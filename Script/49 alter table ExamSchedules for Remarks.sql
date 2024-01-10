@@ -1,0 +1,1 @@
+alter table ExamEvaluations add Remarks nvarchar(max) null

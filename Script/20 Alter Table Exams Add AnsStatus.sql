@@ -1,0 +1,1 @@
+Alter Table Exams Add AnsStatus varchar(12)

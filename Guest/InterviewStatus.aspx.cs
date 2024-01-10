@@ -1,0 +1,205 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+using System.Net;
+using System.IO;
+using System.Web.UI.HtmlControls;
+
+public partial class Guest_InterviewStatus : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (string.IsNullOrEmpty((string)Session["MobileNo"]) || string.IsNullOrEmpty((string)Session["Language"]))
+            {
+                Response.Redirect("~/Guest/SelectLanguage.aspx");
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                //dt = GetProfileDetail(Request.QueryString["MobileNo"].ToString());
+                dt = Interview_Status(Session["MobileNo"].ToString());
+
+                rptInterviewstatus.DataSource = dt;
+                rptInterviewstatus.DataBind();
+            }
+
+
+            //}
+        }
+    }
+    private void ShowErrors(string key, string value)
+    {
+        try
+        {
+            if (key == "Success")
+                pnlErr.CssClass = "errors alert alert-success";
+            else
+                pnlErr.CssClass = "errors alert alert-danger";
+
+            pnlErr.Visible = true;
+            blErrs.Items.Add(new ListItem(value));
+        }
+        catch (Exception ex)
+        {
+            ShowErrors("Error", ex.Message);
+        }
+    }
+
+    private DataTable GetProfileDetail(string MobileNo)
+    {
+        DataTable dt = new DataTable();
+        if (MobileNo != null && MobileNo != "")
+        {
+
+            GeneralDAL objDal = new GeneralDAL();
+            SqlCommand Cmd = new SqlCommand();
+            objDal.OpenSQLConnection();
+            Cmd.Connection = objDal.ActiveSQLConnection();
+            Cmd.CommandType = CommandType.Text;
+            Cmd.CommandText = "SELECT SJ.JobId,R.RegistrationId,R.CandidateId,R.Status, " +
+                              " SC.SubCategory JobProfile,Isnull(SJ.RejectionRemark,'')Remarks, " +
+                              " Format(SJ.InsertedOn,'dd-MMM-yyyy hh:mm') InterviewDateTime, " +
+                              " Format(GetDate(),'dd/MM/yyyy hh:mm') ScheduledTime, " +
+                              " format(R.ApprovedDisapprovedOn,'dd-MMM-yyyy') ApprovedDisapprovedOn, " +
+                              " format(R.Insertedon,'dd-MMM-yyyy')InsertedOn " +
+                              " FROM Registrations R  " +
+                              " Join SubJobOfferings SJ on SJ.CandidateId = R.CandidateId " +
+                              " Join SubCategory SC on SC.SubCategoryId = SJ.SubCategoryId " +
+                              " where R.MobileNo = '" + MobileNo + "'";
+            dt.Load(Cmd.ExecuteReader());
+
+        }
+        return dt;
+    }
+
+
+    protected void rptInterviewstatus_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            DataRowView dataRowView = (DataRowView)e.Item.DataItem;
+
+            HtmlGenericControl myDiv = (HtmlGenericControl)e.Item.FindControl("divProfileCard");
+            HtmlGenericControl divOfferProgressbar = (HtmlGenericControl)e.Item.FindControl("divOfferProgressbar");
+            HtmlGenericControl divProfileProgressbar = (HtmlGenericControl)e.Item.FindControl("divProfileProgressbar");
+            HtmlGenericControl divInterviewCard = (HtmlGenericControl)e.Item.FindControl("divInterviewCard");
+            HtmlGenericControl divDateTimeProgressbar = (HtmlGenericControl)e.Item.FindControl("divDateTimeProgressbar");
+            HtmlGenericControl divDateTimecard = (HtmlGenericControl)e.Item.FindControl("divDateTimecard");
+            HtmlGenericControl rptheader = (HtmlGenericControl)e.Item.FindControl("rptheader");
+            HtmlGenericControl iProfile = (HtmlGenericControl)e.Item.FindControl("iProfile");
+            HtmlGenericControl iDateTime = (HtmlGenericControl)e.Item.FindControl("iDateTime");
+            HtmlGenericControl iInterview = (HtmlGenericControl)e.Item.FindControl("iInterview");
+            HtmlGenericControl divInterviewProgressbar = (HtmlGenericControl)e.Item.FindControl("divInterviewProgressbar");
+
+
+            if (dataRowView["JobProfile"].ToString() != "")
+            {
+                rptheader.InnerText = dataRowView["JobProfile"].ToString();
+                rptheader.Attributes["style"] = "display:flex;justify-content: center;font-size: 40px;";
+            }
+
+            Label lblInterviewDt = (Label)e.Item.FindControl("lblInterviewDt");
+            Label lblInterviewconductDt = (Label)e.Item.FindControl("lblInterviewconductDt");
+
+            //Label lblAppoitmentDate = (Label)e.Item.FindControl("lblAppoitmentDate");
+            Label lblAppoitmentTime = (Label)e.Item.FindControl("lblAppoitmentTime");
+
+            //lblAppoitmentDate.Text = "Interview On";
+            lblAppoitmentTime.Text = dataRowView["AppointmentDate"].ToString();
+
+
+            if (dataRowView["InsertedOn"].ToString() != "")
+            {
+                myDiv.Attributes["style"] = "background-color:#d7eedc;";
+                iProfile.Attributes["style"] = "background-color:#d7eedc;";
+            }
+
+
+            if (dataRowView["Status"].ToString() != "")
+            {
+                //divProfileProgressbar.Attributes["style"] = "position:absolute; left:46%; top:-27%; transform:translateX(-50%); width:2px; height:64px  !important; background-color:#37C1BB; transition:height 0.3s ease;";
+                //divDateTimeProgressbar.Attributes["style"] = "position:absolute; left:46%; top:-27%; transform:translateX(-50%); width:2px; height:64px  !important; background-color:#37C1BB; transition:height 0.3s ease;";
+                //divOfferProgressbar.Attributes["style"] = "position:absolute; left:46%; top:-27%; transform:translateX(-50%); width:2px; height:64px  !important; background-color:#37C1BB; transition:height 0.3s ease;";
+
+
+
+
+                if (dataRowView["Status"].ToString() == "A")
+                {
+                    divInterviewCard.Attributes["style"] = "background-color:#d7eedc";
+                    iInterview.Attributes["style"] = "background-color:#d7eedc";
+                }
+                else if (dataRowView["Status"].ToString() == "R")
+                {
+                    divInterviewCard.Attributes["style"] = "background-color:#f1aeb5";
+                    iInterview.Attributes["style"] = "background-color:#f1aeb5";
+                }
+
+                if (dataRowView["ApprovedDisapprovedOn"].ToString() != "")
+                {
+                    lblInterviewDt.Text = Convert.ToDateTime(dataRowView["ApprovedDisapprovedOn"].ToString()).ToString("dd-MMM-yyyy");
+                    lblInterviewDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+                    lblInterviewDt.CssClass = "top-date";
+                }
+
+                divDateTimecard.Attributes["style"] = "background-color:#d7eedc";
+                lblInterviewconductDt.Text = dataRowView["hrInsertedOn"].ToString();
+                iDateTime.Attributes["style"] = "background-color:#d7eedc;";
+                lblInterviewconductDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+
+            }
+
+            if (dataRowView["AssessmentStatus"].ToString() == "PASS")
+            {
+                divInterviewProgressbar.Attributes["style"] = "background-color:#d7eedc;";
+                divInterviewCard.Attributes["style"] = "background-color:#d7eedc;";
+                iInterview.Attributes["style"] = "background-color:#d7eedc;";
+            }
+
+            if (dataRowView["AssessmentStatus"].ToString() == "FAILED")
+            {
+                divInterviewProgressbar.Attributes["style"] = "background-color:#f1aeb5;";
+                divInterviewCard.Attributes["style"] = "background-color:#f1aeb5;";
+                iInterview.Attributes["style"] = "background-color:#f1aeb5;";
+            }
+
+            Label myLabel = (Label)e.Item.FindControl("lblProfileDt");
+
+            myLabel.Text = dataRowView["InsertedOn"].ToString();
+            myLabel.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+        }
+    }
+
+    public class MyDataClass
+    {
+        public string LabelText { get; set; }
+
+    }
+
+    public DataTable Interview_Status(string MobileNo)
+        {
+
+        SqlCommand sqlCmd = new SqlCommand();
+        GeneralDAL objDal = new GeneralDAL();
+        objDal.OpenSQLConnection();
+        sqlCmd.Connection = objDal.ActiveSQLConnection();
+        sqlCmd.CommandType = CommandType.StoredProcedure;
+        sqlCmd.CommandText = "FitToJob_Interview_Status";
+        sqlCmd.Parameters.AddWithValue("@Action", "Interview_Status");
+        sqlCmd.Parameters.AddWithValue("@PhoneNumber", MobileNo);
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+        DataSet dataSet = new DataSet();
+        dataAdapter.Fill(dataSet);
+        return dataSet.Tables[0];
+
+
+    }
+
+}

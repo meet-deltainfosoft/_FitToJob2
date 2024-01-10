@@ -1,0 +1,1 @@
+alter table Exams add StudentPhoto varchar(max) null

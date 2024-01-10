@@ -1,0 +1,1 @@
+alter table ExamEvaluationLns add ExamId uniqueidentifier null

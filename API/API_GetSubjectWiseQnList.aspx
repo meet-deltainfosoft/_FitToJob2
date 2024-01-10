@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="API_GetSubjectWiseQnList.aspx.cs" Inherits="API_GetSubjectWiseQnList" %>

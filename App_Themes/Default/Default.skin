@@ -1,0 +1,9 @@
+﻿<asp:GridView SkinID="Lns" runat="server" GridLines="None" CellPadding="4" CssClass="gridview">
+    <AlternatingRowStyle CssClass="gridviewRow" />
+    <EditRowStyle />
+    <FooterStyle />
+    <HeaderStyle CssClass="gridviewHeader" />
+    <RowStyle CssClass="gridviewRow" />
+    <SelectedRowStyle CssClass="gridviewSelectedRow" />
+</asp:GridView>
+

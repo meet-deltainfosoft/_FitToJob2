@@ -1,0 +1,17 @@
+alter table Ques add Hashtag nvarchar(100) NULL,TestId uniqueidentifier NULL
+alter table Ques alter column Que nvarchar(350) NOT NULL
+alter table Ques alter column A1 nvarchar(350) NOT NULL
+alter table Ques alter column A2 nvarchar(350) NOT NULL
+alter table Ques alter column A3 nvarchar(350) NOT NULL
+alter table Ques alter column A4 nvarchar(350) NOT NULL
+
+alter table Registration add StandardId uniqueidentifier NULL
+alter table Registration add IsDeActive bit NULL default 0
+alter table Registration alter column LastName varchar(150) NULL
+alter table Registration alter column FatherFirstName varchar(150) NULL
+alter table Registration alter column FatherLastName varchar(150) NULL
+alter table Registration alter column Month varchar(15) NULL
+alter table Registration alter column Day int NULL
+alter table Registration alter column Year int NULL
+alter table Registration alter column Gender bit NULL
+alter table Registration alter column AddressLine1 varchar(500) NULL

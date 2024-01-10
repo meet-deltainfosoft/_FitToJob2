@@ -1,0 +1,62 @@
+
+
+CREATE TABLE [dbo].[QueBankAns](
+	[QueBankAnsId] [uniqueidentifier] NOT NULL,
+	[RegistrationId] [uniqueidentifier] NOT NULL,
+	[SubId] [uniqueidentifier] NOT NULL,
+	QueBankId [uniqueidentifier] NOT NULL,
+	[Ans] [nvarchar](max) NULL,
+	[ChapterId] [uniqueidentifier] NULL,
+	[QueType] [varchar](10) NULL,
+	[AnsImage1] [varchar](max) NULL,
+	[AnsImage2] [varchar](max) NULL,
+	[AnsImage3] [varchar](max) NULL,
+	[AnsImage4] [varchar](max) NULL,
+	[InsertedOn] [datetime] NOT NULL,
+	[LastUpdatedOn] [datetime] NOT NULL,
+	[InsertedByUserId] [uniqueidentifier] NULL,
+	[LastUpdatedByUserId] [uniqueidentifier] NULL,
+	[AnsImage5] [varchar](max) NULL,
+	[AnsImage6] [varchar](max) NULL,
+	[AnsImage7] [varchar](max) NULL,
+	[AnsImage8] [varchar](max) NULL,
+	[AnsImage9] [varchar](max) NULL,
+	[AnsImage10] [varchar](max) NULL,
+	[AnsImage11] [varchar](max) NULL,
+	[AnsImage12] [varchar](max) NULL,
+	[AnsImage13] [varchar](max) NULL,
+	[AnsImage14] [varchar](max) NULL,
+	[AnsImage15] [varchar](max) NULL,
+	[AnsImage16] [varchar](max) NULL,
+	[AnsImage17] [varchar](max) NULL,
+	[AnsImage18] [varchar](max) NULL,
+	[AnsImage19] [varchar](max) NULL,
+	[AnsImage20] [varchar](max) NULL,
+	[AnsImage21] [varchar](max) NULL,
+	[AnsImage22] [varchar](max) NULL,
+	[AnsImage23] [varchar](max) NULL,
+	[AnsImage24] [varchar](max) NULL,
+	[AnsImage25] [varchar](max) NULL,
+	[AnsImage26] [varchar](max) NULL,
+	[AnsImage27] [varchar](max) NULL,
+	[AnsImage28] [varchar](max) NULL,
+	[AnsImage29] [varchar](max) NULL,
+	[AnsImage30] [varchar](max) NULL,
+	[AnsImage31] [varchar](max) NULL,
+	[AnsImage32] [varchar](max) NULL,
+	[AnsImage33] [varchar](max) NULL,
+	[AnsImage34] [varchar](max) NULL,
+	[AnsImage35] [varchar](max) NULL,
+	[AnsImage36] [varchar](max) NULL,
+	[AnsImage37] [varchar](max) NULL,
+	[AnsImage38] [varchar](max) NULL,
+	[AnsImage39] [varchar](max) NULL,
+	[AnsImage40] [varchar](max) NULL,
+ CONSTRAINT [PK_QueBankAns] PRIMARY KEY CLUSTERED 
+(
+	[QueBankAnsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+

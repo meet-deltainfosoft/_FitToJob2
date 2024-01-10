@@ -1,0 +1,1 @@
+Alter Table TextLists Alter Column [Text] nvarchar(300)

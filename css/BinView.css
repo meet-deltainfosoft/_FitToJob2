@@ -1,0 +1,67 @@
+/*Mouse Hover*/
+a:link { 
+/*color:#F778A1;*/
+color: Black;
+font-size: 11px;
+font-family: Verdana;
+/*text-transform: lowercase;*/
+text-decoration: none;
+font-weight:bold;
+}
+
+a:visited { 
+/*color: #008080;*/
+color: Black;
+font-size: 26px;
+font-family: Verdana;
+text-decoration: none;
+}
+
+a:hover{
+color:Orange;
+font-size: 11px;
+font-family: Verdana;
+font-weight:bold;
+}
+
+
+/*Mouse Hover*/
+
+
+/*td.greenCol { background-color: #3ea99f; }*/
+td.greenCol { background-color: #4aa02c; }
+
+td.redCol { background-color: #c11b17; }
+td.redCol { background-color: #FF2B2B; }
+
+
+td.whiteCol { background-color: White; }
+
+td.blueCol { background-color: #6698ff; }
+
+
+.one-edge-shadow {
+width:98%;
+	-webkit-box-shadow: 0 8px 6px -6px gray;
+	   -moz-box-shadow: 0 8px 6px -6px gray;
+	        box-shadow: 0 8px 6px -6px gray;
+}
+
+
+
+.one-edge-shadowTop {
+        width:98%;
+	-webkit-box-shadow: -2px 2px 1px 0px #15317e;
+	   -moz-box-shadow: -2px 2px 1px 0px #15317e;
+	        box-shadow: -2px 2px 1px 0px #15317e;
+	      
+}
+
+
+.one-edge-shadowTopIn {
+        width:98%;
+	-webkit-box-shadow: -2px 2px 1px 0px #15317e;
+	   -moz-box-shadow: -2px 2px 1px 0px #15317e;
+	        box-shadow: -2px 2px 1px 0px #15317e;
+	      
+}

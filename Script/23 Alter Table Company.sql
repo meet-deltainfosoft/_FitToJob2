@@ -1,0 +1,19 @@
+Alter Table Company add Country varchar(100)
+Alter Table Company add ExciseRegNo varchar(100)
+Alter Table Company add ServiceTaxRegn varchar(100)
+Alter Table Company add RangeDetail varchar(100)
+Alter Table Company add CommissionRate varchar(100)
+Alter Table Company add ServiceEmailId varchar(100)
+Alter Table Company add ACNo varchar(100)
+Alter Table Company add BranchName varchar(100)
+Alter Table Company add IFSCCode varchar(100)
+Alter Table Company add DivTextListId uniqueidentifier
+Alter Table Company add LocId uniqueidentifier
+Alter Table Company add LgrId uniqueidentifier
+Alter Table Company add GSTNo varchar(15)
+Alter Table Company add cityId uniqueidentifier
+Alter Table Company add stateId uniqueidentifier
+Alter Table Company add countryId uniqueidentifier
+Alter Table Company add AccountTypeTextListId uniqueidentifier
+Alter Table Company Add LogoPath varchar(500)
+Alter Table Company Alter Column CrncyId uniqueidentifier null

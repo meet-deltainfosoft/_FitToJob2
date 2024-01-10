@@ -1,0 +1,262 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Delta_MCQ.master.cs" Inherits="Trail_ERP"
+    EnableTheming="true" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Delta iEXAM</title>
+    <link type="text/css" rel="Stylesheet" href="jQuery/DDSmoothMenu/ddsmoothmenu.css" />
+    <script type="text/javascript" src="../jQuery/jquery-1.4.2.min.js"></script>
+    <link type="text/css" rel="Stylesheet" href="App_Themes/Default/Default.css" />
+    <script type="text/javascript" src="../jQuery/DDSmoothMenu/jquery.min.js"></script>
+    <script type="text/javascript" src="../jQuery/DDSmoothMenu/ddsmoothmenu.js"></script>
+    <script type="text/javascript">
+
+        ddsmoothmenu.init({
+            mainmenuid: "smoothmenu1", //menu DIV id
+            orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+            classname: 'ddsmoothmenu', //class added to menu's outer DIV
+            //customtheme: ["#1c5a80", "#18374a"],
+            contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+        })
+
+        ////        ddsmoothmenu.init({
+        ////        mainmenuid: "smoothmenu-ajax",
+        ////        //customtheme: ["#1c5a80", "#18374a"], //override default menu CSS background values? Uncomment: ["normal_background", "hover_background"]
+        ////        contentsource: ["smoothcontainer", "../smoothmenu.htm"] //"markup" or ["container_id", "path_to_menu_file"]
+        ////        })
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="wrapper">
+        <div id="smoothmenu1" class="ddsmoothmenu">
+            <ul runat="server" id="ulAdmin">
+                <li runat="server" id="liAdmin"><a href="#">Admin ***</a>
+                    <ul>
+                        <li><a href="../Exams/DigitalInterviewForm.aspx">Candidate Selection</a></li>
+                        <li><a href="../Exams/InterviewAssessment.aspx">Interview Assessment</a></li>
+                      <%--  <li><a href="#">User Master</a>
+                            <ul>
+                                <li><a href="../Admin/User.aspx">New</a></li>
+                                <li><a href="../Admin/Users.aspx">Edit</a></li>
+                            </ul>
+                        </li>--%>
+                        <%-- <li><a href="#">Company Master</a>
+                            <ul>
+                                <li><a href="../General/Company.aspx">New</a></li>
+                                <li><a href="../General/Companies.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Batch Master</a>
+                            <ul>
+                                <li><a href="../General/Batch.aspx">New</a></li>
+                                <li><a href="../General/Batchs.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Pattern Master</a>
+                            <ul>
+                                <li><a href="../General/Pattern.aspx">New</a></li>
+                                <li><a href="../General/Patterns.aspx">Edit</a></li>
+                            </ul>
+                        </li>--%>
+                    </ul>
+                </li>
+                <%-- <li><a href="#">Master</a>
+                    <ul>
+                        <li><a href="#">Standard Value</a>
+                            <ul>
+                                <li><a href="../General/MasterValue.aspx">New</a></li>
+                                <li><a href="../General/MasterValues.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Designation Value</a>
+                            <ul>
+                                <li><a href="../General/Designation.aspx">New</a></li>
+                                <li><a href="../General/Designations.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Job Profile Value</a>
+                            <ul>
+                                <li><a href="../General/JobProfile.aspx">New</a></li>
+                                <li><a href="../General/JobProfiles.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Registration</a>
+                            <ul>
+                                <li><a href="../General/Registration1.aspx">New</a></li>
+                                <li><a href="../General/Registrations1.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Test</a>
+                            <ul>
+                                <li><a href="../Exams/Test.aspx">New</a></li>
+                                <li><a href="../Exams/Tests.aspx">Edit</a></li>
+                                <li><a href="#">Test Create from Question Bank</a>
+                                    <ul>
+                                        <li><a href="../Exams/TestQueBank.aspx">New</a></li>
+                                        <li><a href="../Exams/TestQueBanks.aspx">Edit</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li style="display: none;"><a href="#">Subject</a>
+                            <ul>
+                                <li><a href="../Exams/Sub.aspx">New</a></li>
+                                <li><a href="../Exams/Subs.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Chapter</a>
+                            <ul>
+                                <li><a href="../General/Chapter.aspx">New</a></li>
+                                <li><a href="../General/Chapters.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Chapter Video</a>
+                            <ul>
+                                <li><a href="../General/ChapterVedio.aspx">New</a></li>
+                                <li><a href="../General/ChapterVedios.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Chapter PDF</a>
+                            <ul>
+                                <li><a href="../General/ChapterPDF.aspx">New</a></li>
+                                <li><a href="../General/ChapterPDFs.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li style="display: none;"><a href="#">E-Books</a>
+                            <ul>
+                                <li><a href="../General/EBookPDF.aspx">New</a></li>
+                                <li><a href="../General/EBookPDFs.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li style="display: none;"><a href="#">Reference Link</a>
+                            <ul>
+                                <li><a href="../General/ChapterLink.aspx">New</a></li>
+                                <li><a href="../General/ChapterLinks.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li style="display: none;"><a href="#">Video No</a>
+                            <ul>
+                                <li><a href="../General/VideoNo.aspx">New</a></li>
+                                <li><a href="../General/VideoNos.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li style="display: none;"><a href="#">HomeWork</a>
+                            <ul>
+                                <li><a href="../General/HomeWork.aspx">New</a></li>
+                                <li><a href="../General/HomeWorks.aspx">Edit</a></li>
+                                <li><a href="../General/HomeWorkView.aspx">Employee Homework View</a></li>
+                            </ul>
+                        </li>
+                        <li style="display: none;"><a href="#">Live Class</a>
+                            <ul>
+                                <li><a href="../General/LiveClass.aspx">New</a></li>
+                                <li><a href="../General/LiveClasses.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../General/UpdateCommonOTP.aspx">Change Common OTP</a></li>
+                        <li><a href="../General/UpdateMinPassMarks.aspx">Update Minimum Passing Marks</a></li>
+                    </ul>
+                </li>--%>
+                <%--  <li style="display: none;"><a href="#">Utility</a>
+                    <ul>
+                        <li style="display: none;"><a href="../General/UpdateCommonOTP.aspx">Change Common OTP</a></li>
+                        <li style="display: none;"><a href="../General/UpdateMinPassMarks.aspx">Update Minimum
+                            Passing Marks</a></li>
+                    </ul>
+                </li>--%>
+                <%--<li style="display: none;"><a href="#">Test</a>
+                    <ul>
+                        <li><a href="../Exams/Test.aspx">New</a></li>
+                        <li><a href="../Exams/Tests.aspx">Edit</a></li>
+                        <li><a href="#">Test Create from Question Bank</a>
+                            <ul>
+                                <li><a href="../Exams/TestQueBank.aspx">New</a></li>
+                                <li><a href="../Exams/TestQueBanks.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>--%>
+                <%-- <li><a href="#">Question Bank</a>
+                    <ul>
+                        <li><a href="../Exams/Que.aspx">New</a></li>
+                        <li><a href="../Exams/Ques.aspx">Edit</a></li>
+                        <li><a href="../Exams/ImportQuestion.aspx">Import Sheet - Questions</a></li>
+                        <li><a href="../Exams/CopyQues.aspx">Copy Mutiple Quesions</a></li>
+                        <li><a href="../Exams/DeleteQues.aspx">Delete Mutiple Quesions</a></li>
+                    </ul>
+                </li>--%>
+                <%--<li style="display: none;"><a href="#">Question Bank</a>
+                    <ul>
+                        <li><a href="../Exams/QueBank.aspx">New</a></li>
+                        <li><a href="../Exams/QueBanks.aspx">Edit</a></li>
+                    </ul>
+                </li>--%>
+                <%--<li><a href="#">Employee Data</a>
+                    <ul>
+                        <li style="display: none;"><a href="#">Employee Data</a>
+                            <ul>
+                                <li><a href="../Exams/Registrations.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Interview Form</a>
+                            <ul>
+                                <li><a href="../General/InterViewForm.aspx">New</a></li>
+                                <li><a href="../General/InterViewForms.aspx">Edit</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../Exams/CandidatesList.aspx">Candidates List</a> </li>
+                        <li><a href="../Exams/GenerateCall.aspx">Generate Call</a> </li>
+                        <li><a href="../Exams/FirstInterview.aspx">HR Interview</a> </li>
+                        <li><a href="../General/Interviews.aspx">HOD Interview</a> </li>
+                        <li><a href="../Exams/CandidateFinal.aspx">Final Interview Selected</a>
+                            <li><a href="../Exams/GetPunchNo.aspx">Candidate Get Punch No</a> </li>
+                    </ul>
+            </li>--%>
+            <%--<li><a href="#">Exam Schedule</a>
+                <ul>
+                    <li><a href="../Exams/ExamSchedule.aspx">New</a></li>
+                    <li><a href="../Exams/ExamSchedules.aspx">Edit</a></li>
+                </ul>
+            </li>--%>
+          <%--  <li><a href="../Exams/LiveResultDetail.aspx">Live Exam</a></li>
+            <li style="display: none;"><a href="#">Exam Evaluation</a>
+                <ul>
+                    <li><a href="#">Checking Allotment</a>
+                        <ul>
+                            <li><a href="../Exams/ExamCheckAllotment.aspx">New</a></li>
+                            <li><a href="../Exams/ExamCheckAllotments.aspx">Edit</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../Exams/ExamMarksEntryFilterRights.aspx">Exam Question List For Evaluation</a></li>
+                    <li><a href="#">Exam Result Publish</a>
+                        <ul>
+                            <li><a href="../Exams/ExamResultPublish.aspx">New</a></li>
+                            <li><a href="../Exams/ExamResultPublishs.aspx">Edit</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#">Result MIS</a>
+                <ul>
+                    <li><a href="../Exams/ExamSummaryRpt.aspx">ExamWise Summary</a></li>
+                    <li><a href="../Exams/ResultDetail.aspx">RegistrationWise Detail</a></li>
+                    <li><a href="../Exams/ExamMarksEntryFilter.aspx">Exam Marks Entry</a></li>
+                    <li><a href="../Exams/ResultDetailAdv.aspx">RegistrationWise Detail for Adv</a></li>
+                    <li><a href="../Exams/RejectApproveds.aspx">Reject Approved</a></li>
+                </ul>
+            </li>--%>
+            <li><a href="../Logout.aspx">Log out</a></li>
+            </ul>
+            <br style="clear: left" />
+            <asp:Label ID="LblDBName" runat="server" Text="DB"></asp:Label>
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

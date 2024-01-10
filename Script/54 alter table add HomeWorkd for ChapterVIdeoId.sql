@@ -1,0 +1,1 @@
+alter table HomeWorks add ChapterVideoId bigint null
