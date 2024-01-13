@@ -109,16 +109,16 @@
                 <div class="col-lg-4 col-sm-12" style="display: none;">
                     <div class="form-group">
                         <asp:Label runat="server" ID="lblDepartmentId" Text="Department :"></asp:Label>
-                         <span style="color:red">*</span>
-                        <asp:DropDownList runat="server" ID="ddlDepartmentId" AutoPostBack="true" TabIndex="1"
-                            OnSelectedIndexChanged="ddlStdId_SelectedIndexChanged" CssClass="form-control">
+                        <span style="color: red">*</span>
+                        <asp:DropDownList runat="server" ID="ddlDepartmentId" TabIndex="1" OnSelectedIndexChanged="ddlStdId_SelectedIndexChanged"
+                            CssClass="form-control">
                         </asp:DropDownList>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-12" style="display: none;">
                     <div class="form-group">
                         <asp:Label runat="server" ID="lblDesignationId" Text="Designation :"></asp:Label>
-                         <span style="color:red">*</span>
+                        <span style="color: red">*</span>
                         <asp:DropDownList runat="server" ID="ddlDesignationId" TabIndex="2" CssClass="form-control">
                         </asp:DropDownList>
                     </div>
@@ -126,23 +126,22 @@
                 <div class="col-lg-4 col-sm-12">
                     <div class="form-group" style="display: none;">
                         <asp:Label runat="server" ID="lblDivisionId" Text="Division :"></asp:Label>
-                         <span style="color:red">*</span>
+                        <span style="color: red">*</span>
                         <asp:DropDownList runat="server" ID="ddlDivisionId" TabIndex="3" CssClass="form-control">
                         </asp:DropDownList>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
                     <div class="form-group">
-                        <asp:Label runat="server" ID="lblStaffCategoryId" Text="Staff Category :"
-                            Font-Bold="true"></asp:Label>
-                             <span style="color:red">*</span>
-                            <br />
+                        <asp:Label runat="server" ID="lblStaffCategoryId" Text="Staff Category :" Font-Bold="true"></asp:Label>
+                        <span style="color: red">*</span>
+                        <br />
                         <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
                         </asp:DropDownList>
                         <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" OnCheckedChanged="chkallStaffCategory_CheckedChanged"
-                            Text="Select All" Font-Bold="true" />
+                            Text="Select All" Font-Bold="true" Visible="false" />
                         <asp:CheckBoxList runat="server" Style="margin-left: 15px" ID="chkStaffCategory"
-                            TabIndex="4" AutoPostBack="True">
+                            TabIndex="4">
                         </asp:CheckBoxList>
                     </div>
                 </div>
@@ -182,8 +181,8 @@
                 </div>
             </div>
             <div class="row m-2">
-                <asp:label id="lblMessage" runat="Server" text="Please Select at Least one Category"
-                    forecolor="Red" visible="false"></asp:label>
+                <asp:Label ID="lblMessage" runat="Server" Text="Please Select at Least one Category"
+                    ForeColor="Red" Visible="false"></asp:Label>
             </div>
         </div>
     </div>

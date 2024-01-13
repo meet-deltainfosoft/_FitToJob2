@@ -267,7 +267,7 @@
                             <asp:Label runat="server" ID="lblAadharNo" Text="AadharCard No :"></asp:Label>
                             <span style="color:red">*</span>
                             <asp:TextBox runat="server" ID="txtAadharNo" CssClass="form-control" MaxLength="12"
-                                onkeypress="return validateNumericInput(event);" TabIndex="1" AutoPostBack="false">
+                                onkeypress="return validateNumericInput(event);" TabIndex="1" AutoPostBack="false" AutoCompleteType="Disabled">
                             </asp:TextBox>
                             <asp:RequiredFieldValidator runat="server" ID="rfvAadharNo" ControlToValidate="txtAadharNo"
                                 ErrorMessage="Aadhar number is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -280,7 +280,7 @@
                         <div class="form-group">
                             <asp:Label runat="server" ID="lblFirstname" Text="First Name :"></asp:Label>
                              <span style="color:red">*</span>
-                            <asp:TextBox runat="server" ID="txtFirstname" CssClass="form-control" TabIndex="2">
+                            <asp:TextBox runat="server" ID="txtFirstname" CssClass="form-control" TabIndex="2" AutoCompleteType="Disabled">
                             </asp:TextBox>
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtFirstname"
                                 ErrorMessage="First name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -290,7 +290,7 @@
                         <div class="form-group">
                             <asp:Label runat="server" ID="lblMiddlename" Text="Middle Name :"></asp:Label>
                              <span style="color:red">*</span>
-                            <asp:TextBox runat="server" ID="txtMiddlename" CssClass="form-control" TabIndex="3">
+                            <asp:TextBox runat="server" ID="txtMiddlename" CssClass="form-control" TabIndex="3" AutoCompleteType="Disabled">
                             </asp:TextBox>
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtMiddlename"
                                 ErrorMessage="Middle name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -300,7 +300,7 @@
                         <div class="form-group">
                             <asp:Label runat="server" ID="lblLastName" Text="Last Name :"></asp:Label>
                              <span style="color:red">*</span>
-                            <asp:TextBox runat="server" ID="txtLastname" CssClass="form-control" TabIndex="4">
+                            <asp:TextBox runat="server" ID="txtLastname" CssClass="form-control" TabIndex="4" AutoCompleteType="Disabled">
                             </asp:TextBox>
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtLastname"
                                 ErrorMessage="Last name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -310,7 +310,7 @@
                         <div class="form-group">
                             <asp:Label runat="server" ID="lblMobileNo" Text="Mobile No :"></asp:Label>
                              <span style="color:red">*</span>
-                            <asp:TextBox runat="server" ID="txtMobileNo" CssClass="form-control" TabIndex="5"
+                            <asp:TextBox runat="server" ID="txtMobileNo" CssClass="form-control" TabIndex="5" AutoCompleteType="Disabled"
                                 MaxLength="10">
                             </asp:TextBox>
                             <asp:RequiredFieldValidator runat="server" ID="rfvMobileNo" ControlToValidate="txtMobileNo"
@@ -326,7 +326,7 @@
                              <span style="color:red">*</span>
                             <asp:TextBox runat="server" ID="txtCity" CssClass="form-control" TabIndex="6">
                             </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtCity"
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtCity" AutoCompleteType="Disabled"
                                 ErrorMessage="City is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
                              <span style="color:red">*</span>
                             <asp:TextBox runat="server" ID="txtTaluka" CssClass="form-control" TabIndex="7">
                             </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtTaluka"
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtTaluka" AutoCompleteType="Disabled"
                                 ErrorMessage="Taluka is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>
@@ -346,7 +346,7 @@
                              <span style="color:red">*</span>
                             <asp:TextBox runat="server" ID="txtDistrict" CssClass="form-control" TabIndex="8">
                             </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtDistrict"
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtDistrict" AutoCompleteType="Disabled"
                                 ErrorMessage="District is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>
@@ -356,7 +356,7 @@
                              <span style="color:red">*</span>
                             <asp:TextBox runat="server" ID="txtState" CssClass="form-control" TabIndex="9">
                             </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtState"
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtState" AutoCompleteType="Disabled"
                                 ErrorMessage="State is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>
@@ -364,7 +364,7 @@
                         <div class="form-group">
                             <asp:Label runat="server" ID="lblAddress" Text="Address :"></asp:Label>
                              <span style="color:red">*</span>
-                            <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" TabIndex="10" CssClass="form-control">
+                            <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" TabIndex="10" CssClass="form-control" AutoCompleteType="Disabled">
                             </asp:TextBox>
                             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="txtAddress"
                                 ErrorMessage="Address is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>

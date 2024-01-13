@@ -85,14 +85,13 @@
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
                     <div class="form-group">
-                        <asp:Label runat="server" ID="lblStaffCategoryId" Text="Selected Jobs :"
-                            Font-Bold="true"></asp:Label>
-                             <span style="color:red">*</span>
+                        <asp:Label runat="server" ID="lblStaffCategoryId" Text="Selected Jobs :" Font-Bold="true"></asp:Label>
+                        <span style="color: red">*</span>
                         <br />
                         <%-- <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
                         </asp:DropDownList>--%>
                         <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" Text="Select All"
-                            OnCheckedChanged="chkallStaffCategory_CheckedChanged" Font-Bold="true" />
+                            OnCheckedChanged="chkallStaffCategory_CheckedChanged" Font-Bold="true" Visible="false" />
                         <asp:CheckBoxList runat="server" ID="chkStaffCategory" TabIndex="4">
                         </asp:CheckBoxList>
                     </div>
