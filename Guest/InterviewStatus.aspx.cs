@@ -97,6 +97,11 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             HtmlGenericControl iDateTime = (HtmlGenericControl)e.Item.FindControl("iDateTime");
             HtmlGenericControl iInterview = (HtmlGenericControl)e.Item.FindControl("iInterview");
             HtmlGenericControl divInterviewProgressbar = (HtmlGenericControl)e.Item.FindControl("divInterviewProgressbar");
+            HtmlGenericControl divOfferCard = (HtmlGenericControl)e.Item.FindControl("divOfferCard");
+            HtmlGenericControl iOffer = (HtmlGenericControl)e.Item.FindControl("iOffer");
+            HtmlGenericControl divOffer = (HtmlGenericControl)e.Item.FindControl("divOffer");
+            Label lblOfferDt = (Label)e.Item.FindControl("lblOfferDt");
+            //lblOfferDt
 
 
             if (dataRowView["JobProfile"].ToString() != "")
@@ -124,12 +129,6 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
 
             if (dataRowView["Status"].ToString() != "")
             {
-                //divProfileProgressbar.Attributes["style"] = "position:absolute; left:46%; top:-27%; transform:translateX(-50%); width:2px; height:64px  !important; background-color:#37C1BB; transition:height 0.3s ease;";
-                //divDateTimeProgressbar.Attributes["style"] = "position:absolute; left:46%; top:-27%; transform:translateX(-50%); width:2px; height:64px  !important; background-color:#37C1BB; transition:height 0.3s ease;";
-                //divOfferProgressbar.Attributes["style"] = "position:absolute; left:46%; top:-27%; transform:translateX(-50%); width:2px; height:64px  !important; background-color:#37C1BB; transition:height 0.3s ease;";
-
-
-
 
                 if (dataRowView["Status"].ToString() == "A")
                 {
@@ -143,7 +142,7 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
                 }
 
                 if (dataRowView["ApprovedDisapprovedOn"].ToString() != "")
-                {
+                      {
                     lblInterviewDt.Text = Convert.ToDateTime(dataRowView["ApprovedDisapprovedOn"].ToString()).ToString("dd-MMM-yyyy");
                     lblInterviewDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
                     lblInterviewDt.CssClass = "top-date";
@@ -170,6 +169,25 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
                 iInterview.Attributes["style"] = "background-color:#f1aeb5;";
             }
 
+            if (dataRowView["IsOfferGenerate"].ToString() == "1")
+            {
+                divOfferCard.Attributes["style"] = "background-color:#d7eedc;";
+                divOfferCard.Attributes["style"] = "background-color:#d7eedc;";
+                iOffer.Attributes["style"] = "background-color:#d7eedc;";
+                lblOfferDt.Text = dataRowView["OfferGenerateDateTime"].ToString();
+                divOffer.Visible = true;
+                lblOfferDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+            }
+            else if (dataRowView["IsOfferGenerate"].ToString() == "0")
+            {
+                divOfferCard.Attributes["style"] = "background-color:#f1aeb5;";
+                divOfferCard.Attributes["style"] = "background-color:#f1aeb5;";
+                iOffer.Attributes["style"] = "background-color:#f1aeb5;";
+                lblOfferDt.Text = dataRowView["OfferGenerateDateTime"].ToString();
+                divOffer.Visible = true;
+                lblOfferDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+            }
+
             Label myLabel = (Label)e.Item.FindControl("lblProfileDt");
 
             myLabel.Text = dataRowView["InsertedOn"].ToString();
@@ -184,7 +202,7 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
     }
 
     public DataTable Interview_Status(string MobileNo)
-        {
+    {
 
         SqlCommand sqlCmd = new SqlCommand();
         GeneralDAL objDal = new GeneralDAL();
@@ -198,7 +216,6 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
         DataSet dataSet = new DataSet();
         dataAdapter.Fill(dataSet);
         return dataSet.Tables[0];
-
 
     }
 
