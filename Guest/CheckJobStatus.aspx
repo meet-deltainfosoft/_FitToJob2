@@ -228,7 +228,7 @@
             <div class="col-lg-12 col-sm-12" style="overflow: auto;">
                 <div class="table">
                     <asp:GridView runat="server" ID="gdvJobOfferLatter" AutoGenerateColumns="False" CssClass="gridview-style"
-                        SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvJobOfferLatter_RowDataBound"
+                        SkinID="Lns" EmptyDataText="No Records Found." OnRowCommand="gdvJobOfferLatter_RowCommand" OnRowDataBound="gdvJobOfferLatter_RowDataBound"
                         DataKeyNames="CandidateId">
                         <Columns>
                             <%-- <asp:Button runat="server" ID="btnOffer" Text="View Offer latter" CssClass="btn btn-primary" />--%>
@@ -281,13 +281,11 @@
                                 <ItemTemplate>
                                     <div style="width: 350px;">
                                         <asp:Button runat="server" ID="btnOffer" Text="View Offer Latter" CssClass="btn btn-primary mr-2"
-                                            CommandName="ViewOffer" OnClick="btnOffer_Click" />
+                                            CommandName="ViewOfferLatter" CommandArgument='<%# Eval("JobId") %>' />
                                         <asp:Button runat="server" ID="btnAccept" Text="Accept" CssClass="btn btn-success mr-2"
-                                            CommandName="ViewAccept"  CommandName="RemoveRow" CommandArgument='<%# Eval("JobId") %>' />
-                                        <%--<asp:LinkButton runat="server" ID="lnkRemove" CssClass="btn btn-danger" Text="X"
-                                            ToolTip="Remove Records" CommandName="RemoveRow" CommandArgument='<%# Eval("JobId") %>' />--%>
-                                        <asp:HyperLink runat="server" ID="btnReject" Text="Reject" CssClass="btn btn-danger"
-                                            CommandName="ViewReject" Style="color: White;" data-toggle="modal" data-target="#myModal" />
+                                            CommandName="AcceptRow" CommandArgument='<%# Eval("JobId") %>' />
+                                        <asp:Button runat="server" ID="btnReject" Text="Reject" CssClass="btn btn-danger"
+                                            CommandName="RejectRow" CommandArgument='<%# Eval("JobId") %>' />
                                     </div>
                                 </ItemTemplate>
                                 <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
@@ -296,7 +294,15 @@
                             <asp:TemplateField HeaderText="Rejection Remarks" HeaderStyle-CssClass="header-style-remarks">
                                 <ItemTemplate>
                                     <headerstyle horizontalalign="Left" verticalalign="Top" cssclass="header-style" />
-                                    <asp:TextBox runat="server" ID="txtremarks" Enabled="true" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtremarks" Enabled="true" CssClass="form-control"
+                                        Text='<%# Eval("RejectionRemarks") %>'></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Acceptance Status" HeaderStyle-CssClass="header-style-remarks">
+                                <ItemTemplate>
+                                    <headerstyle horizontalalign="Left" verticalalign="Top" cssclass="header-style" />
+                                    <asp:TextBox runat="server" ID="txtAcceptance" Enabled="true" CssClass="form-control"
+                                        Text='<%# Eval("CandidateApprovalStatus") %>'></asp:TextBox>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

@@ -142,7 +142,7 @@ public partial class Report_Exam_CRViewer : System.Web.UI.Page
         {
             if (Request.QueryString["RptId"] != null)
             {
-                sqlWhere1 = " WHERE RegistrationId='" + Request.QueryString["RptId"].ToString() + "'";
+                sqlWhere1 = " WHERE JobId='" + Request.QueryString["RptId"].ToString() + "'";
             }
             sql1 = "SELECT Top 1 * FROM vwInterviewForms" + sqlWhere1;
             //Final Sql Query

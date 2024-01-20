@@ -41,6 +41,7 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
         gdvJobOfferLatter.Visible = true;
 
     }
+
     private DataTable GetDataFromDataSource()
     {
         List<CheckJobStatus> checkJobStatusList = new List<CheckJobStatus>
@@ -122,12 +123,35 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
 
         return CheckJobStatus;
     }
+
     protected void gdvJobOfferLatter_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            CheckJobStatus checkJobStatus = e.Row.DataItem as CheckJobStatus;
+            TextBox txtAcceptance = (TextBox)e.Row.FindControl("txtAcceptance");
+            TextBox txtremarks = (TextBox)e.Row.FindControl("txtremarks");
 
+            Button btnAccept = (Button)e.Row.FindControl("btnAccept");
+            Button btnReject = (Button)e.Row.FindControl("btnReject");
+
+            if (txtAcceptance != null && btnAccept != null && btnReject != null)
+            {
+                string acceptanceStatus = txtAcceptance.Text;
+                if (acceptanceStatus.Equals("Acceptance") || acceptanceStatus.Equals("Rejected"))
+                {
+                    btnAccept.Enabled = false;
+                    btnReject.Enabled = false;
+                    txtremarks.ReadOnly = true;
+                    txtAcceptance.ReadOnly = true;
+                }
+                else
+                {
+                    btnAccept.Enabled = true;
+                    btnReject.Enabled = true;
+                    txtremarks.ReadOnly = false;
+                    txtAcceptance.ReadOnly = false;
+                }
+            }
         }
     }
 
@@ -149,6 +173,7 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
             gdvJobOfferLatter.DataSource = dataSet.Tables[0];
             gdvJobOfferLatter.DataBind();
         }
+        objDal.CloseSQLConnection();
     }
 
     private void BindGridView(string MobileNo)
@@ -191,6 +216,7 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
             objDal.CloseSQLConnection();
         }
     }
+
     protected void btnOffer_Click(object sender, EventArgs e)
     {
         string sqlWhere1 = "";
@@ -204,6 +230,7 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
         string JobId = sqlCmd.ExecuteScalar().ToString();
         Response.Redirect("../Report/Exam/CRViewer.aspx?RptType=OfferLatter&RptId=" + JobId.ToUpper());
     }
+
     protected void btnReject_Click(object sender, EventArgs e)
     {
         TextBox txtremarks = gdvJobOfferLatter.Rows[gdvJobOfferLatter.EditIndex].FindControl("txtremarks") as TextBox;
@@ -214,8 +241,6 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
             txtremarks.ReadOnly = false;
         }
     }
-
-   
 
     protected void btnAccept_Click(object sender, EventArgs e)
     {
@@ -228,10 +253,9 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
         SaveAcceptanceStatus(jobId, acceptanceStatus);
         //UpdateAcceptRejectButtonText(acceptanceStatus);
         BindGridView("6353364866");
-       
+
     }
-   
-    private void SaveAcceptanceStatus(string jobId,string acceptanceStatus)
+    private void SaveAcceptanceStatus(string jobId, string acceptanceStatus)
     {
         GeneralDAL objDal = new GeneralDAL();
         try
@@ -241,7 +265,7 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
             objDal.OpenSQLConnection();
             sqlCmd.Connection = objDal.ActiveSQLConnection();
             sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.CommandText = "SaveJobAcceptance"; 
+            sqlCmd.CommandText = "SaveJobAcceptance";
             sqlCmd.Parameters.AddWithValue("@JobId", jobId);
             //sqlCmd.Parameters.AddWithValue("@CandidateId", candidateId);
             sqlCmd.Parameters.AddWithValue("@AcceptanceStatus", acceptanceStatus);
@@ -268,6 +292,87 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
             objDal.CloseSQLConnection();
         }
     }
-    
+    protected void gdvJobOfferLatter_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "AcceptRow")
+        {
+            string rowIndex = e.CommandArgument.ToString();
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
 
+            // Set the connection for the SqlCommand
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+
+            sqlCmd.CommandText = "FitToJob_Android_Application";
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Action", "CandidateApproveJob");
+            sqlCmd.Parameters.AddWithValue("@CandidateApprovalStatus", 1);
+            sqlCmd.Parameters.AddWithValue("@CandidateOfferRejectionRemark", "");
+            sqlCmd.Parameters.AddWithValue("@JobId", rowIndex);
+            sqlCmd.Parameters.AddWithValue("@MobileNo", Session["MobileNo"].ToString());
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            DataSet dataSet = new DataSet();
+            dataAdapter.Fill(dataSet);
+
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                Response.Write("<script>alert('Congratulatios !!! You Have Accepted The Job')</script>");
+                gdvJobOfferLatter.DataSource = dataSet.Tables[1];
+                gdvJobOfferLatter.DataBind();
+            }
+
+            objDal.CloseSQLConnection();
+        }
+        else if (e.CommandName == "RejectRow")
+        {
+
+
+            GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
+            //string name = ((TextBox)selectedRow.FindControl("txttartim")).Text;
+
+            TextBox txtremarks = row.FindControl("txtremarks") as TextBox;
+
+            //if (txtRejectRemarks.Text == "")
+            //{
+            //    Response.Write("<Script>alert('Please Enter Rejection Remarks')</script>");
+            //    return;
+            //}
+            // TextBox txtremarks = gdvJobOfferLatter.FindControl("txtremarks") as TextBox;
+
+            string RejectionRemark = txtremarks.Text;
+            string rowIndex = e.CommandArgument.ToString();
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+
+            sqlCmd.CommandText = "FitToJob_Android_Application";
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Action", "CandidateApproveJob");
+            sqlCmd.Parameters.AddWithValue("@CandidateApprovalStatus", 0);
+            sqlCmd.Parameters.AddWithValue("@CandidateOfferRejectionRemark", RejectionRemark);
+            sqlCmd.Parameters.AddWithValue("@JobId", rowIndex);
+            sqlCmd.Parameters.AddWithValue("@MobileNo", Session["MobileNo"].ToString());
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            DataSet dataSet = new DataSet();
+            dataAdapter.Fill(dataSet);
+
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                Response.Write("<script>alert('Thanks For The Confirmation, We are Rejection Offer!!')</script>");
+                gdvJobOfferLatter.DataSource = dataSet.Tables[1];
+                gdvJobOfferLatter.DataBind();
+            }
+
+            objDal.CloseSQLConnection();
+        }
+        else if (e.CommandName == "ViewOfferLatter")
+        {
+            Session["JobId"] = e.CommandArgument.ToString();
+            Response.Redirect("../Guest/OfferApprove.aspx");
+        }
+    }
 }

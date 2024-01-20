@@ -44,6 +44,17 @@
             padding: 10px;
         }
         
+        
+        .buttton1
+        {
+            background-color: #dc3545de !important;
+            width: 45vh !important;
+            border-radius: 10px;
+            padding: 10px;
+            border:1px solid #dc3545de !important;
+            
+        }
+        
         .responsive-img
         {
             max-width: 100%;
@@ -138,8 +149,17 @@
                 </asp:LinkButton>
             </div>
             <div class="col-lg-6 col-sm-6 text-left mt-2">
+                <asp:LinkButton ID="lnkbtnOffer" runat="server" CssClass="btn btn-info buttton1" OnClick="lnkbtnOffer_click"
+                    Style="background-color: #37C1BB;">
+        <div class="d-flex justify-content-center align-items-center" id="blinkContainer">
+            <i class="fas fa-upload mr-2"></i><span>Offer Acceptance</span>
+        </div>
+                </asp:LinkButton>
+            </div>
+            <div class="col-lg-6 col-sm-6 text-left mt-2">
                 <asp:LinkButton ID="lnkInterviewUploadDocuments" runat="server" CssClass="btn btn-info buttton"
-                    OnClick="lnkInterviewUploadDocuments_click" Style="background-color: #37C1BB;">
+                    OnClick="lnkInterviewUploadDocuments_click" Style="background-color: #37C1BB;
+                    color: Red !important;">
         <div class="d-flex justify-content-center align-items-center">
             <i class="fas fa-upload mr-2"></i><span>Upload Documents</span>
         </div>
@@ -150,5 +170,14 @@
         </div>
     </div>
     </form>
+    <script type="text/javascript">
+        function blink() {
+            var blinkContainer = document.getElementById('blinkContainer');
+            blinkContainer.style.opacity = (blinkContainer.style.opacity == '0' ? '1' : '0');
+            blinkText.style.color = (blinkText.style.color == 'red' ? 'black' : 'red');
+        }
+
+        setInterval(blink, 600); // 2000 milliseconds = 2 seconds
+    </script>
 </body>
 </html>

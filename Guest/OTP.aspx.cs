@@ -78,6 +78,7 @@ public partial class Guest_OTP : System.Web.UI.Page
                 btnprint.Visible = (bool)dt.Rows[0]["IsCandidateRegistred"];
                 lnkInterviewstatus.Visible = (bool)dt.Rows[0]["IsInterviewStatusDone"];
                 lnkInterviewUploadDocuments.Visible = (bool)dt.Rows[0]["IsUploadCoumentAllows"];
+                lnkbtnOffer.Visible = (bool)dt.Rows[0]["IsOfferGenerate"];
 
             }
 
@@ -325,6 +326,18 @@ public partial class Guest_OTP : System.Web.UI.Page
         dataAdapter.Fill(dataSet);
         Session["IsApproved"] = dataSet.Tables[0].Rows[0]["IsInterviewStatusDone"];
         return dataSet.Tables[0];
-        
+
+    }
+
+    protected void lnkbtnOffer_click(object sender, EventArgs e)
+    {
+        try
+        {
+            string MobileNo = Session["MobileNo"].ToString();
+            Response.Redirect("../Guest/CheckJobStatus.aspx?MobileNo=" + MobileNo.ToString());
+        }
+        catch (Exception)
+        {
+        }
     }
 }
