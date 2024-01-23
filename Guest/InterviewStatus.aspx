@@ -204,7 +204,29 @@
             -ms-flex-wrap: wrap;
             flex-wrap: wrap;
             margin-right: -28px;
-            margin-left: -3px;</style>
+            margin-left: -3px;
+        }
+    </style>
+    <style type="text/css">
+        .cardsuccess
+        {
+            border-left: 3px solid #119d97;
+            height: 78px;
+            width: 500px;
+            border-radius: 21px;
+            width: 247px;
+            background-color: #d7eedc;
+        }
+        .cardfailure
+        {
+            border-left: 3px solid #119d97;
+            height: 78px;
+            width: 500px;
+            border-radius: 21px;
+            width: 247px;
+            background-color: #f1aeb5;
+        }
+    </style>
 </head>
 <body>
     <form id="formJobProfile" runat="server" method="get">
@@ -218,222 +240,177 @@
         </asp:Panel>
         <div class="flex-container">
             <div class="right-column row">
-                <%-- <asp:Repeater ID="rptInterviewstatus" runat="server" OnItemDataBound="rptInterviewstatus_ItemDataBound">--%>
-                <asp:Repeater ID="rptInterviewstatus" runat="server">
+                <asp:Repeater ID="rptInterviewstatus" runat="server" OnItemDataBound="rptInterviewstatus_ItemDataBound">
                     <ItemTemplate>
                         <div class="right-column-item">
-                            <div runat="server" id="rptheader">
-                            </div>
-                            <%--<div class="row" runat="server" visible="false" id="divOffer">
+                            <div class="row" runat="server" visible="false" id="divFianlJoining">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblOfferDt" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblFianlJoiningDate" Text=""></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
-                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iOffer" aria-hidden="true">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iFianlJoining" aria-hidden="true">
+                                    </i>
+                                    <div class="progress-bar" runat="server" id="div15">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" runat="server" id="div16">
+                                        <div class="card-body">
+                                            <h3>
+                                                Final Joining</h3>
+                                            <h5>
+                                                <asp:Label ID="lblFianlJoining" runat="server" Text=""></asp:Label></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" runat="server" visible="false" id="divAppoitmentLatter">
+                                <div class="col-md-4 lbldt">
+                                    <asp:Label runat="server" ID="lblAppoitmentLatterDate" Text=""></asp:Label>
+                                </div>
+                                <div class="col-md-2 container">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iAppoitmentLatter" aria-hidden="true">
+                                    </i>
+                                    <div class="progress-bar" runat="server" id="div13">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" runat="server" id="div14">
+                                        <div class="card-body">
+                                            <h3>
+                                                Appoitment Latter</h3>
+                                            <h5>
+                                                <asp:Label ID="lblAppoitmentLatter" runat="server" Text=""></asp:Label></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" runat="server" visible="false" id="divOfferLatter">
+                                <div class="col-md-4 lbldt">
+                                    <asp:Label runat="server" ID="lblOfferLatterDate" Text=""></asp:Label>
+                                </div>
+                                <div class="col-md-2 container">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iOfferLatter" aria-hidden="true">
+                                    </i>
+                                    <div class="progress-bar" runat="server" id="div11">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" runat="server" id="div12">
+                                        <div class="card-body">
+                                            <h3>
+                                                Offer Latter</h3>
+                                            <h5>
+                                                <asp:Label ID="lblOfferLatter" runat="server" Text=""></asp:Label></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" runat="server" visible="false" id="divHODAssessment">
+                                <div class="col-md-4 lbldt">
+                                    <asp:Label runat="server" ID="lblHODAssessmentDate" Text=""></asp:Label>
+                                </div>
+                                <div class="col-md-2 container">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iHODAssessment" aria-hidden="true">
+                                    </i>
+                                    <div class="progress-bar" runat="server" id="div9">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" runat="server" id="divSubHODAssessment">
+                                        <div class="card-body">
+                                            <h3>
+                                                HOD Assessment</h3>
+                                            <h5>
+                                                <asp:Label ID="lblHODAssessment" runat="server" Text=""></asp:Label></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" runat="server" visible="false" id="divHRAssessment">
+                                <div class="col-md-4 lbldt">
+                                    <asp:Label runat="server" ID="lblHRAssessmentDate" Text=""></asp:Label>
+                                </div>
+                                <div class="col-md-2 container">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iHRAssessment" aria-hidden="true">
+                                    </i>
+                                    <div class="progress-bar" runat="server" id="div7">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" runat="server" id="divsubHRAssessment">
+                                        <div class="card-body">
+                                            <h3>
+                                                HR Assessment</h3>
+                                            <h5>
+                                                <asp:Label ID="lblHRAssessment" runat="server" Text=""></asp:Label></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" runat="server" visible="false" id="divInterViewOn">
+                                <div class="col-md-4 lbldt">
+                                    <asp:Label runat="server" ID="labelInterViewOnDate" Text=""></asp:Label>
+                                </div>
+                                <div class="col-md-2 container">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iInterViewOn" aria-hidden="true">
+                                    </i>
+                                    <div class="progress-bar" runat="server">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" runat="server" id="divSubInterViewOn">
+                                        <div class="card-body">
+                                            <h3>
+                                                Interview On</h3>
+                                            <h5>
+                                                <asp:Label ID="lblInterViewOn" runat="server" Text=""></asp:Label></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" runat="server" visible="false" id="divProfileShortList">
+                                <div class="col-md-4 lbldt">
+                                    <asp:Label runat="server" ID="lblProfileShortListDate" Text=""></asp:Label>
+                                </div>
+                                <div class="col-md-2 container">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iProfileShortList" aria-hidden="true">
+                                    </i>
+                                    <div class="progress-bar" runat="server" id="div3">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" runat="server" id="divProfileShortSubList">
+                                        <div class="card-body">
+                                            <h3>
+                                                Profile ShortList</h3>
+                                            <h5>
+                                                <asp:Label ID="lblProfileShortList" runat="server" Text=""></asp:Label></h5>
+                                        </div>
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="row" runat="server" visible="false" id="divProfileCreated">
+                                <div class="col-md-4 lbldt">
+                                    <asp:Label runat="server" ID="lblProfileCreatedDate" Text=""></asp:Label>
+                                </div>
+                                <div class="col-md-2 container">
+                                    <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iProfileCreated" aria-hidden="true">
                                     </i>
                                     <div class="progress-bar" runat="server" id="divOfferProgressbar">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card" runat="server" id="divOfferCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                Offer & BGC</h3>
-                                            <h5>
-                                                BGC Scheduled</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>--%>
-                            <div class="row mt-2" runat="server" id="divFinalJoining">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblFinalJoiningdt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-check-square fa-2x icon" runat="server" id="iFinalJoining" aria-hidden="true">
-                                    </i>
-                                    <div class="progress-bar" runat="server" id="divFinalJoiningProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" runat="server" id="divFinalJoiningCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                Final Joining</h3>
-                                            <h5>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2" runat="server" id="divAppointmentLatter">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblAppointmentLatterdt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-address-book-o fa-2x icon" runat="server" id="iAppointmentLatter"
-                                        aria-hidden="true"></i>
-                                    <div class="progress-bar" runat="server" id="divAppointmentProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" runat="server" id="divAppointmentLatterCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                Appointment Latter</h3>
-                                            <h5>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2" runat="server" id="divOfferLatter">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblOfferLatterdt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-duotone fa-envelope fa-2x icon" runat="server" id="iOfferLatter"
-                                        aria-hidden="true"></i>
-                                    <div class="progress-bar" runat="server" id="divOfferLatterProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" runat="server" id="divOfferLatterCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                Offer Latter</h3>
-                                            <h5>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2" runat="server" id="divHODAssessment">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblHODAssessmentdt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-pencil-square-o fa-2x icon" runat="server" id="iHODAssessment" aria-hidden="true">
-                                    </i>
-                                    <div class="progress-bar" runat="server" id="divHODAssessmentProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" runat="server" id="divHODAssessmentCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                HOD Assessment</h3>
-                                            <h5>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2" runat="server" id="divHRAssessment">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblHRAssessmentdt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-pencil-square-o fa-2x icon" runat="server" id="iHRAssessment" aria-hidden="true">
-                                    </i>
-                                    <div class="progress-bar" runat="server" id="divHRAssessmentProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" runat="server" id="divHRAssessmentCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                HR Assessment</h3>
-                                            <h5>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2" runat="server" id="divDateTime">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblInterviewconductDt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-clock-o fa-2x icon" runat="server" id="iDateTime" aria-hidden="true">
-                                    </i>
-                                    <div class="progress-bar" runat="server" id="divDateTimeProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card " runat="server" id="divDateTimecard">
-                                        <div class="card-body">
-                                            <h3>
-                                                Interview On</h3>
-                                            <h5>
-                                                <asp:Label runat="server" ID="lblAppoitmentTime" Text=""></asp:Label></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2" runat="server" id="divProfileShortList">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblProfileShortListdt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-duotone fa-address-card fa-2x icon" runat="server" id="iProfileShortList"
-                                        aria-hidden="true"></i>
-                                    <div class="progress-bar" runat="server" id="divShortListProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" runat="server" id="divProfileShortListCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                Profile ShortList</h3>
-                                            <h5>
-                                                Candidate Registered against Job</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-2" runat="server" id="divProfile">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblProfileDt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-solid fa-user-plus fa-2x icon" runat="server" id="iProfile" aria-hidden="true">
-                                    </i>
-                                    <div class="progress-bar" runat="server" id="divProfileProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" runat="server" id="divProfileCard">
+                                    <div class="card" runat="server" id="divSubOfferCard">
                                         <div class="card-body">
                                             <h3>
                                                 Profile Created</h3>
-                                            <h5>
-                                                Candidate Registered against Job</h5>
+                                            <%-- <h5>
+                                                BGC Scheduled</h5>--%>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <%-- <div class="row mt-2" runat="server" id="divInterview">
-                                <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblInterviewDt" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2 container">
-                                    <i class="fa fa-comments-o fa-2x icon" runat="server" id="iInterview" aria-hidden="true">
-                                    </i>
-                                    <div class="progress-bar" runat="server" id="divInterviewProgressbar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card " runat="server" id="divInterviewCard">
-                                        <div class="card-body">
-                                            <h3>
-                                                Interview</h3>
-                                            <h5>
-                                                Evaluated</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>--%>
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
@@ -455,7 +432,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

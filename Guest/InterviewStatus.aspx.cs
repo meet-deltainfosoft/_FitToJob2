@@ -82,118 +82,331 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
 
     protected void rptInterviewstatus_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
+
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
+
             DataRowView dataRowView = (DataRowView)e.Item.DataItem;
 
-            HtmlGenericControl myDiv = (HtmlGenericControl)e.Item.FindControl("divProfileCard");
-            HtmlGenericControl divOfferProgressbar = (HtmlGenericControl)e.Item.FindControl("divOfferProgressbar");
-            HtmlGenericControl divProfileProgressbar = (HtmlGenericControl)e.Item.FindControl("divProfileProgressbar");
-            HtmlGenericControl divInterviewCard = (HtmlGenericControl)e.Item.FindControl("divInterviewCard");
-            HtmlGenericControl divDateTimeProgressbar = (HtmlGenericControl)e.Item.FindControl("divDateTimeProgressbar");
-            HtmlGenericControl divDateTimecard = (HtmlGenericControl)e.Item.FindControl("divDateTimecard");
-            HtmlGenericControl rptheader = (HtmlGenericControl)e.Item.FindControl("rptheader");
-            HtmlGenericControl iProfile = (HtmlGenericControl)e.Item.FindControl("iProfile");
-            HtmlGenericControl iDateTime = (HtmlGenericControl)e.Item.FindControl("iDateTime");
-            HtmlGenericControl iInterview = (HtmlGenericControl)e.Item.FindControl("iInterview");
-            HtmlGenericControl divInterviewProgressbar = (HtmlGenericControl)e.Item.FindControl("divInterviewProgressbar");
-            HtmlGenericControl divOfferCard = (HtmlGenericControl)e.Item.FindControl("divOfferCard");
-            HtmlGenericControl iOffer = (HtmlGenericControl)e.Item.FindControl("iOffer");
-            HtmlGenericControl divOffer = (HtmlGenericControl)e.Item.FindControl("divOffer");
+            //Profile Created
+            HtmlGenericControl divProfileCreated = (HtmlGenericControl)e.Item.FindControl("divProfileCreated");
+            HtmlGenericControl divSubOfferCard = (HtmlGenericControl)e.Item.FindControl("divSubOfferCard");
+            Label lblProfileCreatedDate = (Label)e.Item.FindControl("lblProfileCreatedDate");
+            HtmlGenericControl iProfileShortList = (HtmlGenericControl)e.Item.FindControl("iProfileShortList");
 
-            Label lblOfferDt = (Label)e.Item.FindControl("lblOfferDt");
-            //lblOfferDt
+            //Profile Short List
+            HtmlGenericControl divProfileShortList = (HtmlGenericControl)e.Item.FindControl("divProfileShortList");
+            HtmlGenericControl divProfileShortSubList = (HtmlGenericControl)e.Item.FindControl("divProfileShortSubList");
+            Label lblProfileShortList = (Label)e.Item.FindControl("lblProfileShortList");
+            Label lblProfileShortListDate = (Label)e.Item.FindControl("lblProfileShortListDate");
+            HtmlGenericControl iProfileCreated = (HtmlGenericControl)e.Item.FindControl("iProfileCreated");
+
+            //InterViewOn
+            HtmlGenericControl divInterViewOn = (HtmlGenericControl)e.Item.FindControl("divInterViewOn");
+            Label labelInterViewOnDate = (Label)e.Item.FindControl("labelInterViewOnDate");
+            HtmlGenericControl divSubInterViewOn = (HtmlGenericControl)e.Item.FindControl("divSubInterViewOn");
+            Label lblInterViewOn = (Label)e.Item.FindControl("lblInterViewOn");
+
+            //HtmlGenericControl divSubInterViewOn = (HtmlGenericControl)e.Item.FindControl("divSubInterViewOn");
+            HtmlGenericControl iInterViewOn = (HtmlGenericControl)e.Item.FindControl("iInterViewOn");
+
+            //HR Assessment
+            HtmlGenericControl divHRAssessment = (HtmlGenericControl)e.Item.FindControl("divHRAssessment");
+            HtmlGenericControl divsubHRAssessment = (HtmlGenericControl)e.Item.FindControl("divsubHRAssessment");
+
+            Label lblHRAssessmentDate = (Label)e.Item.FindControl("lblHRAssessmentDate");
+            Label lblHRAssessment = (Label)e.Item.FindControl("lblHRAssessment");
+            HtmlGenericControl iHRAssessment = (HtmlGenericControl)e.Item.FindControl("iHRAssessment");
+
+            //HOD Assessment
+            HtmlGenericControl divHODAssessment = (HtmlGenericControl)e.Item.FindControl("divHODAssessment");
+            HtmlGenericControl divSubHODAssessment = (HtmlGenericControl)e.Item.FindControl("divSubHODAssessment");
+            Label lblHODAssessmentDate = (Label)e.Item.FindControl("lblHODAssessmentDate");
+            Label lblHODAssessment = (Label)e.Item.FindControl("lblHODAssessment");
+            HtmlGenericControl iHODAssessment = (HtmlGenericControl)e.Item.FindControl("iHODAssessment");
 
 
-            if (dataRowView["JobProfile"].ToString() != "")
+            //Offer Latter
+            HtmlGenericControl divOfferLatter = (HtmlGenericControl)e.Item.FindControl("divOfferLatter");
+            Label lblOfferLatterDate = (Label)e.Item.FindControl("lblOfferLatterDate");
+            Label lblOfferLatter = (Label)e.Item.FindControl("lblOfferLatter");
+            HtmlGenericControl iOfferLatter = (HtmlGenericControl)e.Item.FindControl("iOfferLatter");
+
+
+            //Appoitment Latter
+            HtmlGenericControl divAppoitmentLatter = (HtmlGenericControl)e.Item.FindControl("divAppoitmentLatter");
+            Label lblAppoitmentLatterDate = (Label)e.Item.FindControl("lblAppoitmentLatterDate");
+            Label lblAppoitmentLatter = (Label)e.Item.FindControl("lblAppoitmentLatter");
+            HtmlGenericControl iAppoitmentLatter = (HtmlGenericControl)e.Item.FindControl("iAppoitmentLatter");
+
+
+            //Final Joining
+
+            HtmlGenericControl divFianlJoining = (HtmlGenericControl)e.Item.FindControl("divFianlJoining");
+            Label lblFianlJoiningDate = (Label)e.Item.FindControl("lblFianlJoiningDate");
+            Label lblFianlJoining = (Label)e.Item.FindControl("lblFianlJoining");
+            HtmlGenericControl iFianlJoining = (HtmlGenericControl)e.Item.FindControl("iFianlJoining");
+
+            divProfileCreated.Visible = true;
+            divProfileShortSubList.Attributes["style"] = "background-color:#119d97;color:white";
+            lblProfileCreatedDate.Text = dataRowView["RegistrationDate"].ToString();
+            //lblProfileCreatedDate.Attributes["style"] = "background-color:#d7eedc;";
+
+
+            if (dataRowView["AssementStatus"].ToString() == "PENDING")
             {
-                rptheader.InnerText = dataRowView["JobProfile"].ToString();
-                rptheader.Attributes["style"] = "display:flex;justify-content: center;font-size: 40px;";
+                divProfileShortList.Visible = false;
             }
-
-            Label lblInterviewDt = (Label)e.Item.FindControl("lblInterviewDt");
-            Label lblInterviewconductDt = (Label)e.Item.FindControl("lblInterviewconductDt");
-
-            Label lblAppoitmentDate = (Label)e.Item.FindControl("lblAppoitmentDate");
-            Label lblAppoitmentTime = (Label)e.Item.FindControl("lblAppoitmentTime");
-
-            lblAppoitmentDate.Text = "Interview On";
-            lblAppoitmentTime.Text = dataRowView["AppointmentDate"].ToString();
-
-
-            if (dataRowView["InsertedOn"].ToString() != "")
+            else
             {
-                myDiv.Attributes["style"] = "background-color:#d7eedc;";
-                iProfile.Attributes["style"] = "background-color:#d7eedc;";
-            }
-
-
-            if (dataRowView["Status"].ToString() != "")
-            {
-
-                if (dataRowView["Status"].ToString() == "A")
+                divProfileShortList.Visible = true;
+                if (dataRowView["AssementStatus"].ToString() == "PASS")
                 {
-                    divInterviewCard.Attributes["style"] = "background-color:#d7eedc";
-                    iInterview.Attributes["style"] = "background-color:#d7eedc";
+                    lblProfileShortList.Attributes["class"] = "background-color:#119d97;color:white";
+                    divProfileShortSubList.Attributes["style"] = "background-color:#119d97;color:white";
+                    iProfileShortList.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    //lblProfileShortListDate.Attributes["class"] = "success";
+                    lblProfileShortListDate.Text = dataRowView["RegistrationDate"].ToString();
                 }
-                else if (dataRowView["Status"].ToString() == "R")
+                else
                 {
-                    divInterviewCard.Attributes["style"] = "background-color:#f1aeb5";
-                    iInterview.Attributes["style"] = "background-color:#f1aeb5";
+                    lblProfileShortList.Attributes["class"] = "failure";
+                    divProfileShortSubList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    iProfileShortList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    //  lblProfileShortListDate.Attributes["style"] = "background-color:#f1aeb5;color:white";
+                    //lblProfileShortListDate.Attributes["class"] = "failure";
+                    lblProfileShortListDate.Text = dataRowView["RegistrationDate"].ToString();
                 }
+            }
 
-                if (dataRowView["ApprovedDisapprovedOn"].ToString() != "")
+
+
+            if (dataRowView["AssementStatus"].ToString() == "PENDING")
+            {
+                divInterViewOn.Visible = false;
+            }
+            else
+            {
+                divInterViewOn.Visible = true;
+                if (dataRowView["AssementStatus"].ToString() == "PASS")
                 {
-                    lblInterviewDt.Text = Convert.ToDateTime(dataRowView["ApprovedDisapprovedOn"].ToString()).ToString("dd-MMM-yyyy");
-                    lblInterviewDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
-                    lblInterviewDt.CssClass = "top-date";
+                    labelInterViewOnDate.Attributes["class"] = "success";
+                    divSubInterViewOn.Attributes["style"] = "background-color:#119d97;color:white";
+                    iInterViewOn.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblInterViewOn.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblInterViewOn.Text = dataRowView["AppointmentDate"].ToString();
+                    labelInterViewOnDate.Text = dataRowView["RegistrationDate"].ToString();
                 }
-
-                divDateTimecard.Attributes["style"] = "background-color:#d7eedc";
-                lblInterviewconductDt.Text = dataRowView["hrInsertedOn"].ToString();
-                iDateTime.Attributes["style"] = "background-color:#d7eedc;";
-                lblInterviewconductDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
-
+                else
+                {
+                    lblProfileShortList.Attributes["class"] = "failure";
+                    divSubInterViewOn.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    divProfileShortSubList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    iProfileShortList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblInterViewOn.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblInterViewOn.Text = dataRowView["RegistrationDate"].ToString();
+                }
             }
 
-            if (dataRowView["AssessmentStatus"].ToString() == "PASS")
+
+            if (dataRowView["AssessmentStatus"].ToString() == "PENDING")
             {
-                divInterviewProgressbar.Attributes["style"] = "background-color:#d7eedc;";
-                divInterviewCard.Attributes["style"] = "background-color:#d7eedc;";
-                iInterview.Attributes["style"] = "background-color:#d7eedc;";
+                divHRAssessment.Visible = false;
             }
-
-            if (dataRowView["AssessmentStatus"].ToString() == "FAILED")
+            else
             {
-                divInterviewProgressbar.Attributes["style"] = "background-color:#f1aeb5;";
-                divInterviewCard.Attributes["style"] = "background-color:#f1aeb5;";
-                iInterview.Attributes["style"] = "background-color:#f1aeb5;";
+                divHRAssessment.Visible = true;
+                if (dataRowView["AssementStatus"].ToString() == "PASS")
+                {
+                    labelInterViewOnDate.Attributes["class"] = "success";
+                    divsubHRAssessment.Attributes["style"] = "background-color:#119d97;color:white";
+                    iHRAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    //lblHRAssessmentDate.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblHRAssessment.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblHRAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblHRAssessmentDate.Text = dataRowView["RegistrationDate"].ToString();
+                }
+                else
+                {
+                    lblProfileShortList.Attributes["class"] = "failure";
+                    divsubHRAssessment.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    divProfileShortSubList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    iProfileShortList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblInterViewOn.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblInterViewOn.Text = dataRowView["RegistrationDate"].ToString();
+                }
             }
 
-            if (dataRowView["IsOfferGenerate"].ToString() == "1")
+            if (dataRowView["AssessmentStatus"].ToString() == "PENDING")
             {
-                divOfferCard.Attributes["style"] = "background-color:#d7eedc;";
-                divOfferCard.Attributes["style"] = "background-color:#d7eedc;";
-                iOffer.Attributes["style"] = "background-color:#d7eedc;";
-                lblOfferDt.Text = dataRowView["OfferGenerateDateTime"].ToString();
-                divOffer.Visible = true;
-                lblOfferDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+                divSubHODAssessment.Visible = false;
             }
-            else if (dataRowView["IsOfferGenerate"].ToString() == "0")
+            else
             {
-                divOfferCard.Attributes["style"] = "background-color:#f1aeb5;";
-                divOfferCard.Attributes["style"] = "background-color:#f1aeb5;";
-                iOffer.Attributes["style"] = "background-color:#f1aeb5;";
-                lblOfferDt.Text = dataRowView["OfferGenerateDateTime"].ToString();
-                divOffer.Visible = true;
-                lblOfferDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+                divSubHODAssessment.Visible = true;
+                if (dataRowView["AssementStatus"].ToString() == "PASS")
+                {
+                    labelInterViewOnDate.Attributes["class"] = "success";
+                    divsubHRAssessment.Attributes["style"] = "background-color:#119d97;color:white";
+                    iHRAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    //lblHRAssessmentDate.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblHRAssessment.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblHRAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblHRAssessmentDate.Text = dataRowView["RegistrationDate"].ToString();
+                }
+                else
+                {
+                    lblProfileShortList.Attributes["class"] = "failure";
+                    divsubHRAssessment.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    divProfileShortSubList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    iProfileShortList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblInterViewOn.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblInterViewOn.Text = dataRowView["RegistrationDate"].ToString();
+                }
             }
 
-            Label myLabel = (Label)e.Item.FindControl("lblProfileDt");
 
-            myLabel.Text = dataRowView["InsertedOn"].ToString();
-            myLabel.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+
+
+
+
+            //divFianlJoining.Visible = true;
+            //divProfileCreated.Visible = true;
+            //divProfileShortList.Visible = true;
+            //divInterViewOn.Visible = true;
+            //divHRAssessment.Visible = true;
+            //divHODAssessment.Visible = true;
+            //divOfferLatter.Visible = true;
+            //divAppoitmentLatter.Visible = true;
+
+            //lblOfferLatterDate.Text = "24-Jan-2024";
+            //lblOfferLatter.Text = "24-Jan-2024";
+            //lblHRAssessmentDate.Text = "24-Jan-2024";
+            //lblHRAssessment.Text = "24-Jan-2024";
+            //lblProfileCreatedDate.Text = "24-Jan-2024";
+            //lblProfileShortListDate.Text = "24-Jan-2024";
+            //lblProfileShortList.Text = "24-Jan-2024";
+            //labelInterViewOnDate.Text = "24-Jan-2024";
+            //lblInterViewOn.Text = "24-Jan-2024 03:00 PM";
+            //lblHODAssessmentDate.Text = "24-Jan-2024";
+            //lblHODAssessment.Text = "24-Jan-2024";
+            //lblAppoitmentLatterDate.Text = "24-Jan-2024";
+            //lblFianlJoiningDate.Text = "24-Jan-2024";
+            //lblFianlJoining.Text = "24-Jan-2024";
         }
+
+        //if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        //{
+        //    DataRowView dataRowView = (DataRowView)e.Item.DataItem;
+
+        //    HtmlGenericControl myDiv = (HtmlGenericControl)e.Item.FindControl("divProfileCard");
+        //    HtmlGenericControl divOfferProgressbar = (HtmlGenericControl)e.Item.FindControl("divOfferProgressbar");
+        //    HtmlGenericControl divProfileProgressbar = (HtmlGenericControl)e.Item.FindControl("divProfileProgressbar");
+        //    HtmlGenericControl divInterviewCard = (HtmlGenericControl)e.Item.FindControl("divInterviewCard");
+        //    HtmlGenericControl divDateTimeProgressbar = (HtmlGenericControl)e.Item.FindControl("divDateTimeProgressbar");
+        //    HtmlGenericControl divDateTimecard = (HtmlGenericControl)e.Item.FindControl("divDateTimecard");
+        //    HtmlGenericControl rptheader = (HtmlGenericControl)e.Item.FindControl("rptheader");
+        //    HtmlGenericControl iProfile = (HtmlGenericControl)e.Item.FindControl("iProfile");
+        //    HtmlGenericControl iDateTime = (HtmlGenericControl)e.Item.FindControl("iDateTime");
+        //    HtmlGenericControl iInterview = (HtmlGenericControl)e.Item.FindControl("iInterview");
+        //    HtmlGenericControl divInterviewProgressbar = (HtmlGenericControl)e.Item.FindControl("divInterviewProgressbar");
+        //    HtmlGenericControl divOfferCard = (HtmlGenericControl)e.Item.FindControl("divOfferCard");
+        //    HtmlGenericControl iOffer = (HtmlGenericControl)e.Item.FindControl("iOffer");
+        //    HtmlGenericControl divOffer = (HtmlGenericControl)e.Item.FindControl("divOffer");
+
+        //    Label lblOfferDt = (Label)e.Item.FindControl("lblOfferDt");
+        //    //lblOfferDt
+
+
+        //    if (dataRowView["JobProfile"].ToString() != "")
+        //    {
+        //        rptheader.InnerText = dataRowView["JobProfile"].ToString();
+        //        rptheader.Attributes["style"] = "display:flex;justify-content: center;font-size: 40px;";
+        //    }
+
+        //    Label lblInterviewDt = (Label)e.Item.FindControl("lblInterviewDt");
+        //    Label lblInterviewconductDt = (Label)e.Item.FindControl("lblInterviewconductDt");
+
+        //    Label lblAppoitmentDate = (Label)e.Item.FindControl("lblAppoitmentDate");
+        //    Label lblAppoitmentTime = (Label)e.Item.FindControl("lblAppoitmentTime");
+
+        //    lblAppoitmentDate.Text = "Interview On";
+        //    lblAppoitmentTime.Text = dataRowView["AppointmentDate"].ToString();
+
+
+        //    if (dataRowView["InsertedOn"].ToString() != "")
+        //    {
+        //        myDiv.Attributes["style"] = "background-color:#d7eedc;";
+        //        iProfile.Attributes["style"] = "background-color:#d7eedc;";
+        //    }
+
+
+        //    if (dataRowView["Status"].ToString() != "")
+        //    {
+
+        //        if (dataRowView["Status"].ToString() == "A")
+        //        {
+        //            divInterviewCard.Attributes["style"] = "background-color:#d7eedc";
+        //            iInterview.Attributes["style"] = "background-color:#d7eedc";
+        //        }
+        //        else if (dataRowView["Status"].ToString() == "R")
+        //        {
+        //            divInterviewCard.Attributes["style"] = "background-color:#f1aeb5";
+        //            iInterview.Attributes["style"] = "background-color:#f1aeb5";
+        //        }
+
+        //        if (dataRowView["ApprovedDisapprovedOn"].ToString() != "")
+        //        {
+        //            lblInterviewDt.Text = Convert.ToDateTime(dataRowView["ApprovedDisapprovedOn"].ToString()).ToString("dd-MMM-yyyy");
+        //            lblInterviewDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+        //            lblInterviewDt.CssClass = "top-date";
+        //        }
+
+        //        divDateTimecard.Attributes["style"] = "background-color:#d7eedc";
+        //        lblInterviewconductDt.Text = dataRowView["hrInsertedOn"].ToString();
+        //        iDateTime.Attributes["style"] = "background-color:#d7eedc;";
+        //        lblInterviewconductDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+
+        //    }
+
+        //    if (dataRowView["AssessmentStatus"].ToString() == "PASS")
+        //    {
+        //        divInterviewProgressbar.Attributes["style"] = "background-color:#d7eedc;";
+        //        divInterviewCard.Attributes["style"] = "background-color:#d7eedc;";
+        //        iInterview.Attributes["style"] = "background-color:#d7eedc;";
+        //    }
+
+        //    if (dataRowView["AssessmentStatus"].ToString() == "FAILED")
+        //    {
+        //        divInterviewProgressbar.Attributes["style"] = "background-color:#f1aeb5;";
+        //        divInterviewCard.Attributes["style"] = "background-color:#f1aeb5;";
+        //        iInterview.Attributes["style"] = "background-color:#f1aeb5;";
+        //    }
+
+        //    if (dataRowView["IsOfferGenerate"].ToString() == "1")
+        //    {
+        //        divOfferCard.Attributes["style"] = "background-color:#d7eedc;";
+        //        divOfferCard.Attributes["style"] = "background-color:#d7eedc;";
+        //        iOffer.Attributes["style"] = "background-color:#d7eedc;";
+        //        lblOfferDt.Text = dataRowView["OfferGenerateDateTime"].ToString();
+        //        divOffer.Visible = true;
+        //        lblOfferDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+        //    }
+        //    else if (dataRowView["IsOfferGenerate"].ToString() == "0")
+        //    {
+        //        divOfferCard.Attributes["style"] = "background-color:#f1aeb5;";
+        //        divOfferCard.Attributes["style"] = "background-color:#f1aeb5;";
+        //        iOffer.Attributes["style"] = "background-color:#f1aeb5;";
+        //        lblOfferDt.Text = dataRowView["OfferGenerateDateTime"].ToString();
+        //        divOffer.Visible = true;
+        //        lblOfferDt.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+        //    }
+
+        //    Label myLabel = (Label)e.Item.FindControl("lblProfileDt");
+
+        //    myLabel.Text = dataRowView["InsertedOn"].ToString();
+        //    myLabel.Attributes["style"] = "font-weight: bold;font-size: 20px;";
+        //}
 
     }
 
