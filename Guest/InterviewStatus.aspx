@@ -226,6 +226,13 @@
             width: 247px;
             background-color: #f1aeb5;
         }
+        .date
+        {
+            font-family: Verdana;
+            font-size: large;
+            font-weight: bold;
+            color: #119d97;
+        }
     </style>
 </head>
 <body>
@@ -245,7 +252,7 @@
                         <div class="right-column-item">
                             <div class="row" runat="server" visible="false" id="divFianlJoining">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblFianlJoiningDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblFianlJoiningDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iFianlJoining" aria-hidden="true">
@@ -266,7 +273,7 @@
                             </div>
                             <div class="row" runat="server" visible="false" id="divAppoitmentLatter">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblAppoitmentLatterDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblAppoitmentLatterDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iAppoitmentLatter" aria-hidden="true">
@@ -287,7 +294,7 @@
                             </div>
                             <div class="row" runat="server" visible="false" id="divOfferLatter">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblOfferLatterDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblOfferLatterDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iOfferLatter" aria-hidden="true">
@@ -296,7 +303,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card" runat="server" id="div12">
+                                    <div class="card" runat="server" id="divSubOfferLatter">
                                         <div class="card-body">
                                             <h3>
                                                 Offer Latter</h3>
@@ -308,7 +315,7 @@
                             </div>
                             <div class="row" runat="server" visible="false" id="divHODAssessment">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblHODAssessmentDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblHODAssessmentDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iHODAssessment" aria-hidden="true">
@@ -329,7 +336,7 @@
                             </div>
                             <div class="row" runat="server" visible="false" id="divHRAssessment">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblHRAssessmentDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblHRAssessmentDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iHRAssessment" aria-hidden="true">
@@ -350,7 +357,7 @@
                             </div>
                             <div class="row" runat="server" visible="false" id="divInterViewOn">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="labelInterViewOnDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="labelInterViewOnDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iInterViewOn" aria-hidden="true">
@@ -371,7 +378,7 @@
                             </div>
                             <div class="row" runat="server" visible="false" id="divProfileShortList">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblProfileShortListDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblProfileShortListDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iProfileShortList" aria-hidden="true">
@@ -388,11 +395,11 @@
                                                 <asp:Label ID="lblProfileShortList" runat="server" Text=""></asp:Label></h5>
                                         </div>
                                     </div>
-                            </div>
+                                </div>
                             </div>
                             <div class="row" runat="server" visible="false" id="divProfileCreated">
                                 <div class="col-md-4 lbldt">
-                                    <asp:Label runat="server" ID="lblProfileCreatedDate" Text=""></asp:Label>
+                                    <asp:Label runat="server" ID="lblProfileCreatedDate" Text="" CssClass="date"></asp:Label>
                                 </div>
                                 <div class="col-md-2 container">
                                     <i class="fa fa-thumbs-up fa-2x icon" runat="server" id="iProfileCreated" aria-hidden="true">

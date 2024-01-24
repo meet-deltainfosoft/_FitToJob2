@@ -92,14 +92,14 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             HtmlGenericControl divProfileCreated = (HtmlGenericControl)e.Item.FindControl("divProfileCreated");
             HtmlGenericControl divSubOfferCard = (HtmlGenericControl)e.Item.FindControl("divSubOfferCard");
             Label lblProfileCreatedDate = (Label)e.Item.FindControl("lblProfileCreatedDate");
-            HtmlGenericControl iProfileShortList = (HtmlGenericControl)e.Item.FindControl("iProfileShortList");
+            HtmlGenericControl iProfileCreated = (HtmlGenericControl)e.Item.FindControl("iProfileCreated");
 
             //Profile Short List
             HtmlGenericControl divProfileShortList = (HtmlGenericControl)e.Item.FindControl("divProfileShortList");
             HtmlGenericControl divProfileShortSubList = (HtmlGenericControl)e.Item.FindControl("divProfileShortSubList");
             Label lblProfileShortList = (Label)e.Item.FindControl("lblProfileShortList");
             Label lblProfileShortListDate = (Label)e.Item.FindControl("lblProfileShortListDate");
-            HtmlGenericControl iProfileCreated = (HtmlGenericControl)e.Item.FindControl("iProfileCreated");
+            HtmlGenericControl iProfileShortList = (HtmlGenericControl)e.Item.FindControl("iProfileShortList");
 
             //InterViewOn
             HtmlGenericControl divInterViewOn = (HtmlGenericControl)e.Item.FindControl("divInterViewOn");
@@ -130,6 +130,7 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             HtmlGenericControl divOfferLatter = (HtmlGenericControl)e.Item.FindControl("divOfferLatter");
             Label lblOfferLatterDate = (Label)e.Item.FindControl("lblOfferLatterDate");
             Label lblOfferLatter = (Label)e.Item.FindControl("lblOfferLatter");
+            HtmlGenericControl divSubOfferLatter = (HtmlGenericControl)e.Item.FindControl("divSubOfferLatter");
             HtmlGenericControl iOfferLatter = (HtmlGenericControl)e.Item.FindControl("iOfferLatter");
 
 
@@ -149,7 +150,9 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
 
             divProfileCreated.Visible = true;
             divProfileShortSubList.Attributes["style"] = "background-color:#119d97;color:white";
+            divSubOfferCard.Attributes["style"] = "background-color:#119d97;color:white";
             lblProfileCreatedDate.Text = dataRowView["RegistrationDate"].ToString();
+            iProfileCreated.Attributes["style"] = "background-color:#119d97;color:white";
             //lblProfileCreatedDate.Attributes["style"] = "background-color:#d7eedc;";
 
 
@@ -239,30 +242,42 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
 
             if (dataRowView["AssessmentStatus"].ToString() == "PENDING")
             {
-                divSubHODAssessment.Visible = false;
+                divHODAssessment.Visible = false;
+                //divSubHODAssessment.Visible = false;
             }
             else
             {
-                divSubHODAssessment.Visible = true;
+                divHODAssessment.Visible = true;
                 if (dataRowView["AssementStatus"].ToString() == "PASS")
                 {
                     labelInterViewOnDate.Attributes["class"] = "success";
-                    divsubHRAssessment.Attributes["style"] = "background-color:#119d97;color:white";
-                    iHRAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    divSubHODAssessment.Attributes["style"] = "background-color:#119d97;color:white";
+                    iHODAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
                     //lblHRAssessmentDate.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
-                    lblHRAssessment.Text = dataRowView["AssessmentStatus"].ToString();
-                    lblHRAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
-                    lblHRAssessmentDate.Text = dataRowView["RegistrationDate"].ToString();
+                    lblHODAssessment.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblHODAssessment.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblHODAssessmentDate.Text = dataRowView["RegistrationDate"].ToString();
                 }
                 else
                 {
                     lblProfileShortList.Attributes["class"] = "failure";
-                    divsubHRAssessment.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    divSubHODAssessment.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
                     divProfileShortSubList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
-                    iProfileShortList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
-                    lblInterViewOn.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
-                    lblInterViewOn.Text = dataRowView["RegistrationDate"].ToString();
+                    iHODAssessment.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblHODAssessment.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblHODAssessment.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblHODAssessmentDate.Text = dataRowView["RegistrationDate"].ToString();
                 }
+            }
+
+            if (dataRowView["IsOfferLatterReleased"].ToString() == "0")
+            {
+                divOfferLatter.Visible = false;
+                //divSubHODAssessment.Visible = false;
+            }
+            else
+            {
+
             }
 
 
