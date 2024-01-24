@@ -248,8 +248,20 @@
         <div class="flex-container">
             <div class="right-column row">
                 <asp:Repeater ID="rptInterviewstatus" runat="server" OnItemDataBound="rptInterviewstatus_ItemDataBound">
+                    <%-- <HeaderTemplate>
+                        <itemtemplate>
+                        <asp:Label runat="server" ID="lblJobHeader" Text="" CssClass="date"></asp:Label>
+                        </itemtemplate>
+                    </HeaderTemplate>--%>
+                    <%--<ItemTemplate>
+                        <asp:Label runat="server" ID="lblJobHeader" Text="" CssClass="date"></asp:Label>
+                    </ItemTemplate>--%>
                     <ItemTemplate>
                         <div class="right-column-item">
+                            <div class="row">
+                                <div class="ml-4 text-center">
+                                    <asp:Label runat="server" ID="lblJobHeader" Text="" CssClass="date"></asp:Label></div>
+                            </div>
                             <div class="row" runat="server" visible="false" id="divFianlJoining">
                                 <div class="col-md-4 lbldt">
                                     <asp:Label runat="server" ID="lblFianlJoiningDate" Text="" CssClass="date"></asp:Label>
@@ -282,7 +294,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card" runat="server" id="div14">
+                                    <div class="card" runat="server" id="divSubAppoitmentLatter">
                                         <div class="card-body">
                                             <h3>
                                                 Appoitment Latter</h3>

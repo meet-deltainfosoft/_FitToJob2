@@ -130,6 +130,7 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             HtmlGenericControl divOfferLatter = (HtmlGenericControl)e.Item.FindControl("divOfferLatter");
             Label lblOfferLatterDate = (Label)e.Item.FindControl("lblOfferLatterDate");
             Label lblOfferLatter = (Label)e.Item.FindControl("lblOfferLatter");
+           
             HtmlGenericControl divSubOfferLatter = (HtmlGenericControl)e.Item.FindControl("divSubOfferLatter");
             HtmlGenericControl iOfferLatter = (HtmlGenericControl)e.Item.FindControl("iOfferLatter");
 
@@ -138,6 +139,7 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             HtmlGenericControl divAppoitmentLatter = (HtmlGenericControl)e.Item.FindControl("divAppoitmentLatter");
             Label lblAppoitmentLatterDate = (Label)e.Item.FindControl("lblAppoitmentLatterDate");
             Label lblAppoitmentLatter = (Label)e.Item.FindControl("lblAppoitmentLatter");
+            HtmlGenericControl divSubAppoitmentLatter = (HtmlGenericControl)e.Item.FindControl("divSubAppoitmentLatter");
             HtmlGenericControl iAppoitmentLatter = (HtmlGenericControl)e.Item.FindControl("iAppoitmentLatter");
 
 
@@ -277,11 +279,57 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             }
             else
             {
-
+                divOfferLatter.Visible = true;
+                if (dataRowView["IsOfferLatterReleased"].ToString() == "1")
+                {
+                    lblOfferLatter.Attributes["class"] = "success";
+                    divSubOfferLatter.Attributes["style"] = "background-color:#119d97;color:white";
+                    iOfferLatter.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblOfferLatter.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblOfferLatter.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblOfferLatterDate.Text = dataRowView["OfferGenerateDateTime"].ToString();
+                }
+                else
+                {
+                    lblOfferLatter.Attributes["class"] = "failure";
+                    divSubOfferLatter.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    iOfferLatter.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblOfferLatter.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblOfferLatter.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblOfferLatterDate.Text = dataRowView["OfferGenerateDateTime"].ToString();
+                }
             }
 
 
+            if (dataRowView["AppointmentLatter"].ToString() == "0")
+            {
+                divAppoitmentLatter.Visible = false;
+            }
+            else
+            {
+                divAppoitmentLatter.Visible = true;
+                if (dataRowView["AppointmentLatter"].ToString() == "1")
+                {
+                   
+                    divSubAppoitmentLatter.Attributes["style"] = "background-color:#119d97;color:white";
+                    iAppoitmentLatter.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblAppoitmentLatter.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblAppoitmentLatter.Attributes["style"] = "background-color:#119d97;color:white;border-color:#119d97;";
+                    lblAppoitmentLatterDate.Text = dataRowView["AppointmentLatterDate"].ToString();
+                }
+                else
+                {
+                    divSubAppoitmentLatter.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    iAppoitmentLatter.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblAppoitmentLatter.Text = dataRowView["AssessmentStatus"].ToString();
+                    lblAppoitmentLatter.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    lblAppoitmentLatterDate.Text = dataRowView["AppointmentLatterDate"].ToString();
+                }
+            }
 
+                
+            Label lblJobHeader = (Label)e.Item.FindControl("lblJobHeader");
+            lblJobHeader.Text = dataRowView["JobProfile"].ToString();
 
 
 
