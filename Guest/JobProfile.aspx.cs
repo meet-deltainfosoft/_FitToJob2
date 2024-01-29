@@ -15,8 +15,6 @@ public partial class General_JobProfile : System.Web.UI.Page
     #endregion
 
     // Your code here
-
-
     protected void Page_Init(object sender, EventArgs e)
     {
         try
@@ -92,7 +90,6 @@ public partial class General_JobProfile : System.Web.UI.Page
         {
             try
             {
-
                 if (Session["IsApproved"].ToString() != "" || Session["IsApproved"] != null)
                 {
                     if (Convert.ToBoolean(Session["IsApproved"]) == true)

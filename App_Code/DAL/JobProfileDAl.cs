@@ -357,7 +357,7 @@ public class JobProfileDAl
 
             sqlCmd.Connection = _generalDAL.ActiveSQLConnection();
             sqlCmd.CommandType = CommandType.Text;
-            sqlCmd.CommandText = "Select DesignationID,Department from View_Designations group by Department,DesignationID; ";
+            sqlCmd.CommandText = "Select CategoryId,Category from StaffCategory ; ";
             dt.Load(sqlCmd.ExecuteReader());
 
             _generalDAL.CloseSQLConnection();

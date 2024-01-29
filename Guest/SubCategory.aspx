@@ -92,7 +92,8 @@
                         </asp:DropDownList>--%>
                         <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" Text="Select All"
                             OnCheckedChanged="chkallStaffCategory_CheckedChanged" Font-Bold="true" Visible="false" />
-                        <asp:CheckBoxList runat="server" ID="chkStaffCategory" TabIndex="4">
+                        <asp:CheckBoxList runat="server" ID="chkStaffCategory" TabIndex="4" RepeatLayout="Table"
+                            RepeatDirection="Horizontal" RepeatColumns="8">
                         </asp:CheckBoxList>
                     </div>
                 </div>

@@ -91,8 +91,51 @@
         }
         
         
-        /* Add more custom styles as needed */
+        
+        .horizontal-checkbox-list label
+        {
+            display: inline-block !important;
+            margin-right: 10px !important; /* Adjust margin as needed */
+        }
+        
+        #chkallStaffCategory label
+        {
+            position: relative;
+            top: -10px;
+            left: -5px;
+        }
+        
+        #chkallStaffCategory tr
+        {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        
+        .checkbox-group
+        {
+            display: inline-block;
+            margin-right: 10px; /* Adjust spacing between groups if necessary */
+        }
+        
+        .checkbox-group input[type="checkbox"]
+        {
+            display: block;
+            margin-bottom: 5px; /* Adjust spacing between checkboxes if necessary */
+        }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $checkboxes = $('#<%= chkStaffCategory.ClientID %> input[type="checkbox"]');
+            var checkboxesPerRow = 8;
+
+            $checkboxes.each(function (index) {
+                if (index % checkboxesPerRow === 0) {
+                    $(this).wrap('<div class="checkbox-group"></div>');
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <form id="formJobProfile" runat="server">
@@ -141,6 +184,7 @@
                         <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" OnCheckedChanged="chkallStaffCategory_CheckedChanged"
                             Text="Select All" Font-Bold="true" Visible="false" />
                         <asp:CheckBoxList runat="server" Style="margin-left: 15px" ID="chkStaffCategory"
+                            CssClass="horizontal-checkbox-list" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="8" 
                             TabIndex="4">
                         </asp:CheckBoxList>
                     </div>
