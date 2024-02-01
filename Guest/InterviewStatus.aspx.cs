@@ -158,14 +158,14 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             //lblProfileCreatedDate.Attributes["style"] = "background-color:#d7eedc;";
 
 
-            if (dataRowView["AssementStatus"].ToString() == "PENDING")
+            if (dataRowView["AssementStatus"].ToString().ToUpper() == "PENDING")
             {
                 divProfileShortList.Visible = false;
             }
             else
             {
                 divProfileShortList.Visible = true;
-                if (dataRowView["AssementStatus"].ToString() == "PASS")
+                if (dataRowView["AssementStatus"].ToString().ToUpper() == "PASS")
                 {
                     lblProfileShortList.Attributes["class"] = "background-color:#119d97;color:white";
                     divProfileShortSubList.Attributes["style"] = "background-color:#119d97;color:white";
@@ -176,8 +176,8 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
                 else
                 {
                     lblProfileShortList.Attributes["class"] = "failure";
-                    divProfileShortSubList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
-                    iProfileShortList.Attributes["style"] = "background-color:#f1aeb5;color:white;border-color:#f1aeb5;";
+                    divProfileShortSubList.Attributes["style"] = "background-color:#FF7F50;color:white;border-color:#FF7F50;";
+                    iProfileShortList.Attributes["style"] = "background-color:#FF7F50;color:white;border-color:#FF7F50;";
                     //  lblProfileShortListDate.Attributes["style"] = "background-color:#f1aeb5;color:white";
                     //lblProfileShortListDate.Attributes["class"] = "failure";
                     lblProfileShortListDate.Text = dataRowView["RegistrationDate"].ToString();

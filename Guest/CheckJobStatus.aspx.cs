@@ -365,7 +365,7 @@ public partial class Guest_CheckJobStatus : System.Web.UI.Page
                 Response.Write("<script>alert('Thanks For The Confirmation, We are Rejection Offer!!')</script>");
                 gdvJobOfferLatter.DataSource = dataSet.Tables[1];
                 gdvJobOfferLatter.DataBind();
-            }
+            }   
 
             objDal.CloseSQLConnection();
         }

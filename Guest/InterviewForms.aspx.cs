@@ -267,9 +267,9 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                     string uniqueFileName = Guid.NewGuid().ToString();
                     string fileExtension = Path.GetExtension(fuDigitalSignature.FileName);
                     string newFileName = uniqueFileName + fileExtension;
-                    string uploadFolder = Server.MapPath("~/images/");
+                    string uploadFolder = ConfigurationManager.AppSettings["UploadDirectory"];
                     string fullPath = Path.Combine(uploadFolder, newFileName);
-                    DigitalSignature = "~/images/" + newFileName;
+                    DigitalSignature = newFileName;
                     fuDigitalSignature.SaveAs(fullPath);
                 }
 

@@ -40,12 +40,6 @@
             $(".right-column-item").addClass("col-md-6 col-12");
 
         });
-
-
-
-
-       
-
     </script>
     <style type="text/css">
         body
@@ -138,7 +132,7 @@
         }
         h3
         {
-            text-decoration: underline;
+           
             text-underline-offset: 8px;
             text-decoration-color: #119d97;
             font-size: 23px;

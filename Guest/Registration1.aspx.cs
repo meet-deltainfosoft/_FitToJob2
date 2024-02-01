@@ -366,9 +366,14 @@ public partial class General_Registration1 : System.Web.UI.Page
                 string uniqueFileName = Guid.NewGuid().ToString();
                 string fileExtension = Path.GetExtension(fuPhoto.FileName);
                 string newFileName = uniqueFileName + fileExtension;
-                string uploadFolder = Server.MapPath("~/images/");
-                string fullPath = Path.Combine(uploadFolder, newFileName);
-                PhotoPath = "~/images/" + newFileName;
+                string uploadDirectory = ConfigurationManager.AppSettings["UploadDirectory"];
+
+                if (!Directory.Exists(uploadDirectory))
+                {
+                    Directory.CreateDirectory(uploadDirectory);
+                }
+                string fullPath = Path.Combine(uploadDirectory, newFileName);
+                PhotoPath =  newFileName;
                 fuPhoto.SaveAs(fullPath);
             }
 
@@ -377,9 +382,9 @@ public partial class General_Registration1 : System.Web.UI.Page
                 string uniqueFileName = Guid.NewGuid().ToString();
                 string fileExtension = Path.GetExtension(fuSelfintravideo.FileName);
                 string newFileName = uniqueFileName + fileExtension;
-                string uploadFolder = Server.MapPath("~/images/");
+                string uploadFolder = ConfigurationManager.AppSettings["UploadDirectory"];
                 string fullPath = Path.Combine(uploadFolder, newFileName);
-                SelfIntroVideoPath = "~/images/" + newFileName;
+                SelfIntroVideoPath = newFileName;
                 fuSelfintravideo.SaveAs(fullPath);
             }
 
@@ -388,9 +393,9 @@ public partial class General_Registration1 : System.Web.UI.Page
                 string uniqueFileName = Guid.NewGuid().ToString();
                 string fileExtension = Path.GetExtension(fuResumeUpload.FileName);
                 string newFileName = uniqueFileName + fileExtension;
-                string uploadFolder = Server.MapPath("~/images/");
+                string uploadFolder = ConfigurationManager.AppSettings["UploadDirectory"];
                 string fullPath = Path.Combine(uploadFolder, newFileName);
-                Resume = "~/images/" + newFileName;
+                Resume =  newFileName;
                 fuResumeUpload.SaveAs(fullPath);
             }
 
