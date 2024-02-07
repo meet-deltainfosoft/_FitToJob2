@@ -321,7 +321,7 @@ public partial class General_Registration1 : System.Web.UI.Page
             if (isValid == true)
             {
                 _registrationBLL.Save();
-                Response.Redirect("~/Guest/JobProfile.aspx");
+                Response.Redirect("~/Guest/Division.aspx");
 
                 if (fuPhoto.PostedFile != null && fuPhoto.PostedFile.FileName.ToString().Trim().Length > 0)
                 {
@@ -346,7 +346,7 @@ public partial class General_Registration1 : System.Web.UI.Page
                 else
                 {
                     Session["_registrationBLL"] = null;
-                    Response.Redirect("~/Guest/JobProfile.aspx");
+                    Response.Redirect("~/Guest/Division.aspx");
                 }
             }
         }
@@ -463,7 +463,7 @@ public partial class General_Registration1 : System.Web.UI.Page
                     }
                     else
                     {
-                        Response.Redirect("~/Guest/JobProfile.aspx");
+                        Response.Redirect("~/Guest/Division.aspx");
                     }
                 }
                 objDal.CloseSQLConnection();

@@ -122,6 +122,11 @@
             display: block;
             margin-bottom: 5px; /* Adjust spacing between checkboxes if necessary */
         }
+        .form-control
+        {
+            width: 25%;
+            margin-left: 45px;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -174,18 +179,27 @@
                         </asp:DropDownList>
                     </div>
                 </div>
+                
                 <div class="col-lg-12 col-sm-12">
                     <div class="form-group">
-                        <asp:Label runat="server" ID="lblStaffCategoryId" Text="Staff Category :" Font-Bold="true"></asp:Label>
-                        <span style="color: red">*</span>
-                        <br />
+                        <div class="row">
+                            <asp:Label runat="server" ID="lblStaffCategoryId" Text="Staff Category :" Font-Bold="true" Style="margin-left: 15px;"></asp:Label>
+                            <span style="color: red">*</span>
+
+                            <%--<asp:Label runat="server" ID="lblSearch" Text="Search :"></asp:Label>--%>
+                            <asp:TextBox runat="server" ID="txtSearch" CssClass="form-control" TabIndex="4" AutoCompleteType="Disabled">
+                            </asp:TextBox>
+                            <asp:Button runat="server" ID="btnSearch" Text="Search" OnClick="btnSearch_Click"
+                                class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;
+                                margin-left: 25px;" />
+                        </div>
+                        </br>
                         <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
                         </asp:DropDownList>
                         <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" OnCheckedChanged="chkallStaffCategory_CheckedChanged"
                             Text="Select All" Font-Bold="true" Visible="false" />
-                        <asp:CheckBoxList runat="server" Style="margin-left: 15px" ID="chkStaffCategory"
-                            CssClass="horizontal-checkbox-list" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="8" 
-                            TabIndex="4">
+                        <asp:CheckBoxList runat="server" cc ID="chkStaffCategory" CssClass="horizontal-checkbox-list"
+                            RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="8" TabIndex="4">
                         </asp:CheckBoxList>
                     </div>
                 </div>

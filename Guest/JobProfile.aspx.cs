@@ -207,6 +207,7 @@ public partial class General_JobProfile : System.Web.UI.Page
 
                     else
                     {
+                        
                         SqlCommand sqlCmd = new SqlCommand();
                         GeneralDAL objDal = new GeneralDAL();
                         objDal.OpenSQLConnection();
@@ -232,7 +233,7 @@ public partial class General_JobProfile : System.Web.UI.Page
                         }
                     }
                 }
-
+                #region
 
                 //    else if (ddlStaffCategoryId.SelectedIndex > 0)
                 //    {
@@ -295,6 +296,7 @@ public partial class General_JobProfile : System.Web.UI.Page
                 //        Session["_JobProfileBLL"] = null;
                 //        Response.Redirect("Registartions.aspx");
                 //    }
+                #endregion
             }
         }
         catch (Exception ex)
@@ -687,15 +689,18 @@ public partial class General_JobProfile : System.Web.UI.Page
     {
         try
         {
+            string CandidateId = GetCandidateId(Session["MobileNo"].ToString());
+
             SqlCommand sqlCmd = new SqlCommand();
             GeneralDAL objDal = new GeneralDAL();
             objDal.OpenSQLConnection();
             sqlCmd.Connection = objDal.ActiveSQLConnection();
             sqlCmd.CommandType = CommandType.StoredProcedure;
             {
-                sqlCmd.CommandText = "FitToJob_Master_JobOfferings";
-                sqlCmd.Parameters.AddWithValue("@Action", "GetJobOffering");
-                sqlCmd.Parameters.AddWithValue("@MobileNo", Session["MobileNo"].ToString());
+                sqlCmd.CommandText = "FitToJob_Android_Application";
+                sqlCmd.Parameters.AddWithValue("@Action", "GetAllCategory");
+                sqlCmd.Parameters.AddWithValue("@CandidateId", CandidateId);
+                sqlCmd.Parameters.AddWithValue("@DepartmentSearch", txtSearch.Text);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
                 DataSet dataSet = new DataSet();
                 dataAdapter.Fill(dataSet);
@@ -705,7 +710,7 @@ public partial class General_JobProfile : System.Web.UI.Page
                 {
                     for (int i = 0; i < chkStaffCategory.Items.Count; i++)
                     {
-                        string columnName = "StaffCategoryId";
+                        string columnName = "CategoryId";
                         if (chkStaffCategory.Items[i].Value == row[columnName].ToString())
                         {
                             chkStaffCategory.Items[i].Selected = true;
@@ -724,6 +729,54 @@ public partial class General_JobProfile : System.Web.UI.Page
 
             //throw;
         }
+    }
+
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            {
+                sqlCmd.CommandText = "FitToJob_Android_Application";
+                sqlCmd.Parameters.AddWithValue("@Action", "GetAllCategory");
+                sqlCmd.Parameters.AddWithValue("@MobileNo", Session["MobileNo"].ToString());
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+            }
+
+        }
+        catch (Exception)
+        {
+
+            //throw;
+        }
+    }
+
+    public string GetCandidateId(string MobileNo)
+    {
+        string CandidateId = "";
+        SqlCommand sqlCmd = new SqlCommand();
+        GeneralDAL objDal = new GeneralDAL();
+        objDal.OpenSQLConnection();
+        sqlCmd.Connection = objDal.ActiveSQLConnection();
+        sqlCmd.CommandType = CommandType.Text;
+        sqlCmd.CommandText = "SELECT TOP 1 userId FROM Users_ WHERE username = '" + Session["MobileNo"].ToString() + "'";
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+        DataSet dataSet = new DataSet();
+        dataAdapter.Fill(dataSet);
+        if (dataSet.Tables[0].Rows.Count > 0)
+        {
+            CandidateId = dataSet.Tables[0].Rows[0]["userId"].ToString();
+        }
+        objDal.CloseSQLConnection();
+        return CandidateId;
     }
 
 }
