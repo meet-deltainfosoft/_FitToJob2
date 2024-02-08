@@ -42,8 +42,8 @@
         {
             background-color: #ffffff;
             border: 1px solid #dee2e6;
-            padding: 20px;
-            margin: 20px;
+            padding: 10px;
+            margin: 25px;
             border-radius: 5px;
         }
         
@@ -66,48 +66,64 @@
             background-color: #37C1BB;
             color: #ffffff; /* Text color, you can adjust it based on your preference */
         }
+        .containerBorder
+        {
+            border: 3px solid #37C1BB;
+            border-radius: 10px;
+            background-color: white;
+            height: auto;
+            margin: 20px;
+        }
         
+        .containerBorder:hover
+        {
+            border-color: #018881; 
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+            
+        }
         
         /* Add more custom styles as needed */
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="form">
-        <div class="formHeader">
-            Division
-            <asp:Label ID="lblTitle" runat="server" Text=" - [New Mode]"></asp:Label></div>
-        <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
-            <asp:BulletedList ID="blErrs" runat="server">
-            </asp:BulletedList>
-        </asp:Panel>
-        <div class="formBody">
-            <div class="row">
-                <div class="col-lg-12 col-sm-12">
-                    <div class="form-group">
-                        <asp:Label runat="server" ID="lblDivisionId" Text="Selected Divisions :" Font-Bold="true"></asp:Label>
-                        <span style="color: red">*</span>
-                        <br />
-                        <asp:CheckBox ID="chkallDivision" runat="server" AutoPostBack="True" Text="Select All"
-                            OnCheckedChanged="chkallDivision_CheckedChanged" Font-Bold="true" Visible="false" />
-                        <asp:CheckBoxList runat="server"  ID="chkDivision" TabIndex="4" RepeatLayout="Table"
-                            RepeatDirection="Horizontal" RepeatColumns="1">
-                        </asp:CheckBoxList>
+    <div class=" containerBorder ">
+        <div class="form">
+            <div class="formHeader">
+                Division
+                <asp:Label ID="lblTitle" runat="server" Text=" - [New Mode]"></asp:Label></div>
+            <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
+                <asp:BulletedList ID="blErrs" runat="server">
+                </asp:BulletedList>
+            </asp:Panel>
+            <div class="formBody">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblDivisionId" Text="Selected Divisions :" Font-Bold="true"></asp:Label>
+                            <span style="color: red">*</span>
+                            <br />
+                            <asp:CheckBox ID="chkallDivision" runat="server" AutoPostBack="True" Text="Select All"
+                                OnCheckedChanged="chkallDivision_CheckedChanged" Font-Bold="true" Visible="false" />
+                            <asp:CheckBoxList runat="server" ID="chkDivision" TabIndex="4" RepeatLayout="Table"
+                                RepeatDirection="Horizontal" RepeatColumns="1">
+                            </asp:CheckBoxList>
+                        </div>
                     </div>
                 </div>
-            </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="formFooter">
-                <div class="row">
-                    <div class="col-lg-8 m-1">
-                        <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
-                            Style="height: 30px; width: 200px; font-size: 15px;" />
-                        <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
-                            class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
-                    </div>
-                    <div class="col-lg-12  m-1">
-                        <asp:Label ID="lblMessage" runat="Server" Text="Please Select at Least one Division"
-                            ForeColor="Red" Visible="false"></asp:Label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="formFooter">
+                    <div class="row">
+                        <div class="col-lg-8 m-1">
+                            <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
+                                Style="height: 30px; width: 200px; font-size: 15px;" />
+                            <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
+                                class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
+                        </div>
+                        <div class="col-lg-12  m-1">
+                            <asp:Label ID="lblMessage" runat="Server" Text="Please Select at Least one Division"
+                                ForeColor="Red" Visible="false"></asp:Label>
+                        </div>
                     </div>
                 </div>
             </div>

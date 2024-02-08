@@ -9,6 +9,7 @@ using System.Data;
 
 public partial class Guest_SubCategory : System.Web.UI.Page
 {
+
     protected void Page_Init(object sender, EventArgs e)
     {
         try
@@ -63,7 +64,9 @@ public partial class Guest_SubCategory : System.Web.UI.Page
                         Response.Redirect("~/Guest/SignIn.aspx");
                     }
 
-                    GetSubCategory(Session["MobileNo"].ToString());
+                    LoadSubcategory();
+
+                   // GetSubCategory(Session["MobileNo"].ToString());
                     GetSubCategoryById(Session["MobileNo"].ToString());
                 }
             }
@@ -71,7 +74,50 @@ public partial class Guest_SubCategory : System.Web.UI.Page
         catch (Exception ex)
         {
         }
-    }   
+    }
+    private void LoadSubcategory()
+    {
+        try
+        {
+            ListItem li = new ListItem();
+            // ddlStaffCategoryId.Items.Clear();
+            chkStaffCategory.Items.Clear();
+
+            string CandidateId = GetCandidateId(Session["MobileNo"].ToString());
+            DataSet dataSet = new DataSet();
+
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+
+            sqlCmd.CommandText = "FitToJob_Android_Application";
+            sqlCmd.Parameters.AddWithValue("@Action", "GetAllSubCategory");
+            sqlCmd.Parameters.AddWithValue("@CandidateId", CandidateId);
+            sqlCmd.Parameters.AddWithValue("@DesignationSearch", txtSearch.Text);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+
+            dataAdapter.Fill(dataSet);
+
+            objDal.CloseSQLConnection();
+
+            foreach (DataRow dtr in dataSet.Tables[0].Rows)
+            {
+                li = new ListItem();
+
+                li.Text = dtr[0].ToString();
+                li.Value = dtr[1].ToString();
+                chkStaffCategory.Items.Add(li);
+
+                li = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowErrors("Error", ex.Message);
+        }
+    }
 
     private void GetSubCategory(string MobileNo)
     {
@@ -86,7 +132,7 @@ public partial class Guest_SubCategory : System.Web.UI.Page
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.CommandText = "FitToJob_Master_SubJobOfferings";
             sqlCmd.Parameters.AddWithValue("@Action", "GetSubCategory");
-            sqlCmd.Parameters.AddWithValue("@MobileNo", MobileNo);  
+            sqlCmd.Parameters.AddWithValue("@MobileNo", MobileNo);
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
             DataSet dataSet = new DataSet();
             dataAdapter.Fill(dataSet);
@@ -277,6 +323,41 @@ public partial class Guest_SubCategory : System.Web.UI.Page
         {
         }
     }
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LoadSubcategory();
+
+        }
+        catch (Exception)
+        {
+
+            //throw;
+        }
+    }
+
+    public string GetCandidateId(string MobileNo)
+    {
+        string CandidateId = "";
+        SqlCommand sqlCmd = new SqlCommand();
+        GeneralDAL objDal = new GeneralDAL();
+        objDal.OpenSQLConnection();
+        sqlCmd.Connection = objDal.ActiveSQLConnection();
+        sqlCmd.CommandType = CommandType.Text;
+        sqlCmd.CommandText = "SELECT TOP 1 userId FROM Users_ WHERE username = '" + Session["MobileNo"].ToString() + "'";
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+        DataSet dataSet = new DataSet();
+        dataAdapter.Fill(dataSet);
+        if (dataSet.Tables[0].Rows.Count > 0)
+        {
+            CandidateId = dataSet.Tables[0].Rows[0]["userId"].ToString();
+        }
+        objDal.CloseSQLConnection();
+        return CandidateId;
+    }
+
+
     private void ShowErrors(string key, string value)
     {
         try

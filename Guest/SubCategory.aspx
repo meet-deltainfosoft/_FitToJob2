@@ -42,8 +42,8 @@
         {
             background-color: #ffffff;
             border: 1px solid #dee2e6;
-            padding: 20px;
-            margin: 20px;
+            padding: 10px;
+            margin: 25px;
             border-radius: 5px;
         }
         
@@ -66,13 +66,33 @@
             background-color: #37C1BB;
             color: #ffffff; /* Text color, you can adjust it based on your preference */
         }
+        .form-control
+        {
+            width: 25%;
+            margin-left: 45px;
+        }
+        .containerBorder
+        {
+            border: 3px solid #37C1BB;
+            border-radius: 10px;
+            background-color: white;
+            height: auto;
+            margin: 20px;
+        }
         
+        .containerBorder:hover
+        {
+            border-color: #018881; 
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+            
+        }
         
         /* Add more custom styles as needed */
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+    <div class=" containerBorder ">
     <div class="form">
         <div class="formHeader">
             Job Profile
@@ -85,15 +105,21 @@
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
                     <div class="form-group">
-                        <asp:Label runat="server" ID="lblStaffCategoryId" Text="Selected Jobs :" Font-Bold="true"></asp:Label>
-                        <span style="color: red">*</span>
+                        <div class="row">
+                            <asp:Label runat="server" ID="lblStaffCategoryId" Text="Selected Jobs :" Font-Bold="true" Style="margin-left: 15px;"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtSearch" CssClass="form-control" TabIndex="4" AutoCompleteType="Disabled">
+                            </asp:TextBox>
+                            <asp:Button runat="server" ID="btnSearch" Text="Search" OnClick="btnSearch_Click" class="btn custom-button"
+                                Style="height: 30px; width: 80px; font-size: 15px; margin-left: 25px;" />
+                        </div>
                         <br />
                         <%-- <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
                         </asp:DropDownList>--%>
                         <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" Text="Select All"
                             OnCheckedChanged="chkallStaffCategory_CheckedChanged" Font-Bold="true" Visible="false" />
                         <asp:CheckBoxList runat="server" ID="chkStaffCategory" TabIndex="4" RepeatLayout="Table"
-                            RepeatDirection="Horizontal" RepeatColumns="8">
+                            RepeatDirection="Horizontal" RepeatColumns="5">
                         </asp:CheckBoxList>
                     </div>
                 </div>
@@ -114,6 +140,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </form>
 </body>

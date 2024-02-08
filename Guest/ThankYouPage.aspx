@@ -60,8 +60,7 @@
 </head>
 <body>
     <div class="centered">
-        <h1>
-     </h1>
+       
         <img src="~/images/_JobApply12-1.jpg" alt="" />
         <asp:Image ID="Image1" runat="server" ImageUrl="~/images/_JobApply12-1.jpg" />
         <a href="SelectLanguage.aspx" class="MainPage" style="">Go to Main page</a>

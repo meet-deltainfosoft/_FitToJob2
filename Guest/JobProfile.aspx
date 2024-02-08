@@ -65,8 +65,8 @@
         {
             background-color: #ffffff;
             border: 1px solid #dee2e6;
-            padding: 20px;
-            margin: 20px;
+            padding: 10px;
+            margin: 25px;
             border-radius: 5px;
         }
         
@@ -127,6 +127,20 @@
             width: 25%;
             margin-left: 45px;
         }
+        .containerBorder
+        {
+            border: 3px solid #37C1BB;
+            border-radius: 10px;
+            background-color: white;
+            height: auto;
+            margin: 20px;
+        }
+        
+        .containerBorder:hover
+        {
+            border-color: #018881;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -144,103 +158,104 @@
 </head>
 <body>
     <form id="formJobProfile" runat="server">
-    <div class="form">
-        <div class="formHeader">
-            Job Profile Entry
-            <asp:Label ID="lblTitle" runat="server" Text=" - [New Mode]"></asp:Label></div>
-        <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
-            <asp:BulletedList ID="blErrs" runat="server">
-            </asp:BulletedList>
-        </asp:Panel>
-        <div class="formBody">
-            <div class="row">
-                <div class="col-lg-4 col-sm-12" style="display: none;">
-                    <div class="form-group">
-                        <asp:Label runat="server" ID="lblDepartmentId" Text="Department :"></asp:Label>
-                        <span style="color: red">*</span>
-                        <asp:DropDownList runat="server" ID="ddlDepartmentId" TabIndex="1" OnSelectedIndexChanged="ddlStdId_SelectedIndexChanged"
-                            CssClass="form-control">
-                        </asp:DropDownList>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-12" style="display: none;">
-                    <div class="form-group">
-                        <asp:Label runat="server" ID="lblDesignationId" Text="Designation :"></asp:Label>
-                        <span style="color: red">*</span>
-                        <asp:DropDownList runat="server" ID="ddlDesignationId" TabIndex="2" CssClass="form-control">
-                        </asp:DropDownList>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-12">
-                    <div class="form-group" style="display: none;">
-                        <asp:Label runat="server" ID="lblDivisionId" Text="Division :"></asp:Label>
-                        <span style="color: red">*</span>
-                        <asp:DropDownList runat="server" ID="ddlDivisionId" TabIndex="3" CssClass="form-control">
-                        </asp:DropDownList>
-                    </div>
-                </div>
-                
-                <div class="col-lg-12 col-sm-12">
-                    <div class="form-group">
-                        <div class="row">
-                            <asp:Label runat="server" ID="lblStaffCategoryId" Text="Staff Category :" Font-Bold="true" Style="margin-left: 15px;"></asp:Label>
+    <div class=" containerBorder ">
+        <div class="form">
+            <div class="formHeader">
+                Job Profile Entry
+                <asp:Label ID="lblTitle" runat="server" Text=" - [New Mode]"></asp:Label></div>
+            <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
+                <asp:BulletedList ID="blErrs" runat="server">
+                </asp:BulletedList>
+            </asp:Panel>
+            <div class="formBody">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12" style="display: none;">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblDepartmentId" Text="Department :"></asp:Label>
                             <span style="color: red">*</span>
-
-                            <%--<asp:Label runat="server" ID="lblSearch" Text="Search :"></asp:Label>--%>
-                            <asp:TextBox runat="server" ID="txtSearch" CssClass="form-control" TabIndex="4" AutoCompleteType="Disabled">
-                            </asp:TextBox>
-                            <asp:Button runat="server" ID="btnSearch" Text="Search" OnClick="btnSearch_Click"
-                                class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;
-                                margin-left: 25px;" />
+                            <asp:DropDownList runat="server" ID="ddlDepartmentId" TabIndex="1" OnSelectedIndexChanged="ddlStdId_SelectedIndexChanged"
+                                CssClass="form-control">
+                            </asp:DropDownList>
                         </div>
-                        </br>
-                        <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
-                        </asp:DropDownList>
-                        <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" OnCheckedChanged="chkallStaffCategory_CheckedChanged"
-                            Text="Select All" Font-Bold="true" Visible="false" />
-                        <asp:CheckBoxList runat="server" cc ID="chkStaffCategory" CssClass="horizontal-checkbox-list"
-                            RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="8" TabIndex="4">
-                        </asp:CheckBoxList>
                     </div>
-                </div>
-                <div class="col-lg-4 col-sm-12">
-                    <div class="form-group" style="display: none;">
-                        <asp:Label runat="server" ID="lblNoOfSeats" Text="NoOfSeats :"></asp:Label>
-                        <asp:TextBox runat="server" ID="txtNoOfSeats" CssClass="form-control" TabIndex="1"></asp:TextBox>
+                    <div class="col-lg-4 col-sm-12" style="display: none;">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblDesignationId" Text="Designation :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:DropDownList runat="server" ID="ddlDesignationId" TabIndex="2" CssClass="form-control">
+                            </asp:DropDownList>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-sm-12">
-                    <div class="form-group" style="display: none;">
-                        <asp:Label runat="server" ID="lblValidfrom" Text="Valid From :"></asp:Label>
-                        <asp:TextBox runat="server" ID="txtValidfrom" CssClass="form-control"></asp:TextBox>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group" style="display: none;">
+                            <asp:Label runat="server" ID="lblDivisionId" Text="Division :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:DropDownList runat="server" ID="ddlDivisionId" TabIndex="3" CssClass="form-control">
+                            </asp:DropDownList>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-sm-12">
-                    <div class="form-group" style="display: none;">
-                        <asp:Label runat="server" ID="lblValidto" Text="Valid To :"></asp:Label>
-                        <asp:TextBox runat="server" ID="txtValidto" CssClass="form-control"></asp:TextBox>
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <asp:Label runat="server" ID="lblStaffCategoryId" Text="Staff Category :" Font-Bold="true"
+                                    Style="margin-left: 15px;"></asp:Label>
+                                <span style="color: red">*</span>
+                                <%--<asp:Label runat="server" ID="lblSearch" Text="Search :"></asp:Label>--%>
+                                <asp:TextBox runat="server" ID="txtSearch" CssClass="form-control" TabIndex="4" AutoCompleteType="Disabled">
+                                </asp:TextBox>
+                                <asp:Button runat="server" ID="btnSearch" Text="Search" OnClick="btnSearch_Click"
+                                    class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;
+                                    margin-left: 25px;" />
+                            </div>
+                            </br>
+                            <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
+                            </asp:DropDownList>
+                            <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" OnCheckedChanged="chkallStaffCategory_CheckedChanged"
+                                Text="Select All" Font-Bold="true" Visible="false" />
+                            <asp:CheckBoxList runat="server" cc ID="chkStaffCategory" CssClass="horizontal-checkbox-list"
+                                RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="6" TabIndex="4">
+                            </asp:CheckBoxList>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group" style="display: none;">
+                            <asp:Label runat="server" ID="lblNoOfSeats" Text="NoOfSeats :"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtNoOfSeats" CssClass="form-control" TabIndex="1"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group" style="display: none;">
+                            <asp:Label runat="server" ID="lblValidfrom" Text="Valid From :"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtValidfrom" CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group" style="display: none;">
+                            <asp:Label runat="server" ID="lblValidto" Text="Valid To :"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtValidto" CssClass="form-control"></asp:TextBox>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="formFooter">
-            <div class="row">
-                <div class="col-lg-8 m-1">
-                    <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
-                        Style="height: 30px; width: 200px; font-size: 15px;" />
-                    <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
-                        class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="formFooter">
+                <div class="row">
+                    <div class="col-lg-8 m-1">
+                        <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
+                            Style="height: 30px; width: 200px; font-size: 15px;" />
+                        <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
+                            class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
+                    </div>
+                    <div class="col-lg-2 m-1">
+                        <asp:Button runat="server" ID="btnDelete" Enabled="false" Text="Delete" class="btn btn-danger"
+                            OnClientClick="return confirm('Do you Want to Delete');" OnClick="btnDelete_Click"
+                            Style="height: 30px; width: 80px; font-size: 15px;" />
+                    </div>
                 </div>
-                <div class="col-lg-2 m-1">
-                    <asp:Button runat="server" ID="btnDelete" Enabled="false" Text="Delete" class="btn btn-danger"
-                        OnClientClick="return confirm('Do you Want to Delete');" OnClick="btnDelete_Click"
-                        Style="height: 30px; width: 80px; font-size: 15px;" />
+                <div class="row m-2">
+                    <asp:Label ID="lblMessage" runat="Server" Text="Please Select at Least one Category"
+                        ForeColor="Red" Visible="false"></asp:Label>
                 </div>
-            </div>
-            <div class="row m-2">
-                <asp:Label ID="lblMessage" runat="Server" Text="Please Select at Least one Category"
-                    ForeColor="Red" Visible="false"></asp:Label>
             </div>
         </div>
     </div>

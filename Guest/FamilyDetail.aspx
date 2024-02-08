@@ -97,7 +97,20 @@
             background-color: #37C1BB;
             color: #ffffff; /* Text color, you can adjust it based on your preference */
         }
+          .containerBorder
+        {
+            border: 3px solid #37C1BB;
+            border-radius: 10px;
+            margin: 20px;
+            background-color: white;
+            height: auto;
+        }
         
+        .containerBorder:hover
+        {
+            border-color: #018881;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
         
         /* Add more custom styles as needed */
     </style>
@@ -114,6 +127,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <div class=" containerBorder ">
+
     <div class="form">
         <div class="formHeader">
             <asp:Label ID="lblTitle" runat="server" Text="Family Detail(AS Per Ration Card)"></asp:Label>
@@ -197,6 +212,7 @@
         </div>
     </div>
     <div class="mt-1">
+    </div>
     </div>
     </form>
 </body>

@@ -99,7 +99,20 @@
             color: #ffffff; /* Text color, you can adjust it based on your preference */
         }
         
+        .containerBorder
+        {
+            border: 3px solid #37C1BB;
+            border-radius: 10px;
+            margin: 20px;
+            background-color: white;
+            height: auto;
+        }
         
+        .containerBorder:hover
+        {
+            border-color: #018881;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
         /* Add more custom styles as needed */
     </style>
     <script type="text/javascript">
@@ -115,86 +128,88 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="form">
-        <div class="formHeader">
-            <asp:Label ID="lblTitle" runat="server" Text="Experience Detail"></asp:Label>
-        </div>
-        <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
-            <asp:BulletedList ID="blErrs" runat="server">
-            </asp:BulletedList>
-        </asp:Panel>
-        <asp:Button runat="server" ID="btnAddRow" Text="+ Add Experience" CssClass="btn btn-primary m-2"
-            OnClick="btnAddRow_Click" ToolTip="Add New Records" />
-        <label id="lblNotes" runat="server" style="font-family: Verdana; font-weight: bold;">
-            Experience In Year and Month(E.g 1.2)</label>
-        <div class="row" style="overflow: scroll;">
-            <asp:GridView runat="server" ID="gvExperienceyDetails" AutoGenerateColumns="False"
-                CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"
-                OnRowCommand="gvExperienceDetails_RowCommand" Width="1350px">
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
-                <AlternatingRowStyle BackColor="White" />
-                <Columns>
-                    <asp:TemplateField HeaderText="Company Name">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtCompanyName" CssClass="form-control" Text='<%# Eval("CompanyName") %>'></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Company Address">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtCompanyAddress" CssClass="form-control" Text='<%# Eval("CompanyAddress") %>'></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Designations">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtDesignations" CssClass="form-control" Text='<%# Eval("Designations") %>'></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Experience">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtExperience" CssClass="form-control" Text='<%# Eval("Experience") %>'
-                                onkeypress="return isNumber(event)"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Last CTC Per Month">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtLastSalaryDetail" CssClass="form-control" Text='<%# Eval("LastSalaryDetail") %>'
-                                onkeypress="return isNumber(event)"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Actions">
-                        <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="lnkRemove" CssClass="btn btn-danger" Text="X"
-                                ToolTip="Remove Records" CommandName="RemoveRow" CommandArgument='<%# Container.DataItemIndex %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-            </asp:GridView>
-        </div>
-        <div class="row">
-            <%--<div class="mt-3">--%>
-            <%--<div class="class-lg-3 col-sm-6">
+    <div class=" containerBorder ">
+        <div class="form">
+            <div class="formHeader">
+                <asp:Label ID="lblTitle" runat="server" Text="Experience Detail"></asp:Label>
+            </div>
+            <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
+                <asp:BulletedList ID="blErrs" runat="server">
+                </asp:BulletedList>
+            </asp:Panel>
+            <asp:Button runat="server" ID="btnAddRow" Text="+ Add Experience" CssClass="btn btn-primary m-2"
+                OnClick="btnAddRow_Click" ToolTip="Add New Records" />
+            <label id="lblNotes" runat="server" style="font-family: Verdana; font-weight: bold;">
+                Experience In Year and Month(E.g 1.2)</label>
+            <div class="row" style="overflow: scroll;">
+                <asp:GridView runat="server" ID="gvExperienceyDetails" AutoGenerateColumns="False"
+                    CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"
+                    OnRowCommand="gvExperienceDetails_RowCommand" Width="1350px">
+                    <EditRowStyle BackColor="#7C6F57" />
+                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="Company Name">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtCompanyName" CssClass="form-control" Text='<%# Eval("CompanyName") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Company Address">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtCompanyAddress" CssClass="form-control" Text='<%# Eval("CompanyAddress") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Designations">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtDesignations" CssClass="form-control" Text='<%# Eval("Designations") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Experience">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtExperience" CssClass="form-control" Text='<%# Eval("Experience") %>'
+                                    onkeypress="return isNumber(event)"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Last CTC Per Month">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtLastSalaryDetail" CssClass="form-control" Text='<%# Eval("LastSalaryDetail") %>'
+                                    onkeypress="return isNumber(event)"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Actions">
+                            <ItemTemplate>
+                                <asp:LinkButton runat="server" ID="lnkRemove" CssClass="btn btn-danger" Text="X"
+                                    ToolTip="Remove Records" CommandName="RemoveRow" CommandArgument='<%# Container.DataItemIndex %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#E3EAEB" />
+                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                    <SortedAscendingHeaderStyle BackColor="#246B61" />
+                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                    <SortedDescendingHeaderStyle BackColor="#15524A" />
+                </asp:GridView>
+            </div>
+            <div class="row">
+                <%--<div class="mt-3">--%>
+                <%--<div class="class-lg-3 col-sm-6">
                     <asp:Button ID="btnSubmit" runat="Server" Text="Submit" class="btn btn-primary" OnClick="lnkBtnSubmit_click" />
                 </div>--%>
-            <div class="col-lg-1 col-sm-12 mt-3">
-                <asp:Button ID="btnSubmit" runat="Server" Text="Submit" class="btn btn-primary" OnClick="lnkBtnSubmit_click" />
-            </div>
-            <div class="col-lg-1 col-sm-12 mt-3">
-                <asp:Button ID="btnprint" runat="Server" Text="Print" class="btn btn-primary" OnClick="lnkPrint_click"
-                    OnClientClick="target ='_blank';" />
-            </div>
-            <%--</div>--%>
-            <div class="mt-2">
-                <asp:Label ID="lblMessage" runat="server" Text="Please Enter Mandatory Value" Style="color: Red;"
-                    Visible="false"></asp:Label>
+                <div class="col-lg-1 col-sm-12 mt-3">
+                    <asp:Button ID="btnSubmit" runat="Server" Text="Submit" class="btn btn-primary" OnClick="lnkBtnSubmit_click" />
+                </div>
+                <div class="col-lg-1 col-sm-12 mt-3">
+                    <asp:Button ID="btnprint" runat="Server" Text="Print" class="btn btn-primary" OnClick="lnkPrint_click"
+                        OnClientClick="target ='_blank';" />
+                </div>
+                <%--</div>--%>
+                <div class="mt-2">
+                    <asp:Label ID="lblMessage" runat="server" Text="Please Enter Mandatory Value" Style="color: Red;"
+                        Visible="false"></asp:Label>
+                </div>
             </div>
         </div>
     </div>

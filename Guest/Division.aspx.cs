@@ -221,7 +221,7 @@ public partial class Guest_Division : System.Web.UI.Page
                         sqlCmd.Parameters.AddWithValue("@MobileNo", Session["MobileNo"].ToString());
                         sqlCmd.Parameters.AddWithValue("@UtilitieIds", UtilitieIds);
                         //string subQuery = "SELECT TOP 1 userId FROM Users_ WHERE username = @Username";
-                        
+
                         //sqlCmd.Parameters.AddWithValue("@CandidateId", subQuery);
                         //sqlCmd.Parameters.AddWithValue("@userId", "579F63B0-A86F-46EA-97DB-51DE75E7ABC7");
                         sqlCmd.Parameters.AddWithValue("@CandidateId", A_CandidateId);
@@ -249,26 +249,29 @@ public partial class Guest_Division : System.Web.UI.Page
     {
         try
         {
+            string CandidateId = GetCandidateId(MobileNo);
+
             SqlCommand sqlCmd = new SqlCommand();
             GeneralDAL objDal = new GeneralDAL();
             objDal.OpenSQLConnection();
             sqlCmd.Connection = objDal.ActiveSQLConnection();
             sqlCmd.CommandType = CommandType.StoredProcedure;
             sqlCmd.CommandText = "FitToJob_Android_Application";
-            sqlCmd.Parameters.AddWithValue("@Action", "GetDivisionById");
-            sqlCmd.Parameters.AddWithValue("@MobileNo", MobileNo);
+            sqlCmd.Parameters.AddWithValue("@Action", "GetAllUtilities");
+            sqlCmd.Parameters.AddWithValue("@CandidateId", CandidateId);
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
             DataSet dataSet = new DataSet();
-            string CandidateId = null;
+            //string CandidateId = null;
             dataAdapter.Fill(dataSet);
             foreach (DataRow row in dataSet.Tables[0].Rows)
             {
                 for (int i = 0; i < chkDivision.Items.Count; i++)
                 {
-                    string columnName = "CandidateId";
+                    string columnName = "UtilitieId";
                     if (chkDivision.Items[i].Value == row[columnName].ToString())
                     {
-                        chkDivision.Items[i].Selected = true;
+                        bool isChecked = Convert.ToBoolean(row["IsChecked"]);
+                        chkDivision.Items[i].Selected = isChecked;
 
                         if (CandidateId != null && CandidateId != "")
                             CandidateId = CandidateId + "," + chkDivision.Items[i].Value;

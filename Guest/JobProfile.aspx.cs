@@ -104,8 +104,8 @@ public partial class General_JobProfile : System.Web.UI.Page
                     Response.Redirect("~/Guest/SignIn.aspx");
                 }
                 //LoadDesignations();
-                LoadDivision();
-                LoadDepartment();
+                // LoadDivision();
+                //LoadDepartment();
                 LoadStafcategory();
                 GetJobOffering();
                 if (Request.QueryString["JobOfferingId"] != null)
@@ -207,7 +207,7 @@ public partial class General_JobProfile : System.Web.UI.Page
 
                     else
                     {
-                        
+
                         SqlCommand sqlCmd = new SqlCommand();
                         GeneralDAL objDal = new GeneralDAL();
                         objDal.OpenSQLConnection();
@@ -655,15 +655,35 @@ public partial class General_JobProfile : System.Web.UI.Page
 
             //    li = null;
             //}
-            DataTable dt = new DataTable();
-            dt = _JobProfileBLL.GetStafcategory();
+            //DataTable dt = new DataTable();
+            //dt = _JobProfileBLL.GetStafcategory();
 
-            foreach (DataRow dtr in dt.Rows)
+
+            string CandidateId = GetCandidateId(Session["MobileNo"].ToString());
+            DataSet dataSet = new DataSet();
+
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            {
+                sqlCmd.CommandText = "FitToJob_Android_Application";
+                sqlCmd.Parameters.AddWithValue("@Action", "GetAllCategory");
+                sqlCmd.Parameters.AddWithValue("@CandidateId", CandidateId);
+                sqlCmd.Parameters.AddWithValue("@DepartmentSearch", txtSearch.Text);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+
+                dataAdapter.Fill(dataSet);
+            }
+            objDal.CloseSQLConnection();
+
+            foreach (DataRow dtr in dataSet.Tables[0].Rows)
             {
                 li = new ListItem();
 
-                li.Text = dtr[1].ToString();
-                li.Value = dtr[0].ToString();
+                li.Text = dtr[2].ToString();
+                li.Value = dtr[1].ToString();
                 chkStaffCategory.Items.Add(li);
 
                 li = null;
@@ -713,7 +733,8 @@ public partial class General_JobProfile : System.Web.UI.Page
                         string columnName = "CategoryId";
                         if (chkStaffCategory.Items[i].Value == row[columnName].ToString())
                         {
-                            chkStaffCategory.Items[i].Selected = true;
+                            bool isChecked = Convert.ToBoolean(row["IsChecked"]);
+                            chkStaffCategory.Items[i].Selected = isChecked;
 
                             if (StaffCategoryId != null && StaffCategoryId != "")
                                 StaffCategoryId = StaffCategoryId + "," + chkStaffCategory.Items[i].Value;
@@ -736,20 +757,7 @@ public partial class General_JobProfile : System.Web.UI.Page
     {
         try
         {
-            SqlCommand sqlCmd = new SqlCommand();
-            GeneralDAL objDal = new GeneralDAL();
-            objDal.OpenSQLConnection();
-            sqlCmd.Connection = objDal.ActiveSQLConnection();
-            sqlCmd.CommandType = CommandType.StoredProcedure;
-            {
-                sqlCmd.CommandText = "FitToJob_Android_Application";
-                sqlCmd.Parameters.AddWithValue("@Action", "GetAllCategory");
-                sqlCmd.Parameters.AddWithValue("@MobileNo", Session["MobileNo"].ToString());
-
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
-                DataSet dataSet = new DataSet();
-                dataAdapter.Fill(dataSet);
-            }
+            LoadStafcategory();
 
         }
         catch (Exception)
