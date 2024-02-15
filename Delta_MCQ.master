@@ -38,13 +38,13 @@
                     <ul>
                         <li><a href="../Exams/DigitalInterviewForm.aspx">Candidate Selection</a></li>
                         <li><a href="../Exams/InterviewAssessment.aspx">Interview Assessment</a></li>
-                      <%--  <li><a href="#">User Master</a>
+                        <li><a href="#">User Master</a>
                             <ul>
                                 <li><a href="../Admin/User.aspx">New</a></li>
                                 <li><a href="../Admin/Users.aspx">Edit</a></li>
                             </ul>
-                        </li>--%>
-                        <%-- <li><a href="#">Company Master</a>
+                        </li>
+                        <li><a href="#">Company Master</a>
                             <ul>
                                 <li><a href="../General/Company.aspx">New</a></li>
                                 <li><a href="../General/Companies.aspx">Edit</a></li>
@@ -61,10 +61,10 @@
                                 <li><a href="../General/Pattern.aspx">New</a></li>
                                 <li><a href="../General/Patterns.aspx">Edit</a></li>
                             </ul>
-                        </li>--%>
+                        </li>
                     </ul>
                 </li>
-                <%-- <li><a href="#">Master</a>
+                <li><a href="#">Master</a>
                     <ul>
                         <li><a href="#">Standard Value</a>
                             <ul>
@@ -160,15 +160,15 @@
                         <li><a href="../General/UpdateCommonOTP.aspx">Change Common OTP</a></li>
                         <li><a href="../General/UpdateMinPassMarks.aspx">Update Minimum Passing Marks</a></li>
                     </ul>
-                </li>--%>
-                <%--  <li style="display: none;"><a href="#">Utility</a>
+                </li>
+                <li style="display: none;"><a href="#">Utility</a>
                     <ul>
                         <li style="display: none;"><a href="../General/UpdateCommonOTP.aspx">Change Common OTP</a></li>
                         <li style="display: none;"><a href="../General/UpdateMinPassMarks.aspx">Update Minimum
                             Passing Marks</a></li>
                     </ul>
-                </li>--%>
-                <%--<li style="display: none;"><a href="#">Test</a>
+                </li>
+                <li style="display: none;"><a href="#">Test</a>
                     <ul>
                         <li><a href="../Exams/Test.aspx">New</a></li>
                         <li><a href="../Exams/Tests.aspx">Edit</a></li>
@@ -179,8 +179,8 @@
                             </ul>
                         </li>
                     </ul>
-                </li>--%>
-                <%-- <li><a href="#">Question Bank</a>
+                </li>
+                <li><a href="#">Question Bank</a>
                     <ul>
                         <li><a href="../Exams/Que.aspx">New</a></li>
                         <li><a href="../Exams/Ques.aspx">Edit</a></li>
@@ -188,14 +188,14 @@
                         <li><a href="../Exams/CopyQues.aspx">Copy Mutiple Quesions</a></li>
                         <li><a href="../Exams/DeleteQues.aspx">Delete Mutiple Quesions</a></li>
                     </ul>
-                </li>--%>
-                <%--<li style="display: none;"><a href="#">Question Bank</a>
+                </li>
+                <li style="display: none;"><a href="#">Question Bank</a>
                     <ul>
                         <li><a href="../Exams/QueBank.aspx">New</a></li>
                         <li><a href="../Exams/QueBanks.aspx">Edit</a></li>
                     </ul>
-                </li>--%>
-                <%--<li><a href="#">Employee Data</a>
+                </li>
+                <li><a href="#">Employee Data</a>
                     <ul>
                         <li style="display: none;"><a href="#">Employee Data</a>
                             <ul>
@@ -215,14 +215,14 @@
                         <li><a href="../Exams/CandidateFinal.aspx">Final Interview Selected</a>
                             <li><a href="../Exams/GetPunchNo.aspx">Candidate Get Punch No</a> </li>
                     </ul>
-            </li>--%>
-            <%--<li><a href="#">Exam Schedule</a>
-                <ul>
-                    <li><a href="../Exams/ExamSchedule.aspx">New</a></li>
-                    <li><a href="../Exams/ExamSchedules.aspx">Edit</a></li>
-                </ul>
-            </li>--%>
-          <%--  <li><a href="../Exams/LiveResultDetail.aspx">Live Exam</a></li>
+                </li>
+                <li><a href="#">Exam Schedule</a>
+                    <ul>
+                        <li><a href="../Exams/ExamSchedule.aspx">New</a></li>
+                        <li><a href="../Exams/ExamSchedules.aspx">Edit</a></li>
+                    </ul>
+                </li>
+                <%--  <li><a href="../Exams/LiveResultDetail.aspx">Live Exam</a></li>
             <li style="display: none;"><a href="#">Exam Evaluation</a>
                 <ul>
                     <li><a href="#">Checking Allotment</a>
@@ -249,7 +249,7 @@
                     <li><a href="../Exams/RejectApproveds.aspx">Reject Approved</a></li>
                 </ul>
             </li>--%>
-            <li><a href="../Logout.aspx">Log out</a></li>
+                <li><a href="../Logout.aspx">Log out</a></li>
             </ul>
             <br style="clear: left" />
             <asp:Label ID="LblDBName" runat="server" Text="DB"></asp:Label>

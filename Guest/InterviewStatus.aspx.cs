@@ -31,6 +31,7 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
             }
         }
     }
+
     private void ShowErrors(string key, string value)
     {
         try
@@ -75,7 +76,6 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
         }
         return dt;
     }
-
 
     protected void rptInterviewstatus_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
@@ -624,5 +624,5 @@ public partial class Guest_InterviewStatus : System.Web.UI.Page
         objDal.CloseSQLConnection();
         return dataSet.Tables[0].Rows[0]["CandidateId"].ToString();
     }
-
+        
 }
