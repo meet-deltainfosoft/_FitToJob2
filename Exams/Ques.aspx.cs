@@ -23,6 +23,34 @@ public partial class Exams_Ques : System.Web.UI.Page
             LoadStandard();
             btnShowAllRecords.Visible = false;
         }
+#region
+       // DataTable dt = new DataTable();
+       // dt.Columns.Add("Question");
+       // dt.Columns.Add("Standard");
+       // dt.Columns.Add("Subject");
+       
+       // dt.Columns.Add("Marks");
+       // dt.Columns.Add("SrNo");
+       //// dt.Columns.Add("A1");
+       // DataRow dr = null;
+
+       // for (int i = 0; i < 10; i++)
+       // {
+       //     dr = dt.NewRow(); // have new row on each iteration
+       //     dr["Question"] = i.ToString();
+       //     dr["Standard"] = i.ToString();
+       //     dr["Subject"] = i.ToString();
+          
+       //     dr["Marks"] = i.ToString();
+       //     dr["SrNo"] = i.ToString();
+       //     //dr["Remarks"] = (i * 1000).ToString();
+       //     //dr["InsertedOn"] = DateTime.Now;
+       //     //dr["LastUpdatedOn"] = DateTime.Now;
+       //     dt.Rows.Add(dr);
+       // }
+       // gdvQues.DataSource = dt;
+        // gdvQues.DataBind();
+#endregion
     }
 
     protected void btnFilter_Click(object sender, EventArgs e)

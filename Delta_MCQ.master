@@ -66,40 +66,40 @@
                 </li>
                 <li><a href="#">Master</a>
                     <ul>
-                        <li><a href="#">Standard Value</a>
+                      <%--  <li><a href="#">Standard Value</a>
                             <ul>
                                 <li><a href="../General/MasterValue.aspx">New</a></li>
                                 <li><a href="../General/MasterValues.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Designation Value</a>
+                        </li>--%>
+                       <%-- <li><a href="#">Designation Value</a>
                             <ul>
                                 <li><a href="../General/Designation.aspx">New</a></li>
                                 <li><a href="../General/Designations.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Job Profile Value</a>
+                        </li>--%>
+                       <%-- <li><a href="#">Job Profile Value</a>
                             <ul>
                                 <li><a href="../General/JobProfile.aspx">New</a></li>
                                 <li><a href="../General/JobProfiles.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Registration</a>
+                        </li>--%>
+                        <%--<li><a href="#">Registration</a>
                             <ul>
                                 <li><a href="../General/Registration1.aspx">New</a></li>
                                 <li><a href="../General/Registrations1.aspx">Edit</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li><a href="#">Test</a>
                             <ul>
                                 <li><a href="../Exams/Test.aspx">New</a></li>
                                 <li><a href="../Exams/Tests.aspx">Edit</a></li>
-                                <li><a href="#">Test Create from Question Bank</a>
+                               <%-- <li><a href="#">Test Create from Question Bank</a>
                                     <ul>
                                         <li><a href="../Exams/TestQueBank.aspx">New</a></li>
                                         <li><a href="../Exams/TestQueBanks.aspx">Edit</a></li>
                                     </ul>
-                                </li>
+                                </li>--%>
                             </ul>
                         </li>
                         <li style="display: none;"><a href="#">Subject</a>
@@ -108,67 +108,67 @@
                                 <li><a href="../Exams/Subs.aspx">Edit</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Chapter</a>
+                       <%-- <li><a href="#">Chapter</a>
                             <ul>
                                 <li><a href="../General/Chapter.aspx">New</a></li>
                                 <li><a href="../General/Chapters.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Chapter Video</a>
+                        </li>--%>
+                       <%-- <li><a href="#">Chapter Video</a>
                             <ul>
                                 <li><a href="../General/ChapterVedio.aspx">New</a></li>
                                 <li><a href="../General/ChapterVedios.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li><a href="#">Chapter PDF</a>
+                        </li>--%>
+                       <%-- <li><a href="#">Chapter PDF</a>
                             <ul>
                                 <li><a href="../General/ChapterPDF.aspx">New</a></li>
                                 <li><a href="../General/ChapterPDFs.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li style="display: none;"><a href="#">E-Books</a>
+                        </li>--%>
+                       <%-- <li style="display: none;"><a href="#">E-Books</a>
                             <ul>
                                 <li><a href="../General/EBookPDF.aspx">New</a></li>
                                 <li><a href="../General/EBookPDFs.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li style="display: none;"><a href="#">Reference Link</a>
+                        </li>--%>
+                       <%-- <li style="display: none;"><a href="#">Reference Link</a>
                             <ul>
                                 <li><a href="../General/ChapterLink.aspx">New</a></li>
                                 <li><a href="../General/ChapterLinks.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li style="display: none;"><a href="#">Video No</a>
+                        </li>--%>
+                       <%-- <li style="display: none;"><a href="#">Video No</a>
                             <ul>
                                 <li><a href="../General/VideoNo.aspx">New</a></li>
                                 <li><a href="../General/VideoNos.aspx">Edit</a></li>
                             </ul>
-                        </li>
-                        <li style="display: none;"><a href="#">HomeWork</a>
+                        </li>--%>
+                       <%-- <li style="display: none;"><a href="#">HomeWork</a>
                             <ul>
                                 <li><a href="../General/HomeWork.aspx">New</a></li>
                                 <li><a href="../General/HomeWorks.aspx">Edit</a></li>
                                 <li><a href="../General/HomeWorkView.aspx">Employee Homework View</a></li>
                             </ul>
-                        </li>
-                        <li style="display: none;"><a href="#">Live Class</a>
+                        </li>--%>
+                       <%-- <li style="display: none;"><a href="#">Live Class</a>
                             <ul>
                                 <li><a href="../General/LiveClass.aspx">New</a></li>
                                 <li><a href="../General/LiveClasses.aspx">Edit</a></li>
                             </ul>
                         </li>
                         <li><a href="../General/UpdateCommonOTP.aspx">Change Common OTP</a></li>
-                        <li><a href="../General/UpdateMinPassMarks.aspx">Update Minimum Passing Marks</a></li>
+                        <li><a href="../General/UpdateMinPassMarks.aspx">Update Minimum Passing Marks</a></li>--%>
                     </ul>
                 </li>
-                <li style="display: none;"><a href="#">Utility</a>
+              <%--  <li style="display: none;"><a href="#">Utility</a>
                     <ul>
                         <li style="display: none;"><a href="../General/UpdateCommonOTP.aspx">Change Common OTP</a></li>
                         <li style="display: none;"><a href="../General/UpdateMinPassMarks.aspx">Update Minimum
                             Passing Marks</a></li>
                     </ul>
-                </li>
-                <li style="display: none;"><a href="#">Test</a>
+                </li>--%>
+              <%--  <li style="display: none;"><a href="#">Test</a>
                     <ul>
                         <li><a href="../Exams/Test.aspx">New</a></li>
                         <li><a href="../Exams/Tests.aspx">Edit</a></li>
@@ -179,7 +179,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
                 <li><a href="#">Question Bank</a>
                     <ul>
                         <li><a href="../Exams/Que.aspx">New</a></li>

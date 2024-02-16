@@ -22,6 +22,25 @@ public partial class Exams_Tests : System.Web.UI.Page
         {
 
         }
+
+        DataTable dt = new DataTable();
+        dt.Columns.Add("TestName");
+        dt.Columns.Add("Remarks");
+        dt.Columns.Add("InsertedOn");
+        dt.Columns.Add("LastUpdatedOn");
+        DataRow dr = null;
+
+        for (int i = 0; i < 10; i++)
+        {
+            dr = dt.NewRow(); // have new row on each iteration
+            dr["TestName"] = i.ToString();
+            dr["Remarks"] = (i * 1000).ToString();
+            dr["InsertedOn"] = DateTime.Now;
+            dr["LastUpdatedOn"] = DateTime.Now;
+            dt.Rows.Add(dr);
+        }
+        gdvSubs.DataSource = dt;
+        gdvSubs.DataBind();
     }
 
     protected void btnFilter_Click(object sender, EventArgs e)
