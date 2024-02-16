@@ -66,6 +66,12 @@
                 </li>
                 <li><a href="#">Master</a>
                     <ul>
+                        <li><a href="#">Subjects</a>
+                            <ul>
+                                <li><a href="../Exams/Subject.aspx?SubjectId=0">New</a></li>
+                                <li><a href="../Exams/SubjectEdit.aspx">Edit</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#">Standard Value</a>
                             <ul>
                                 <li><a href="../General/MasterValue.aspx">New</a></li>
