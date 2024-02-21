@@ -16,23 +16,24 @@ using System.Text;
 public partial class Login : System.Web.UI.Page
 {
     private LoginBLL _LoginBLL = new LoginBLL();
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
 
-              //<%--Version : 17.07.01 V1 Dated : 17-Jul-2020 DT+QB--%>
-              //      <%--10.07.01 V3 Dated : 10-Jul-2020 for 100--%>
-              //       <%--Version : 11.05.03 V3 Dated : 12-May-2020--%>
+            //<%--Version : 17.07.01 V1 Dated : 17-Jul-2020 DT+QB--%>
+            //      <%--10.07.01 V3 Dated : 10-Jul-2020 for 100--%>
+            //       <%--Version : 11.05.03 V3 Dated : 12-May-2020--%>
 
-            lblVersion.Text = "Version : 03.03.23 Dated : 03-Mar-2023 SkpALAdv";
+            lblVersion.Text = "Version : 03.03.23 Dated : 20-Feb-2024 SkpALAdv";
 
             LoadYear();
             ddlYear_SelectedIndexChanged(null, null);
             txtUserName.Focus();
         }
     }
+
     override protected void OnInit(EventArgs e)
     {
         //
@@ -41,36 +42,62 @@ public partial class Login : System.Web.UI.Page
         //InitializeComponent();
         //base.OnInit(e);
     }
+
     private void InitializeComponent()
     {
         this.cmdSubmit.Click += new System.EventHandler(this.cmdSubmit_Click);
         this.Load += new System.EventHandler(this.Page_Load);
 
     }
+
     protected void cmdSubmit_Click(object sender, System.EventArgs e)
     {
-        if (Page.IsValid)
+
+        SqlCommand sqlCmd = new SqlCommand();
+        GeneralDAL objDal = new GeneralDAL();
+        objDal.OpenSQLConnection();
+        sqlCmd.Connection = objDal.ActiveSQLConnection();
+        sqlCmd.CommandType = CommandType.StoredProcedure;
+        try
         {
-            _LoginBLL.Login = txtUserName.Text.Trim();
-            _LoginBLL.Password = txtPassword.Text.Trim();
-
-            if (_LoginBLL.ValidateUser)
+            sqlCmd.CommandText = "MyTime_Master_userauthentication";
+            sqlCmd.Parameters.AddWithValue("@Action", "UserAuthentication");
+            sqlCmd.Parameters.AddWithValue("@UserName", txtUserName.Text);
+            sqlCmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            DataSet dataSet = new DataSet();
+            dataAdapter.Fill(dataSet);
+            if (dataSet.Tables[0].Rows.Count > 0)
             {
-                Session["UserLogin"] = txtUserName.Text;
-                MySession.UserID = txtUserName.Text;
-                MySession.UserUnique = _LoginBLL.GetUniqueCode;
-                MySession.IsAdmin = _LoginBLL.GetIsAdmin;
+                if (dataSet.Tables[0].Rows[0]["IsSuccessful"].ToString() == "1")
+                {
+                    if (dataSet.Tables[1].Rows[0]["IsAdmin"].ToString() == "True")
+                    {
+                        MySession.IsAdmin = true;
+                    }
+                    else
+                    {
+                        MySession.IsAdmin = false;
+                    }
+                    MySession.UserID = txtUserName.Text;
+                    Response.Redirect("~/Guest/SelectLanguage.aspx");
+                }
+                else
+                {
+                    lblMessage.Visible = true;
+                    lblMessage.Text = "Invalid UserName Or Password";
+                }
+            }
 
-                FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, false);
-            }
-            else
-            {
-                System.Web.HttpContext.Current.Session["UserLogin"] = "";
-                txtUserName.Text = "";
-                lblMessage.Text = "Invalid Login, please try again!";
-                txtUserName.Focus();
-            }
         }
+        catch (Exception Ex)
+        {
+        }
+    }
+
+    protected void lnlForgotPassoword_Click(object sender, System.EventArgs e)
+    {
+        Response.Redirect("SetPassword.aspx");
     }
 
     private void LoadYear()

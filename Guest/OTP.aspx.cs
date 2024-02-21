@@ -49,17 +49,17 @@ public partial class Guest_OTP : System.Web.UI.Page
 
                 if (Session["Language"].ToString() == "Gujarati")
                 {
-                    lblVerifyOtp.InnerText = "OTP ચકાસો";
+                    lblVerifyOtp.InnerText = "આગામી ફોર્મ પર જાઓ";
                     lblMessage.Text = "અમાન્ય OTP";
                 }
                 else if (Session["Language"].ToString() == "Hindi")
                 {
-                    lblVerifyOtp.InnerText = "OTP चकासीए";
+                    lblVerifyOtp.InnerText = "अगला फॉर्म जाओ";
                     lblMessage.Text = "अमान्य OTP";
                 }
                 else
                 {
-                    lblVerifyOtp.InnerText = "Verify OTP";
+                    lblVerifyOtp.InnerText = "Go To Next Form";
                     lblMessage.Text = "Invalid OTP";
                 }
 
@@ -119,61 +119,58 @@ public partial class Guest_OTP : System.Web.UI.Page
     {
         try
         {
-            SqlCommand sqlCmd = new SqlCommand();
-            GeneralDAL objDal = new GeneralDAL();
-            objDal.OpenSQLConnection();
-            sqlCmd.Connection = objDal.ActiveSQLConnection();
-            sqlCmd.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                sqlCmd.CommandText = "FitToJob_Master_Users";
-                sqlCmd.Parameters.AddWithValue("@Action", "VerfiyOTP");
-                sqlCmd.Parameters.AddWithValue("@UserName", Session["MobileNo"].ToString());
-                sqlCmd.Parameters.AddWithValue("@OTP", txtOTP.Text);
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
-                DataSet dataSet = new DataSet();
-                dataAdapter.Fill(dataSet);
-                objDal.CloseSQLConnection();
-                if (dataSet.Tables[0].Rows.Count > 0)
-                {
-                    if (dataSet.Tables[0].Rows[0]["IsSuccessful"].ToString() == "1")
-                    {
-                        SqlCommand Cmd = new SqlCommand();
-                        objDal.OpenSQLConnection();
-                        Cmd.Connection = objDal.ActiveSQLConnection();
-                        Cmd.CommandType = CommandType.Text;
-                        Cmd.CommandText = "select case when isnull(Status,'P') = 'P' then 0 else 1 end as Status from Registrations where MobileNo = '" + Session["MobileNo"].ToString() + "'";
-                        bool IsApproved = Convert.ToBoolean(Cmd.ExecuteScalar());
-                        //Session["IsApproved"] = IsApproved.ToString();
-                        objDal.CloseSQLConnection();
-                        Response.Redirect("~/Guest/Registration1.aspx");
-                    }
-                    else
-                    {
-                        lblMessage.Visible = true;
-                        lblMessage.Style["color"] = "Red";
-                        if (Session["Language"].ToString() == "Gujarati")
-                        {
-                            lblMessage.Text = "અમાન્ય OTP!";
-                            lblMessage.Visible = true;
-                        }
-                        else if (Session["Language"].ToString() == "Hindi")
-                        {
-                            lblMessage.Text = "अमान्य OTP!";
-                            lblMessage.Visible = true;
-                        }
-                        else
-                        {
-                            lblMessage.Text = dataSet.Tables[0].Rows[0]["Message"].ToString();
-                        }
+            //SqlCommand sqlCmd = new SqlCommand();
+            //GeneralDAL objDal = new GeneralDAL();
+            //objDal.OpenSQLConnection();
+            //sqlCmd.Connection = objDal.ActiveSQLConnection();
+            //sqlCmd.CommandType = CommandType.StoredProcedure;
+            //try
+            //{
+            //    sqlCmd.CommandText = "FitToJob_Master_Users";
+            //    sqlCmd.Parameters.AddWithValue("@Action", "VerfiyOTP");
+            //    sqlCmd.Parameters.AddWithValue("@UserName", Session["MobileNo"].ToString());
+            //    sqlCmd.Parameters.AddWithValue("@OTP", txtOTP.Text);
+            //    SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            //    DataSet dataSet = new DataSet();
+            //    dataAdapter.Fill(dataSet);
+            //    objDal.CloseSQLConnection();
+            //    if (dataSet.Tables[0].Rows.Count > 0)
+            //    {
+            //        if (dataSet.Tables[0].Rows[0]["IsSuccessful"].ToString() == "1")
+            //        {
+            //            SqlCommand Cmd = new SqlCommand();
+            //            objDal.OpenSQLConnection();
+            //            Cmd.Connection = objDal.ActiveSQLConnection();
+            //            Cmd.CommandType = CommandType.Text;
+            //            Cmd.CommandText = "select case when isnull(Status,'P') = 'P' then 0 else 1 end as Status from Registrations where MobileNo = '" + Session["MobileNo"].ToString() + "'";
+            //            bool IsApproved = Convert.ToBoolean(Cmd.ExecuteScalar());
+            //            //Session["IsApproved"] = IsApproved.ToString();
+            //            objDal.CloseSQLConnection();
+            //            Response.Redirect("~/Guest/Registration1.aspx");
+            //        }
+            //        else
+            //        {
+            //            lblMessage.Visible = true;
+            //            lblMessage.Style["color"] = "Red";
+            //            if (Session["Language"].ToString() == "Gujarati")
+            //            {
+            //                lblMessage.Text = "અમાન્ય OTP!";
+            //                lblMessage.Visible = true;
+            //            }
+            //            else if (Session["Language"].ToString() == "Hindi")
+            //            {
+            //                lblMessage.Text = "अमान्य OTP!";
+            //                lblMessage.Visible = true;
+            //            }
+            //            else
+            //            {
+            //                lblMessage.Text = dataSet.Tables[0].Rows[0]["Message"].ToString();
+            //            }
 
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                objDal.CloseSQLConnection();
-            }
+            //        }
+            //    }
+
+            Response.Redirect("~/Guest/Registration1.aspx");
         }
         catch (Exception ex)
         {

@@ -1,9 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ExperienceDetails.aspx.cs"
-    Inherits="Guest_ExperienceDetails" %>
+    Inherits="Guest_ExperienceDetails" MasterPageFile="~/Guest/Candidate.master" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link type="text/css" href="../jQuery/jQuery.UI/Datepicker/CSS/redmond/jquery-ui-1.8.1.custom.css"
         rel="Stylesheet" />
     <script type="text/javascript" src="../jQuery/jQuery.UI/jquery.ui.core.js"></script>
@@ -125,9 +123,8 @@
             return true;
         }
     </script>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class=" containerBorder ">
         <div class="form">
             <div class="formHeader">
@@ -213,6 +210,4 @@
             </div>
         </div>
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>

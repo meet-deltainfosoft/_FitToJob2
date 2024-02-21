@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SelectLanguage.aspx.cs" Inherits="Guest_SelectLanguage" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SelectLanguage.aspx.cs" MasterPageFile="~/Guest/Candidate.master"
+    Inherits="Guest_SelectLanguage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
     <title></title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -49,10 +49,20 @@
             max-height: 150px; /* Adjust this value based on your desired medium size */
         }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container mt-2 containerBorder align-items-center">
+        <%-- <div class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-3 text-right">
+                <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_OnClick"
+                    CssClass="btn btn-primary" />
+            </div>
+        </div>--%>
         <div class="row">
             <div class="col-lg-4 col-sm-12 text-left">
                 <img src="../images/DukeLogo.png" alt="Duke Logo" class="responsive-img" />
@@ -83,22 +93,21 @@
         <div class="row">
             <div class="col-lg-12 col-sm-12">
                 <asp:Label runat="server" ID="lblLanguage" Text="Select Language*"></asp:Label>
-                <asp:DropDownList ID="ddlSelectLanguage" runat="server" class="form-control" color="#37C1BB" style="padding:4px;">
+                <asp:DropDownList ID="ddlSelectLanguage" runat="server" class="form-control" color="#37C1BB"
+                    Style="padding: 4px;">
                     <asp:ListItem Value="English" Text="English"></asp:ListItem>
                     <asp:ListItem Value="Gujarati" Text="ગુજરાતી"></asp:ListItem>
                     <asp:ListItem Value="Hindi" Text="हिंदी"></asp:ListItem>
-                    
                 </asp:DropDownList>
             </div>
         </div>
         <div class="row justify-content-center mt-3">
             <div class="col-lg-4 col-sm-12">
-                <asp:LinkButton runat="server" ID="lnkBtnLanguage" CssClass="btn btn-info buttton" OnClick="lnkBtnLanguage_Click">
+                <asp:LinkButton runat="server" ID="lnkBtnLanguage" CssClass="btn btn-info buttton"
+                    OnClick="lnkBtnLanguage_Click">
                         <i class="fa fa-chevron-circle-right" ></i> Select Language
                 </asp:LinkButton>
             </div>
         </div>
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>

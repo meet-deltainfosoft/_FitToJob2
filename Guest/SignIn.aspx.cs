@@ -18,29 +18,52 @@ public partial class Guest_SignIn : System.Web.UI.Page
 
         try
         {
-            if (string.IsNullOrEmpty((string)Session["Language"]))
+            if (!IsPostBack)
             {
-                Response.Redirect("~/Guest/SelectLanguage.aspx");
-            }
-            else
-            {
-                if (Session["Language"].ToString() == "Gujarati")
+
+                if (MySession.UserID.ToString() == "")
                 {
-                    lblMobileNo.Text = "તમારો મોબાઈલ નંબર દાખલ કરો*";
-                    lblSignIn.InnerText = "સાઇન ઇન";
-                    lblGetOtp.InnerText = "OTP મેળવો";
+                    Response.Redirect("../Login.aspx");
                 }
-                else if (Session["Language"].ToString() == "Hindi")
+                else
                 {
-                    lblMobileNo.Text = "अपना मोबाइल नंबर दर्ज करें*";
-                    lblSignIn.InnerText = "साइन इन";
-                    lblGetOtp.InnerText = "OTP प्राप्त करें";
-                }
-                else if (Session["Language"].ToString() == "English")
-                {
-                    lblMobileNo.Text = "Enter Your Mobile No*";
-                    lblSignIn.InnerText = "Sign In";
-                    lblGetOtp.InnerText = "Get OTP";
+
+                    if (MySession.IsAdmin == true)
+                    {
+                        txtMobileNo.Text = "";
+                        txtMobileNo.Enabled = true;
+                    }
+                    else
+                    {
+                        txtMobileNo.Text = MySession.UserID.ToString();
+                        txtMobileNo.Enabled = false;
+                    }
+                    //txtMobileNo.Text = MySession.UserID.ToString();
+                    if (string.IsNullOrEmpty((string)Session["Language"]))
+                    {
+                        Response.Redirect("~/Guest/SelectLanguage.aspx");
+                    }
+                    else
+                    {
+                        if (Session["Language"].ToString() == "Gujarati")
+                        {
+                            lblMobileNo.Text = "તમારો મોબાઈલ નંબર દાખલ કરો*";
+                            lblSignIn.InnerText = "સાઇન ઇન";
+                            lblGetOtp.InnerText = "OTP મેળવો";
+                        }
+                        else if (Session["Language"].ToString() == "Hindi")
+                        {
+                            lblMobileNo.Text = "अपना मोबाइल नंबर दर्ज करें*";
+                            lblSignIn.InnerText = "साइन इन";
+                            lblGetOtp.InnerText = "OTP प्राप्त करें";
+                        }
+                        else if (Session["Language"].ToString() == "English")
+                        {
+                            lblMobileNo.Text = "Enter Your Mobile No*";
+                            lblSignIn.InnerText = "Sign In";
+                            lblGetOtp.InnerText = "Get OTP";
+                        }
+                    }
                 }
             }
         }
@@ -71,83 +94,114 @@ public partial class Guest_SignIn : System.Web.UI.Page
         string result = "";
         try
         {
-            if (txtMobileNo.Text.Trim() == "0000000000")
-            {
+            Session["MobileNo"] = txtMobileNo.Text;
 
-                if (Session["Language"] != null)
-                {
-                    string language = Session["Language"].ToString().Trim().ToLowerInvariant();
-
-                    if (language == "gujarati")
-                    {
-                        lblMessage.Text = "કૃપા કરીને માન્ય મોબાઇલ નંબર દાખલ કરો.";
-                    }
-                    else if (language == "hindi")
-                    {
-                        lblMessage.Text = "कृपया मान्य मोबाइल नंबर दर्ज करें.";
-                    }
-                    else if (language == "english")
-                    {
-                        lblMessage.Text = "Please enter a valid mobile number.";
-                    }
-
-                    lblMessage.Visible = true;
-                    return; // Exit the method to prevent further processing
-                }
-            }
 
             Random generator = new Random();
             String random = generator.Next(0, 1000000).ToString("D6");
-            string userName = System.Configuration.ConfigurationManager.AppSettings["SMSUserName"];
-            string password = System.Configuration.ConfigurationManager.AppSettings["SMSPassword"];
-            string APIkey = System.Configuration.ConfigurationManager.AppSettings["SMSAPIkey"];
-            string SenderID = System.Configuration.ConfigurationManager.AppSettings["SMSSenderID"];
-            string SMSType = System.Configuration.ConfigurationManager.AppSettings["SMSType"];
-            string EntityID = System.Configuration.ConfigurationManager.AppSettings["SMSEntityID"];
-            string TemplateID = System.Configuration.ConfigurationManager.AppSettings["SMSTemplateID"];
 
-            //result = APIRequest1(userName, password, APIkey, SenderID, SMSType, EntityID, TemplateID, random);
-            result = "ok";
-
-            if (result.Contains("ok"))
+            lblMessage.Visible = false;
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            try
             {
-                lblMessage.Visible = false;
-                SqlCommand sqlCmd = new SqlCommand();
-                GeneralDAL objDal = new GeneralDAL();
-                objDal.OpenSQLConnection();
-                sqlCmd.Connection = objDal.ActiveSQLConnection();
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                try
-                {
-                    sqlCmd.CommandText = "FitToJob_Master_Users";
-                    sqlCmd.Parameters.AddWithValue("@Action", "InsertUsers");
-                    sqlCmd.Parameters.AddWithValue("@UserName", txtMobileNo.Text);
-                    sqlCmd.Parameters.AddWithValue("@OTP", "1");
-                    //sqlCmd.Parameters.AddWithValue("@OTP", random);
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
-                    DataSet dataSet = new DataSet();
-                    dataAdapter.Fill(dataSet);
-                    Session["MobileNo"] = txtMobileNo.Text;
-                    Response.Redirect("~/Guest/OTP.aspx");
-                }
-                catch (Exception)
-                {
-                }
+                sqlCmd.CommandText = "FitToJob_Master_Users";
+                sqlCmd.Parameters.AddWithValue("@Action", "InsertUsers");
+                sqlCmd.Parameters.AddWithValue("@UserName", txtMobileNo.Text);
+                sqlCmd.Parameters.AddWithValue("@OTP", random.ToString());
+                //sqlCmd.Parameters.AddWithValue("@OTP", random);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+                Session["MobileNo"] = txtMobileNo.Text;
+                Response.Redirect("~/Guest/OTP.aspx");
                 objDal.CloseSQLConnection();
+                Response.Redirect("~/Guest/OTP.aspx");
             }
-            else
+            catch (Exception)
             {
-                if (Session["Language"].ToString() == "Gujarati")
-                {
-                    lblMessage.Text = "તમે ખોટી માહિતી દાખલ કરી છે.";
-                    lblMessage.Visible = true;
-                }
-                else if (Session["Language"].ToString() == "Hindi")
-                {
-                    lblMessage.Text = "आपने ग़लत जानकारी दर्ज की है!";
-                    lblMessage.Visible = false;
-                }
             }
+
+            //if (txtMobileNo.Text.Trim() == "0000000000")
+            //{
+
+            //    if (Session["Language"] != null)
+            //    {
+            //        string language = Session["Language"].ToString().Trim().ToLowerInvariant();
+
+            //        if (language == "gujarati")
+            //        {
+            //            lblMessage.Text = "કૃપા કરીને માન્ય મોબાઇલ નંબર દાખલ કરો.";
+            //        }
+            //        else if (language == "hindi")
+            //        {
+            //            lblMessage.Text = "कृपया मान्य मोबाइल नंबर दर्ज करें.";
+            //        }
+            //        else if (language == "english")
+            //        {
+            //            lblMessage.Text = "Please enter a valid mobile number.";
+            //        }
+
+            //        lblMessage.Visible = true;
+            //        return; // Exit the method to prevent further processing
+            //    }
+            //}
+
+            //Random generator = new Random();
+            //String random = generator.Next(0, 1000000).ToString("D6");
+            //string userName = System.Configuration.ConfigurationManager.AppSettings["SMSUserName"];
+            //string password = System.Configuration.ConfigurationManager.AppSettings["SMSPassword"];
+            //string APIkey = System.Configuration.ConfigurationManager.AppSettings["SMSAPIkey"];
+            //string SenderID = System.Configuration.ConfigurationManager.AppSettings["SMSSenderID"];
+            //string SMSType = System.Configuration.ConfigurationManager.AppSettings["SMSType"];
+            //string EntityID = System.Configuration.ConfigurationManager.AppSettings["SMSEntityID"];
+            //string TemplateID = System.Configuration.ConfigurationManager.AppSettings["SMSTemplateID"];
+
+            ////result = APIRequest1(userName, password, APIkey, SenderID, SMSType, EntityID, TemplateID, random);
+            //result = "ok";
+
+            //if (result.Contains("ok"))
+            //{
+            //    lblMessage.Visible = false;
+            //    SqlCommand sqlCmd = new SqlCommand();
+            //    GeneralDAL objDal = new GeneralDAL();
+            //    objDal.OpenSQLConnection();
+            //    sqlCmd.Connection = objDal.ActiveSQLConnection();
+            //    sqlCmd.CommandType = CommandType.StoredProcedure;
+            //    try
+            //    {
+            //        sqlCmd.CommandText = "FitToJob_Master_Users";
+            //        sqlCmd.Parameters.AddWithValue("@Action", "InsertUsers");
+            //        sqlCmd.Parameters.AddWithValue("@UserName", txtMobileNo.Text);
+            //        sqlCmd.Parameters.AddWithValue("@OTP", "123");
+            //        //sqlCmd.Parameters.AddWithValue("@OTP", random);
+            //        SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            //        DataSet dataSet = new DataSet();
+            //        dataAdapter.Fill(dataSet);
+            //        Session["MobileNo"] = txtMobileNo.Text;
+            //        Response.Redirect("~/Guest/OTP.aspx");
+            //    }
+            //    catch (Exception)
+            //    {
+            //    }
+            //    objDal.CloseSQLConnection();
+            //}
+            //else
+            //{
+            //    if (Session["Language"].ToString() == "Gujarati")
+            //    {
+            //        lblMessage.Text = "તમે ખોટી માહિતી દાખલ કરી છે.";
+            //        lblMessage.Visible = true;
+            //    }
+            //    else if (Session["Language"].ToString() == "Hindi")
+            //    {
+            //        lblMessage.Text = "आपने ग़लत जानकारी दर्ज की है!";
+            //        lblMessage.Visible = false;
+            //    }
+            //}
         }
         catch (Exception ex)
         {

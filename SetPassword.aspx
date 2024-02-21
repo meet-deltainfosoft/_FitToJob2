@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Online Exam Login" Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs"
+﻿<%@ Page Title="Online Exam Login" Language="C#" AutoEventWireup="true" CodeFile="SetPassword.aspx.cs"
     Inherits="Login" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -50,50 +50,36 @@
                 border-radius: 20px;">
                 <div style="text-align: center">
                     <img src="images/DukeLogo.png" width="200px" />
-                    <%--<img src="images/Genius.png" width="200px" />--%>
-                    <%--<img src="images/SWASTIK.jpg" width="180px" />--%>
                 </div>
                 <p>
-                    <asp:TextBox type="text" runat="server" ID="txtUserName" value="UserName" placeholder="UserName"
-                        onfocus="if(this.value=='UserName')this.value='' "></asp:TextBox>
+                    <asp:Label ID="lblPassword" runat="server" Text="Enter User Name"></asp:Label>
+                    <asp:TextBox type="text" runat="server" ID="txtUserName" placeholder="UserName"></asp:TextBox>
                 </p>
-                <p style="text-align: center">
+                <p>
+                    <asp:Label ID="lblEnterOTP" runat="server" Text="Enter OTP" Style="display: none;"></asp:Label>
+                    <asp:TextBox type="text" runat="server" ID="txtOTP" placeholder="Enter OTP" Style="display: none;"></asp:TextBox>
+                </p>
+                <%--<p style="text-align: center">
                     <asp:TextBox TextMode="password" runat="server" ID="txtPassword" placeholder="Password"
                         onfocus="if(this.value=='Password')this.value='' "></asp:TextBox>
-                    <%--<asp:Label ID="lblMessage" runat="server" Width="180px" Font-Bold="False" Font-Italic="True"
-                        Font-Size="X-Small" ForeColor="#C00000"></asp:Label>--%>
-                </p>
+                    <asp:Label ID="lblMessage" runat="server" Width="180px" Font-Bold="False" Font-Italic="True"
+                        Font-Size="X-Small" ForeColor="#C00000"></asp:Label>
+                </p>--%>
                 <p>
                     <asp:DropDownList Visible="false" CssClass="uppercase" runat="server" ID="ddlYear"
                         Width="300px" Height="40px" OnSelectedIndexChanged="ddlYear_SelectedIndexChanged">
                     </asp:DropDownList>
-                    <asp:Label ID="lblMessage" runat="server" Visible="false" Style="color: Red;"></asp:Label>
                 </p>
-                <asp:Button ID="cmdSubmit" runat="server" Text="Sign in" OnClick="cmdSubmit_Click">
+                <p>
+                    <asp:Label ID="lblMessage" runat="server" Style="color: Red;"></asp:Label>
+                </p>
+                <asp:Button ID="cmdSubmit" runat="server" Text="verify otp" OnClick="cmdSubmit_Click">
                 </asp:Button>
-                <div style="text-align: center; font-family: Verdana; font-weight: bold;">
-                    <asp:LinkButton ID="lnlForgotPassoword" runat="server" Text="Forgot Pasword/Set Password"
-                        OnClick="lnlForgotPassoword_Click"></asp:LinkButton>
-                </div>
-                <%--Version : 17.07.01 V1 Dated : 17-Jul-2020 DT+QB--%>
-                <%--10.07.01 V3 Dated : 10-Jul-2020 for 100--%>
-                <%--Version : 11.05.03 V3 Dated : 12-May-2020--%>
-                <p style="text-align: center; font-size: x-small">
-                    <asp:Label ID="lblVersion" runat="server" Text=""></asp:Label></p>
+                <asp:Button ID="btnVerifyOTP" runat="server" Text="Submit otp" OnClick="btnVerifyOTP_Click"
+                    Style="display: none;"></asp:Button>
             </fieldset>
         </div>
-        <div style="text-align: center" class="banner">
-            <a href="http://www.ierp.in/" style="color: #555">
-                <img src="images/DeltaIPL-T.png" height="58px" width="145px" /></a><br />
-            <asp:Image runat="server" ID="imgflag" ImageUrl="~/images/Flag.png" Width="20px"
-                Height="12px" />&nbsp;Design in India
-        </div>
-        <div class="banner" style="text-align: center; font-size: x-small">
-            B-1010, Infinity Tower, S.G. Highway, Ahmedabad - 15, Gujarat. www.SchooliERP.com</a>
-        </div>
-        <!-- end #content -->
         </form>
-        <!-- end #footer -->
     </div>
 </body>
 </html>

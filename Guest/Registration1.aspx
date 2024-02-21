@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeFile="Registration1.aspx.cs"
-    Inherits="General_Registration1" %>
+    Inherits="General_Registration1" MasterPageFile="~/Guest/Candidate.master" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <meta charset="utf-8" />
     <%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">--%>
     <link type="text/css" href="../jQuery/jQuery.UI/Datepicker/CSS/redmond/jquery-ui-1.8.1.custom.css"
@@ -245,215 +244,210 @@
         {
             border: 3px solid #37C1BB;
             border-radius: 10px;
-          
-            background-color: white; 
+            background-color: white;
             height: auto;
         }
         
         .containerBorder:hover
         {
-            border-color: #018881; 
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+            border-color: #018881;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Add more custom styles as needed */
     </style>
-</head>
-<body>
-    <form id="Registration1" runat="server">
-    <div class="container mt-2 containerBorder align-items-center">
-        <%--</asp:Content>--%>
-        <%--<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">--%>
-        <div class="container">
-            <div class="form">
-                <div class="formHeader" class="formHeader header-divider">
-                    <asp:Label ID="lblTitle" runat="server" Text="Registration Entry (New Mode)"></asp:Label>
-                </div>
-                <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
-                    <asp:BulletedList ID="blErrs" runat="server">
-                    </asp:BulletedList>
-                </asp:Panel>
-                <div class="formBody">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblAadharNo" Text="AadharCard No :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtAadharNo" CssClass="form-control" MaxLength="12"
-                                    onkeypress="return validateNumericInput(event);" TabIndex="1" AutoPostBack="false"
-                                    AutoCompleteType="Disabled">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="rfvAadharNo" ControlToValidate="txtAadharNo"
-                                    ErrorMessage="Aadhar number is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator runat="server" ID="revAadharNo" ControlToValidate="txtAadharNo"
-                                    ValidationExpression="^\d{12}$" ErrorMessage="Aadhar number must be 12 digits."
-                                    Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblFirstname" Text="First Name :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtFirstname" CssClass="form-control" TabIndex="2"
-                                    AutoCompleteType="Disabled">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtFirstname"
-                                    ErrorMessage="First name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblMiddlename" Text="Middle Name :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtMiddlename" CssClass="form-control" TabIndex="3"
-                                    AutoCompleteType="Disabled">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtMiddlename"
-                                    ErrorMessage="Middle name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblLastName" Text="Last Name :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtLastname" CssClass="form-control" TabIndex="4"
-                                    AutoCompleteType="Disabled">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtLastname"
-                                    ErrorMessage="Last name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblMobileNo" Text="Mobile No :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtMobileNo" CssClass="form-control" TabIndex="5"
-                                    AutoCompleteType="Disabled" MaxLength="10">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="rfvMobileNo" ControlToValidate="txtMobileNo"
-                                    ErrorMessage="Mobile number is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator runat="server" ID="revMobileNo" ControlToValidate="txtMobileNo"
-                                    ValidationExpression="^\d{10}$" ErrorMessage="Mobile number must be 10 digits."
-                                    Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblCity" Text="City / Village :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtCity" CssClass="form-control" TabIndex="6">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtCity"
-                                    AutoCompleteType="Disabled" ErrorMessage="City is required." Display="Dynamic"
-                                    ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblTaluka" Text="Taluka :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtTaluka" CssClass="form-control" TabIndex="7">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtTaluka"
-                                    AutoCompleteType="Disabled" ErrorMessage="Taluka is required." Display="Dynamic"
-                                    ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblDistrict" Text="District :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtDistrict" CssClass="form-control" TabIndex="8">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtDistrict"
-                                    AutoCompleteType="Disabled" ErrorMessage="District is required." Display="Dynamic"
-                                    ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblState" Text="State :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtState" CssClass="form-control" TabIndex="9">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtState"
-                                    AutoCompleteType="Disabled" ErrorMessage="State is required." Display="Dynamic"
-                                    ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-sm-12">
-                            <div class="form-group">
-                                <asp:Label runat="server" ID="lblAddress" Text="Address :"></asp:Label>
-                                <span style="color: red">*</span>
-                                <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" TabIndex="10" CssClass="form-control"
-                                    AutoCompleteType="Disabled">
-                                </asp:TextBox>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="txtAddress"
-                                    ErrorMessage="Address is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <asp:Label ID="lblPhoto" runat="server" Text="Passport Photo : "></asp:Label>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <%--</asp:Content>--%>
+    <%--<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">--%>
+    <div class="container">
+        <div class="form">
+            <div class="formHeader" class="formHeader header-divider">
+                <asp:Label ID="lblTitle" runat="server" Text="Registration Entry (New Mode)"></asp:Label>
+            </div>
+            <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
+                <asp:BulletedList ID="blErrs" runat="server">
+                </asp:BulletedList>
+            </asp:Panel>
+            <div class="formBody">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblAadharNo" Text="AadharCard No :"></asp:Label>
                             <span style="color: red">*</span>
-                            <asp:FileUpload ID="fuPhoto" runat="server" class="form-control" onchange="return validateFile();" />
-                        </div>
-                        <div class="col-lg-3">
-                            <asp:Image ID="imgPhoto" runat="server" Height="158.4px" TabIndex="11" Visible="True"
-                                Width="120px" />
-                        </div>
-                        <div class="col-lg-3">
-                            <asp:Label ID="lblSelfintravideo" runat="server" Text="Self Intro Video :"></asp:Label>
-                            <asp:FileUpload ID="fuSelfintravideo" runat="server" class="form-control" onchange="return validateVideo();" />
-                        </div>
-                        <div class="col-lg-3">
-                            <asp:Label ID="lblResume" runat="server" Text="Resume Upload :"></asp:Label>
-                            <span style="color: red">*</span>
-                            <asp:FileUpload ID="fuResumeUpload" runat="server" onchange="return validateResume();"
-                                class="form-control" />
-                        </div>
-                        <table style="display: none">
-                            <tr>
-                                <td align="left">
-                                    <asp:Image ID="imgSelfintravideo" runat="server" Height="158.4px" TabIndex="12" Visible="True"
-                                        Width="120px" />
-                                </td>
-                                <td align="right">
-                                </td>
-                                <td>
-                                </td>
-                                <td align="left">
-                                    <asp:Image ID="imgResumeUpload" runat="server" Height="158.4px" TabIndex="13" Visible="True"
-                                        Width="120px" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="formFooter">
-                    <div class="row">
-                        <div class="col-lg-8 m-1">
-                            <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
-                                Style="height: 30px; width: 200px; font-size: 15px;" CausesValidation="true" />
-                            <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
-                                class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
-                        </div>
-                        <div class="col-lg-2 m-1">
-                            <asp:Button runat="server" ID="btnDelete" Enabled="false" Text="Delete" class="btn btn-danger"
-                                OnClientClick="return confirm('Do you Want to Delete');" OnClick="btnDelete_Click"
-                                Style="height: 30px; width: 80px; font-size: 15px; display: none;" />
-                            <asp:Label ID="lblPhotoPath" runat="server" Visible="false"></asp:Label>
-                            <asp:Label ID="lblSelfIntroPath" runat="server" Visible="false"></asp:Label>
-                            <asp:Label ID="lblResumePath" runat="server" Visible="false"></asp:Label>
+                            <asp:TextBox runat="server" ID="txtAadharNo" CssClass="form-control" MaxLength="12"
+                                onkeypress="return validateNumericInput(event);" TabIndex="1" AutoPostBack="false"
+                                AutoCompleteType="Disabled">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="rfvAadharNo" ControlToValidate="txtAadharNo"
+                                ErrorMessage="Aadhar number is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="revAadharNo" ControlToValidate="txtAadharNo"
+                                ValidationExpression="^\d{12}$" ErrorMessage="Aadhar number must be 12 digits."
+                                Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblFirstname" Text="First Name :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtFirstname" CssClass="form-control" TabIndex="2"
+                                AutoCompleteType="Disabled">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtFirstname"
+                                ErrorMessage="First name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblMiddlename" Text="Middle Name :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtMiddlename" CssClass="form-control" TabIndex="3"
+                                AutoCompleteType="Disabled">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtMiddlename"
+                                ErrorMessage="Middle name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblLastName" Text="Last Name :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtLastname" CssClass="form-control" TabIndex="4"
+                                AutoCompleteType="Disabled">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtLastname"
+                                ErrorMessage="Last name is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblMobileNo" Text="Mobile Number :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtMobileNo" CssClass="form-control" TabIndex="5"
+                                AutoCompleteType="Disabled" MaxLength="10">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="rfvMobileNo" ControlToValidate="txtMobileNo"
+                                ErrorMessage="Mobile number is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="revMobileNo" ControlToValidate="txtMobileNo"
+                                ValidationExpression="^\d{10}$" ErrorMessage="Mobile number must be 10 digits."
+                                Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblCity" Text="City / Village :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtCity" CssClass="form-control" TabIndex="6">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="txtCity"
+                                AutoCompleteType="Disabled" ErrorMessage="City is required." Display="Dynamic"
+                                ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblTaluka" Text="Taluka :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtTaluka" CssClass="form-control" TabIndex="7">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtTaluka"
+                                AutoCompleteType="Disabled" ErrorMessage="Taluka is required." Display="Dynamic"
+                                ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblDistrict" Text="District :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtDistrict" CssClass="form-control" TabIndex="8">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator6" ControlToValidate="txtDistrict"
+                                AutoCompleteType="Disabled" ErrorMessage="District is required." Display="Dynamic"
+                                ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblState" Text="State :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtState" CssClass="form-control" TabIndex="9">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator7" ControlToValidate="txtState"
+                                AutoCompleteType="Disabled" ErrorMessage="State is required." Display="Dynamic"
+                                ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblAddress" Text="Address :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" TabIndex="10" CssClass="form-control"
+                                AutoCompleteType="Disabled">
+                            </asp:TextBox>
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="txtAddress"
+                                ErrorMessage="Address is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <asp:Label ID="lblPhoto" runat="server" Text="Passport Photo : "></asp:Label>
+                        <span style="color: red">*</span>
+                        <asp:FileUpload ID="fuPhoto" runat="server" class="form-control" onchange="return validateFile();" />
+                    </div>
+                    <div class="col-lg-3">
+                        <asp:Image ID="imgPhoto" runat="server" Height="158.4px" TabIndex="11" Visible="True"
+                            Width="120px" />
+                    </div>
+                    <div class="col-lg-3">
+                        <asp:Label ID="lblSelfintravideo" runat="server" Text="Self Intro Video :"></asp:Label>
+                        <asp:FileUpload ID="fuSelfintravideo" runat="server" class="form-control" onchange="return validateVideo();" />
+                    </div>
+                    <div class="col-lg-3">
+                        <asp:Label ID="lblResume" runat="server" Text="Resume Upload :"></asp:Label>
+                        <span style="color: red">*</span>
+                        <asp:FileUpload ID="fuResumeUpload" runat="server" onchange="return validateResume();"
+                            class="form-control" />
+                    </div>
+                    <table style="display: none">
+                        <tr>
+                            <td align="left">
+                                <asp:Image ID="imgSelfintravideo" runat="server" Height="158.4px" TabIndex="12" Visible="True"
+                                    Width="120px" />
+                            </td>
+                            <td align="right">
+                            </td>
+                            <td>
+                            </td>
+                            <td align="left">
+                                <asp:Image ID="imgResumeUpload" runat="server" Height="158.4px" TabIndex="13" Visible="True"
+                                    Width="120px" />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="row m-1">
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="formFooter">
+                <div class="row">
+                    <div class="col-lg-8 m-1">
+                        <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
+                            Style="height: 30px; width: 200px; font-size: 15px;" CausesValidation="true" />
+                        <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
+                            class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
+                    </div>
+                    <div class="col-lg-2 m-1">
+                        <asp:Button runat="server" ID="btnDelete" Enabled="false" Text="Delete" class="btn btn-danger"
+                            OnClientClick="return confirm('Do you Want to Delete');" OnClick="btnDelete_Click"
+                            Style="height: 30px; width: 80px; font-size: 15px; display: none;" />
+                        <asp:Label ID="lblPhotoPath" runat="server" Visible="false"></asp:Label>
+                        <asp:Label ID="lblSelfIntroPath" runat="server" Visible="false"></asp:Label>
+                        <asp:Label ID="lblResumePath" runat="server" Visible="false"></asp:Label>
+                    </div>
                 </div>
+            </div>
+            <div class="row m-1">
             </div>
         </div>
     </div>
-    </form>
-</body>
-</html>
+    </div>
+</asp:Content>
 <%--</asp:Content>--%>

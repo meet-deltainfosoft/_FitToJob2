@@ -1,10 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeFile="JobProfile.aspx.cs"
-    Inherits="General_JobProfile" %>
+    MasterPageFile="~/Guest/Candidate.master" Inherits="General_JobProfile" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">--%>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link type="text/css" href="../jQuery/jQuery.UI/Datepicker/CSS/redmond/jquery-ui-1.8.1.custom.css"
         rel="Stylesheet" />
     <script type="text/javascript" src="../jQuery/jQuery.UI/jquery.ui.core.js"></script>
@@ -31,30 +28,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <%--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous"
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>--%>
-    <%--  <script type="text/javascript">
-        $(document).ready(function () {
-
-
-
-
-        });
-    </script>--%>
-    <%--</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    --%>
     <style>
-        /* Custom CSS styles for your form */
         body
         {
             font-family: 'Arial' , sans-serif;
@@ -155,9 +129,8 @@
             });
         });
     </script>
-</head>
-<body>
-    <form id="formJobProfile" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class=" containerBorder ">
         <div class="form">
             <div class="formHeader">
@@ -259,8 +232,4 @@
             </div>
         </div>
     </div>
-    </form>
-</body>
-</html>
-<%--</asp:Content>
---%>
+</asp:Content>

@@ -1,9 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SignIn.aspx.cs" Inherits="Guest_SignIn"
-    UICulture="auto:gu-IN" Culture="auto:gu-IN" %>
+    MasterPageFile="~/Guest/Candidate.master" UICulture="auto:gu-IN" Culture="auto:gu-IN" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title></title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -60,9 +58,8 @@
             textBox.value = textBox.value.substring(0, 10);
         }
     </script>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container mt-2 containerBorder align-items-center">
         <div class="row">
             <div class="col-lg-4 col-sm-12 text-left">
@@ -119,6 +116,4 @@
         <div class="mt-1">
         </div>
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>

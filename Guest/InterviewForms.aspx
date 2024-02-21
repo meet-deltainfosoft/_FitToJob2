@@ -1,8 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="InterviewForms.aspx.cs" Inherits="Guest_InterviewForms" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="InterviewForms.aspx.cs" MasterPageFile="~/Guest/Candidate.master"
+    Inherits="Guest_InterviewForms" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <%--<head runat="server">--%>
     <title></title>
     <link type="text/css" href="../jQuery/jQuery.UI/Datepicker/CSS/redmond/jquery-ui-1.8.1.custom.css"
         rel="Stylesheet" />
@@ -177,9 +179,9 @@
             return true;
         }
     </script>
-</head>
-<body>
-    <form id="form1" runat="server">
+    <%-- </head>--%>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="containerBorder ">
         <div class="wrapper">
             <div class="form">
@@ -348,7 +350,7 @@
                             <asp:TextBox ID="txtNomineeName" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblNomineeDOB" runat="server" Text="Nominee DOB"></asp:Label>
+                            <asp:Label ID="lblNomineeDOB" runat="server" Text="Nominee Birth Date"></asp:Label>
                             <asp:TextBox ID="txtNomineeDOB" runat="server" CssClass="form-control datepicker"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
@@ -373,16 +375,16 @@
                             <asp:TextBox ID="txtDukeReferences" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblDukeReferencesMobileNo" runat="server" Text="Duke Man. Ref. Mobile No"></asp:Label>
+                            <asp:Label ID="lblDukeReferencesMobileNo" runat="server" Text="Duke References Mobile Number"></asp:Label>
                             <asp:TextBox ID="txtDukeReferencesMobileNo" runat="server" CssClass="form-control"
                                 onkeypress="return isNumber(event)" MaxLength="10"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblVillageNotableRefernces" runat="server" Text="Village Notable References"></asp:Label>
+                            <asp:Label ID="lblVillageNotableRefernces" runat="server" Text="Village References"></asp:Label>
                             <asp:TextBox ID="txtVillageNotableRefernces" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblVillageNotableReferncesMobileNo" runat="server" Text="Village Notable Ref. Mobile No"></asp:Label>
+                            <asp:Label ID="lblVillageNotableReferncesMobileNo" runat="server" Text="Village References Number"></asp:Label>
                             <asp:TextBox ID="txtVillageNotableReferncesMobileNo" runat="server" CssClass="form-control"
                                 onkeypress="return isNumber(event)" MaxLength="10"></asp:TextBox>
                         </div>
@@ -457,6 +459,4 @@
             </div>
         </div>
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>

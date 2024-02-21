@@ -1,8 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FamilyDetail.aspx.cs" Inherits="Guest_FamilyDetail" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="FamilyDetail.aspx.cs" Inherits="Guest_FamilyDetail"
+    MasterPageFile="~/Guest/Candidate.master" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link type="text/css" href="../jQuery/jQuery.UI/Datepicker/CSS/redmond/jquery-ui-1.8.1.custom.css"
         rel="Stylesheet" />
     <script type="text/javascript" src="../jQuery/jQuery.UI/jquery.ui.core.js"></script>
@@ -97,7 +96,7 @@
             background-color: #37C1BB;
             color: #ffffff; /* Text color, you can adjust it based on your preference */
         }
-          .containerBorder
+        .containerBorder
         {
             border: 3px solid #37C1BB;
             border-radius: 10px;
@@ -124,96 +123,92 @@
             return true;
         }
     </script>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class=" containerBorder ">
-
-    <div class="form">
-        <div class="formHeader">
-            <asp:Label ID="lblTitle" runat="server" Text="Family Detail(AS Per Ration Card)"></asp:Label>
-        </div>
-        <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
-            <asp:BulletedList ID="blErrs" runat="server">
-            </asp:BulletedList>
-        </asp:Panel>
-        <asp:Button runat="server" ID="btnAddRow" Text="+  Add Family Member" CssClass="btn btn-primary m-2"
-            OnClick="btnAddRow_Click" ToolTip="Add New Records" />
-        <div class="row" style="overflow: scroll;">
-            <asp:GridView runat="server" ID="gvFamilyDetails" AutoGenerateColumns="False" CssClass="gridview-style"
-                CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCommand="gvFamilyDetails_RowCommand"
-                Width="1350px">
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
-                <AlternatingRowStyle BackColor="White" />
-                <Columns>
-                    <asp:TemplateField HeaderText="Relation">
-                        <ItemTemplate>
-                            <asp:DropDownList runat="server" ID="ddlRelation" CssClass="form-control" SelectedValue='<%# Eval("Relation") %>'>
-                                <asp:ListItem Text="Father" Value="Father" />
-                                <asp:ListItem Text="Mother" Value="Mother" />
-                                <asp:ListItem Text="Son" Value="Son" />
-                                <asp:ListItem Text="Brother" Value="Brother" />
-                                <asp:ListItem Text="Sister" Value="Sister" />
-                                <asp:ListItem Text="Daughter" Value="Daughter" />
-                                <asp:ListItem Text="Spouse" Value="Spouse" />
-                            </asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Name">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtName" CssClass="form-control" Text='<%# Eval("Name") %>'></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Bussiness">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtBusiness" CssClass="form-control" Text='<%# Eval("Business") %>'></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Education Qualification">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtEducation" CssClass="form-control" Text='<%# Eval("Education") %>'></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Mobile No">
-                        <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtMobile" CssClass="form-control" Text='<%# Eval("Mobile") %>'
-                                onkeypress="return isNumber(event)"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Actions">
-                        <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="lnkRemove" CssClass="btn btn-danger" Text="X"
-                                ToolTip="Remove Records" CommandName="RemoveRow" CommandArgument='<%# Container.DataItemIndex %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-            </asp:GridView>
-        </div>
-        <div class="row">
-            <div class="mt-3">
-                <div class="class-lg-3 col-sm-6">
-                    <asp:Button ID="btnSubmit" runat="Server" Text="Save & Next" class="btn btn-primary"
-                        OnClick="lnkBtnSubmit_click" />
+        <div class="form">
+            <div class="formHeader">
+                <asp:Label ID="lblTitle" runat="server" Text="Family Detail(AS Per Ration Card)"></asp:Label>
+            </div>
+            <asp:Panel ID="pnlErr" CssClass="errors" runat="server" Visible="false">
+                <asp:BulletedList ID="blErrs" runat="server">
+                </asp:BulletedList>
+            </asp:Panel>
+            <asp:Button runat="server" ID="btnAddRow" Text="+  Add Family Member" CssClass="btn btn-primary m-2"
+                OnClick="btnAddRow_Click" ToolTip="Add New Records" />
+            <div class="row" style="overflow: scroll;">
+                <asp:GridView runat="server" ID="gvFamilyDetails" AutoGenerateColumns="False" CssClass="gridview-style"
+                    CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCommand="gvFamilyDetails_RowCommand"
+                    Width="1350px">
+                    <EditRowStyle BackColor="#7C6F57" />
+                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="Relation">
+                            <ItemTemplate>
+                                <asp:DropDownList runat="server" ID="ddlRelation" CssClass="form-control" SelectedValue='<%# Eval("Relation") %>'>
+                                    <asp:ListItem Text="Father" Value="Father" />
+                                    <asp:ListItem Text="Mother" Value="Mother" />
+                                    <asp:ListItem Text="Son" Value="Son" />
+                                    <asp:ListItem Text="Brother" Value="Brother" />
+                                    <asp:ListItem Text="Sister" Value="Sister" />
+                                    <asp:ListItem Text="Daughter" Value="Daughter" />
+                                    <asp:ListItem Text="Spouse" Value="Spouse" />
+                                </asp:DropDownList>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Name">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtName" CssClass="form-control" Text='<%# Eval("Name") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Bussiness">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtBusiness" CssClass="form-control" Text='<%# Eval("Business") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Education Qualification">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtEducation" CssClass="form-control" Text='<%# Eval("Education") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Mobile No">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtMobile" CssClass="form-control" Text='<%# Eval("Mobile") %>'
+                                    onkeypress="return isNumber(event)"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Actions">
+                            <ItemTemplate>
+                                <asp:LinkButton runat="server" ID="lnkRemove" CssClass="btn btn-danger" Text="X"
+                                    ToolTip="Remove Records" CommandName="RemoveRow" CommandArgument='<%# Container.DataItemIndex %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#E3EAEB" />
+                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                    <SortedAscendingHeaderStyle BackColor="#246B61" />
+                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                    <SortedDescendingHeaderStyle BackColor="#15524A" />
+                </asp:GridView>
+            </div>
+            <div class="row">
+                <div class="mt-3">
+                    <div class="class-lg-3 col-sm-6">
+                        <asp:Button ID="btnSubmit" runat="Server" Text="Save & Next" class="btn btn-primary"
+                            OnClick="lnkBtnSubmit_click" />
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <asp:Label ID="lblMessage" runat="server" Text="Please Enter Mandatory Value" Style="color: Red;"
+                        Visible="false"></asp:Label>
                 </div>
             </div>
-            <div class="mt-2">
-                <asp:Label ID="lblMessage" runat="server" Text="Please Enter Mandatory Value" Style="color: Red;"
-                    Visible="false"></asp:Label>
-            </div>
+        </div>
+        <div class="mt-1">
         </div>
     </div>
-    <div class="mt-1">
-    </div>
-    </div>
-    </form>
-</body>
-</html>
+</asp:Content>

@@ -1,8 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Division.aspx.cs" Inherits="Guest_Division" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Division.aspx.cs" Inherits="Guest_Division"
+    MasterPageFile="~/Guest/Candidate.master" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title></title>
     <link type="text/css" href="../jQuery/jQuery.UI/Datepicker/CSS/redmond/jquery-ui-1.8.1.custom.css"
         rel="Stylesheet" />
@@ -77,16 +76,15 @@
         
         .containerBorder:hover
         {
-            border-color: #018881; 
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
-            
+            border-color: #018881;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Add more custom styles as needed */
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+   <%-- <form id="form1" runat="server">--%>
     <div class=" containerBorder ">
         <div class="form">
             <div class="formHeader">
@@ -129,6 +127,4 @@
             </div>
         </div>
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Threading;
-using System.Globalization;  
+using System.Globalization;
 
 public partial class Guest_SelectLanguage : System.Web.UI.Page
 {
@@ -18,5 +18,17 @@ public partial class Guest_SelectLanguage : System.Web.UI.Page
     {
         Session["Language"] = ddlSelectLanguage.SelectedValue.ToString();
         Response.Redirect("~/Guest/SignIn.aspx");
+    }
+
+    protected void btnLogout_OnClick(object sender, EventArgs e)
+    {
+        try
+        {
+
+        }
+        catch (Exception)
+        {
+        }
+
     }
 }

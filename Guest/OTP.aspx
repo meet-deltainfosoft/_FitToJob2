@@ -1,8 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OTP.aspx.cs" Inherits="Guest_OTP" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OTP.aspx.cs" Inherits="Guest_OTP"
+    MasterPageFile="~/Guest/Candidate.master" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title></title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -51,8 +50,7 @@
             width: 45vh !important;
             border-radius: 10px;
             padding: 10px;
-            border:1px solid #dc3545de !important;
-            
+            border: 1px solid #dc3545de !important;
         }
         
         .responsive-img
@@ -72,9 +70,8 @@
             textBox.value = textBox.value.substring(0, 6);
         }
     </script>
-</head>
-<body>
-    <form id="form1" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container mt-2 containerBorder align-items-center">
         <div class="row">
             <div class="col-lg-4 col-sm-12 text-left">
@@ -84,7 +81,7 @@
                 font-weight: bolder !important;">
                 <%--<a href="" style="font-family: Verdana; font-weight: bold;">Sign In</a>--%>
                 <h3>
-                    OTP</h3>
+                    Interview Status</h3>
                 <%--
                 <h6>
                     
@@ -103,7 +100,7 @@
                 </h3>
             </div>
         </div>
-        <div class="row justify-content-left mt-4">
+        <div class="row justify-content-left mt-4" style="display: none;">
             <div class="col-lg-12 text-left">
                 <asp:Label runat="server" ID="lblOTP" Text="OTP*"></asp:Label>
                 <asp:TextBox runat="server" ID="txtOTP" CssClass="form-control" MaxLength="12" placeholder="xxxxxx"
@@ -119,19 +116,19 @@
                 <asp:LinkButton runat="server" ID="lnkBtnGetOTP" CssClass="btn btn-info buttton"
                     OnClick="lnkBtnGetOTP_click">
                     <div class="d-flex justify-content-center align-items-center">
-                        <i class="fas fa-check-circle mr-2"></i><span id="lblVerifyOtp" runat="server">Verify
-                            OTP</span>
+                        <i class="fas fa-check-circle mr-2"></i><span id="lblVerifyOtp" runat="server">Go To
+                            Next Page</span>
                     </div>
                 </asp:LinkButton>
             </div>
-            <div class="col-lg-6 col-sm-6 text-left mt-2">
+            <%--<div class="col-lg-6 col-sm-6 text-left mt-2">
                 <asp:LinkButton runat="server" ID="lnkResendOTP" CssClass="btn btn-info buttton"
                     OnClick="lnkResendOTP_click">
                     <div class="d-flex justify-content-center align-items-center">
                         <i class="fas fa-check-circle mr-2"></i><span id="Span2" runat="server">Resend OTP</span>
                     </div>
                 </asp:LinkButton>
-            </div>
+            </div>--%>
             <div class="col-lg-6 col-sm-6 text-left mt-2">
                 <asp:LinkButton ID="btnprint" runat="server" CssClass="btn btn-info buttton" OnClick="lnkPrint_click"
                     Style="background-color: #37C1BB;">
@@ -149,8 +146,8 @@
                 </asp:LinkButton>
             </div>
             <div class="col-lg-6 col-sm-6 text-left mt-2">
-                <asp:LinkButton ID="lnkbtnOffer" runat="server" CssClass="btn btn-info buttton1" OnClick="lnkbtnOffer_click"
-                    Style="background-color: #37C1BB;">
+                <asp:LinkButton ID="lnkbtnOffer" runat="server" CssClass="btn btn-info buttton1"
+                    OnClick="lnkbtnOffer_click" Style="background-color: #37C1BB;">
         <div class="d-flex justify-content-center align-items-center" id="blinkContainer">
             <i class="fas fa-upload mr-2"></i><span>Offer Acceptance</span>
         </div>
@@ -169,7 +166,6 @@
         <div class="row justify-content-left mt-3">
         </div>
     </div>
-    </form>
     <script type="text/javascript">
         function blink() {
             var blinkContainer = document.getElementById('blinkContainer');
@@ -179,5 +175,4 @@
 
         setInterval(blink, 600); // 2000 milliseconds = 2 seconds
     </script>
-</body>
-</html>
+</asp:Content>
