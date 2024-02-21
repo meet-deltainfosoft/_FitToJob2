@@ -59,6 +59,11 @@
             height: auto;
             max-height: 150px; /* Adjust this value based on your desired medium size */
         }
+        .name
+        {
+            font-size: 15px;
+            margin-left: auto;
+        }
     </style>
     <script type="text/javascript">
         function validateNumericInput(event) {
@@ -87,7 +92,20 @@
                     
                 </h6>--%>
             </div>
+            <div class="name">
+                <asp:Label ID="lblFullName" runat="server" Text="Candidate:"></asp:Label>
+                  <asp:Label ID="lblFullNameValue" runat="server" Text=""></asp:Label>
+                 <asp:Label ID="lblMobileNumber" runat="server" Text="|"></asp:Label>
+                <asp:Label ID="lblMobileNumberValue" runat="server" Text=""></asp:Label>
+              
+               
+            </div>
+             
+          
         </div>
+          <div class="name">
+               
+            </div>
         <div class="row justify-content-left">
             <div class="col-lg-12 col-sm-6 text-left">
                 <h4>

@@ -37,7 +37,7 @@
         .buttton
         {
             background-color: #37C1BB !important;
-            width: 25vh !important;
+            width: 32vh !important;
             border-radius: 10px;
             padding: 10px;
         }
@@ -106,7 +106,7 @@
             <div class="col-lg-12 col-sm-12 text-left">
                 <asp:LinkButton runat="server" ID="lnkBtnGetOTP" CssClass="btn btn-info buttton"
                     OnClick="lnkBtnGetOTP_click">
-                    <i class="fa fa-chevron-circle-right"></i><span id="lblGetOtp" runat="server">Get OTP
+                    <i class="fa fa-chevron-circle-right"></i><span id="lblGetOtp" runat="server">Go To Next Form
                     </span>
                 </asp:LinkButton>
                 <asp:Label ID="lblMessage" runat="server" Text="Incorrect Information" Visible="false"

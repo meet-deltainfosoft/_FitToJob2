@@ -155,7 +155,11 @@
     <form id="formJobApprove" runat="server">
     <div class="form mt-3   ">
         <div class="formHeader">
-            Offer Approve
+            Offer Approve for 
+            <asp:Label ID="lblFullName" runat="server" Text="Candidate:"></asp:Label>
+            <asp:Label ID="lblFullNameValue" runat="server" Text=""></asp:Label>
+            <asp:Label ID="lblMobileNumber" runat="server" Text="|"></asp:Label>
+            <asp:Label ID="lblMobileNumberValue" runat="server" Text=""></asp:Label>
         </div>
         <asp:Panel runat="server" ID="pnlErr" Visible="false" CssClass="errors">
             <asp:BulletedList runat="server" ID="blErrs">
@@ -197,7 +201,8 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-12 mt-3">
-                        <asp:Button runat="server" ID="btnViewOffer" Text="View Offer Latter" CssClass="btn btn-primary" OnClick="btnViewOffer_click" />
+                        <asp:Button runat="server" ID="btnViewOffer" Text="View Offer Latter" CssClass="btn btn-primary"
+                            OnClick="btnViewOffer_click" />
                     </div>
                 </div>
                 <div class="row mt-3 ml-1">
@@ -233,7 +238,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row ml-1">
+                <div class="row mt-3 ml-1">
                     <div runat="server" visible="true" id="divContact" class="col-lg-5 col-sm-11 mt-4 ">
                         <div class="card icontact" runat="server" id="divContactCard">
                             <div class="card-body">

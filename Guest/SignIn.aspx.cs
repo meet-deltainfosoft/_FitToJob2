@@ -49,19 +49,19 @@ public partial class Guest_SignIn : System.Web.UI.Page
                         {
                             lblMobileNo.Text = "તમારો મોબાઈલ નંબર દાખલ કરો*";
                             lblSignIn.InnerText = "સાઇન ઇન";
-                            lblGetOtp.InnerText = "OTP મેળવો";
+                            lblGetOtp.InnerText = "આગળના ફોર્મ પર જાઓ";
                         }
                         else if (Session["Language"].ToString() == "Hindi")
                         {
                             lblMobileNo.Text = "अपना मोबाइल नंबर दर्ज करें*";
                             lblSignIn.InnerText = "साइन इन";
-                            lblGetOtp.InnerText = "OTP प्राप्त करें";
+                            lblGetOtp.InnerText = "अगले फॉर्म पर जाएं";
                         }
                         else if (Session["Language"].ToString() == "English")
                         {
                             lblMobileNo.Text = "Enter Your Mobile No*";
                             lblSignIn.InnerText = "Sign In";
-                            lblGetOtp.InnerText = "Get OTP";
+                            lblGetOtp.InnerText = "Go To Next Form";
                         }
                     }
                 }

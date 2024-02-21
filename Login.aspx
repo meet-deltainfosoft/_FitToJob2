@@ -89,7 +89,7 @@
                 Height="12px" />&nbsp;Design in India
         </div>
         <div class="banner" style="text-align: center; font-size: x-small">
-            B-1010, Infinity Tower, S.G. Highway, Ahmedabad - 15, Gujarat. www.SchooliERP.com</a>
+            B-1010, Infinity Tower, S.G. Highway, Ahmedabad - 15, Gujarat</a>
         </div>
         <!-- end #content -->
         </form>

@@ -11,6 +11,7 @@ public partial class Guest_OfferApprove : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        string MobileNo = "";
         if (!IsPostBack)
         {
             if (string.IsNullOrEmpty((string)Session["MobileNo"]) || string.IsNullOrEmpty((string)Session["JobId"]))
@@ -20,6 +21,11 @@ public partial class Guest_OfferApprove : System.Web.UI.Page
             }
             else
             {
+                string fullName = GetFullName(MobileNo);
+                lblFullNameValue.Text = fullName;
+                string MobileNumber = GetFullName(Session["MobileNo"].ToString());
+                lblMobileNumberValue.Text = Session["MobileNo"].ToString();
+                string FullName = GetFullName(Session["MobileNo"].ToString());
                 GetOfferApprove(Session["JobId"].ToString());
             }
         }
@@ -67,4 +73,25 @@ public partial class Guest_OfferApprove : System.Web.UI.Page
         {
         }
     }
+    protected string GetFullName(string MobileNumber)
+    {
+        string CandidateId = "";
+        SqlCommand sqlCmd = new SqlCommand();
+        GeneralDAL objDal = new GeneralDAL();
+        objDal.OpenSQLConnection();
+        sqlCmd.Connection = objDal.ActiveSQLConnection();
+        sqlCmd.CommandType = CommandType.Text;
+        sqlCmd.CommandText = "Select Concat(FirstName,' ',MiddleName,' ',LastName) FullName  from Registrations Where MobileNo   = '" + Session["MobileNo"].ToString() + "'";
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+        DataSet dataSet = new DataSet();
+        dataAdapter.Fill(dataSet);
+        if (dataSet.Tables[0].Rows.Count > 0)
+        {
+            CandidateId = dataSet.Tables[0].Rows[0]["FullName"].ToString();
+
+        }
+        objDal.CloseSQLConnection();
+        return CandidateId;
+    }
+
 }
