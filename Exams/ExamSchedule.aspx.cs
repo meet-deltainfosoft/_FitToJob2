@@ -663,6 +663,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     private void LoadDivision()
     {
         try
@@ -696,6 +697,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     private void LoadSubjects()
     {
         try
@@ -729,6 +731,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     private void LoadTest()
     {
         try
@@ -762,6 +765,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     protected void ddlStandard_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -783,6 +787,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     protected void ddlSubs_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -806,6 +811,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     protected void ddlTestId_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -836,6 +842,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     protected void txtExamDate_TextChanged(object sender, EventArgs e)
     {
         try
@@ -863,6 +870,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     public void printHTML(DataTable dt)
     {
         try
@@ -940,6 +948,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message.ToString());
         }
     }
+
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         try
@@ -1066,6 +1075,7 @@ public partial class Exams_ExamSchedule : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     protected void ddlPatternId_SelectedIndexChanged(object sender, EventArgs e)
     {
         try

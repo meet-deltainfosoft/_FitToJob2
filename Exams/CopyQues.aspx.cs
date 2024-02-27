@@ -14,6 +14,7 @@ using System.Xml.Linq;
 public partial class Exams_CopyQues : System.Web.UI.Page
 {
     private QuesBLL _QuesBLL = new QuesBLL();
+
     private QueBLL _queBLL = new QueBLL();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -169,6 +170,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("er", ex.Message);
         }
     }
+
     protected void ddlStandardTextListIdTo_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -187,6 +189,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("er", ex.Message);
         }
     }
+
     private void LoadSubjects()
     {
         try
@@ -220,6 +223,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     private void LoadSubjectsTo()
     {
         try
@@ -253,6 +257,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     private void LoadTest()
     {
         try
@@ -286,6 +291,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     private void LoadTestTo()
     {
         try
@@ -331,6 +337,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
         pnlErr.Visible = false;
         blErrs.Items.Clear();
     }
+
     private void LoadStandard()
     {
         try
@@ -364,6 +371,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     private void LoadStandardTo()
     {
         try
@@ -397,6 +405,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("err", ex.Message);
         }
     }
+
     protected void ddlSubId_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -417,6 +426,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("er", ex.Message);
         }
     }
+
     protected void ddlSubIdTo_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -437,6 +447,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("er", ex.Message);
         }
     }
+
     protected void BtnCopyTo_Click(object sender, EventArgs e)
     {
         try
@@ -470,6 +481,7 @@ public partial class Exams_CopyQues : System.Web.UI.Page
             ShowErrors("err", ex.Message.ToString());
         }
     }
+
     protected void ddlTestIdTo_SelectedIndexChanged(object sender, EventArgs e)
     {
 

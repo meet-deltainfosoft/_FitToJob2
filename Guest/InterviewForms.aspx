@@ -208,8 +208,8 @@
                         <div class="col-lg-3 col-sm-12">
                             <div class="form-group">
                                 <asp:Label runat="server" ID="lblDOB" Text="Date Of Birth*"></asp:Label>
-                                <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control datepicker" AutoPostBack="true"
-                                    OnTextChanged="txtDOB_TextChanged" MaxLength="12" TabIndex="1">
+                                <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control datepicker" MaxLength="12"
+                                    TabIndex="1">
                                 </asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtDOB"
                                     ErrorMessage="Date Of Birth is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -351,7 +351,8 @@
                         </div>
                         <div class="col-lg-3 col-sm-12">
                             <asp:Label ID="lblNomineeDOB" runat="server" Text="Nominee Birth Date"></asp:Label>
-                            <asp:TextBox ID="txtNomineeDOB" runat="server" CssClass="form-control datepicker"></asp:TextBox>
+                            <asp:TextBox ID="txtNomineeDOB" runat="server" CssClass="form-control datepicker"
+                                AutoPostBack="true" OnTextChanged="txtNomineeDOB_TextChanged"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
                             <asp:Label ID="lblNomineeAge" runat="server" Text="age"></asp:Label>

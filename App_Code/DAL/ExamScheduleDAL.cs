@@ -95,7 +95,7 @@ public class ExamScheduleDAL
                 }
             }
 
-            DataTable dtNotification = new DataTable();
+            DataTable dtNotification = new DataTable(); 
             if (examScheduleDTO.SendNotification)
             {
                 sqlCmd.CommandText = " Select e.ExamScheduleId,el.RegistrationId,e.TestId,e.SubId, e.StandardTextListId, " +
