@@ -391,7 +391,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
 
                 if (txtNomineeDOB.Text.Trim() != "")
                 {
-                    sqlCmd.Parameters.AddWithValue("@NomineeBirthDate", DateTime.ParseExact(txtDOB.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
+                    sqlCmd.Parameters.AddWithValue("@NomineeBirthDate", DateTime.ParseExact(txtNomineeDOB.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture));
                 }
                 else
                 {
@@ -488,14 +488,14 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
 
     }
 
-    protected void txtDOB_TextChanged(object sender, EventArgs e)
+    protected void txtNomineeDOB_TextChanged(object sender, EventArgs e)
     {
         try
         {
-            string dateString = txtDOB.Text;
+            string dateString = txtNomineeAge.Text;
 
 
-            DateTime date = DateTime.ParseExact(txtDOB.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime date = DateTime.ParseExact(txtNomineeDOB.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
             DateTime birthDate = Convert.ToDateTime(date);
             DateTime currentDate = DateTime.Now;
