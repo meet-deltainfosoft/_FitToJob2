@@ -214,7 +214,7 @@
                                     <tr>
                                         <td>
                                             <asp:Label runat="server" ID="lblTotalExamMinuteslabel" Text="Exam Minutes :"></asp:Label>
-                                        </td>
+                                        </td>   
                                         <td>
                                             <asp:Label runat="server" ID="lblTotalExamMinutes"></asp:Label>
                                         </td>
