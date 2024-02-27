@@ -31,38 +31,45 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
             //}
             //else
             //{
-            CheckUser("7359192973");
-            DataSet dt = CheckUserDocuments("7359192973");
-
-            if (dt.Tables[0].Rows.Count > 0)
+            if (Session["MobileNo"] != null && !string.IsNullOrEmpty(Session["MobileNo"].ToString()))
             {
+                string MobileNo = Session["MobileNo"].ToString();
 
-                gdvIdentification.DataSource = dt.Tables[0];
-                gdvIdentification.DataBind();
+                CheckUser(MobileNo);
+                CheckUserDocuments(MobileNo);
+                DataSet dt = CheckUserDocuments(MobileNo);
+                DataSet dtset = new DataSet();
+
+                if (dt.Tables[0].Rows.Count > 0)
+                {
+
+                    gdvIdentification.DataSource = dt.Tables[0];
+                    gdvIdentification.DataBind();
+                }
+                if (dt.Tables[1].Rows.Count > 0)
+                {
+                    gdvPhotograph.DataSource = dt.Tables[1];
+                    gdvPhotograph.DataBind();
+                }
+                if (dt.Tables[2].Rows.Count > 0)
+                {
+                    gdvEducation.DataSource = dt.Tables[2];
+                    gdvEducation.DataBind();
+                }
+
+                if (dt.Tables[3].Rows.Count > 0)
+                {
+                    gdvWorkExperience.DataSource = dt.Tables[3];
+                    gdvWorkExperience.DataBind();
+                }
+
+
+
+               // ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
             }
-            if (dt.Tables[1].Rows.Count > 0)
-            {
-                gdvPhotograph.DataSource = dt.Tables[1];
-                gdvPhotograph.DataBind();
-            }
-            if (dt.Tables[2].Rows.Count > 0)
-            {
-                gdvEducation.DataSource = dt.Tables[2];
-                gdvEducation.DataBind();
-            }
-
-            if (dt.Tables[3].Rows.Count > 0)
-            {
-                gdvWorkExperience.DataSource = dt.Tables[3];
-                gdvWorkExperience.DataBind();
-            }
-
-
-
-            ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
-            //}
         }
     }
+    
     private void ShowErrors(string key, string value)
     {
         try
@@ -87,6 +94,7 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
         blErrs.Items.Clear();
 
     }
+
     protected void lnkBtnSubmit_click(object sender, EventArgs e)
     {
         try
@@ -370,20 +378,20 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
         int count = 0;
         try
         {
-            SqlCommand sqlCmd = new SqlCommand();
-            GeneralDAL objDal = new GeneralDAL();
-            objDal.OpenSQLConnection();
-            sqlCmd.Connection = objDal.ActiveSQLConnection();
-            sqlCmd.CommandType = CommandType.Text;
+            //SqlCommand sqlCmd = new SqlCommand();
+            //GeneralDAL objDal = new GeneralDAL();
+            //objDal.OpenSQLConnection();
+            //sqlCmd.Connection = objDal.ActiveSQLConnection();
+            //sqlCmd.CommandType = CommandType.Text;
 
-            sqlCmd.CommandText = "select Count(b.CandidateId) from CandidateDocumentations a " +
-                                 " inner join Registrations b on a.CandidateId = a.CandidateId " +
-                                 " where b.MobileNo = @MobileNumber";
-            sqlCmd.Parameters.AddWithValue("@MobileNumber", MobileNo);
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
-            DataSet dataSet = new DataSet();
-            dataAdapter.Fill(dataSet);
-            count = (dataSet.Tables[0].Rows.Count > 0) ? 1 : 0;
+            //sqlCmd.CommandText = "select Count(b.CandidateId) from CandidateDocumentations a " +
+            //                     " inner join Registrations b on a.CandidateId = a.CandidateId " +
+            //                     " where b.MobileNo = @MobileNumber";
+            //sqlCmd.Parameters.AddWithValue("@MobileNumber", MobileNo);
+            //SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            //DataSet dataSet = new DataSet();
+            //dataAdapter.Fill(dataSet);
+            //count = (dataSet.Tables[0].Rows.Count > 0) ? 1 : 0;
         }
         catch (Exception)
         {
@@ -392,6 +400,7 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
         }
         return count;
     }
+
     private DataSet CheckUserDocuments(string MobileNo)
     {
         DataSet dtset = new DataSet();
@@ -451,6 +460,8 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
         {
         }
     }
+
+
 
 
 }
