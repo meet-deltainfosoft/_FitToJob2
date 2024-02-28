@@ -172,7 +172,6 @@
             font-size: small;
             font-weight: bold;
             font-size: 1em !important;
-            
         }
         
         
@@ -193,13 +192,14 @@
             </asp:Panel>
             <div class="formBody">
                 <div class="form">
+                   <%-- <asp:Button ID="btnLinkDownload" runat="server" Text="Download" OnClick="btnLinkDownload_Click" />--%>
                     <div class="formHeader">
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 Photograph
                             </div>
                             <div class="col-md-6 col-12 d-flex justify-content-end">
-                               <%-- <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content1')">
+                                <%-- <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content1')">
                                 </i>--%>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                         <div class="row">
                             <div class="col-md-12 col-12">
                                 <asp:GridView runat="server" ID="gdvPhotograph" AutoGenerateColumns="False" CssClass="gridview-style"
-                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvPhotograph_RowDataBound"
+                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvPhotograph_RowDataBound" OnRowCommand="gdvPhotograph_RowCommand"
                                     ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Name">
@@ -224,16 +224,22 @@
                                         <asp:TemplateField HeaderText="Upload Photo">
                                             <ItemTemplate>
                                                 <asp:FileUpload ID="fuPhotograph" runat="server" />
-                                                
                                                 <asp:Label runat="server" ID="hfPhotographPath" Text='<%# Eval("PhotoPath")%>' Visible="false"></asp:Label>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Photo">
+                                           <%-- <ItemTemplate>
+                                               <%-- <a href='<%# Eval("PhotoPath") %>' download>Download Document</a>--%>
+                                                 <%--<asp:LinkButton ID="btnLinkDownload" runat="server" Text="Download Document" OnClick="btnLinkDownload_Click" />
+                                            </ItemTemplate>--%>
                                             <ItemTemplate>
-                                                <a href='<%# Eval("PhotoPath") %>' download>Download Document</a>
+                                                <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
+                                                    ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("PhotoPath") %>' />
                                             </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
+                                            <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                         </asp:TemplateField>
@@ -250,7 +256,7 @@
                                 Identification
                             </div>
                             <div class="col-md-6 col-12 d-flex justify-content-end">
-                               <%-- <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content2')">
+                                <%-- <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content2')">
                                 </i>--%>
                             </div>
                         </div>
@@ -259,7 +265,7 @@
                         <div class="row">
                             <div class="col-md-12 col-12">
                                 <asp:GridView runat="server" ID="gdvIdentification" AutoGenerateColumns="False" CssClass="gridview-style"
-                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvIdentification_RowDataBound"
+                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvIdentification_RowDataBound" OnRowCommand="gdvIdentification_RowCommand"
                                     ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Name">
@@ -276,16 +282,20 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Upload Photo">
                                             <ItemTemplate>
-                                                <asp:FileUpload ID="fuIdentification"  runat="server" />
-                                                
-                                                <asp:Label runat="server" ID="hfIdentificationPath" Text='<%# Eval("CardPath")%>'  Visible="false"></asp:Label>
+                                                <asp:FileUpload ID="fuIdentification" runat="server" />
+                                                <asp:Label runat="server" ID="hfIdentificationPath" Text='<%# Eval("CardPath")%>'
+                                                    Visible="false"></asp:Label>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Photo">
-                                            <ItemTemplate>
+                                           <%-- <ItemTemplate>
                                                 <a href='<%# Eval("CardPath") %>' download>Download Document</a>
+                                            </ItemTemplate>--%>
+                                             <ItemTemplate>
+                                                <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
+                                                    ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("CardPath") %>' />
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
@@ -303,7 +313,7 @@
                                 Education
                             </div>
                             <div class="col-md-6 col-12 d-flex justify-content-end">
-                               <%-- <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content3')">
+                                <%-- <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content3')">
                                 </i>--%>
                             </div>
                         </div>
@@ -312,7 +322,7 @@
                         <div class="row">
                             <div class="col-md-12 col-12">
                                 <asp:GridView runat="server" ID="gdvEducation" AutoGenerateColumns="False" CssClass="gridview-style"
-                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvEducation_RowDataBound"
+                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvEducation_RowDataBound" OnRowCommand="gdvEducation_RowCommand"
                                     ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Name">
@@ -330,14 +340,20 @@
                                         <asp:TemplateField HeaderText="Upload Photo">
                                             <ItemTemplate>
                                                 <asp:FileUpload ID="fuEducationLevel" runat="server" />
-                                                <asp:Label ID="hfEducationPath" runat="server" Text='<%# Eval("DocumentPath")%>'  Visible="false"></asp:Label>
+                                                <asp:Label ID="hfEducationPath" runat="server" Text='<%# Eval("DocumentPath")%>'
+                                                    Visible="false"></asp:Label>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Photo">
-                                            <ItemTemplate>
-                                                <a  href='<%# Eval("DocumentPath") %>' download>Download Document</a>
+                                            <%--<ItemTemplate>
+                                                <a href='<%# Eval("DocumentPath") %>' download>Download Document</a>
+                                            </ItemTemplate>--%>
+
+                                             <ItemTemplate>
+                                                <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
+                                                    ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("DocumentPath") %>' />
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
@@ -355,7 +371,7 @@
                                 Work Experience
                             </div>
                             <div class="col-md-6 col-12 d-flex justify-content-end">
-                              <%--  <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content4')">
+                                <%--  <i class="fa fa-arrow-up" aria-hidden="true" onclick="toggleContent(this,'content4')">
                                 </i>--%>
                             </div>
                         </div>
@@ -363,36 +379,40 @@
                     <div class="formBody" runat="server" id="content4">
                         <div class="row">
                             <asp:GridView runat="server" ID="gdvWorkExperience" AutoGenerateColumns="False" CssClass="gridview-style"
-                                SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvWorkExperience_RowDataBound"
+                                SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvWorkExperience_RowDataBound"  OnRowCommand="gdvWorkExperience_RowCommand"
                                 ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
                                 <Columns>
-                                 <asp:TemplateField HeaderText="Name">
-                                            <ItemTemplate>
-                                                <div class="form-label">
-                                                    <span runat="server" id="Label">
-                                                        <%# Eval("Label")%>
-                                                    </span>
-                                                    <asp:HiddenField ID="hfRegistrationId" runat="server" Value='<%# Eval("RegistrationId") %>' />
-                                                </div>
+                                    <asp:TemplateField HeaderText="Name">
+                                        <ItemTemplate>
+                                            <div class="form-label">
+                                                <span runat="server" id="Label">
+                                                    <%# Eval("Label")%>
+                                                </span>
+                                                <asp:HiddenField ID="hfRegistrationId" runat="server" Value='<%# Eval("RegistrationId") %>' />
+                                            </div>
+                                        </ItemTemplate>
+                                        <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Upload Photo">
+                                        <ItemTemplate>
+                                            <asp:FileUpload ID="fuWorkExperience" runat="server" />
+                                            <asp:Label runat="server" ID="hfDocumentPath" Text='<%# Eval("DocumentPath")%>' Visible="false"></asp:Label>
+                                        </ItemTemplate>
+                                        <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Photo">
+                                       <%-- <ItemTemplate>
+                                            <a href='<%# Eval("DocumentPath") %>' download>Download Document</a>
+                                        </ItemTemplate>--%>
+                                         <ItemTemplate>
+                                                <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
+                                                    ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("DocumentPath") %>' />
                                             </ItemTemplate>
-                                            <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
-                                            <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Upload Photo">
-                                            <ItemTemplate>
-                                                <asp:FileUpload ID="fuWorkExperience" runat="server" />
-                                                <asp:Label runat="server" ID="hfDocumentPath" Text='<%# Eval("DocumentPath")%>'  Visible="false"></asp:Label>
-                                            </ItemTemplate>
-                                            <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
-                                            <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Photo">
-                                            <ItemTemplate>
-                                                <a href='<%# Eval("DocumentPath") %>' download>Download Document</a>
-                                            </ItemTemplate>
-                                            <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
-                                            <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
-                                        </asp:TemplateField>
+                                        <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
+                                    </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
                         </div>
