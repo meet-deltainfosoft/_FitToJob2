@@ -435,57 +435,32 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-
             FileUpload fuPhotograph = e.Row.FindControl("fuPhotograph") as FileUpload;
             HiddenField hfCandidateId = e.Row.FindControl("hfCandidateId") as HiddenField;
             Label hfPhotographPath = e.Row.FindControl("hfPhotographPath") as Label;
-            //fuPhotograph.Enabled = false;
+            LinkButton lnkDownload = e.Row.FindControl("lnkDownload") as LinkButton; 
+            
+            if (hfPhotographPath != null && !string.IsNullOrEmpty(hfPhotographPath.Text))
+            {
+                string imagePath = hfPhotographPath.Text;
+                string fileExtension = Path.GetExtension(imagePath);
+                lnkDownload.Visible = true;
+            }
+            else
+            {
 
+                Label lblNoDataFound = e.Row.FindControl("lblNoDataFound") as Label;
+                lnkDownload.Visible = false;
 
-            //if (!string.IsNullOrEmpty(hfPhotographPath.Text))
-            //{
-            //    // Create a LinkButton for download
-            //    LinkButton lnkDownload = new LinkButton();
-            //    lnkDownload.ID = "lnkDownload";
-            //    lnkDownload.Text = "Download Document1";
-            //    lnkDownload.CommandName = "Download";
-            //    lnkDownload.CommandArgument = hfPhotographPath.Text;
-            //    lnkDownload.Style["cursor"] = "pointer";
+                if (lblNoDataFound != null)
+                {
+                    lblNoDataFound.Font.Size = FontUnit.Point(10);
+                    lblNoDataFound.ForeColor = System.Drawing.Color.Red;
+                    lblNoDataFound.Visible = true;
+                    lblNoDataFound.Text = "File not Uploaded";
+                }
+            }
 
-
-            //    lnkDownload.OnClientClick = "return confirm('Are you sure you want to download this document?');";
-
-            //    //lnkDownload.Click += lnkDownload_Click;
-
-            //    e.Row.Cells[e.Row.Cells.Count - 1].Controls.Add(lnkDownload);
-            //}
-            //else
-            //{
-
-            //}
-        }
-    }
-
-    protected void btnLinkDownload_Click(object sender, EventArgs e)
-    {
-
-
-        string Path = "~/images/" + "1d74d688-cd6d-43a4-a42a-a8d084723f79.png";
-        //string Path = "~/images/" + fuResume.ToString();
-        if (Path != string.Empty)
-        {
-            WebClient req = new WebClient();
-            HttpResponse response = HttpContext.Current.Response;
-            string filePath = Path;
-            response.Clear();
-            response.ClearContent();
-            response.ClearHeaders();
-            response.Buffer = true;
-            response.ContentType = "image/jpeg";
-            response.AddHeader("Content-Disposition", "attachment;filename=image.jpg");
-            byte[] data = req.DownloadData(Server.MapPath(filePath));
-            response.BinaryWrite(data);
-            response.End();
         }
     }
 
@@ -493,13 +468,65 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+            FileUpload fuEducationLevel = e.Row.FindControl("fuEducationLevel") as FileUpload;
+            HiddenField hfEducationId = e.Row.FindControl("hfEducationId") as HiddenField;
+            Label hfEducationPath = e.Row.FindControl("hfEducationPath") as Label;
+            LinkButton lnkDownload = e.Row.FindControl("lnkDownload") as LinkButton; 
+
+            if (hfEducationPath != null && !string.IsNullOrEmpty(hfEducationPath.Text))
+            {
+                string imagePath = hfEducationPath.Text;
+                string fileExtension = Path.GetExtension(imagePath);
+                lnkDownload.Visible = true;
+            }
+            else
+            {
+                
+                Label lblNoDataFound = e.Row.FindControl("lblNoDataFound") as Label;
+                lnkDownload.Visible = false;
+
+                if (lblNoDataFound != null)
+                {
+                    lblNoDataFound.Font.Size = FontUnit.Point(10);
+                    lblNoDataFound.ForeColor = System.Drawing.Color.Red;
+                    lblNoDataFound.Visible = true;
+                    lblNoDataFound.Text = "File not Uploaded";
+                }
+            }
         }
     }
+
+    
 
     protected void gdvIdentification_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+            FileUpload fuIdentification = e.Row.FindControl("fuIdentification") as FileUpload;
+            HiddenField hfRegistrationId = e.Row.FindControl("hfRegistrationId") as HiddenField;
+            Label hfIdentificationPath = e.Row.FindControl("hfIdentificationPath") as Label;
+            LinkButton lnkDownload = e.Row.FindControl("lnkDownload") as LinkButton;
+
+            if (hfIdentificationPath != null && !string.IsNullOrEmpty(hfIdentificationPath.Text))
+            {
+                string imagePath = hfIdentificationPath.Text;
+                string fileExtension = Path.GetExtension(imagePath);
+                lnkDownload.Visible = true;
+            }
+            else
+            {
+
+                Label lblNoDataFound = e.Row.FindControl("lblNoDataFound") as Label;
+                lnkDownload.Visible = false;
+
+                if (lblNoDataFound != null)
+                {
+                    lblNoDataFound.Font.Size = FontUnit.Point(10);
+                    lblNoDataFound.ForeColor = System.Drawing.Color.Red;
+                    lblNoDataFound.Visible = true;
+                    lblNoDataFound.Text = "File not Uploaded";
+                }
+            }
         }
     }
 
@@ -507,6 +534,31 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+            FileUpload fuWorkExperience = e.Row.FindControl("fuWorkExperience") as FileUpload;
+            HiddenField hfRegistrationId = e.Row.FindControl("hfRegistrationId") as HiddenField;
+            Label hfDocumentPath = e.Row.FindControl("hfDocumentPath") as Label;
+            LinkButton lnkDownload = e.Row.FindControl("lnkDownload") as LinkButton;
+
+            if (hfDocumentPath != null && !string.IsNullOrEmpty(hfDocumentPath.Text))
+            {
+                string imagePath = hfDocumentPath.Text;
+                string fileExtension = Path.GetExtension(imagePath);
+                lnkDownload.Visible = true;
+            }
+            else
+            {
+
+                Label lblNoDataFound = e.Row.FindControl("lblNoDataFound") as Label;
+                lnkDownload.Visible = false;
+
+                if (lblNoDataFound != null)
+                {
+                    lblNoDataFound.Font.Size = FontUnit.Point(10);
+                    lblNoDataFound.ForeColor = System.Drawing.Color.Red;
+                    lblNoDataFound.Visible = true;
+                    lblNoDataFound.Text = "File not Uploaded";
+                }
+            }
         }
     }
 
@@ -533,32 +585,199 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
             }
         }
     }
+   
+
     protected void gdvIdentification_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "Download")
         {
-            string Path = e.CommandArgument.ToString();
-            if (Path != string.Empty)
+            string filePath = e.CommandArgument.ToString();
+
+            if (!string.IsNullOrEmpty(filePath))
             {
                 WebClient req = new WebClient();
                 HttpResponse response = HttpContext.Current.Response;
-                string filePath = Path;
+
                 response.Clear();
                 response.ClearContent();
                 response.ClearHeaders();
                 response.Buffer = true;
-                response.ContentType = "image/jpeg";
-                response.AddHeader("Content-Disposition", "attachment;filename=image.jpg");
-                byte[] data = req.DownloadData(Server.MapPath(filePath));
-                response.BinaryWrite(data);
-                response.End();
+
+                // Determine the file extension
+                string fileExtension = Path.GetExtension(filePath);
+                string contentType = "";
+
+                switch (fileExtension.ToLower())
+                {
+                    case ".pdf":
+                        contentType = "application/pdf";
+                        break;
+                    case ".doc":
+                        contentType = "application/msword";
+                        break;
+                    case ".docx":
+                        contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                        break;
+                    case ".jpeg":
+                        contentType = "attachment;filename=image.jpeg";
+                        break;
+                    case ".jpg":
+                        contentType = "attachment;filename=image.jpg";
+                        break;
+                    case ".png":
+                        contentType = "attachment;filename=image.png";
+                        break;
+                    default:
+                        // Add more cases as needed for other file types
+                        break;
+                }
+
+                if (!string.IsNullOrEmpty(contentType))
+                {
+                    response.ContentType = contentType;
+                    string fileName = Path.GetFileName(filePath);
+                    response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+                    byte[] data = req.DownloadData(Server.MapPath(filePath));
+                    response.BinaryWrite(data);
+                    response.End();
+                }
+                else
+                {
+                    // Handle unsupported file types
+                    // You can add custom logic or display a message to the user
+                }
             }
         }
     }
-    protected void gdvEducation_RowCommand(object sender, GridViewCommandEventArgs e)
-    { }
-    protected void gdvWorkExperience_RowCommand(object sender, GridViewCommandEventArgs e)
-    { }
     
+    protected void gdvEducation_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Download")
+        {
+            string filePath = e.CommandArgument.ToString();
 
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                WebClient req = new WebClient();
+                HttpResponse response = HttpContext.Current.Response;
+
+                response.Clear();
+                response.ClearContent();
+                response.ClearHeaders();
+                response.Buffer = true;
+
+                // Determine the file extension
+                string fileExtension = Path.GetExtension(filePath);
+                string contentType = "";
+
+                switch (fileExtension.ToLower())
+                {
+                    case ".pdf":
+                        contentType = "application/pdf";
+                        break;
+                    case ".doc":
+                        contentType = "application/msword";
+                        break;
+                    case ".docx":
+                        contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                        break;
+                    case ".jpeg":
+                        contentType = "attachment;filename=image.jpeg";
+                        break;
+                    case ".jpg":
+                        contentType = "attachment;filename=image.jpg";
+                        break;
+                    case ".png":
+                        contentType = "attachment;filename=image.png";
+                        break;
+                    default:
+                        // Add more cases as needed for other file types
+                        break;
+                }
+
+                if (!string.IsNullOrEmpty(contentType))
+                {
+                    response.ContentType = contentType;
+                    string fileName = Path.GetFileName(filePath);
+                    response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+                    byte[] data = req.DownloadData(Server.MapPath(filePath));
+                    response.BinaryWrite(data);
+                    response.End();
+                }
+                else
+                {
+                    // Handle unsupported file types
+                    // You can add custom logic or display a message to the user
+                }
+            }
+        }
+    }
+    protected void gdvWorkExperience_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Download")
+        {
+            string filePath = e.CommandArgument.ToString();
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                WebClient req = new WebClient();
+                HttpResponse response = HttpContext.Current.Response;
+
+                response.Clear();
+                response.ClearContent();
+                response.ClearHeaders();
+                response.Buffer = true;
+
+                // Determine the file extension
+                string fileExtension = Path.GetExtension(filePath);
+                string contentType = "";
+
+                switch (fileExtension.ToLower())
+                {
+                    case ".pdf":
+                        contentType = "application/pdf";
+                        break;
+                    case ".doc":
+                        contentType = "application/msword";
+                        break;
+                    case ".docx":
+                        contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                        break;
+                    case ".jpeg":
+                        contentType = "attachment;filename=image.jpeg";
+                        break;
+                    case ".jpg":
+                        contentType = "attachment;filename=image.jpg";
+                        break;
+                    case ".png":
+                        contentType = "attachment;filename=image.png";
+                        break;
+                    default:
+                        // Add more cases as needed for other file types
+                        break;
+                }
+
+                if (!string.IsNullOrEmpty(contentType))
+                {
+                    response.ContentType = contentType;
+                    string fileName = Path.GetFileName(filePath);
+                    response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+                    byte[] data = req.DownloadData(Server.MapPath(filePath));
+                    response.BinaryWrite(data);
+                    response.End();
+                }
+                else
+                {
+                    // Handle unsupported file types
+                    // You can add custom logic or display a message to the user
+                }
+            }
+        }
+    }
+
+
+   
 }

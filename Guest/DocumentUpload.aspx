@@ -79,7 +79,7 @@
 
         }
     </script>
-    <script>
+    <script type="text/javascript">
         function toggleContent(icon, divid) {
             //            var content = document.getElementById(divid);
 
@@ -94,6 +94,7 @@
             //            }
         }
     </script>
+    
     <style type="text/css">
         .header-style
         {
@@ -192,7 +193,7 @@
             </asp:Panel>
             <div class="formBody">
                 <div class="form">
-                   <%-- <asp:Button ID="btnLinkDownload" runat="server" Text="Download" OnClick="btnLinkDownload_Click" />--%>
+                    <%-- <asp:Button ID="btnLinkDownload" runat="server" Text="Download" OnClick="btnLinkDownload_Click" />--%>
                     <div class="formHeader">
                         <div class="row">
                             <div class="col-md-6 col-12">
@@ -208,8 +209,9 @@
                         <div class="row">
                             <div class="col-md-12 col-12">
                                 <asp:GridView runat="server" ID="gdvPhotograph" AutoGenerateColumns="False" CssClass="gridview-style"
-                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvPhotograph_RowDataBound" OnRowCommand="gdvPhotograph_RowCommand"
-                                    ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
+                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvPhotograph_RowDataBound"
+                                    OnRowCommand="gdvPhotograph_RowCommand" ShowHeader="false" BorderStyle="None"
+                                    CellPadding="0" CellSpacing="0">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Name">
                                             <ItemTemplate>
@@ -230,13 +232,15 @@
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Photo">
-                                           <%-- <ItemTemplate>
+                                            <%-- <ItemTemplate>
                                                <%-- <a href='<%# Eval("PhotoPath") %>' download>Download Document</a>--%>
-                                                 <%--<asp:LinkButton ID="btnLinkDownload" runat="server" Text="Download Document" OnClick="btnLinkDownload_Click" />
+                                            <%--<asp:LinkButton ID="btnLinkDownload" runat="server" Text="Download Document" OnClick="btnLinkDownload_Click" />
                                             </ItemTemplate>--%>
                                             <ItemTemplate>
                                                 <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
                                                     ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("PhotoPath") %>' />
+                                                     <asp:Label ID="lblNoDataFound" runat="server" 
+                                                    Visible="false"></asp:Label>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
@@ -265,8 +269,9 @@
                         <div class="row">
                             <div class="col-md-12 col-12">
                                 <asp:GridView runat="server" ID="gdvIdentification" AutoGenerateColumns="False" CssClass="gridview-style"
-                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvIdentification_RowDataBound" OnRowCommand="gdvIdentification_RowCommand"
-                                    ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
+                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvIdentification_RowDataBound"
+                                    OnRowCommand="gdvIdentification_RowCommand" ShowHeader="false" BorderStyle="None"
+                                    CellPadding="0" CellSpacing="0">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Name">
                                             <ItemTemplate>
@@ -290,12 +295,14 @@
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Photo">
-                                           <%-- <ItemTemplate>
+                                            <%-- <ItemTemplate>
                                                 <a href='<%# Eval("CardPath") %>' download>Download Document</a>
                                             </ItemTemplate>--%>
-                                             <ItemTemplate>
+                                            <ItemTemplate>
                                                 <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
                                                     ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("CardPath") %>' />
+                                                     <asp:Label ID="lblNoDataFound" runat="server" 
+                                                    Visible="false"></asp:Label>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
@@ -322,8 +329,9 @@
                         <div class="row">
                             <div class="col-md-12 col-12">
                                 <asp:GridView runat="server" ID="gdvEducation" AutoGenerateColumns="False" CssClass="gridview-style"
-                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvEducation_RowDataBound" OnRowCommand="gdvEducation_RowCommand"
-                                    ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
+                                    SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvEducation_RowDataBound"
+                                    OnRowCommand="gdvEducation_RowCommand" ShowHeader="false" BorderStyle="None"
+                                    CellPadding="0" CellSpacing="0">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Name">
                                             <ItemTemplate>
@@ -350,10 +358,13 @@
                                             <%--<ItemTemplate>
                                                 <a href='<%# Eval("DocumentPath") %>' download>Download Document</a>
                                             </ItemTemplate>--%>
-
-                                             <ItemTemplate>
+                                            <ItemTemplate>
                                                 <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
-                                                    ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("DocumentPath") %>' />
+                                                    ToolTip="Download Records" CommandName="Download" 
+                                                    CommandArgument='<%# Eval("DocumentPath") %>' />
+                                                    <asp:Label ID="lblNoDataFound" runat="server" 
+                                                    Visible="false"></asp:Label>
+
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                             <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
@@ -379,8 +390,9 @@
                     <div class="formBody" runat="server" id="content4">
                         <div class="row">
                             <asp:GridView runat="server" ID="gdvWorkExperience" AutoGenerateColumns="False" CssClass="gridview-style"
-                                SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvWorkExperience_RowDataBound"  OnRowCommand="gdvWorkExperience_RowCommand"
-                                ShowHeader="false" BorderStyle="None" CellPadding="0" CellSpacing="0">
+                                SkinID="Lns" EmptyDataText="No Records Found." OnRowDataBound="gdvWorkExperience_RowDataBound"
+                                OnRowCommand="gdvWorkExperience_RowCommand" ShowHeader="false" BorderStyle="None"
+                                CellPadding="0" CellSpacing="0">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Name">
                                         <ItemTemplate>
@@ -403,13 +415,15 @@
                                         <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Photo">
-                                       <%-- <ItemTemplate>
+                                        <%-- <ItemTemplate>
                                             <a href='<%# Eval("DocumentPath") %>' download>Download Document</a>
                                         </ItemTemplate>--%>
-                                         <ItemTemplate>
-                                                <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
-                                                    ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("DocumentPath") %>' />
-                                            </ItemTemplate>
+                                        <ItemTemplate>
+                                            <asp:LinkButton runat="server" ID="lnkDownload" CssClass="btn btn-primary" Text="Download Document"
+                                                ToolTip="Download Records" CommandName="Download" CommandArgument='<%# Eval("DocumentPath") %>' />
+                                                 <asp:Label ID="lblNoDataFound" runat="server" 
+                                                    Visible="false"></asp:Label>
+                                        </ItemTemplate>
                                         <HeaderStyle HorizontalAlign="Left" VerticalAlign="Top" CssClass="header-style" />
                                         <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" />
                                     </asp:TemplateField>
