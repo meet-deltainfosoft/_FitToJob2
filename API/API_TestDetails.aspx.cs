@@ -103,49 +103,53 @@ public partial class API_TestDetails : System.Web.UI.Page
         string ReturnVal = "";
         try
         {
-            da = _aPI_BLL.returnDataTable(" select e.ExamScheduleId,e.SubId,e.TestId,el.RegistrationId,r.SchoolName, null as SchoolLogoImagePath, " +
-                                          " e.No as AssesmentCode, e.TotalMins as Duration, " +
-                                          " REPLACE(CONVERT(CHAR(11), ExamDate, 106), ' ', '-') + ' ' + FORMAT(ExamFromTime,'hh:mm:ss tt')  as AssesmentDateTime,  " +
-                                          " e.TotalQuestions as TotalQn, (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and " +
-                                          " x.RegistrationId = el.RegistrationId and ISNULL(x.Ans,'') <> '~SKIPPED~' ) as 'AnsweredQn',(select count(*) from Ques q where q.TestId = ts.TestId ) -" +
-                                          " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId)  as 'PendingQn', " +
-                                          " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId and Ans = '~SKIPPED~' ) as 'SkippedQn', " +
-                //" Case when e.PatternId is not null then 'True' else 'False' end as 'IsJeeNeetTest', " +
-                                          " Case when isnull(e.AllowReview, 0) = 1 then 'True' else 'False' end as 'IsJeeNeetTest', " +
-                                          " case when isnull(e.ShowResult, 0) = 1 then case when conveRT(int, datediff(MINUTE, e.ExamToTime, getdate())) > convert(int, e.MinsforResultShow) then 'true' else 'false' end else 'false' end as 'IsResultAvailable' " +
-                                          " ,e.ExamDate" +
-                                          " From ExamSchedules e " +
-                                          " inner join ExamScheduleLns el on el.ExamScheduleId = e.ExamScheduleId " +
-                                          " inner join TextLists t on t.TextListId = e.StandardTextListId " +
-                                          " inner join Subs s on s.SubId = e.SubId " +
-                                          " inner join Tests ts on ts.TestId = e.TestId " +
-                                          " inner join Registration r on r.RegistrationId = el.RegistrationId " +
-                                          " where e.ExamScheduleId = '" + ExamScheduleId.ToString() + "' "+
-                                          " and r.RegistrationId = '" + RegistrationId.ToString() + "' " +
-                                          " and ts.TestId = '" + TestId.ToString() + "'" +
-                                          " Union " +
-                                          " select e.ExamScheduleId,e.SubId,e.TestId,el.RegistrationId,r.SchoolName, null as SchoolLogoImagePath, " +
-                                          " e.No as AssesmentCode, e.TotalMins as Duration, " +
-                                          " REPLACE(CONVERT(CHAR(11), ExamDate, 106), ' ', '-') + ' ' + FORMAT(ExamFromTime,'hh:mm:ss tt')  as AssesmentDateTime,  " +
-                                          " e.TotalQuestions as TotalQn, (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and " +
-                                          " x.RegistrationId = el.RegistrationId and ISNULL(x.Ans,'') <> '~SKIPPED~' ) as 'AnsweredQn',(select count(*) from Ques q where q.TestId = ts.TestId ) -" +
-                                          " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId)  as 'PendingQn', " +
-                                          " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId and Ans = '~SKIPPED~' ) as 'SkippedQn', " +
-                //" Case when e.PatternId is not null then 'True' else 'False' end as 'IsJeeNeetTest', " +
-                                          " Case when isnull(e.AllowReview, 0) = 1 then 'True' else 'False' end as 'IsJeeNeetTest', " +
-                                          " case when isnull(e.ShowResult, 0) = 1 then case when conveRT(int, datediff(MINUTE, e.ExamToTime, getdate())) > convert(int, e.MinsforResultShow) then 'true' else 'false' end else 'false' end as 'IsResultAvailable' " +
-                                          ",e.ExamDate" +
-                                          " From ExamSchedules e " +
-                                          " inner join ExamScheduleLns el on el.ExamScheduleId = e.ExamScheduleId " +
-                                          " inner join TextLists t on t.TextListId = e.StandardTextListId " +
-                                          " Left join PatternLns pl on pl.PatternId = e.PatternId" +
-                                          " Left join Subs s on s.SubId = pl.SubId " +
-                                          " inner join Tests ts on ts.TestId = e.TestId " +
-                                          " inner join Registration r on r.RegistrationId = el.RegistrationId " +
-                                          " where e.ExamScheduleId = '" + ExamScheduleId.ToString() + "' and r.RegistrationId = '" + RegistrationId.ToString() + "' " +
-                                          " and ts.TestId = '" + TestId.ToString() + "'" +
-                                          " Order By ExamDate "
-                                          );
+
+            da = _aPI_BLL.returnDataTable("Select E.SubId,E.TestId,EL.RegistrationId RegistrationId,Isnull(E.TotalMins,0)duration,E.ExamDate,E.TotalQuestions,0 answeredQn,0 pendingQn,0 skippedQn,E.ExamScheduleId,E.ShowResult " +
+                " from ExamSchedules E Join ExamScheduleLns EL on E.ExamScheduleId = EL.ExamScheduleId Where EL.RegistrationId ='" + RegistrationId.ToString() +"'"
+                );  
+            //da = _aPI_BLL.returnDataTable(" select e.ExamScheduleId,e.SubId,e.TestId,el.RegistrationId,r.SchoolName, null as SchoolLogoImagePath, " +
+            //                              " e.No as AssesmentCode, e.TotalMins as Duration, " +
+            //                              " REPLACE(CONVERT(CHAR(11), ExamDate, 106), ' ', '-') + ' ' + FORMAT(ExamFromTime,'hh:mm:ss tt')  as AssesmentDateTime,  " +
+            //                              " e.TotalQuestions as TotalQn, (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and " +
+            //                              " x.RegistrationId = el.RegistrationId and ISNULL(x.Ans,'') <> '~SKIPPED~' ) as 'AnsweredQn',(select count(*) from Ques q where q.TestId = ts.TestId ) -" +
+            //                              " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId)  as 'PendingQn', " +
+            //                              " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId and Ans = '~SKIPPED~' ) as 'SkippedQn', " +
+            //    //" Case when e.PatternId is not null then 'True' else 'False' end as 'IsJeeNeetTest', " +
+            //                              " Case when isnull(e.AllowReview, 0) = 1 then 'True' else 'False' end as 'IsJeeNeetTest', " +
+            //                              " case when isnull(e.ShowResult, 0) = 1 then case when conveRT(int, datediff(MINUTE, e.ExamToTime, getdate())) > convert(int, e.MinsforResultShow) then 'true' else 'false' end else 'false' end as 'IsResultAvailable' " +
+            //                              " ,e.ExamDate" +
+            //                              " From ExamSchedules e " +
+            //                              " inner join ExamScheduleLns el on el.ExamScheduleId = e.ExamScheduleId " +
+            //                              " inner join TextLists t on t.TextListId = e.StandardTextListId " +
+            //                              " inner join Subs s on s.SubId = e.SubId " +
+            //                              " inner join Tests ts on ts.TestId = e.TestId " +
+            //                              " inner join Registration r on r.RegistrationId = el.RegistrationId " +
+            //                              " where e.ExamScheduleId = '" + ExamScheduleId.ToString() + "' "+
+            //                              " and r.RegistrationId = '" + RegistrationId.ToString() + "' " +
+            //                              " and ts.TestId = '" + TestId.ToString() + "'" +
+            //                              " Union " +
+            //                              " select e.ExamScheduleId,e.SubId,e.TestId,el.RegistrationId,r.SchoolName, null as SchoolLogoImagePath, " +
+            //                              " e.No as AssesmentCode, e.TotalMins as Duration, " +
+            //                              " REPLACE(CONVERT(CHAR(11), ExamDate, 106), ' ', '-') + ' ' + FORMAT(ExamFromTime,'hh:mm:ss tt')  as AssesmentDateTime,  " +
+            //                              " e.TotalQuestions as TotalQn, (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and " +
+            //                              " x.RegistrationId = el.RegistrationId and ISNULL(x.Ans,'') <> '~SKIPPED~' ) as 'AnsweredQn',(select count(*) from Ques q where q.TestId = ts.TestId ) -" +
+            //                              " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId)  as 'PendingQn', " +
+            //                              " (select count(*) from Exams x where x.ExamScheduleId = e.ExamScheduleId and x.RegistrationId = el.RegistrationId and Ans = '~SKIPPED~' ) as 'SkippedQn', " +
+            //    //" Case when e.PatternId is not null then 'True' else 'False' end as 'IsJeeNeetTest', " +
+            //                              " Case when isnull(e.AllowReview, 0) = 1 then 'True' else 'False' end as 'IsJeeNeetTest', " +
+            //                              " case when isnull(e.ShowResult, 0) = 1 then case when conveRT(int, datediff(MINUTE, e.ExamToTime, getdate())) > convert(int, e.MinsforResultShow) then 'true' else 'false' end else 'false' end as 'IsResultAvailable' " +
+            //                              ",e.ExamDate" +
+            //                              " From ExamSchedules e " +
+            //                              " inner join ExamScheduleLns el on el.ExamScheduleId = e.ExamScheduleId " +
+            //                              " inner join TextLists t on t.TextListId = e.StandardTextListId " +
+            //                              " Left join PatternLns pl on pl.PatternId = e.PatternId" +
+            //                              " Left join Subs s on s.SubId = pl.SubId " +
+            //                              " inner join Tests ts on ts.TestId = e.TestId " +
+            //                              " inner join Registration r on r.RegistrationId = el.RegistrationId " +
+            //                              " where e.ExamScheduleId = '" + ExamScheduleId.ToString() + "' and r.RegistrationId = '" + RegistrationId.ToString() + "' " +
+            //                              " and ts.TestId = '" + TestId.ToString() + "'" +
+            //                              " Order By ExamDate "
+            //                              );
 
             st.Append(DataTableToJsonObj(da));
 
