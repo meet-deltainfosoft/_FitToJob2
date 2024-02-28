@@ -17,6 +17,7 @@ using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
+using System.Net;
 
 public partial class Guest_DocumentUpload : System.Web.UI.Page
 {
@@ -31,6 +32,7 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
             //}
             //else
             //{
+
             if (Session["MobileNo"] != null && !string.IsNullOrEmpty(Session["MobileNo"].ToString()))
             {
                 string MobileNo = Session["MobileNo"].ToString();
@@ -65,11 +67,11 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
 
 
 
-               // ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
+                // ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
             }
         }
     }
-    
+
     private void ShowErrors(string key, string value)
     {
         try
@@ -433,12 +435,59 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+
             FileUpload fuPhotograph = e.Row.FindControl("fuPhotograph") as FileUpload;
+            HiddenField hfCandidateId = e.Row.FindControl("hfCandidateId") as HiddenField;
+            Label hfPhotographPath = e.Row.FindControl("hfPhotographPath") as Label;
             //fuPhotograph.Enabled = false;
 
+
+            //if (!string.IsNullOrEmpty(hfPhotographPath.Text))
+            //{
+            //    // Create a LinkButton for download
+            //    LinkButton lnkDownload = new LinkButton();
+            //    lnkDownload.ID = "lnkDownload";
+            //    lnkDownload.Text = "Download Document1";
+            //    lnkDownload.CommandName = "Download";
+            //    lnkDownload.CommandArgument = hfPhotographPath.Text;
+            //    lnkDownload.Style["cursor"] = "pointer";
+
+
+            //    lnkDownload.OnClientClick = "return confirm('Are you sure you want to download this document?');";
+
+            //    //lnkDownload.Click += lnkDownload_Click;
+
+            //    e.Row.Cells[e.Row.Cells.Count - 1].Controls.Add(lnkDownload);
+            //}
+            //else
+            //{
+
+            //}
         }
     }
 
+    protected void btnLinkDownload_Click(object sender, EventArgs e)
+    {
+
+
+        string Path = "~/images/" + "1d74d688-cd6d-43a4-a42a-a8d084723f79.png";
+        //string Path = "~/images/" + fuResume.ToString();
+        if (Path != string.Empty)
+        {
+            WebClient req = new WebClient();
+            HttpResponse response = HttpContext.Current.Response;
+            string filePath = Path;
+            response.Clear();
+            response.ClearContent();
+            response.ClearHeaders();
+            response.Buffer = true;
+            response.ContentType = "image/jpeg";
+            response.AddHeader("Content-Disposition", "attachment;filename=image.jpg");
+            byte[] data = req.DownloadData(Server.MapPath(filePath));
+            response.BinaryWrite(data);
+            response.End();
+        }
+    }
 
     protected void gdvEducation_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -462,6 +511,54 @@ public partial class Guest_DocumentUpload : System.Web.UI.Page
     }
 
 
-
+    protected void gdvPhotograph_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Download")
+        {
+            string Path = e.CommandArgument.ToString();
+            if (Path != string.Empty)
+            {
+                WebClient req = new WebClient();
+                HttpResponse response = HttpContext.Current.Response;
+                string filePath = Path;
+                response.Clear();
+                response.ClearContent();
+                response.ClearHeaders();
+                response.Buffer = true;
+                response.ContentType = "image/jpeg";
+                response.AddHeader("Content-Disposition", "attachment;filename=image.jpg");
+                byte[] data = req.DownloadData(Server.MapPath(filePath));
+                response.BinaryWrite(data);
+                response.End();
+            }
+        }
+    }
+    protected void gdvIdentification_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Download")
+        {
+            string Path = e.CommandArgument.ToString();
+            if (Path != string.Empty)
+            {
+                WebClient req = new WebClient();
+                HttpResponse response = HttpContext.Current.Response;
+                string filePath = Path;
+                response.Clear();
+                response.ClearContent();
+                response.ClearHeaders();
+                response.Buffer = true;
+                response.ContentType = "image/jpeg";
+                response.AddHeader("Content-Disposition", "attachment;filename=image.jpg");
+                byte[] data = req.DownloadData(Server.MapPath(filePath));
+                response.BinaryWrite(data);
+                response.End();
+            }
+        }
+    }
+    protected void gdvEducation_RowCommand(object sender, GridViewCommandEventArgs e)
+    { }
+    protected void gdvWorkExperience_RowCommand(object sender, GridViewCommandEventArgs e)
+    { }
+    
 
 }
