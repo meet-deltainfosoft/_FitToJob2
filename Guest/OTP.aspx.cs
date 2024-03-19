@@ -77,7 +77,7 @@ public partial class Guest_OTP : System.Web.UI.Page
 
                 btnprint.Visible = (bool)dt.Rows[0]["IsCandidateRegistred"];
                 lnkInterviewstatus.Visible = (bool)dt.Rows[0]["IsInterviewStatusDone"];
-                lnkInterviewUploadDocuments.Visible = (bool)dt.Rows[0]["IsUploadCoumentAllows"];
+                lnkInterviewUploadDocuments.Visible = true; //(bool)dt.Rows[0]["IsUploadCoumentAllows"];
                 lnkbtnOffer.Visible = (bool)dt.Rows[0]["IsOfferGenerate"];
 
             }

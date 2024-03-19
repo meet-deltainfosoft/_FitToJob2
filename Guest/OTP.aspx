@@ -155,8 +155,7 @@
             </div>
             <div class="col-lg-6 col-sm-6 text-left mt-2">
                 <asp:LinkButton ID="lnkInterviewUploadDocuments" runat="server" CssClass="btn btn-info buttton"
-                    OnClick="lnkInterviewUploadDocuments_click" Style="background-color: #37C1BB;
-                    color: Red !important;">
+                    OnClick="lnkInterviewUploadDocuments_click" Style="background-color: #37C1BB;">
         <div class="d-flex justify-content-center align-items-center">
             <i class="fas fa-upload mr-2"></i><span>Upload Documents</span>
         </div>

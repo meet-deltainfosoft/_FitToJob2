@@ -28,8 +28,8 @@ public partial class API_GetTestTime : System.Web.UI.Page
                 else
                     RegistrationId = null;
 
-                if (Request.Form["TestId"] != null && Request.Form["TestId"] != "")
-                    TestId = Request.Form["TestId"].ToString();
+                if (Request.Form["SubId"] != null && Request.Form["SubId"] != "")
+                    TestId = Request.Form["SubId"].ToString();
                 else
                     TestId = null;
 
@@ -109,7 +109,7 @@ public partial class API_GetTestTime : System.Web.UI.Page
             da = _aPI_BLL.returnDataTable(" Select e.ExamscheduleId, e.TestId, e.SubId, e.ExamDate, e.ExamFromTime, e.ExamToTime " +
                                           " from ExamSchedules e " +
                                           " Inner Join ExamScheduleLns el on el.ExamScheduleId = e.ExamScheduleId " +
-                                          " where e.ExamScheduleId = '" + ExamScheduleId.ToString() + "' and e.TestId = '" + TestId.ToString() + "' " +
+                                          " where e.ExamScheduleId = '" + ExamScheduleId.ToString() + "' and e.SubId = '" + TestId.ToString() + "' " +
                                           " and el.RegistrationId = '" + RegistrationId.ToString() + "'");
             if (da != null)
             {

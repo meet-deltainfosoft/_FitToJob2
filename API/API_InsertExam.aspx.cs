@@ -11,6 +11,7 @@ using System.Data;
 using System.Collections;
 using System.Web.Script.Serialization;
 using System.Text;
+using System.Data.SqlClient;
 
 
 public partial class API_InsertExam : System.Web.UI.Page
@@ -194,7 +195,58 @@ public partial class API_InsertExam : System.Web.UI.Page
         }
     }
 
+
     public string selectdata()
+    {
+        string ReturnVal = "";
+        DataTable da = new DataTable();
+        StringBuilder st = new StringBuilder();
+        try
+        {
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.CommandText = "FitToJob_Exam_Module";
+            sqlCmd.Parameters.AddWithValue("@Action", "API_InsertExam");
+            sqlCmd.Parameters.AddWithValue("@RegistrationId ", RegistrationId);
+            sqlCmd.Parameters.AddWithValue("@SubjectId ", SubId);
+            sqlCmd.Parameters.AddWithValue("@TestId", TestId);
+            sqlCmd.Parameters.AddWithValue("@ExamScheduleId  ", ExamScheduleId);
+            sqlCmd.Parameters.AddWithValue("@QuestionId", QueId);
+            sqlCmd.Parameters.AddWithValue("@Answer", Ans);
+            sqlCmd.Parameters.AddWithValue("@UserId", MySession.UserID);
+            //sqlCmd.Parameters.AddWithValue("@ExamId", ExamId);
+            sqlCmd.Parameters.AddWithValue("@QuestionType", QueType);
+            sqlCmd.Parameters.AddWithValue("@AnswerStatus", AnsStatus);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            //Da dataSet = new DataSet();
+            dataAdapter.Fill(da);
+            if (da != null)
+            {
+                if (da.Rows.Count > 0)
+                {
+                    ReturnVal = GetReturnValue("200", "Ok", st);
+                }
+            }
+
+            if (st.ToString() != "[]")
+                return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+            else
+                return ReturnVal.Replace("\\", "").Replace("\"[]\"", "[]");
+        }
+        catch (Exception ex)
+        {
+
+            StringBuilder s = new StringBuilder();
+            s.Append(ex.Message);
+            ReturnVal = GetReturnValue("209", "Data Get Issue", s);
+            return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+        }
+    }
+
+    public string selectdata_old()
     {
 
         DataTable da = new DataTable();
@@ -203,32 +255,32 @@ public partial class API_InsertExam : System.Web.UI.Page
         string ExamId = "";
         try
         {
-            da = _aPI_BLL.returnDataTable(" select * from Exams where RegistrationId = '" + RegistrationId.ToString() + "' " +
-                                          " and SubId = '" + SubId.ToString() + "' and TestId = '" + TestId.ToString() + "'  " +
-                                          " and ExamScheduleId = '" + ExamScheduleId.ToString() + "' " +
-                                          " and QueId = '" + QueId.ToString() + "'");
+            da = _aPI_BLL.returnDataTable(" select * from Exams where RegistrationId = " + ((RegistrationId == null) ? "NULL" : "'" + RegistrationId.ToString().Replace("'", "''") + "'") + " " +
+                                          " and SubId = " + ((SubId == null) ? "NULL" : "'" + SubId.ToString().Replace("'", "''") + "'") + " and TestId = " + ((TestId == null) ? "NULL" : "'" + TestId.ToString().Replace("'", "''") + "'") + "  " +
+                                          " and ExamScheduleId = " + ((ExamScheduleId == null) ? "NULL" : "'" + ExamScheduleId.ToString().Replace("'", "''") + "'") + " " +
+                                          " and QueId = " + ((QueId == null) ? "NULL" : "'" + QueId.ToString().Replace("'", "''") + "'") + "");
             if (da.Rows.Count == 0)
             {
                 if (Ans != null)
                 {
-                    ExamId = _aPI_BLL.InsertUpdateWithReturnIdentity(" DECLARE @ExamId as uniqueidentifier" +
-                                                                     " SET @ExamId = NEWID() " +
-                                                                     " insert into Exams (ExamId, RegistrationId, SubId, QueId, Ans, ExamScheduleId, TestId, " +
-                                                                     " InsertedOn, LastUpdatedOn, InsertedByUserId, LastUpdatedByUserId, QueType, AnsStatus) " +
-                                                                     " values (@ExamId " +
-                                                                     " , " + ((RegistrationId == null) ? "NULL" : "'" + RegistrationId.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((SubId == null) ? "NULL" : "'" + SubId.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((QueId == null) ? "NULL" : "'" + QueId.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((Ans == null) ? "NULL" : "'" + Ans.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((ExamScheduleId == null) ? "NULL" : "'" + ExamScheduleId.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((TestId == null) ? "NULL" : "'" + TestId.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , GETDATE(), GETDATE(), '" + InsertedByUserId + "', NULL " +
-                                                                     " , " + ((QueType == null) ? "NULL" : "'" + QueType.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((AnsStatus == null) ? "NULL" : "'" + AnsStatus.ToString().Replace("'", "''") + "'") + " " +
-                                                                     "); Select @ExamId;");
+                    //ExamId = _aPI_BLL.InsertUpdateWithReturnIdentity(" DECLARE @ExamId as uniqueidentifier" +
+                    //                                                 " SET @ExamId = NEWID() " +
+                    //                                                 " insert into Exams (ExamId, RegistrationId, SubId, QueId, Ans, ExamScheduleId, TestId, " +
+                    //                                                 " InsertedOn, LastUpdatedOn, InsertedByUserId, LastUpdatedByUserId, QueType, AnsStatus) " +
+                    //                                                 " values (@ExamId " +
+                    //                                                 " , " + ((RegistrationId == null) ? "NULL" : "'" + RegistrationId.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 " , " + ((SubId == null) ? "NULL" : "'" + SubId.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 " , " + ((QueId == null) ? "NULL" : "'" + QueId.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 " , " + ((Ans == null) ? "NULL" : "'" + Ans.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 " , " + ((ExamScheduleId == null) ? "NULL" : "'" + ExamScheduleId.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 " , " + ((TestId == null) ? "NULL" : "'" + TestId.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 " , GETDATE(), GETDATE(), '" + InsertedByUserId + "', NULL " +
+                    //                                                 " , " + ((QueType == null) ? "NULL" : "'" + QueType.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 " , " + ((AnsStatus == null) ? "NULL" : "'" + AnsStatus.ToString().Replace("'", "''") + "'") + " " +
+                    //                                                 "); Select @ExamId;"); 
 
-                    da = _aPI_BLL.returnDataTable(" select ExamId from Exams where ExamId = '" + ExamId.ToString() + "'  ");
-                    st.Append(DataTableToJsonObj(da));
+                    //da = _aPI_BLL.returnDataTable(" select ExamId from Exams where ExamId = '" + ExamId.ToString() + "'  ");
+                    //st.Append(DataTableToJsonObj(da));
                 }
                 else
                 {
@@ -435,14 +487,7 @@ public partial class API_InsertExam : System.Web.UI.Page
                     ExamId = _aPI_BLL.InsertUpdateWithReturnIdentity(" DECLARE @ExamId as uniqueidentifier" +
                                                                      " SET @ExamId = NEWID() " +
                                                                      " insert into Exams (ExamId, RegistrationId, SubId, QueId, Ans, ExamScheduleId, TestId, " +
-                                                                     " InsertedOn, LastUpdatedOn, InsertedByUserId, LastUpdatedByUserId, QueType, AnsImage1, AnsImage2, AnsImage3, AnsImage4, AnsStatus " +
-                                                                     " , AnsImage5, AnsImage6, AnsImage7, AnsImage8, AnsImage9, AnsImage10 " +
-                                                                     " , AnsImage11, AnsImage12, AnsImage13, AnsImage14, AnsImage15, AnsImage16 " +
-                                                                     " , AnsImage17, AnsImage18, AnsImage19, AnsImage20, AnsImage21, AnsImage22 " +
-                                                                     " , AnsImage23, AnsImage24, AnsImage25, AnsImage26, AnsImage27, AnsImage28 " +
-                                                                     " , AnsImage29, AnsImage30, AnsImage31, AnsImage32, AnsImage33, AnsImage34 " +
-                                                                     " , AnsImage35, AnsImage36, AnsImage37, AnsImage38, AnsImage39, AnsImage40 " +
-                                                                     " , StudentPhoto) " +
+                                                                     " InsertedOn, LastUpdatedOn, InsertedByUserId, LastUpdatedByUserId, QueType) " +
                                                                      " values (@ExamId " +
                                                                      " , " + ((RegistrationId == null) ? "NULL" : "'" + RegistrationId.ToString().Replace("'", "''") + "'") + " " +
                                                                      " , " + ((SubId == null) ? "NULL" : "'" + SubId.ToString().Replace("'", "''") + "'") + " " +
@@ -452,48 +497,48 @@ public partial class API_InsertExam : System.Web.UI.Page
                                                                      " , " + ((TestId == null) ? "NULL" : "'" + TestId.ToString().Replace("'", "''") + "'") + " " +
                                                                      " , GETDATE(), GETDATE(), '" + InsertedByUserId + "', NULL " +
                                                                      " , " + ((QueType == null) ? "NULL" : "'" + QueType.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path1 == null) ? "NULL" : "'" + path1.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path2 == null) ? "NULL" : "'" + path2.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path3 == null) ? "NULL" : "'" + path3.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path4 == null) ? "NULL" : "'" + path4.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((AnsStatus == null) ? "NULL" : "'" + AnsStatus.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path5 == null) ? "NULL" : "'" + path5.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path6 == null) ? "NULL" : "'" + path6.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path7 == null) ? "NULL" : "'" + path7.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path8 == null) ? "NULL" : "'" + path8.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path9 == null) ? "NULL" : "'" + path9.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path10 == null) ? "NULL" : "'" + path10.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path11 == null) ? "NULL" : "'" + path11.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path12 == null) ? "NULL" : "'" + path12.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path13 == null) ? "NULL" : "'" + path13.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path14 == null) ? "NULL" : "'" + path14.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path15 == null) ? "NULL" : "'" + path15.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path16 == null) ? "NULL" : "'" + path16.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path17 == null) ? "NULL" : "'" + path17.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path18 == null) ? "NULL" : "'" + path18.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path19 == null) ? "NULL" : "'" + path19.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path20 == null) ? "NULL" : "'" + path20.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path21 == null) ? "NULL" : "'" + path21.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path22 == null) ? "NULL" : "'" + path22.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path23 == null) ? "NULL" : "'" + path23.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path24 == null) ? "NULL" : "'" + path24.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path25 == null) ? "NULL" : "'" + path25.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path26 == null) ? "NULL" : "'" + path26.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path27 == null) ? "NULL" : "'" + path27.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path28 == null) ? "NULL" : "'" + path28.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path29 == null) ? "NULL" : "'" + path29.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path30 == null) ? "NULL" : "'" + path30.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path31 == null) ? "NULL" : "'" + path31.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path32 == null) ? "NULL" : "'" + path32.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path33 == null) ? "NULL" : "'" + path33.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path34 == null) ? "NULL" : "'" + path34.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path35 == null) ? "NULL" : "'" + path35.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path36 == null) ? "NULL" : "'" + path36.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path37 == null) ? "NULL" : "'" + path37.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path38 == null) ? "NULL" : "'" + path38.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path39 == null) ? "NULL" : "'" + path39.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((path40 == null) ? "NULL" : "'" + path40.ToString().Replace("'", "''") + "'") + " " +
-                                                                     " , " + ((StudentPhoto == null) ? "NULL" : "'" + StudentPhoto.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path1 == null) ? "NULL" : "'" + path1.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path2 == null) ? "NULL" : "'" + path2.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path3 == null) ? "NULL" : "'" + path3.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path4 == null) ? "NULL" : "'" + path4.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((AnsStatus == null) ? "NULL" : "'" + AnsStatus.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path5 == null) ? "NULL" : "'" + path5.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path6 == null) ? "NULL" : "'" + path6.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path7 == null) ? "NULL" : "'" + path7.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path8 == null) ? "NULL" : "'" + path8.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path9 == null) ? "NULL" : "'" + path9.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path10 == null) ? "NULL" : "'" + path10.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path11 == null) ? "NULL" : "'" + path11.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path12 == null) ? "NULL" : "'" + path12.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path13 == null) ? "NULL" : "'" + path13.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path14 == null) ? "NULL" : "'" + path14.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path15 == null) ? "NULL" : "'" + path15.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path16 == null) ? "NULL" : "'" + path16.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path17 == null) ? "NULL" : "'" + path17.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path18 == null) ? "NULL" : "'" + path18.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path19 == null) ? "NULL" : "'" + path19.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path20 == null) ? "NULL" : "'" + path20.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path21 == null) ? "NULL" : "'" + path21.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path22 == null) ? "NULL" : "'" + path22.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path23 == null) ? "NULL" : "'" + path23.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path24 == null) ? "NULL" : "'" + path24.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path25 == null) ? "NULL" : "'" + path25.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path26 == null) ? "NULL" : "'" + path26.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path27 == null) ? "NULL" : "'" + path27.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path28 == null) ? "NULL" : "'" + path28.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path29 == null) ? "NULL" : "'" + path29.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path30 == null) ? "NULL" : "'" + path30.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path31 == null) ? "NULL" : "'" + path31.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path32 == null) ? "NULL" : "'" + path32.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path33 == null) ? "NULL" : "'" + path33.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path34 == null) ? "NULL" : "'" + path34.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path35 == null) ? "NULL" : "'" + path35.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path36 == null) ? "NULL" : "'" + path36.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path37 == null) ? "NULL" : "'" + path37.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path38 == null) ? "NULL" : "'" + path38.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path39 == null) ? "NULL" : "'" + path39.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((path40 == null) ? "NULL" : "'" + path40.ToString().Replace("'", "''") + "'") + " " +
+                        //" , " + ((StudentPhoto == null) ? "NULL" : "'" + StudentPhoto.ToString().Replace("'", "''") + "'") + " " +
                                                                      "); Select @ExamId;");
 
                     da = _aPI_BLL.returnDataTable(" select ExamId from Exams where ExamId = '" + ExamId.ToString() + "'  ");
@@ -724,47 +769,47 @@ public partial class API_InsertExam : System.Web.UI.Page
                                                       " , LastUpdatedByUserId = '" + InsertedByUserId + "'" +
                                                       " , Ans = " + ((Ans == null) ? "NULL" : "'" + Ans.ToString().Replace("'", "''") + "'") +
                                                       " , AnsStatus = " + ((AnsStatus == null) ? "NULL" : "'" + AnsStatus.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path1 == null) ? "" : ",AnsImage1 = '" + path1.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path2 == null) ? "" : ",AnsImage2 = '" + path2.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path3 == null) ? "" : ",AnsImage3 = '" + path3.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path4 == null) ? "" : ",AnsImage4 = '" + path4.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path5 == null) ? "" : ",AnsImage5 = '" + path5.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path6 == null) ? "" : ",AnsImage6 = '" + path6.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path7 == null) ? "" : ",AnsImage7 = '" + path7.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path8 == null) ? "" : ",AnsImage8 = '" + path8.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path9 == null) ? "" : ",AnsImage9 = '" + path9.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path10 == null) ? "" : ",AnsImage10 = '" + path10.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path11 == null) ? "" : ",AnsImage11 = '" + path11.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path12 == null) ? "" : ",AnsImage12 = '" + path12.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path13 == null) ? "" : ",AnsImage13 = '" + path13.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path14 == null) ? "" : ",AnsImage14 = '" + path14.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path15 == null) ? "" : ",AnsImage15 = '" + path15.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path16 == null) ? "" : ",AnsImage16 = '" + path16.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path17 == null) ? "" : ",AnsImage17 = '" + path17.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path18 == null) ? "" : ",AnsImage18 = '" + path18.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path19 == null) ? "" : ",AnsImage19 = '" + path19.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path20 == null) ? "" : ",AnsImage20 = '" + path20.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path21 == null) ? "" : ",AnsImage21 = '" + path21.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path22 == null) ? "" : ",AnsImage22 = '" + path22.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path23 == null) ? "" : ",AnsImage23 = '" + path23.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path24 == null) ? "" : ",AnsImage24 = '" + path24.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path25 == null) ? "" : ",AnsImage25 = '" + path25.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path26 == null) ? "" : ",AnsImage26 = '" + path26.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path27 == null) ? "" : ",AnsImage27 = '" + path27.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path28 == null) ? "" : ",AnsImage28 = '" + path28.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path29 == null) ? "" : ",AnsImage29 = '" + path29.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path30 == null) ? "" : ",AnsImage30 = '" + path30.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path31 == null) ? "" : ",AnsImage31 = '" + path31.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path32 == null) ? "" : ",AnsImage32 = '" + path32.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path33 == null) ? "" : ",AnsImage33 = '" + path33.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path34 == null) ? "" : ",AnsImage34 = '" + path34.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path35 == null) ? "" : ",AnsImage35 = '" + path35.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path36 == null) ? "" : ",AnsImage36 = '" + path36.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path37 == null) ? "" : ",AnsImage37 = '" + path37.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path38 == null) ? "" : ",AnsImage38 = '" + path38.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path39 == null) ? "" : ",AnsImage39 = '" + path39.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((path40 == null) ? "" : ",AnsImage40 = '" + path40.ToString().Replace("'", "''") + "'") +
-                                                      " " + ((StudentPhoto == null) ? "" : ",StudentPhoto = '" + StudentPhoto.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path1 == null) ? "" : ",AnsImage1 = '" + path1.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path2 == null) ? "" : ",AnsImage2 = '" + path2.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path3 == null) ? "" : ",AnsImage3 = '" + path3.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path4 == null) ? "" : ",AnsImage4 = '" + path4.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path5 == null) ? "" : ",AnsImage5 = '" + path5.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path6 == null) ? "" : ",AnsImage6 = '" + path6.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path7 == null) ? "" : ",AnsImage7 = '" + path7.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path8 == null) ? "" : ",AnsImage8 = '" + path8.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path9 == null) ? "" : ",AnsImage9 = '" + path9.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path10 == null) ? "" : ",AnsImage10 = '" + path10.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path11 == null) ? "" : ",AnsImage11 = '" + path11.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path12 == null) ? "" : ",AnsImage12 = '" + path12.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path13 == null) ? "" : ",AnsImage13 = '" + path13.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path14 == null) ? "" : ",AnsImage14 = '" + path14.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path15 == null) ? "" : ",AnsImage15 = '" + path15.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path16 == null) ? "" : ",AnsImage16 = '" + path16.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path17 == null) ? "" : ",AnsImage17 = '" + path17.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path18 == null) ? "" : ",AnsImage18 = '" + path18.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path19 == null) ? "" : ",AnsImage19 = '" + path19.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path20 == null) ? "" : ",AnsImage20 = '" + path20.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path21 == null) ? "" : ",AnsImage21 = '" + path21.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path22 == null) ? "" : ",AnsImage22 = '" + path22.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path23 == null) ? "" : ",AnsImage23 = '" + path23.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path24 == null) ? "" : ",AnsImage24 = '" + path24.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path25 == null) ? "" : ",AnsImage25 = '" + path25.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path26 == null) ? "" : ",AnsImage26 = '" + path26.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path27 == null) ? "" : ",AnsImage27 = '" + path27.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path28 == null) ? "" : ",AnsImage28 = '" + path28.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path29 == null) ? "" : ",AnsImage29 = '" + path29.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path30 == null) ? "" : ",AnsImage30 = '" + path30.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path31 == null) ? "" : ",AnsImage31 = '" + path31.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path32 == null) ? "" : ",AnsImage32 = '" + path32.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path33 == null) ? "" : ",AnsImage33 = '" + path33.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path34 == null) ? "" : ",AnsImage34 = '" + path34.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path35 == null) ? "" : ",AnsImage35 = '" + path35.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path36 == null) ? "" : ",AnsImage36 = '" + path36.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path37 == null) ? "" : ",AnsImage37 = '" + path37.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path38 == null) ? "" : ",AnsImage38 = '" + path38.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path39 == null) ? "" : ",AnsImage39 = '" + path39.ToString().Replace("'", "''") + "'") +
+                            //" " + ((path40 == null) ? "" : ",AnsImage40 = '" + path40.ToString().Replace("'", "''") + "'") +
+                            //" " + ((StudentPhoto == null) ? "" : ",StudentPhoto = '" + StudentPhoto.ToString().Replace("'", "''") + "'") +
                                                       " WHERE ExamId = '" + da.Rows[0]["ExamId"].ToString() + "' ");
 
                         da = _aPI_BLL.returnDataTable(" select ExamId from Exams where ExamId = '" + da.Rows[0]["ExamId"].ToString() + "'  ");
