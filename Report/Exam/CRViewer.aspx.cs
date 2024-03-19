@@ -8,6 +8,8 @@ using System.Data;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using System.Runtime.Serialization;
+using System.IO;
+using System.Net;
 
 public partial class Report_Exam_CRViewer : System.Web.UI.Page
 {
@@ -111,6 +113,21 @@ public partial class Report_Exam_CRViewer : System.Web.UI.Page
                     Response.Expires = -1;
                     Response.ContentType = "application/pdf";
                     Response.WriteFile(Fname);
+
+                    if (Request.QueryString["RptType"].ToString() == "InterviewFormdetial")
+                    {
+                        string pdfFilePath = Server.MapPath("~/Tmp.pdf"); // Use virtual path here
+                        WebClient req = new WebClient();
+                        HttpResponse response = HttpContext.Current.Response;
+                        response.Clear();
+                        response.ClearContent();
+                        response.ClearHeaders();
+                        response.Buffer = true;
+                        response.AddHeader("Content-Disposition", "attachment;filename=InterviewForm.PDF");
+                        byte[] data = req.DownloadData(pdfFilePath); // Pass virtual path here
+                        response.BinaryWrite(data);
+                        response.End();
+                    }
                 }
             }
         }
@@ -207,7 +224,28 @@ public partial class Report_Exam_CRViewer : System.Web.UI.Page
         }
         if (Request.QueryString["RptType"].ToString() == "InterviewFormdetial")
         {
+
             crRpt.Load(Server.MapPath("~/Report/Exam/InterviewFormdetial.rpt"));
+            //string pdfFilePath = Server.MapPath("~/Tmp.pdf"); // Use virtual path here
+            //WebClient req = new WebClient();
+            //HttpResponse response = HttpContext.Current.Response;
+            //response.Clear();
+            //response.ClearContent();
+            //response.ClearHeaders();
+            //response.Buffer = true;
+            //response.AddHeader("Content-Disposition", "attachment;filename=Filename.PDF");
+            //byte[] data = req.DownloadData(pdfFilePath); // Pass virtual path here
+            //response.BinaryWrite(data);
+            //response.End();
+
+            //filepath = Server.MapPath(filepath);
+            //string filepath = "~/"+"Tmp.pdf";
+            //filepath = Server.MapPath(filepath);
+            //crRpt.ExportToDisk(ExportFormatType.PortableDocFormat, filepath);
+            //FileInfo fileinfo = new FileInfo(filepath);
+            //Response.AddHeader("Content-Disposition", "inline;filenam=demo.pdf");
+            //Response.ContentType = "application/pdf";
+            //Response.WriteFile(fileinfo.FullName); 
         }
     }
 
@@ -285,6 +323,7 @@ public partial class Report_Exam_CRViewer : System.Web.UI.Page
 
         blErrs.Items.Add(new ListItem(value));
     }
+
     private void HideErrors()
     {
         pnlErr.Visible = false;
