@@ -4,6 +4,7 @@ using System.Collections;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Configuration;
+using System.Data.SqlClient;
 
 public partial class API_JEESummary : System.Web.UI.Page
 {
@@ -109,6 +110,48 @@ public partial class API_JEESummary : System.Web.UI.Page
     }
 
     public string selectdata()
+    {
+        string ReturnVal = "";
+        DataTable da = new DataTable();
+        StringBuilder st = new StringBuilder();
+        try
+        {
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.CommandText = "FitToJob_Exam_Module";
+            sqlCmd.Parameters.AddWithValue("@Action", "API_QuestionSummary");
+            sqlCmd.Parameters.AddWithValue("@RegistrationId ", RegistrationId);
+            sqlCmd.Parameters.AddWithValue("@SubjectId ", SubId);
+            sqlCmd.Parameters.AddWithValue("@TestId", TestId);
+            sqlCmd.Parameters.AddWithValue("@ExamScheduleId  ", ExamScheduleId);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            //Da dataSet = new DataSet();
+            dataAdapter.Fill(da);
+            st.Append(DataTableToJsonObj(da));
+
+            if (da.Rows.Count > 0)
+            {
+                ReturnVal = GetReturnValue("200", "Data Get", st);
+            }
+
+            if (st.ToString() != "[]")
+                return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+            else
+                return ReturnVal.Replace("\\", "").Replace("\"[]\"", "[]");
+        }
+        catch (Exception ex)
+        {
+            StringBuilder s = new StringBuilder();
+            s.Append(ex.Message);
+            ReturnVal = GetReturnValue("209", "Data Get Issue", s);
+            return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+        }
+    }
+
+    public string selectdata_Old()
     {
 
         DataTable da = new DataTable();
