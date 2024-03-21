@@ -29,7 +29,7 @@ public class GeneralDAL
 
     public void OpenSQLConnection()
     {
-        _sqlConn.ConnectionString = @"Persist Security Info=False;User ID=sa;Password=ERP@1234;Initial Catalog=MyTime_Organogram;Data Source=192.168.1.239\NEW2012"; // Live
+        _sqlConn.ConnectionString = @"Persist Security Info=False;User ID=sa;Password=ERP@1234;Initial Catalog=MyTime_Organogram2;Data Source=192.168.1.239\NEW2012"; // Live
         //_sqlConn.ConnectionString = @"Persist Security Info=False;User ID=sa;Password=sqlserver@123;Initial Catalog=MyTime_Organogram;Data Source=DIPLWS1\SQLPLN"; // local
 
         _sqlConn.Open();
