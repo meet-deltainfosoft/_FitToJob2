@@ -3,12 +3,14 @@ using System.Data;
 using System.Collections;
 using System.Web.Script.Serialization;
 using System.Text;
+using System.Data.SqlClient;
 
 public partial class API_TestDetails : System.Web.UI.Page
 {
     string ExamScheduleId;
     string RegistrationId;
     string TestId;
+    string SubjectId;
 
     API_BLL _aPI_BLL = new API_BLL();
 
@@ -32,6 +34,13 @@ public partial class API_TestDetails : System.Web.UI.Page
                     TestId = Request.Form["TestId"].ToString();
                 else
                     TestId = null;
+
+                if (Request.Form["SubjectId"] != null && Request.Form["SubjectId"] != "")
+                    SubjectId = Request.Form["SubjectId"].ToString();
+                else
+                    SubjectId = null;
+
+              
 
                 Response.ContentType = "application/json";
                 Response.Write(selectdata());
@@ -96,6 +105,52 @@ public partial class API_TestDetails : System.Web.UI.Page
     }
 
     public string selectdata()
+    {
+        string ReturnVal = "";
+        DataTable da = new DataTable();
+        StringBuilder st = new StringBuilder();
+        try
+        {
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.CommandText = "FitToJob_Exam_Module";
+            sqlCmd.Parameters.AddWithValue("@Action", "API_TestDetails");
+            sqlCmd.Parameters.AddWithValue("@RegistrationId", RegistrationId);
+            sqlCmd.Parameters.AddWithValue("@ExamScheduleId", ExamScheduleId);
+            sqlCmd.Parameters.AddWithValue("@TestId", TestId);
+            sqlCmd.Parameters.AddWithValue("@SubjectId", SubjectId);
+       
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            //Da dataSet = new DataSet();
+            dataAdapter.Fill(da);
+            st.Append(DataTableToJsonObj(da));
+
+            if (da.Rows.Count > 0)
+            {
+                ReturnVal = GetReturnValue("200", "Data Get", st);
+            }
+
+            if (st.ToString() != "[]")
+                return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+            else
+                return ReturnVal.Replace("\\", "").Replace("\"[]\"", "[]");
+        }
+        catch (Exception ex)
+        {
+            StringBuilder s = new StringBuilder();
+            s.Append(ex.Message);
+            ReturnVal = GetReturnValue("209", "Data Get Issue", s);
+            return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+        }
+    }
+
+
+
+    public string selectdata_old()
     {
 
         DataTable da = new DataTable();

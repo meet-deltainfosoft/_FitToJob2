@@ -4,6 +4,7 @@ using System.Collections;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Configuration;
+using System.Data.SqlClient;
 
 public partial class API_GetSubjectWiseQnList : System.Web.UI.Page
 {
@@ -19,10 +20,10 @@ public partial class API_GetSubjectWiseQnList : System.Web.UI.Page
         {
             try
             {
-                if (Request.Form["TestId"] != null && Request.Form["TestId"] != "")
-                    TestId = Request.Form["TestId"].ToString();
-                else
-                    TestId = null;
+                //if (Request.Form["TestId"] != null && Request.Form["TestId"] != "")
+                //    TestId = Request.Form["TestId"].ToString();
+                //else
+                //    TestId = null;
 
                 if (Request.Form["ExamScheduleId"] != null && Request.Form["ExamScheduleId"] != "")
                     ExamScheduleId = Request.Form["ExamScheduleId"].ToString();
@@ -98,6 +99,47 @@ public partial class API_GetSubjectWiseQnList : System.Web.UI.Page
 
     public string selectdata()
     {
+        string ReturnVal = "";
+        DataTable da = new DataTable();
+        StringBuilder st = new StringBuilder();
+        try
+        {
+            SqlCommand sqlCmd = new SqlCommand();
+            GeneralDAL objDal = new GeneralDAL();
+            objDal.OpenSQLConnection();
+            sqlCmd.Connection = objDal.ActiveSQLConnection();
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.CommandText = "FitToJob_Exam_Module";
+            sqlCmd.Parameters.AddWithValue("@Action", "API_GetSubjectWiseQnList");
+            sqlCmd.Parameters.AddWithValue("@RegistrationId", RegistrationId);
+            sqlCmd.Parameters.AddWithValue("@ExamScheduleId", ExamScheduleId);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+            //Da dataSet = new DataSet();
+            dataAdapter.Fill(da);
+            st.Append(DataTableToJsonObj(da));
+
+            if (da.Rows.Count > 0)
+            {
+                ReturnVal = GetReturnValue("200", "Data Get", st);
+            }
+
+            if (st.ToString() != "[]")
+                return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+            else
+                return ReturnVal.Replace("\\", "").Replace("\"[]\"", "[]");
+        }
+        catch (Exception ex)
+        {
+            StringBuilder s = new StringBuilder();
+            s.Append(ex.Message);
+            ReturnVal = GetReturnValue("209", "Data Get Issue", s);
+            return ReturnVal.Replace("\\", "").Replace("\"[", "[").Replace("]\"", "]");
+        }
+    }
+
+
+    public string selectdata_old()
+    {
 
         DataTable da = new DataTable();
         StringBuilder st = new StringBuilder();
@@ -105,33 +147,13 @@ public partial class API_GetSubjectWiseQnList : System.Web.UI.Page
         try
         {
 
-            da = _aPI_BLL.returnDataTable(" select q.SubId,q.QueId,q.Que as Question ,q.A1,q.A2,q.A3,q.A4  ,s.Name as SubjectName, newid() as 'OrderBy' " +
-                                          " , replace(q.ImageNameQus, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'ImageNameQus' " +
-                                          " , replace(q.ImageNameA1, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'ImageNameA1' " +
-                                          " , replace(q.ImageNameA2, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'ImageNameA2' " +
-                                          " , replace(q.ImageNameA3, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'ImageNameA3' " +
-                                          " , replace(q.ImageNameA4, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'ImageNameA4' " +
-                                          " , q.QueType, q.QueDataType, q.RightMarks, q.WrongMarks, q.NonMarks, q.NoOfFile,'False' as PerQuestionTime " +
-                                          " ,q.Srno as QueNo,e.PerQueMins as QnTime,e.TotalMins, ts.TestId,q.Language,s.Name as Subject,ee.Ans,ee.AnsStatus " +
-                                          " , replace(ee.AnsImage1, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'AnsImage1' " +
-                                          " , replace(ee.AnsImage2, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'AnsImage2' " +
-                                          " , replace(ee.AnsImage3, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'AnsImage3' " +
-                                          " , replace(ee.AnsImage4, '" + ConfigurationSettings.AppSettings["FolderPath"] + "', '" + ConfigurationSettings.AppSettings["FolderPathShow"] + "') as 'AnsImage4',q.Ans as 'TrueAns' " +
-                                          " into #tmp From ExamSchedules e " +
-                                          " inner join ExamScheduleLns el on el.ExamScheduleId = e.ExamScheduleId " +
-                                          //" inner join PatternLns pl on pl.PatternId = e.PatternId " +
-                                          " inner join Subs s on s.SubId = e.SubId " +
-                                          " inner join Tests ts on ts.TestId = e.TestId " +
-                                          " inner join Ques q on s.SubId = q.SubId and ts.TestId = q.TestId " +
-                                          " left join Exams ee on ee.QueId = q.QueId and ee.RegistrationId = el.RegistrationId "+
-                                          " and ee.ExamScheduleId = e.ExamScheduleId and ee.TestId = ts.TestId "+
-                                          " where e.TestId = '" + TestId.ToString() + "' and el.RegistrationId = '" + RegistrationId.ToString() + "' " +
-                                          " and e.ExamScheduleId = '" + ExamScheduleId.ToString() + "' "+
-                                          " select SubId,QueId,Question ,A1,A2,A3,A4,SubjectName, ROW_NUMBER() OVER(ORDER BY OrderBy) as SrNo, OrderBy " +
-                                          " , ImageNameQus, ImageNameA1, ImageNameA2, ImageNameA3,  ImageNameA4 " +
-                                          " , QueType, QueDataType, RightMarks, WrongMarks, NonMarks, NoOfFile, PerQuestionTime, QueNo, QnTime, TotalMins, TestId,Language,Subject,Ans,AnsStatus,AnsImage1,AnsImage2,AnsImage3,AnsImage4,TrueAns " +
-                                          " from #tmp  " +
-                                          " ORDER BY Subject,QueNo  drop table #tmp ");
+           
+
+
+            da = _aPI_BLL.returnDataTable(  "Declare @RegistrationId uniqueidentifier = '" + RegistrationId + "', " +                                      "@ExamScheduleId uniqueidentifier = '" + ExamScheduleId + "' " +                                                                            " Select S.SubjectName,T.TestName,Q.Que,  " +                                      " Isnull(Q.A1,'')A1, " +                                      " Isnull(Q.A2,'')A2,  " +                                      " Isnull(Q.A3,'')A3,  " +                                      " Isnull(Q.A4,'')A4,  " +                                      " Isnull(Q.ImageNameA1,'')ImageNameA1,  " +                                      " Isnull(Q.ImageNameA2,'')ImageNameA2,  " +                                      " Isnull(Q.ImageNameA3,'')ImageNameA3,  " +                                      " Isnull(Q.ImageNameA4,'')ImageNameA4,  " +                                      " e.PerQueMins as QnTime,e.TotalMins,  " +                                      " q.QueType, q.QueDataType, q.RightMarks, q.WrongMarks, q.NonMarks, q.NoOfFile,'False' as PerQuestionTime,  " +
+                                      " q.Ans as TrueAns,s.subjectId, q.QueId, Row_Number()Over(Order by (Select 1)) as queNo,t.TestId, q.ImageNameQus, " +                                      " Isnull(EE.AnsStatus,'')AnsStatus  " +                                      " From ExamSchedules E Join ExamScheduleLns EL on E.ExamScheduleId = EL.ExamScheduleId  " +                                      " Join Subjects S  on S.subjectId = E.SubId  " +                                      " Join Tests T on T.TestId = E.TestId  " +                                      " Join Ques Q on Q.SubId = S.subjectId and T.TestId = Q.TestId  " +                                       " Left JOIN Exams ee ON ee.QueId = q.QueId AND ee.RegistrationId = el.RegistrationId  " +
+                                      "     AND ee.ExamScheduleId = e.ExamScheduleId AND ee.TestId = T.TestId  " +                                      " Where E.ExamScheduleId = @ExamScheduleId and EL.RegistrationId = @RegistrationId  " +
+                                      " order by q.SrNo  " );
 
             st.Append(DataTableToJsonObj(da));
 

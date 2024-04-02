@@ -13,8 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Web.Configuration;
 using System.Configuration;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
+
 using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
 
@@ -378,14 +377,14 @@ public partial class Exams_CandidatesList : System.Web.UI.Page
 
     private void SendMail(string No, DateTime? Dt, string CustomerName)
     {
-        ReportDocument crystalReport = new ReportDocument();
+        //ReportDocument crystalReport = new ReportDocument();
         StringBuilder strbuSummary = new StringBuilder();
         Literal disp = new Literal();
         string fname = "";
 
         try
         {
-            crystalReport.Load(HttpContext.Current.Server.MapPath("~/Reports/Exam/Offerlater1.rpt"));
+            //crystalReport.Load(HttpContext.Current.Server.MapPath("~/Reports/Exam/Offerlater1.rpt"));
 
             DataSet ds = new DataSet();
 
@@ -393,21 +392,21 @@ public partial class Exams_CandidatesList : System.Web.UI.Page
 
             RenameDataSetTables(ref ds);
 
-            crystalReport.SetDataSource(ds);
+            //crystalReport.SetDataSource(ds);
 
-            ExportOptions crExportOptions;
-            DiskFileDestinationOptions crDiskFileDestinationOptions;
+            //ExportOptions crExportOptions;
+            //DiskFileDestinationOptions crDiskFileDestinationOptions;
 
             fname = HttpContext.Current.Server.MapPath("~\\Export\\" + "Offerlater" + ".pdf");
 
-            crDiskFileDestinationOptions = new DiskFileDestinationOptions();
-            crDiskFileDestinationOptions.DiskFileName = fname;
-            crExportOptions = crystalReport.ExportOptions;
-            crExportOptions.DestinationOptions = crDiskFileDestinationOptions;
-            crExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-            crExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+            //crDiskFileDestinationOptions = new DiskFileDestinationOptions();
+            //crDiskFileDestinationOptions.DiskFileName = fname;
+            //crExportOptions = crystalReport.ExportOptions;
+            //crExportOptions.DestinationOptions = crDiskFileDestinationOptions;
+            //crExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+            //crExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
 
-            crystalReport.Export();
+            //crystalReport.Export();
 
             DataTable DtCompany = new DataTable();
             DtCompany = GetCompanyDetails();

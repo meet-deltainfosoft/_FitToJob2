@@ -13,8 +13,8 @@ using System.Drawing;
 using System.IO;
 using System.Web.Configuration;
 using System.Configuration;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
+//using CrystalDecisions.CrystalReports.Engine;
+//using CrystalDecisions.Shared;
 using System.Data.SqlClient;
 
 public partial class Guest_DigitalInterviewForm : System.Web.UI.Page

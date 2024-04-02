@@ -118,24 +118,31 @@ public partial class API_InsertSignAndLocation : System.Web.UI.Page
         {
             if (Type == "Start")
             {
-                #region Update EndDt in Previous Record
+                #region Update ExamToTime in Previous Record
                 string PrevExamStartStopId = "";
                 try
                 {
                     //PrevExamStartStopId = _aPI_BLL.InsertUpdateWithReturnIdentity(" WITH CTE AS " +
-                    //                                                          " ( SELECT ExamStartStopTimeId, ROW_NUMBER() OVER(ORDER BY InsertedOn desc) AS RowNum " +
-                    //                                                          "   FROM Examstartstoptimes " +
+                    //                                                          " ( SELECT ExamScheduleId, ROW_NUMBER() OVER(ORDER BY InsertedOn desc) AS RowNum " +
+                    //                                                          "   FROM ExamSchedules " +
                     //                                                          "   WHERE RegistrationId = '" + RegistrationId.ToString() + "' " +
                     //                                                          "   and ExamScheduleId = '" + ExamScheduleId.ToString() + "' " +
-                    //                                                          "   and StopTime is null and EndDt is null ) " +
-                    //                                                          " SELECT ExamStartStopTimeId FROM CTE WHERE RowNum = 2");
+                    //                                                          "   and ExamToTime is null and ExamToTime is null ) " +
+                    //                                                          " SELECT ExamScheduleId FROM CTE WHERE RowNum = 2");
 
-                    PrevExamStartStopId = _aPI_BLL.InsertUpdateWithReturnIdentity(" SELECT STUFF((SELECT ',' + Convert(varchar(50),ExamStartStopTimeId) " +
-                                                                                  " FROM Examstartstoptimes " +
-                                                                                  " WHERE RegistrationId = '" + RegistrationId.ToString() + "' " +
-                                                                                  " and ExamScheduleId = '" + ExamScheduleId.ToString() + "' " +
-                                                                                  " and StopTime is null and EndDt is null and StartTime < Getdate() "+
-                                                                                  " FOR XML PATH ('')),1,1,'') AS ExamStartStopTimeId " );
+                    //PrevExamStartStopId = _aPI_BLL.InsertUpdateWithReturnIdentity(" SELECT STUFF((SELECT ',' + Convert(varchar(50),ExamScheduleId) " +
+                    //                                                              " FROM ExamSchedules " +
+                    //                                                              " WHERE RegistrationId = '" + RegistrationId.ToString() + "' " +
+                    //                                                              " and ExamScheduleId = '" + ExamScheduleId.ToString() + "' " +
+                    //                                                              " and ExamToTime is null and ExamToTime is null and ExamFromTime < Getdate() "+
+                    //                                                              " FOR XML PATH ('')),1,1,'') AS ExamScheduleId " );
+
+                    PrevExamStartStopId = _aPI_BLL.InsertUpdateWithReturnIdentity(" SELECT STUFF((SELECT ',' + Convert(varchar(50),a.ExamScheduleId)  FROM ExamSchedules  a "+
+				                                                                 " inner join ExamScheduleLns b on a.ExamScheduleId = b.ExamScheduleId "+
+                                                                                 " WHERE b.RegistrationId = '" + RegistrationId.ToString() + "'   " +
+                                                                                 " and a.ExamScheduleId = '" + ExamScheduleId.ToString() + "'   " +
+                                                                                 " and a.ExamToTime is null and a.ExamToTime is null  " +
+                                                                                 " and a.ExamFromTime < Getdate()  FOR XML PATH ('')),1,1,'') AS ExamScheduleId ");
                 }
                 catch
                 {
@@ -145,97 +152,98 @@ public partial class API_InsertSignAndLocation : System.Web.UI.Page
 
                 if (PrevExamStartStopId != null && PrevExamStartStopId != "")
                 {
-                    _aPI_BLL.InsertUpdateNonQuery(" UPDATE Examstartstoptimes SET " +
-                                                  " EndDt=GETDATE() " +
-                                                  ",StopTime = GETDATE()" +
+                    _aPI_BLL.InsertUpdateNonQuery(" UPDATE ExamSchedules SET " +
+                                                  " ExamToTime=GETDATE() " +
                                                   ",LastUpdatedOn=GETDATE() " +
                                                   ",LastUpdatedByUserId = '" + InsertedByUserId + "'" +
-                                                  " WHERE ExamStartStopTimeId in ('" + PrevExamStartStopId.Replace(",","','") + "')");
+                                                  " WHERE ExamScheduleId in ('" + PrevExamStartStopId.Replace(",","','") + "')");
 
                 }
                 #endregion
 
                 string path1 = null, path2 = null;
 
-                if (SelfiePhotoPath != null && SelfiePhotoPath.FileName != "")
-                {
-                    byte[] imageSize = new byte[SelfiePhotoPath.ContentLength];
-                    HttpPostedFile uploadedImage = SelfiePhotoPath;
+                //if (SelfiePhotoPath != null && SelfiePhotoPath.FileName != "")
+                //{
+                //    byte[] imageSize = new byte[SelfiePhotoPath.ContentLength];
+                //    HttpPostedFile uploadedImage = SelfiePhotoPath;
 
-                    string[] getExtenstion = SelfiePhotoPath.FileName.Split('.');
-                    string oExtension = getExtenstion[getExtenstion.Length - 1].ToString();
+                //    string[] getExtenstion = SelfiePhotoPath.FileName.Split('.');
+                //    string oExtension = getExtenstion[getExtenstion.Length - 1].ToString();
 
-                    string msExcelFilePathOnServer = ConfigurationSettings.AppSettings["FolderPath"] + "" + Convert.ToDateTime(System.DateTime.Now).ToString("ddMMMyyyy") + "/";
+                //    string msExcelFilePathOnServer = ConfigurationSettings.AppSettings["FolderPath"] + "" + Convert.ToDateTime(System.DateTime.Now).ToString("ddMMMyyyy") + "/";
 
-                    bool exists = System.IO.Directory.Exists(msExcelFilePathOnServer);
+                //    bool exists = System.IO.Directory.Exists(msExcelFilePathOnServer);
 
-                    if (!exists)
-                        System.IO.Directory.CreateDirectory(msExcelFilePathOnServer);
+                //    if (!exists)
+                //        System.IO.Directory.CreateDirectory(msExcelFilePathOnServer);
 
-                    path1 = msExcelFilePathOnServer + uploadedImage.FileName.Replace("." + oExtension, "") + "_" + InsertedByUserId.ToString() + "_" + RegistrationId.ToString() + "_F1" + "." + oExtension;
-                    uploadedImage.SaveAs(path1);
-                }
+                //    path1 = msExcelFilePathOnServer + uploadedImage.FileName.Replace("." + oExtension, "") + "_" + InsertedByUserId.ToString() + "_" + RegistrationId.ToString() + "_F1" + "." + oExtension;
+                //    uploadedImage.SaveAs(path1);
+                //}
 
-                if (SignaturePath != null && SignaturePath.FileName != "")
-                {
-                    byte[] imageSize = new byte[SignaturePath.ContentLength];
-                    HttpPostedFile uploadedImage = SignaturePath;
+                //if (SignaturePath != null && SignaturePath.FileName != "")
+                //{
+                //    byte[] imageSize = new byte[SignaturePath.ContentLength];
+                //    HttpPostedFile uploadedImage = SignaturePath;
 
-                    string[] getExtenstion = SignaturePath.FileName.Split('.');
-                    string oExtension = getExtenstion[getExtenstion.Length - 1].ToString();
+                //    string[] getExtenstion = SignaturePath.FileName.Split('.');
+                //    string oExtension = getExtenstion[getExtenstion.Length - 1].ToString();
 
-                    string msExcelFilePathOnServer = ConfigurationSettings.AppSettings["FolderPath"] + "" + Convert.ToDateTime(System.DateTime.Now).ToString("ddMMMyyyy") + "/";
+                //    string msExcelFilePathOnServer = ConfigurationSettings.AppSettings["FolderPath"] + "" + Convert.ToDateTime(System.DateTime.Now).ToString("ddMMMyyyy") + "/";
 
-                    bool exists = System.IO.Directory.Exists(msExcelFilePathOnServer);
+                //    bool exists = System.IO.Directory.Exists(msExcelFilePathOnServer);
 
-                    if (!exists)
-                        System.IO.Directory.CreateDirectory(msExcelFilePathOnServer);
+                //    if (!exists)
+                //        System.IO.Directory.CreateDirectory(msExcelFilePathOnServer);
 
-                    path2 = msExcelFilePathOnServer + uploadedImage.FileName.Replace("." + oExtension, "") + "_" + InsertedByUserId.ToString() + "_" + RegistrationId.ToString() + "_F2" + "." + oExtension;
-                    uploadedImage.SaveAs(path2);
-                }
-                ExamStartStopId = _aPI_BLL.InsertUpdateWithReturnIdentity(" DECLARE @ExamStartStopTimeId as uniqueidentifier" +
-                                                             " SET @ExamStartStopTimeId = NEWID() " +
-                                                             " insert into Examstartstoptimes (ExamStartStopTimeId, RegistrationId, ExamScheduleId, " +
-                                                             " StartDt,EndDt,StartTime,StartLat,StartLong,StopTime,StopLat,StopLong,SelfiePhotoPath," +
-                                                             " SignaturePhotoPath,InsertedOn, LastUpdatedOn, InsertedByUserId, LastUpdatedByUserId) " +
-                                                             " values (@ExamStartStopTimeId " +
-                                                             " , " + ((RegistrationId == null) ? "NULL" : "'" + RegistrationId.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , " + ((ExamScheduleId == null) ? "NULL" : "'" + ExamScheduleId.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , GETDATE(), NULL,GETDATE() " +
-                                                             " , " + ((StartLat == null) ? "NULL" : "'" + StartLat.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , " + ((StartLong == null) ? "NULL" : "'" + StartLong.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , NULL " +
-                                                             " , " + ((StopLat == null) ? "NULL" : "'" + StopLat.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , " + ((StopLong == null) ? "NULL" : "'" + StopLong.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , " + ((path1 == null) ? "NULL" : "'" + path1.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , " + ((path2 == null) ? "NULL" : "'" + path2.ToString().Replace("'", "''") + "'") + " " +
-                                                             " , GETDATE(), GETDATE(), '" + InsertedByUserId + "', NULL " +
-                                                             "); Select @ExamStartStopTimeId;");
+                //    path2 = msExcelFilePathOnServer + uploadedImage.FileName.Replace("." + oExtension, "") + "_" + InsertedByUserId.ToString() + "_" + RegistrationId.ToString() + "_F2" + "." + oExtension;
+                //    uploadedImage.SaveAs(path2);
+                //}
+                //ExamStartStopId = _aPI_BLL.InsertUpdateWithReturnIdentity(" DECLARE @ExamScheduleId as uniqueidentifier" +
+                //                                             " SET @ExamScheduleId = NEWID() " +
+                //                                             " insert into ExamSchedules (ExamScheduleId, RegistrationId, ExamScheduleId, " +
+                //                                             " ExamFromTime,ExamToTime,ExamFromTime,ExamToTime," +
+                //                                             " InsertedOn, LastUpdatedOn, InsertedByUserId, LastUpdatedByUserId) " +
+                //                                             " values (@ExamScheduleId " +
+                //                                             " , " + ((RegistrationId == null) ? "NULL" : "'" + RegistrationId.ToString().Replace("'", "''") + "'") + " " +
+                //                                             " , " + ((ExamScheduleId == null) ? "NULL" : "'" + ExamScheduleId.ToString().Replace("'", "''") + "'") + " " +
+                //                                             " , GETDATE(), NULL,GETDATE() " +
+                //                                             " , NULL " +
+                //                                             " , GETDATE(), GETDATE(), '" + InsertedByUserId + "', NULL " +
+                //                                             "); Select @ExamScheduleId;");
 
-                da = _aPI_BLL.returnDataTable(" select ExamStartStopTimeId from Examstartstoptimes where ExamStartStopTimeId = '" + ExamStartStopId.ToString() + "'  ");
+                //_aPI_BLL.InsertUpdateNonQuery("DECLARE @ExamScheduleLnId as uniqueidentifier"+
+                //                               " SET @ExamScheduleLnId = NEWID() " +
+                //                               " insert into ExamScheduleLns (ExamScheduleLnId, ExamScheduleId, LnNo, RegistrationId, InsertedOn, LastUpdatedOn, InsertedByUserId, LastUpdatedByUserId) " +
+                //                               " values (@ExamScheduleLnId " +
+
+                //                                                                            );
+
+
+                da = _aPI_BLL.returnDataTable(" select ExamScheduleId from ExamSchedules where ExamScheduleId = '" + ExamScheduleId.ToString() + "'  ");
                 st.Append(DataTableToJsonObj(da));
             }
             else if (Type == "Stop")
             {
-                
 
-                da = _aPI_BLL.returnDataTable(" select Top 1 ExamStartStopTimeId from Examstartstoptimes where StopTime is null and EndDt is null " +
-                                              " and RegistrationId = '" + RegistrationId.ToString() + "' " +
-                                              " and ExamScheduleId = '" + ExamScheduleId.ToString() + "'" +
-                                              " Order by InsertedOn desc ");
+
+                da = _aPI_BLL.returnDataTable(" select Top 1 a.ExamScheduleId from ExamSchedules a inner join ExamScheduleLns b on a.ExamScheduleId = b.ExamScheduleId where Isnull(a.ExamToTime,'1900-01-01')!='1900-01-01' "+
+                                             " and Isnull(a.ExamToTime,'1900-01-01') !='1900-01-01' " +
+                                              " and b.RegistrationId = '" + RegistrationId.ToString() + "' " +
+                                              " and a.ExamScheduleId = '" + ExamScheduleId.ToString() + "'" +
+                                              " Order by a.InsertedOn desc ");
                 if (da.Rows.Count > 0)
                 {
-                    _aPI_BLL.InsertUpdateNonQuery(" UPDATE Examstartstoptimes SET " +
-                                                  " EndDt=GETDATE() " +
-                                                  ",StopTime = GETDATE()" +
-                                                  ",StopLat =" + ((StopLat == null) ? "NULL" : "'" + StopLat.ToString() + "'") +
-                                                  ",StopLong=" + ((StopLong == null) ? "NULL" : "'" + StopLong.ToString() + "'") + "" +
+                    _aPI_BLL.InsertUpdateNonQuery(" UPDATE ExamSchedules SET " +
+                                                  " ExamToTime=GETDATE() " +
+                                                  //",StopLat =" + ((StopLat == null) ? "NULL" : "'" + StopLat.ToString() + "'") +
+                                                  //",StopLong=" + ((StopLong == null) ? "NULL" : "'" + StopLong.ToString() + "'") + "" +
                                                   ",LastUpdatedOn=GETDATE() " +
                                                   ",LastUpdatedByUserId = '" + InsertedByUserId + "'" +
-                                                  " WHERE ExamStartStopTimeId='" + da.Rows[0]["ExamStartStopTimeId"].ToString() + "'");
+                                                  " WHERE ExamScheduleId='" + da.Rows[0]["ExamScheduleId"].ToString() + "'");
 
-                    da = _aPI_BLL.returnDataTable(" select ExamStartStopTimeId from Examstartstoptimes where ExamStartStopTimeId = '" + da.Rows[0]["ExamStartStopTimeId"].ToString() + "'  ");
+                    da = _aPI_BLL.returnDataTable(" select ExamScheduleId from ExamSchedules where ExamScheduleId = '" + da.Rows[0]["ExamScheduleId"].ToString() + "'  ");
                     st.Append(DataTableToJsonObj(da));
                 }
                 else
