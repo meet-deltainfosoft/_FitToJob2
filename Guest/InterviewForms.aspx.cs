@@ -69,6 +69,9 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                         txtVillageNotableRefernces.Enabled = false;
                         txtDukeReferencesMobileNo.Enabled = false;
                         txtVillageNotableReferncesMobileNo.Enabled = false;
+                       
+                        txtPermanentState.Enabled = false;
+                        txtresidentialState.Enabled = false;
 
                         ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
                     }
@@ -133,6 +136,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                     lblVillageNotableRefernces.Text = "ગામ નોંધપાત્ર સંદર્ભો";
                     lblDukeReferencesMobileNo.Text = "ડ્યુક મેનેજમેન્ટ સંદર્ભો મોબાઇલ નંબર";
                     lblVillageNotableReferncesMobileNo.Text = "ગામ નોંધપાત્ર સંદર્ભો મોબાઇલ નંબર";
+                    lblresidentialState.Text = "રાજ્ય";
                 }
                 else if (Session["Language"] == "Hindi")
                 {
@@ -170,6 +174,8 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                     lblVillageNotableRefernces.Text = "गाँव के उल्लेखनीय सन्दर्भ";
                     lblDukeReferencesMobileNo.Text = "ड्यूक प्रबंधन संदर्भ मोबाइल नंबर";
                     lblVillageNotableReferncesMobileNo.Text = "गाँव उल्लेखनीय संदर्भ मोबाइल नंबर";
+                    lblPermanentState.Text = "जिला";
+                    lblresidentialState.Text = "राज्य";
                 }
             }
         }
@@ -222,6 +228,8 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 txtVillageNotableRefernces.Text = dataSet.Tables[0].Rows[0]["VillagePersonReferences"].ToString();
                 txtDukeReferencesMobileNo.Text = dataSet.Tables[0].Rows[0]["DukeReferencesMobileNo"].ToString();
                 txtVillageNotableReferncesMobileNo.Text = dataSet.Tables[0].Rows[0]["VillagePersonReferencesMobileNo"].ToString();
+                txtPermanentState.Text = dataSet.Tables[0].Rows[0]["permanentState"].ToString();
+                txtresidentialState.Text = dataSet.Tables[0].Rows[0]["ResidentState"].ToString();
             }
 
             if (dataSet.Tables[1].Rows.Count > 0)
@@ -385,6 +393,9 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 sqlCmd.Parameters.AddWithValue("@NomineeName", txtNomineeName.Text);
 
                 sqlCmd.Parameters.AddWithValue("@Post", txtPermanentPost.Text);
+               
+                sqlCmd.Parameters.AddWithValue("@ResidentialState", txtresidentialState.Text);
+                sqlCmd.Parameters.AddWithValue("@permanentState", txtPermanentState.Text);
 
 
                 string nomineeDOB = txtNomineeDOB.Text.Trim();
@@ -447,6 +458,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 txtPermanentVillage.Text = txtresidentialVillage.Text;
                 txtPermanentPost.Text = txtresidentialPost.Text;
                 txtPermanentPinCode.Text = txtresidentialPinCode.Text;
+                txtPermanentState.Text = txtresidentialState.Text;
             }
         }
         catch

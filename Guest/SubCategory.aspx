@@ -127,7 +127,7 @@
                 <div class="formFooter">
                     <div class="row">
                         <div class="col-lg-8 m-1">
-                            <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
+                            <asp:Button runat="server" ID="btnOk" Text="Save & Next" OnClick="btnOk_Click" class="btn custom-button"
                                 Style="height: 30px; width: 200px; font-size: 15px;" />
                             <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
                                 class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />

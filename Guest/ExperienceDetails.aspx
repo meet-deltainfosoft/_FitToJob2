@@ -137,7 +137,7 @@
             <asp:Button runat="server" ID="btnAddRow" Text="+ Add Experience" CssClass="btn btn-primary m-2"
                 OnClick="btnAddRow_Click" ToolTip="Add New Records" />
             <label id="lblNotes" runat="server" style="font-family: Verdana; font-weight: bold;">
-                Experience In Year and Month(E.g 1.2)</label>
+                Experience In Year and Month(Exp.1.2)</label>
             <div class="row" style="overflow: scroll;">
                 <asp:GridView runat="server" ID="gvExperienceyDetails" AutoGenerateColumns="False"
                     CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"

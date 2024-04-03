@@ -128,7 +128,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
     {
         List<FamilyDetail> familyDetails = GetFamilyDetailsFromGrid();
 
-        familyDetails.Add(new FamilyDetail { Relation = "Father", Name = "", Business = "", Education = "", Mobile = "" });
+        familyDetails.Add(new FamilyDetail { Relation = "Father", Name = "", DOB = "", Business = "", Education = "", Mobile = "" });
         gvFamilyDetails.DataSource = familyDetails;
         gvFamilyDetails.DataBind();
     }
@@ -214,6 +214,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
             TextBox txtBusiness = row.FindControl("txtBusiness") as TextBox;
             TextBox txtEducation = row.FindControl("txtEducation") as TextBox;
             TextBox txtMobile = row.FindControl("txtMobile") as TextBox;
+            TextBox txtDOB = row.FindControl("txtDOB") as TextBox;
 
             // Assign values after null checks
             detail.Relation = ddlRelation != null ? ddlRelation.SelectedValue : "Father";
@@ -221,6 +222,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
             detail.Business = (txtBusiness != null) ? txtBusiness.Text : string.Empty;
             detail.Education = (txtEducation != null) ? txtEducation.Text : string.Empty;
             detail.Mobile = (txtMobile != null) ? txtMobile.Text : string.Empty;
+            detail.DOB = (txtDOB != null) ? txtDOB.Text : string.Empty;
 
             familyDetails.Add(detail);
         }
@@ -235,6 +237,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
         public string Business { get; set; }
         public string Education { get; set; }
         public string Mobile { get; set; }
+        public string DOB { get; set; }
     }
 
     protected void lnkBtnSubmit_click(object sender, EventArgs e)
@@ -255,6 +258,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                 familyTable.Columns.Add("Business", typeof(string));
                 familyTable.Columns.Add("Education", typeof(string));
                 familyTable.Columns.Add("Mobile", typeof(string));
+                familyTable.Columns.Add("DOB", typeof(string));
 
                 foreach (GridViewRow row in gvFamilyDetails.Rows)
                 {
@@ -263,8 +267,9 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                     TextBox txtBusiness = (TextBox)row.FindControl("txtBusiness");
                     TextBox txtEducation = (TextBox)row.FindControl("txtEducation");
                     TextBox txtMobile = (TextBox)row.FindControl("txtMobile");
+                    TextBox txtDOB = (TextBox)row.FindControl("txtDOB");
 
-                    if (ddlRelation.SelectedValue == "" || txtName.Text.Trim() == "" || txtBusiness.Text.Trim() == "" || txtEducation.Text.Trim() == "" || txtMobile.Text.Trim() == "")
+                    if (ddlRelation.SelectedValue == "" || txtName.Text.Trim() == "" || txtDOB.Text.Trim() == "" || txtBusiness.Text.Trim() == "" || txtEducation.Text.Trim() == "" || txtMobile.Text.Trim() == "")
                     {
                         IsValidated = false;
                     }
@@ -275,6 +280,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                     dataRow["Business"] = txtBusiness.Text;
                     dataRow["Education"] = txtEducation.Text;
                     dataRow["Mobile"] = txtMobile.Text;
+                    dataRow["DOB"] = txtDOB.Text;
 
                     familyTable.Rows.Add(dataRow);
 

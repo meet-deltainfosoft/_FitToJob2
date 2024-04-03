@@ -10,7 +10,7 @@ using System.IO;
 /// </summary>
 public class Registration1BLL
 {
-	 #region Declarations
+    #region Declarations
     private Registration1DAL _registrationDAL;
     private GeneralDAL _generalDAL;
     private Registration1DTO _registrationDTO;
@@ -212,6 +212,18 @@ public class Registration1BLL
         }
     }
 
+    public string permanentPinCode
+    {
+        set
+        {
+            _registrationDTO.permanentPinCode = value;
+        }
+        get
+        {
+            return _registrationDTO.permanentPinCode;
+        }
+    }
+
     public bool IsNew
     {
         get
@@ -249,7 +261,7 @@ public class Registration1BLL
             {
                 sl.Add("LastName", "Last Name cannot be blank.");
             }
-            
+
             if (_registrationDTO.MobileNo == null)
             {
                 sl.Add("MobileNo", "Mobile No. cannot be blank.");
@@ -290,6 +302,16 @@ public class Registration1BLL
                 if (_registrationDTO.Address.Length > 500)
                     sl.Add("Address", "Address can not be greater then 500 characters.");
             }
+            if (_registrationDTO.permanentPinCode == null)
+            {
+                sl.Add("Pincode", "Pincode cannot be blank.");
+
+            }
+            //else if (_registrationDTO.permanentPinCode != null)
+            //{
+            //    if (_registrationDTO.permanentPinCode.Length > 6)
+            //        sl.Add("Pincode", "Pincode can not be greater then 6 characters.");
+            //}
 
             if (_registrationDTO.Resume != null)
             {

@@ -217,7 +217,7 @@
                         </div>
                         <div class="col-lg-3 col-sm-12">
                             <div class="form-group">
-                                <asp:Label runat="server" ID="lblPF" Text="UAN"></asp:Label>
+                                <asp:Label runat="server" ID="lblPF" Text="UAN Number"></asp:Label>
                                 <asp:TextBox runat="server" ID="txtPF" CssClass="form-control" MaxLength="12" TabIndex="1">
                                 </asp:TextBox>
                             </div>
@@ -250,7 +250,7 @@
                                     <asp:TextBox ID="txtresidentialAddress" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
-                                    <asp:Label ID="lblresidentialPost" runat="server" Text="Post"></asp:Label>
+                                    <asp:Label ID="lblresidentialPost" runat="server" Text="Taluka"></asp:Label>
                                     <asp:TextBox ID="txtresidentialPost" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
@@ -268,7 +268,11 @@
                                         ValidationExpression="^\d{6}$" ErrorMessage="PIN code must be exactly 6 digits."
                                         Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </div>
-                                <div class="col-lg-12 col-sm-12">
+                                 <div class="col-lg-6 col-sm-12">
+                                    <asp:Label ID="lblresidentialState" runat="server" Text="State"></asp:Label>
+                                    <asp:TextBox ID="txtresidentialState" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
                                     <asp:Label ID="lblresidentialMobileNo" runat="server" Text="Mobile No"></asp:Label>
                                     <asp:TextBox ID="txtresidentialMobileNo" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
                                 </div>
@@ -285,7 +289,7 @@
                                     <asp:TextBox ID="txtPermanentAddress" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
-                                    <asp:Label ID="lblPermanentPost" runat="server" Text="Permanent Post"></asp:Label>
+                                    <asp:Label ID="lblPermanentPost" runat="server" Text="Permanent Taluka"></asp:Label>
                                     <asp:TextBox ID="txtPermanentPost" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
@@ -303,7 +307,11 @@
                                         ValidationExpression="^\d{6}$" ErrorMessage="PIN code must be exactly 6 digits."
                                         Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
                                 </div>
-                                <div class="col-lg-12 col-sm-12">
+                                 <div class="col-lg-6 col-sm-12">
+                                    <asp:Label ID="lblPermanentState" runat="server" Text="State"></asp:Label>
+                                    <asp:TextBox ID="txtPermanentState" runat="server" CssClass="form-control"></asp:TextBox>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
                                     <asp:Label ID="lblPermanentMobileNo" runat="server" Text="Mobile No"></asp:Label>
                                     <asp:TextBox ID="txtPermanentMobileNo" runat="server" CssClass="form-control" onkeypress="return isNumber(event)"
                                         MaxLength="10" ReadOnly="true"></asp:TextBox>
@@ -355,7 +363,7 @@
                                 AutoPostBack="true" OnTextChanged="txtNomineeDOB_TextChanged"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblNomineeAge" runat="server" Text="age"></asp:Label>
+                            <asp:Label ID="lblNomineeAge" runat="server" Text="Nominee Age"></asp:Label>
                             <asp:TextBox ID="txtNomineeAge" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
@@ -372,16 +380,16 @@
                                 Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblDukeReferences" runat="server" Text="Duke Management References"></asp:Label>
+                            <asp:Label ID="lblDukeReferences" runat="server" Text="Company Reference Name"></asp:Label>
                             <asp:TextBox ID="txtDukeReferences" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblDukeReferencesMobileNo" runat="server" Text="Duke References Mobile Number"></asp:Label>
+                            <asp:Label ID="lblDukeReferencesMobileNo" runat="server" Text="Company Reference Mobile Number"></asp:Label>
                             <asp:TextBox ID="txtDukeReferencesMobileNo" runat="server" CssClass="form-control"
                                 onkeypress="return isNumber(event)" MaxLength="10"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
-                            <asp:Label ID="lblVillageNotableRefernces" runat="server" Text="Village References"></asp:Label>
+                            <asp:Label ID="lblVillageNotableRefernces" runat="server" Text="Village References Name"></asp:Label>
                             <asp:TextBox ID="txtVillageNotableRefernces" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="col-lg-3 col-sm-12">
@@ -389,7 +397,7 @@
                             <asp:TextBox ID="txtVillageNotableReferncesMobileNo" runat="server" CssClass="form-control"
                                 onkeypress="return isNumber(event)" MaxLength="10"></asp:TextBox>
                         </div>
-                        <div class="col-lg-3 col-sm-12">
+                         <div class="col-lg-3 col-sm-12" runat="server" visible="false">
                             <asp:Label ID="Label1" runat="server" Text="Upload Digital Signature"></asp:Label>
                             <%--<asp:FileUpload ID="fuDigitalSignature" runat="server" />--%>
                             <asp:FileUpload ID="fuDigitalSignature" runat="server" class="form-control" />

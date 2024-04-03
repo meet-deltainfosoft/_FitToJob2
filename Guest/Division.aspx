@@ -84,7 +84,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-   <%-- <form id="form1" runat="server">--%>
+    <%-- <form id="form1" runat="server">--%>
     <div class=" containerBorder ">
         <div class="form">
             <div class="formHeader">
@@ -101,6 +101,10 @@
                             <asp:Label runat="server" ID="lblDivisionId" Text="Selected Divisions :" Font-Bold="true"></asp:Label>
                             <span style="color: red">*</span>
                             <br />
+                           <%-- <asp:RadioButtonList runat="server" ID="radDivision" TabIndex="4" RepeatLayout="Table"
+                                RepeatDirection="Horizontal" RepeatColumns="1" OnSelectedIndexChanged="radDivision_SelectedIndexChanged"
+                                AutoPostBack="true">
+                            </asp:RadioButtonList>--%>
                             <asp:CheckBox ID="chkallDivision" runat="server" AutoPostBack="True" Text="Select All"
                                 OnCheckedChanged="chkallDivision_CheckedChanged" Font-Bold="true" Visible="false" />
                             <asp:CheckBoxList runat="server" ID="chkDivision" TabIndex="4" RepeatLayout="Table"
@@ -113,7 +117,7 @@
                 <div class="formFooter">
                     <div class="row">
                         <div class="col-lg-8 m-1">
-                            <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
+                            <asp:Button runat="server" ID="btnOk" Text="Save & Next" OnClick="btnOk_Click" class="btn custom-button"
                                 Style="height: 30px; width: 200px; font-size: 15px;" />
                             <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
                                 class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
