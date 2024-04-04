@@ -20,7 +20,7 @@ public partial class Guest_Division : System.Web.UI.Page
                 {
                     lblTitle.Text = "વિભાગ એન્ટ્રી - [નવો મોડ]";
                     lblDivisionId.Text = "વિભાગ";
-                    chkallDivision.Text = "બધા પસંદ કરો";
+                    rbtnAllDivision.Text = "બધા પસંદ કરો";
                     btnOk.Text = "સાચવો";
                     btnCancel.Text = "રદ કરો";
                 }
@@ -28,7 +28,7 @@ public partial class Guest_Division : System.Web.UI.Page
                 {
                     lblTitle.Text = "विभाजन एंट्री - [नया मोड]";
                     lblDivisionId.Text = "विभाजन वर्ग";
-                    chkallDivision.Text = "सबका चयन करें";
+                    rbtnAllDivision.Text = "सबका चयन करें";
                     btnOk.Text = "सहेजें";
                     btnCancel.Text = "रद्द करें";
                 }
@@ -54,8 +54,8 @@ public partial class Guest_Division : System.Web.UI.Page
                     {
                         if (Convert.ToBoolean(Session["IsApproved"]) == true)
                         {
-                            chkallDivision.Enabled = false;
-                            chkDivision.Enabled = false;
+                            rbtnAllDivision.Enabled = false;
+                            rbtnDivision.Enabled = false;
                             ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
                         }
                     }
@@ -98,7 +98,7 @@ public partial class Guest_Division : System.Web.UI.Page
 
                     li.Text = dtr[1].ToString();
                     li.Value = dtr[0].ToString();
-                    chkDivision.Items.Add(li);
+                    rbtnDivision.Items.Add(li);
 
                     li = null;
                 }
@@ -109,24 +109,24 @@ public partial class Guest_Division : System.Web.UI.Page
         {
         }
     }
-    protected void chkallDivision_CheckedChanged(object sender, EventArgs e)
+    protected void rbtnAllDivision_CheckedChanged(object sender, EventArgs e)
     {
         try
         {
-            if (chkallDivision.Checked == true)
+            if (rbtnAllDivision.Checked == true)
             {
-                foreach (ListItem chkall in chkDivision.Items)
+                foreach (ListItem chkall in rbtnDivision.Items)
                 {
                     chkall.Selected = true;
                     string k = "";
-                    for (int i = 0; i < chkDivision.Items.Count; i++)
+                    for (int i = 0; i < rbtnDivision.Items.Count; i++)
                     {
-                        if (chkDivision.Items[i].Selected)
+                        if (rbtnDivision.Items[i].Selected)
                         {
                             if (k != null && k != "")
-                                k = k + "," + chkDivision.Items[i].Value;
+                                k = k + "," + rbtnDivision.Items[i].Value;
                             else
-                                k = k + chkDivision.Items[i].Value;
+                                k = k + rbtnDivision.Items[i].Value;
                         }
                     }
 
@@ -135,7 +135,7 @@ public partial class Guest_Division : System.Web.UI.Page
             }
             else
             {
-                foreach (ListItem chkall in chkDivision.Items)
+                foreach (ListItem chkall in rbtnDivision.Items)
                 {
                     chkall.Selected = false;
                 }
@@ -174,17 +174,17 @@ public partial class Guest_Division : System.Web.UI.Page
                 string UtilitieIds = null;
                 string userId = null;
 
-                if (chkDivision.Items.Count > 0)
+                if (rbtnDivision.Items.Count > 0)
                 {
-                    for (int i = 0; i < chkDivision.Items.Count; i++)
+                    for (int i = 0; i < rbtnDivision.Items.Count; i++)
                     {
-                        if (chkDivision.Items[i].Selected)
+                        if (rbtnDivision.Items[i].Selected)
                         {
 
                             if (UtilitieIds != null && UtilitieIds != "")
-                                UtilitieIds = UtilitieIds + "," + chkDivision.Items[i].Value;
+                                UtilitieIds = UtilitieIds + "," + rbtnDivision.Items[i].Value;
                             else
-                                UtilitieIds = UtilitieIds + chkDivision.Items[i].Value;
+                                UtilitieIds = UtilitieIds + rbtnDivision.Items[i].Value;
                         }
                     }
 
@@ -265,22 +265,22 @@ public partial class Guest_Division : System.Web.UI.Page
             dataAdapter.Fill(dataSet);
             foreach (DataRow row in dataSet.Tables[0].Rows)
             {
-                for (int i = 0; i < chkDivision.Items.Count; i++)
+                for (int i = 0; i < rbtnDivision.Items.Count; i++)
                 {
                     string columnName = "UtilitieId";
-                    if (chkDivision.Items[i].Value == row[columnName].ToString())
+                    if (rbtnDivision.Items[i].Value == row[columnName].ToString())
                     {
                         bool isChecked = Convert.ToBoolean(row["IsChecked"]);
-                        chkDivision.Items[i].Selected = isChecked;
+                        rbtnDivision.Items[i].Selected = isChecked;
 
                         if (CandidateId != null && CandidateId != "")
-                            CandidateId = CandidateId + "," + chkDivision.Items[i].Value;
+                            CandidateId = CandidateId + "," + rbtnDivision.Items[i].Value;
                         else
-                            CandidateId = CandidateId + chkDivision.Items[i].Value;
+                            CandidateId = CandidateId + rbtnDivision.Items[i].Value;
                     }
                 }
             }
-
+           
         }
         catch (Exception ex)
         {

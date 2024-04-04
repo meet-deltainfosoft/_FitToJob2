@@ -379,10 +379,10 @@
                     </div>
                     <div class="col-lg-4 col-sm-12">
                         <div class="form-group">
-                            <asp:Label ID="lblresidentialPinCode" runat="server" Text="PinCode :"></asp:Label>
+                            <asp:Label ID="lblResidentPinCode" runat="server" Text="PinCode :"></asp:Label>
                             <span style="color: red">*</span>
-                            <asp:TextBox ID="txtresidentialPinCode" runat="server" CssClass="form-control" onkeypress="return isNumber(event)" AutoCompleteType="Disabled" TabIndex="10"></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="txtresidentialPinCode"
+                            <asp:TextBox ID="txtResidentPinCode" runat="server" CssClass="form-control" onkeypress="return isNumber(event)" AutoCompleteType="Disabled" TabIndex="10"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="txtResidentPinCode"
                                  ValidationExpression="^\d{6}$" ErrorMessage="PIN code must be exactly 6 digits."
                                 Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
                         </div>
@@ -394,7 +394,7 @@
                             <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" TabIndex="11" CssClass="form-control"
                                 AutoCompleteType="Disabled">
                             </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="txtAddress"
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtAddress"
                                 ErrorMessage="Address is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>

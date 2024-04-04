@@ -115,11 +115,17 @@
                             <br />
                             <%-- <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
                         </asp:DropDownList>--%>
-                            <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" Text="Select All"
+
+                         <asp:RadioButton ID="rbtnAllStaffCategory" runat="server" AutoPostBack="True" Text="Select All"
+                                OnCheckedChanged="rbtnAllStaffCategory_CheckedChanged" Font-Bold="true" Visible="false" />
+                            <asp:RadioButtonList runat="server" ID="rbtnStaffCategory" TabIndex="4" RepeatLayout="Table"
+                                RepeatDirection="Horizontal" RepeatColumns="6" CellPadding="8">
+                            </asp:RadioButtonList>
+                            <%--<asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" Text="Select All"
                                 OnCheckedChanged="chkallStaffCategory_CheckedChanged" Font-Bold="true" Visible="false" />
                             <asp:CheckBoxList runat="server" ID="chkStaffCategory" TabIndex="4" RepeatLayout="Table"
                                 RepeatDirection="Horizontal" RepeatColumns="5">
-                            </asp:CheckBoxList>
+                            </asp:CheckBoxList>--%>
                         </div>
                     </div>
                 </div>

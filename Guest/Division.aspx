@@ -101,15 +101,16 @@
                             <asp:Label runat="server" ID="lblDivisionId" Text="Selected Divisions :" Font-Bold="true"></asp:Label>
                             <span style="color: red">*</span>
                             <br />
-                           <%-- <asp:RadioButtonList runat="server" ID="radDivision" TabIndex="4" RepeatLayout="Table"
-                                RepeatDirection="Horizontal" RepeatColumns="1" OnSelectedIndexChanged="radDivision_SelectedIndexChanged"
-                                AutoPostBack="true">
-                            </asp:RadioButtonList>--%>
-                            <asp:CheckBox ID="chkallDivision" runat="server" AutoPostBack="True" Text="Select All"
+                            <asp:RadioButton ID="rbtnAllDivision" runat="server" AutoPostBack="True" Text="Select All"
+                                OnCheckedChanged="rbtnAllDivision_CheckedChanged" Font-Bold="true" Visible="false" />
+                            <asp:RadioButtonList runat="server" ID="rbtnDivision" TabIndex="4" RepeatLayout="Table"
+                                RepeatDirection="Horizontal" RepeatColumns="1" CellPadding="8">
+                            </asp:RadioButtonList>
+                            <%--    <asp:CheckBox ID="chkallDivision" runat="server" AutoPostBack="True" Text="Select All"
                                 OnCheckedChanged="chkallDivision_CheckedChanged" Font-Bold="true" Visible="false" />
                             <asp:CheckBoxList runat="server" ID="chkDivision" TabIndex="4" RepeatLayout="Table"
                                 RepeatDirection="Horizontal" RepeatColumns="1">
-                            </asp:CheckBoxList>
+                            </asp:CheckBoxList>--%>
                         </div>
                     </div>
                 </div>

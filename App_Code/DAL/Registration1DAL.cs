@@ -36,7 +36,7 @@ public class Registration1DAL
             sqlCmd.Connection = _generalDAL.ActiveSQLConnection();
             sqlCmd.CommandType = CommandType.Text;
             sqlCmd.CommandText = " INSERT INTO Registrations(RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State," +
-                                 " InsertedOn,LastUpdatedOn,Address,permanentPinCode)" +
+                                 " InsertedOn,LastUpdatedOn,Address,ResidentPinCode)" +
                 //" InsertedByUserId,LastUpdatedByUserId,Address)" +
                                  " VALUES('" + _registrationDTO.RegistrationId + "', " +
                                  ((_registrationDTO.AadharCardNo == null) ? "NULL" : "'" + _registrationDTO.AadharCardNo.Replace("'", "''") + "'") + "," +
@@ -52,7 +52,7 @@ public class Registration1DAL
                                  " GETDATE(),GETDATE()," +
                 //" '" + MySession.UserUnique + "','" + MySession.UserUnique + "'," +
                                  ((_registrationDTO.Address == null) ? "NULL" : "'" + _registrationDTO.Address + "'") +
-                                  ((_registrationDTO.permanentPinCode == null) ? "NULL" : "'" + _registrationDTO.permanentPinCode.Replace("'", "''") + "'") + "," +
+                                  ((_registrationDTO.ResidentPinCode == null) ? "NULL" : "'" + _registrationDTO.ResidentPinCode.Replace("'", "''") + "'") + "," +
                                  " );" +
                                  " Select '" + _registrationDTO.RegistrationId + "'";
 
@@ -124,7 +124,7 @@ public class Registration1DAL
                                  " ,LastUpdatedOn=GETDATE()" +
                 //" ,LastUpdatedByUserId='" + MySession.UserUnique + "'" +
                                  " ,Address =" + ((_registrationDTO.Address == null) ? "NULL" : "'" + _registrationDTO.Address.Replace("'", "''") + "'") +
-                                  " ,permanentPinCode =" + ((_registrationDTO.permanentPinCode == null) ? "NULL" : "'" + _registrationDTO.permanentPinCode.Replace("'", "''") + "'") +
+                                  " ,ResidentPinCode =" + ((_registrationDTO.ResidentPinCode == null) ? "NULL" : "'" + _registrationDTO.ResidentPinCode.Replace("'", "''") + "'") +
                                  " WHERE RegistrationId='" + _registrationDTO.RegistrationId + "'";
 
             sqlCmd.ExecuteNonQuery();
@@ -236,10 +236,10 @@ public class Registration1DAL
                 else
                     _registrationDTO.Address = null;
 
-                if (sqlDr["permanentPinCode"] != DBNull.Value)
-                    _registrationDTO.permanentPinCode = sqlDr["permanentPinCode"].ToString();
+                if (sqlDr["ResidentPinCode"] != DBNull.Value)
+                    _registrationDTO.ResidentPinCode = sqlDr["ResidentPinCode"].ToString();
                 else
-                    _registrationDTO.permanentPinCode = null;
+                    _registrationDTO.ResidentPinCode = null;
 
             }
 
@@ -295,7 +295,7 @@ public class Registration1DAL
             string[] dbname = _generalDAL.ActiveSQLConnection().ConnectionString.ToString().Split(';');
             sqlCmd.CommandText = " Insert Into " + dbname[2].Replace("Initial Catalog=", "") + "Deleted..Registrations(RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State,Address,permanentPinCode" +
                                  " OTP,OTPGeneratedOn,FCMId,LastUpdatedOn, LastUpdatedByUserId, InsertedOn, InsertedByUserId)" +
-                                 " Select RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State,Address,permanentPinCode" +
+                                 " Select RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State,Address,ResidentPinCode" +
                                  " OTP,OTPGeneratedOn,FCMId,InsertedOn,LastUpdatedOn, LastUpdatedByUserId" +
                                  " , getdate(),'" + MySession.UserUnique + "'" +
                                  " FROM Registrations WHERE RegistrationId='" + RegistrationId + "'";

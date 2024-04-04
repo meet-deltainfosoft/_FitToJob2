@@ -414,7 +414,7 @@
                 <div class="mt-1">
                 </div>
                 <div class="row" style="overflow: scroll;">
-                    <asp:GridView runat="server" ID="gvEducationDetails" AutoGenerateColumns="False"
+                    <asp:GridView runat="server" ID="gvEducationDetails" AutoGenerateColumns="false"
                         CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"
                         Width="993px">
                         <AlternatingRowStyle BackColor="White" />

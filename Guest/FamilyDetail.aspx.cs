@@ -241,7 +241,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
     }
 
     protected void lnkBtnSubmit_click(object sender, EventArgs e)
-    {
+        {
         try
         {
             if (Convert.ToBoolean(Session["IsApproved"]) == true)
@@ -258,7 +258,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                 familyTable.Columns.Add("Business", typeof(string));
                 familyTable.Columns.Add("Education", typeof(string));
                 familyTable.Columns.Add("Mobile", typeof(string));
-                familyTable.Columns.Add("DOB", typeof(string));
+             //   familyTable.Columns.Add("DOB", typeof(string));
 
                 foreach (GridViewRow row in gvFamilyDetails.Rows)
                 {
@@ -267,9 +267,9 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                     TextBox txtBusiness = (TextBox)row.FindControl("txtBusiness");
                     TextBox txtEducation = (TextBox)row.FindControl("txtEducation");
                     TextBox txtMobile = (TextBox)row.FindControl("txtMobile");
-                    TextBox txtDOB = (TextBox)row.FindControl("txtDOB");
+                   // TextBox txtDOB = (TextBox)row.FindControl("txtDOB");
 
-                    if (ddlRelation.SelectedValue == "" || txtName.Text.Trim() == "" || txtDOB.Text.Trim() == "" || txtBusiness.Text.Trim() == "" || txtEducation.Text.Trim() == "" || txtMobile.Text.Trim() == "")
+                    if (ddlRelation.SelectedValue == "" || txtName.Text.Trim() == "" || txtBusiness.Text.Trim() == "" || txtEducation.Text.Trim() == "" || txtMobile.Text.Trim() == "")
                     {
                         IsValidated = false;
                     }
@@ -280,7 +280,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                     dataRow["Business"] = txtBusiness.Text;
                     dataRow["Education"] = txtEducation.Text;
                     dataRow["Mobile"] = txtMobile.Text;
-                    dataRow["DOB"] = txtDOB.Text;
+                  //  dataRow["DOB"] = txtDOB.Text;
 
                     familyTable.Rows.Add(dataRow);
 

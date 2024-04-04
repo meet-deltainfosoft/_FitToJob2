@@ -49,8 +49,8 @@ public partial class General_JobProfile : System.Web.UI.Page
                 {
                     if (Convert.ToBoolean(Session["IsApproved"]) == true)
                     {
-                        chkallStaffCategory.Enabled = false;
-                        chkStaffCategory.Enabled = false;
+                        rbtnAllStaffCategory.Enabled = false;
+                        rbtnStaffCategory.Enabled = false;
                         ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
                     }
                 }
@@ -63,7 +63,7 @@ public partial class General_JobProfile : System.Web.UI.Page
                 {
                     lblTitle.Text = "જોબ પ્રોફાઇલ એન્ટ્રી - [નવો મોડ]";
                     lblStaffCategoryId.Text = "સ્ટાફ કેટેગરી";
-                    chkallStaffCategory.Text = "બધા પસંદ કરો";
+                    rbtnAllStaffCategory.Text = "બધા પસંદ કરો";
                     btnOk.Text = "સાચવો";
                     btnCancel.Text = "રદ કરો";
                 }
@@ -71,7 +71,7 @@ public partial class General_JobProfile : System.Web.UI.Page
                 {
                     lblTitle.Text = "जॉब प्रोफ़ाइल एंट्री - [नया मोड]";
                     lblStaffCategoryId.Text = "कर्मचारी वर्ग";
-                    chkallStaffCategory.Text = "सबका चयन करें";
+                    rbtnAllStaffCategory.Text = "सबका चयन करें";
                     btnOk.Text = "सहेजें";
                     btnCancel.Text = "रद्द करें";
                 }
@@ -94,8 +94,8 @@ public partial class General_JobProfile : System.Web.UI.Page
                 {
                     if (Convert.ToBoolean(Session["IsApproved"]) == true)
                     {
-                        chkallStaffCategory.Enabled = false;
-                        chkStaffCategory.Enabled = false;
+                        rbtnAllStaffCategory.Enabled = false;
+                        rbtnStaffCategory.Enabled = false;
                         ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
                     }
                 }
@@ -166,17 +166,17 @@ public partial class General_JobProfile : System.Web.UI.Page
             {
                 string StaffCategoryId = null;
 
-                if (chkStaffCategory.Items.Count > 0)
+                if (rbtnStaffCategory.Items.Count > 0)
                 {
-                    for (int i = 0; i < chkStaffCategory.Items.Count; i++)
+                    for (int i = 0; i < rbtnStaffCategory.Items.Count; i++)
                     {
-                        if (chkStaffCategory.Items[i].Selected)
+                        if (rbtnStaffCategory.Items[i].Selected)
                         {
 
                             if (StaffCategoryId != null && StaffCategoryId != "")
-                                StaffCategoryId = StaffCategoryId + "," + chkStaffCategory.Items[i].Value;
+                                StaffCategoryId = StaffCategoryId + "," + rbtnStaffCategory.Items[i].Value;
                             else
-                                StaffCategoryId = StaffCategoryId + chkStaffCategory.Items[i].Value;
+                                StaffCategoryId = StaffCategoryId + rbtnStaffCategory.Items[i].Value;
                         }
                     }
                     if (StaffCategoryId != null)
@@ -308,22 +308,22 @@ public partial class General_JobProfile : System.Web.UI.Page
 
 
 
-    protected void chkallStaffCategory_CheckedChanged(object sender, EventArgs e)
+    protected void rbtnAllStaffCategory_CheckedChanged(object sender, EventArgs e)
     {
-        if (chkallStaffCategory.Checked == true)
+        if (rbtnAllStaffCategory.Checked == true)
         {
-            foreach (ListItem chkall in chkStaffCategory.Items)
+            foreach (ListItem chkall in rbtnStaffCategory.Items)
             {
                 chkall.Selected = true;
                 string k = "";
-                for (int i = 0; i < chkStaffCategory.Items.Count; i++)
+                for (int i = 0; i < rbtnStaffCategory.Items.Count; i++)
                 {
-                    if (chkStaffCategory.Items[i].Selected)
+                    if (rbtnStaffCategory.Items[i].Selected)
                     {
                         if (k != null && k != "")
-                            k = k + "," + chkStaffCategory.Items[i].Value;
+                            k = k + "," + rbtnStaffCategory.Items[i].Value;
                         else
-                            k = k + chkStaffCategory.Items[i].Value;
+                            k = k + rbtnStaffCategory.Items[i].Value;
                     }
                 }
 
@@ -332,7 +332,7 @@ public partial class General_JobProfile : System.Web.UI.Page
         }
         else
         {
-            foreach (ListItem chkall in chkStaffCategory.Items)
+            foreach (ListItem chkall in rbtnStaffCategory.Items)
             {
                 chkall.Selected = false;
             }
@@ -447,10 +447,10 @@ public partial class General_JobProfile : System.Web.UI.Page
             ddlDepartmentId.SelectedIndex = 0;
             ddlDesignationId.SelectedIndex = 0;
             ddlDivisionId.SelectedIndex = 0;
-            chkStaffCategory.SelectedValue = null;
+            rbtnStaffCategory.SelectedValue = null;
             txtValidfrom.Text = "";
             txtValidto.Text = "";
-            chkallStaffCategory.Checked = false;
+            rbtnAllStaffCategory.Checked = false;
             //ddlStaffCategoryId.SelectedIndex = 0;
 
         }
@@ -526,7 +526,7 @@ public partial class General_JobProfile : System.Web.UI.Page
             //    ddlStaffCategoryId.SelectedValue = _JobProfileBLL.StaffCategoryTextListId.ToString();
 
             if (_JobProfileBLL.StaffCategoryTextListId != null)
-                chkStaffCategory.SelectedValue = _JobProfileBLL.StaffCategoryTextListId;
+                rbtnStaffCategory.SelectedValue = _JobProfileBLL.StaffCategoryTextListId;
 
             if (_JobProfileBLL.ValidFrom != null)
                 txtValidfrom.Text = Convert.ToDateTime(_JobProfileBLL.ValidFrom).ToString("dd-MMM-yyyy");
@@ -635,7 +635,7 @@ public partial class General_JobProfile : System.Web.UI.Page
         {
             ListItem li = new ListItem();
             // ddlStaffCategoryId.Items.Clear();
-            chkStaffCategory.Items.Clear();
+            rbtnStaffCategory.Items.Clear();
             //  li.Text = "<select>";
             //  li.Value = "0";
             ////  ddlStaffCategoryId.Items.Add(li);
@@ -684,7 +684,7 @@ public partial class General_JobProfile : System.Web.UI.Page
 
                 li.Text = dtr[2].ToString();
                 li.Value = dtr[1].ToString();
-                chkStaffCategory.Items.Add(li);
+                rbtnStaffCategory.Items.Add(li);
 
                 li = null;
             }
@@ -728,18 +728,18 @@ public partial class General_JobProfile : System.Web.UI.Page
 
                 foreach (DataRow row in dataSet.Tables[0].Rows)
                 {
-                    for (int i = 0; i < chkStaffCategory.Items.Count; i++)
+                    for (int i = 0; i < rbtnStaffCategory.Items.Count; i++)
                     {
                         string columnName = "CategoryId";
-                        if (chkStaffCategory.Items[i].Value == row[columnName].ToString())
+                        if (rbtnStaffCategory.Items[i].Value == row[columnName].ToString())
                         {
                             bool isChecked = Convert.ToBoolean(row["IsChecked"]);
-                            chkStaffCategory.Items[i].Selected = isChecked;
+                            rbtnStaffCategory.Items[i].Selected = isChecked;
 
                             if (StaffCategoryId != null && StaffCategoryId != "")
-                                StaffCategoryId = StaffCategoryId + "," + chkStaffCategory.Items[i].Value;
+                                StaffCategoryId = StaffCategoryId + "," + rbtnStaffCategory.Items[i].Value;
                             else
-                                StaffCategoryId = StaffCategoryId + chkStaffCategory.Items[i].Value;
+                                StaffCategoryId = StaffCategoryId + rbtnStaffCategory.Items[i].Value;
                         }
                     }
                 }

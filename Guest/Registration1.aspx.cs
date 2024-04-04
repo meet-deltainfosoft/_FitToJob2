@@ -71,7 +71,7 @@ public partial class General_Registration1 : System.Web.UI.Page
                     lblTitle.Text = " નોંધણી એન્ટ્રી -મૂલ્ય - [નવો મોડ]";
                     btnOk.Text = "સાચવો અને આગળ";
                     btnCancel.Text = "રદ કરો";
-                    lblresidentialPinCode.Text = "પીન કોડ";
+                    lblResidentPinCode.Text = "પીન કોડ";
 
                 }
                 else if (Session["Language"].ToString() == "Hindi")
@@ -92,7 +92,7 @@ public partial class General_Registration1 : System.Web.UI.Page
                     lblTitle.Text = "पंजीकरण प्रविष्टि -मूल्य - [नया मोड]";
                     btnOk.Text = "सहेजें और अगला";
                     btnCancel.Text = "रद्द करें";
-                    lblresidentialPinCode.Text = "पिन कोड";
+                    lblResidentPinCode.Text = "पिन कोड";
                 }
             }
 
@@ -107,6 +107,7 @@ public partial class General_Registration1 : System.Web.UI.Page
     {
         try
         {
+            LoadWebForm();
             if (!IsPostBack)
             {
                 if (Session["MobileNo"].ToString() != "" || Session["Language"].ToString() != "")
@@ -132,7 +133,7 @@ public partial class General_Registration1 : System.Web.UI.Page
                             fuPhoto.Enabled = false;
                             fuSelfintravideo.Enabled = false;
                             fuResumeUpload.Enabled = false;
-                            txtresidentialPinCode.Enabled = false;
+                            txtResidentPinCode.Enabled = false;
                             ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
                         }
                     }
@@ -230,10 +231,10 @@ public partial class General_Registration1 : System.Web.UI.Page
             else
                 _registrationBLL.Address = null;
 
-            if (txtresidentialPinCode.Text.Trim().Length > 0)
-                _registrationBLL.permanentPinCode = txtresidentialPinCode.Text.Trim();
+            if (txtResidentPinCode.Text.Trim().Length > 0)
+                _registrationBLL.ResidentPinCode = txtResidentPinCode.Text.Trim();
             else
-                _registrationBLL.permanentPinCode = null;
+                _registrationBLL.ResidentPinCode = null;
 
             SqlCommand sqlCmd = new SqlCommand();
             GeneralDAL objDal = new GeneralDAL();
@@ -458,7 +459,7 @@ public partial class General_Registration1 : System.Web.UI.Page
                 sqlCmd.Parameters.AddWithValue("@PhotoPath", PhotoPath);
                 sqlCmd.Parameters.AddWithValue("@VideoPath", SelfIntroVideoPath);
                 sqlCmd.Parameters.AddWithValue("@ResumePath", Resume);
-                sqlCmd.Parameters.AddWithValue("@ResidentPinCode", txtresidentialPinCode.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@ResidentialPincode", txtResidentPinCode.Text.Trim());
                 sqlCmd.Parameters.AddWithValue("@Action", "InsertRegistration");
 
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
@@ -575,10 +576,10 @@ public partial class General_Registration1 : System.Web.UI.Page
                 lblResume.CssClass = "";
                 fuResumeUpload.CssClass = "error";
             }
-            if (key == "Pincode")
+            if (key == "ResidentPinCode")
             {
-                lblresidentialPinCode.CssClass = "";
-                txtresidentialPinCode.CssClass = "error form-control";
+                lblResidentPinCode.CssClass = "";
+                txtResidentPinCode.CssClass = "error form-control";
             }
 
 
@@ -626,8 +627,8 @@ public partial class General_Registration1 : System.Web.UI.Page
             lblAddress.CssClass = "";
             txtAddress.CssClass = "form-control";
 
-            lblresidentialPinCode.CssClass = "";
-            txtresidentialPinCode.CssClass = "form-control";
+            lblResidentPinCode.CssClass = "";
+            txtResidentPinCode.CssClass = "form-control";
         }
         catch (Exception ex)
         {
@@ -648,7 +649,7 @@ public partial class General_Registration1 : System.Web.UI.Page
             txtDistrict.Text = "";
             txtState.Text = "";
             txtAddress.Text = "";
-            txtresidentialPinCode.Text = "";
+            txtResidentPinCode.Text = "";
 
         }
         catch (Exception ex)
@@ -705,8 +706,8 @@ public partial class General_Registration1 : System.Web.UI.Page
             }
 
 
-            if (_registrationBLL.permanentPinCode != null)
-                txtresidentialPinCode.Text = _registrationBLL.permanentPinCode;
+            if (_registrationBLL.ResidentPinCode != null)
+                txtResidentPinCode.Text = _registrationBLL.ResidentPinCode;
 
         }
         catch (Exception ex)
@@ -778,7 +779,7 @@ public partial class General_Registration1 : System.Web.UI.Page
                         lblPhotoPath.Text = dataSet.Tables[1].Rows[0]["PhotoPath"].ToString();
                         lblSelfIntroPath.Text = dataSet.Tables[1].Rows[0]["VideoPath"].ToString();
                         lblResumePath.Text = dataSet.Tables[1].Rows[0]["ResumePath"].ToString();
-                        txtresidentialPinCode.Text = dataSet.Tables[1].Rows[0]["ResidentPinCode"].ToString();
+                        txtResidentPinCode.Text = dataSet.Tables[1].Rows[0]["ResidentPinCode"].ToString();
                         Registration1DTO _registrationDTO = new Registration1DTO();
                         _registrationDTO.IsNew = false;
                     }

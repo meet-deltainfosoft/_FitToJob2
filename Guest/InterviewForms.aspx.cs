@@ -23,6 +23,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+
             HideErrors();
             if (string.IsNullOrEmpty((string)Session["MobileNo"]) || string.IsNullOrEmpty((string)Session["Language"]))
             {
@@ -96,7 +97,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                     gvEducationDetails.Columns[2].HeaderText = "शिक्षा पास करने का वर्ष";
                     gvEducationDetails.Columns[3].HeaderText = "प्रतिशत";
                 }
-
+               
                 gvEducationDetails.DataBind();
                 GetRegistrationById(Session["MobileNo"].ToString());
 
@@ -286,21 +287,21 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                     DigitalSignature = lblDigitalSignature.Text;
                 }
 
-                if (DigitalSignature == "")
-                {
-                    if (Session["Language"].ToString() == "Gujarati")
-                    {
-                        ShowErrors("err", "ડિજિટલ હસ્તાક્ષર જરૂરી!!");
-                    }
-                    else if (Session["Language"].ToString() == "Gujarati")
-                    {
-                        ShowErrors("err", "डिजिटल हस्ताक्षर आवश्यक!!");
-                    }
-                    else
-                    {
-                        ShowErrors("err", "Digital Signature Required!!");
-                    }
-                }
+                //if (DigitalSignature == "")
+                //{
+                //    if (Session["Language"].ToString() == "Gujarati")
+                //    {
+                //        ShowErrors("err", "ડિજિટલ હસ્તાક્ષર જરૂરી!!");
+                //    }
+                //    else if (Session["Language"].ToString() == "Gujarati")
+                //    {
+                //        ShowErrors("err", "डिजिटल हस्ताक्षर आवश्यक!!");
+                //    }
+                //    else
+                //    {
+                //        ShowErrors("err", "Digital Signature Required!!");
+                //    }
+                //}
 
                 DataTable educationTable = new DataTable();
                 educationTable.Columns.Add("EducationLevel", typeof(string));
@@ -393,8 +394,8 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 sqlCmd.Parameters.AddWithValue("@NomineeName", txtNomineeName.Text);
 
                 sqlCmd.Parameters.AddWithValue("@Post", txtPermanentPost.Text);
-               
-                sqlCmd.Parameters.AddWithValue("@ResidentialState", txtresidentialState.Text);
+
+                sqlCmd.Parameters.AddWithValue("@State", txtresidentialState.Text);
                 sqlCmd.Parameters.AddWithValue("@permanentState", txtPermanentState.Text);
 
 

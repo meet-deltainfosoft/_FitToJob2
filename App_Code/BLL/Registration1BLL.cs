@@ -212,15 +212,15 @@ public class Registration1BLL
         }
     }
 
-    public string permanentPinCode
+    public string ResidentPinCode
     {
         set
         {
-            _registrationDTO.permanentPinCode = value;
+            _registrationDTO.ResidentPinCode = value;
         }
         get
         {
-            return _registrationDTO.permanentPinCode;
+            return _registrationDTO.ResidentPinCode;
         }
     }
 
@@ -302,16 +302,16 @@ public class Registration1BLL
                 if (_registrationDTO.Address.Length > 500)
                     sl.Add("Address", "Address can not be greater then 500 characters.");
             }
-            if (_registrationDTO.permanentPinCode == null)
+            if (_registrationDTO.ResidentPinCode == null)
             {
                 sl.Add("Pincode", "Pincode cannot be blank.");
 
             }
-            //else if (_registrationDTO.permanentPinCode != null)
-            //{
-            //    if (_registrationDTO.permanentPinCode.Length > 6)
-            //        sl.Add("Pincode", "Pincode can not be greater then 6 characters.");
-            //}
+            else if (_registrationDTO.ResidentPinCode != null)
+            {
+                if (_registrationDTO.ResidentPinCode.Length > 6)
+                    sl.Add("Pincode", "PIN code must be exactly 6 digits.");
+            }
 
             if (_registrationDTO.Resume != null)
             {

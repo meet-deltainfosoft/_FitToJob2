@@ -163,11 +163,11 @@
                                 <asp:TextBox runat="server" ID="txtName" CssClass="form-control" Text='<%# Eval("Name") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                         <asp:TemplateField HeaderText="Date Of Birth">
+                       <%--  <asp:TemplateField HeaderText="Date Of Birth">
                             <ItemTemplate>
                                 <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control" Text='<%# Eval("DOB") %>'></asp:TextBox>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
                        <%-- <div class="form-group">
                                 <asp:Label runat="server" ID="lblDOB" Text="Date Of Birth*"></asp:Label>
                                 <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control datepicker" MaxLength="12"

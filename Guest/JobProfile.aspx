@@ -119,12 +119,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            var $checkboxes = $('#<%= chkStaffCategory.ClientID %> input[type="checkbox"]');
-            var checkboxesPerRow = 8;
+            var $radiobtn = $('#<%= rbtnStaffCategory.ClientID %> input[type="radiobtn"]');
+            var radiobtnPerRow = 8;
 
-            $checkboxes.each(function (index) {
-                if (index % checkboxesPerRow === 0) {
-                    $(this).wrap('<div class="checkbox-group"></div>');
+            $radiobtn.each(function (index) {
+                if (index % radiobtnPerRow === 0) {
+                    $(this).wrap('<div class="radiobtn-group"></div>');
                 }
             });
         });
@@ -183,11 +183,16 @@
                             </br>
                             <asp:DropDownList runat="server" Visible="false" ID="ddlStaffCategoryId">
                             </asp:DropDownList>
-                            <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" OnCheckedChanged="chkallStaffCategory_CheckedChanged"
+                             <asp:RadioButton ID="rbtnAllStaffCategory" runat="server" AutoPostBack="True" Text="Select All"
+                                OnCheckedChanged="rbtnAllStaffCategory_CheckedChanged" Font-Bold="true" Visible="false" />
+                            <asp:RadioButtonList runat="server" ID="rbtnStaffCategory" TabIndex="4" RepeatLayout="Table"
+                                RepeatDirection="Horizontal" RepeatColumns="6" CellPadding="8">
+                            </asp:RadioButtonList>
+                          <%--  <asp:CheckBox ID="chkallStaffCategory" runat="server" AutoPostBack="True" OnCheckedChanged="chkallStaffCategory_CheckedChanged"
                                 Text="Select All" Font-Bold="true" Visible="false" />
                             <asp:CheckBoxList runat="server" cc ID="chkStaffCategory" CssClass="horizontal-checkbox-list"
                                 RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="6" TabIndex="4">
-                            </asp:CheckBoxList>
+                            </asp:CheckBoxList>--%>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-12">

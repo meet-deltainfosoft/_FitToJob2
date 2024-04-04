@@ -20,7 +20,7 @@ public partial class Guest_SubCategory : System.Web.UI.Page
                 {
                     lblTitle.Text = "જોબ પ્રોફાઇલ એન્ટ્રી - [નવો મોડ]";
                     lblStaffCategoryId.Text = "સ્ટાફ કેટેગરી";
-                    chkallStaffCategory.Text = "બધા પસંદ કરો";
+                    rbtnAllStaffCategory.Text = "બધા પસંદ કરો";
                     btnOk.Text = "સાચવો";
                     btnCancel.Text = "રદ કરો";
                 }
@@ -28,7 +28,7 @@ public partial class Guest_SubCategory : System.Web.UI.Page
                 {
                     lblTitle.Text = "जॉब प्रोफ़ाइल एंट्री - [नया मोड]";
                     lblStaffCategoryId.Text = "कर्मचारी वर्ग";
-                    chkallStaffCategory.Text = "सबका चयन करें";
+                    rbtnAllStaffCategory.Text = "सबका चयन करें";
                     btnOk.Text = "सहेजें";
                     btnCancel.Text = "रद्द करें";
                 }
@@ -54,8 +54,8 @@ public partial class Guest_SubCategory : System.Web.UI.Page
                     {
                         if (Convert.ToBoolean(Session["IsApproved"]) == true)
                         {
-                            chkallStaffCategory.Enabled = false;
-                            chkStaffCategory.Enabled = false;
+                            rbtnAllStaffCategory.Enabled = false;
+                            rbtnStaffCategory.Enabled = false;
                             ShowErrors("error", "Your Profile is reviwed for change please contact administrator.");
                         }
                     }
@@ -81,7 +81,7 @@ public partial class Guest_SubCategory : System.Web.UI.Page
         {
             ListItem li = new ListItem();
             // ddlStaffCategoryId.Items.Clear();
-            chkStaffCategory.Items.Clear();
+            rbtnStaffCategory.Items.Clear();
 
             string CandidateId = GetCandidateId(Session["MobileNo"].ToString());
             DataSet dataSet = new DataSet();
@@ -108,7 +108,7 @@ public partial class Guest_SubCategory : System.Web.UI.Page
 
                 li.Text = dtr[0].ToString();
                 li.Value = dtr[1].ToString();
-                chkStaffCategory.Items.Add(li);
+                rbtnStaffCategory.Items.Add(li);
 
                 li = null;
             }
@@ -144,7 +144,7 @@ public partial class Guest_SubCategory : System.Web.UI.Page
 
                     li.Text = dtr[1].ToString();
                     li.Value = dtr[0].ToString();
-                    chkStaffCategory.Items.Add(li);
+                    rbtnStaffCategory.Items.Add(li);
 
                     li = null;
                 }
@@ -156,24 +156,24 @@ public partial class Guest_SubCategory : System.Web.UI.Page
         }
     }
 
-    protected void chkallStaffCategory_CheckedChanged(object sender, EventArgs e)
+    protected void rbtnAllStaffCategory_CheckedChanged(object sender, EventArgs e)
     {
         try
         {
-            if (chkallStaffCategory.Checked == true)
+            if (rbtnAllStaffCategory.Checked == true)
             {
-                foreach (ListItem chkall in chkStaffCategory.Items)
+                foreach (ListItem chkall in rbtnStaffCategory.Items)
                 {
                     chkall.Selected = true;
                     string k = "";
-                    for (int i = 0; i < chkStaffCategory.Items.Count; i++)
+                    for (int i = 0; i < rbtnStaffCategory.Items.Count; i++)
                     {
-                        if (chkStaffCategory.Items[i].Selected)
+                        if (rbtnStaffCategory.Items[i].Selected)
                         {
                             if (k != null && k != "")
-                                k = k + "," + chkStaffCategory.Items[i].Value;
+                                k = k + "," + rbtnStaffCategory.Items[i].Value;
                             else
-                                k = k + chkStaffCategory.Items[i].Value;
+                                k = k + rbtnStaffCategory.Items[i].Value;
                         }
                     }
 
@@ -182,7 +182,7 @@ public partial class Guest_SubCategory : System.Web.UI.Page
             }
             else
             {
-                foreach (ListItem chkall in chkStaffCategory.Items)
+                foreach (ListItem chkall in rbtnStaffCategory.Items)
                 {
                     chkall.Selected = false;
                 }
@@ -220,17 +220,17 @@ public partial class Guest_SubCategory : System.Web.UI.Page
 
                 string StaffCategoryId = null;
 
-                if (chkStaffCategory.Items.Count > 0)
+                if (rbtnStaffCategory.Items.Count > 0)
                 {
-                    for (int i = 0; i < chkStaffCategory.Items.Count; i++)
+                    for (int i = 0; i < rbtnStaffCategory.Items.Count; i++)
                     {
-                        if (chkStaffCategory.Items[i].Selected)
+                        if (rbtnStaffCategory.Items[i].Selected)
                         {
 
                             if (StaffCategoryId != null && StaffCategoryId != "")
-                                StaffCategoryId = StaffCategoryId + "," + chkStaffCategory.Items[i].Value;
+                                StaffCategoryId = StaffCategoryId + "," + rbtnStaffCategory.Items[i].Value;
                             else
-                                StaffCategoryId = StaffCategoryId + chkStaffCategory.Items[i].Value;
+                                StaffCategoryId = StaffCategoryId + rbtnStaffCategory.Items[i].Value;
                         }
                     }
 
@@ -303,17 +303,17 @@ public partial class Guest_SubCategory : System.Web.UI.Page
             dataAdapter.Fill(dataSet);
             foreach (DataRow row in dataSet.Tables[0].Rows)
             {
-                for (int i = 0; i < chkStaffCategory.Items.Count; i++)
+                for (int i = 0; i < rbtnStaffCategory.Items.Count; i++)
                 {
                     string columnName = "SubCategoryId";
-                    if (chkStaffCategory.Items[i].Value == row[columnName].ToString())
+                    if (rbtnStaffCategory.Items[i].Value == row[columnName].ToString())
                     {
-                        chkStaffCategory.Items[i].Selected = true;
+                        rbtnStaffCategory.Items[i].Selected = true;
 
                         if (SubCategoryId != null && SubCategoryId != "")
-                            SubCategoryId = SubCategoryId + "," + chkStaffCategory.Items[i].Value;
+                            SubCategoryId = SubCategoryId + "," + rbtnStaffCategory.Items[i].Value;
                         else
-                            SubCategoryId = SubCategoryId + chkStaffCategory.Items[i].Value;
+                            SubCategoryId = SubCategoryId + rbtnStaffCategory.Items[i].Value;
                     }
                 }
             }
