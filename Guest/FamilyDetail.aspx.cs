@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 public partial class Guest_FamilyDetail : System.Web.UI.Page
 {
@@ -241,7 +242,7 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
     }
 
     protected void lnkBtnSubmit_click(object sender, EventArgs e)
-        {
+    {
         try
         {
             if (Convert.ToBoolean(Session["IsApproved"]) == true)
@@ -254,11 +255,12 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                 bool IsValidated = true;
                 DataTable familyTable = new DataTable();
                 familyTable.Columns.Add("Relation", typeof(string));
+                familyTable.Columns.Add("DOB", typeof(string));
                 familyTable.Columns.Add("Name", typeof(string));
                 familyTable.Columns.Add("Business", typeof(string));
                 familyTable.Columns.Add("Education", typeof(string));
                 familyTable.Columns.Add("Mobile", typeof(string));
-             //   familyTable.Columns.Add("DOB", typeof(string));
+                
 
                 foreach (GridViewRow row in gvFamilyDetails.Rows)
                 {
@@ -267,20 +269,37 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                     TextBox txtBusiness = (TextBox)row.FindControl("txtBusiness");
                     TextBox txtEducation = (TextBox)row.FindControl("txtEducation");
                     TextBox txtMobile = (TextBox)row.FindControl("txtMobile");
-                   // TextBox txtDOB = (TextBox)row.FindControl("txtDOB");
+                    TextBox txtDOB = (TextBox)row.FindControl("txtDOB");
 
                     if (ddlRelation.SelectedValue == "" || txtName.Text.Trim() == "" || txtBusiness.Text.Trim() == "" || txtEducation.Text.Trim() == "" || txtMobile.Text.Trim() == "")
                     {
                         IsValidated = false;
                     }
-
                     DataRow dataRow = familyTable.NewRow();
                     dataRow["Relation"] = ddlRelation.SelectedValue;
                     dataRow["Name"] = txtName.Text;
                     dataRow["Business"] = txtBusiness.Text;
                     dataRow["Education"] = txtEducation.Text;
                     dataRow["Mobile"] = txtMobile.Text;
-                  //  dataRow["DOB"] = txtDOB.Text;
+                    //dataRow["DOB"] = "2024-01-01";
+                    dataRow["DOB"] = Convert.ToDateTime(txtDOB.Text).ToString("dd-MMM-yyyy");
+
+                    //if (txtDOB.Text.Trim() != "")
+                    //{
+                    //    string dateString = txtDOB.Text;
+                    //    string format = "yyyy-MM-dd";
+                    //    dataRow["DOB"] = DateTime.ParseExact(dateString, format, CultureInfo.InvariantCulture);
+                    //}
+                    //else
+                    //{
+                    //    dataRow["DOB"] = "";
+                    //}
+
+
+
+
+
+
 
                     familyTable.Rows.Add(dataRow);
 

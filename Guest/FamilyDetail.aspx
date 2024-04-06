@@ -44,8 +44,46 @@
         integrity="sha512-jN53oRtrw3z+3iPYAK5QVrAJS3IdNTe8c0gkyaDA5ZIUVsm+Jb94ZvLNKLO5U+Q98s3UfcddoGezpKNBo1i5Hg=="
         crossorigin="anonymous" />
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../jQuery/Timepicker/jquery.ui.timepicker.js"></script>
+    <link type="text/css" href="../jQuery/Timepicker/jquery-ui-1.8.14.custom.css" />
+    <link type="text/css" href="../jQuery/Timepicker/jquery.ui.timepicker.css" />
+    <script type="text/javascript" src="../jquery.tablesorter/jquery.tablesorter-update.js"></script>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery UI library for Datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Include Bootstrap DateTimePicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <!-- Include Bootstrap DateTimePicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
         var j = jQuery.noConflict();
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Initialize Datepicker for date of birth
+            $('.datepicker').datepicker({
+                dateFormat: 'dd-M-yy', // Define your desired date format
+                changeMonth: true,
+                changeYear: true,
+                yearRange: 'c-100:c' // Restrict to 100 years ago up to the current year
+            });
+
+            // Initialize DateTimePicker for datetime of birth
+            $('.datetimepicker').datetimepicker({
+                format: 'dd-M-yy', // Define your desired datetime format
+                showClose: true,
+                showTodayButton: true,
+                toolbarPlacement: 'top',
+                useCurrent: false // Do not set the value to current datetime
+            });
+        });
     </script>
     <style type="text/css">
         .header-style
@@ -163,12 +201,18 @@
                                 <asp:TextBox runat="server" ID="txtName" CssClass="form-control" Text='<%# Eval("Name") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                       <%--  <asp:TemplateField HeaderText="Date Of Birth">
+                        <%--  <asp:TemplateField HeaderText="Date Of Birth">
                             <ItemTemplate>
-                                <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control" Text='<%# Eval("DOB") %>'></asp:TextBox>
+                            <input type="text" id="txtDOB" class="form-control datepicker" value='<%# Eval("DOB") %>' />
+                            
                             </ItemTemplate>
                         </asp:TemplateField>--%>
-                       <%-- <div class="form-group">
+                        <asp:TemplateField HeaderText="Date Of Birth (Date)">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control datepicker" Text='<%# Eval("DOB", "{0:dd-MM-yyyy}") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <%-- <div class="form-group">
                                 <asp:Label runat="server" ID="lblDOB" Text="Date Of Birth*"></asp:Label>
                                 <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control datepicker" MaxLength="12"
                                     TabIndex="1">
