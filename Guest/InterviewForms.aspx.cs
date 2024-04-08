@@ -181,6 +181,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
             }
         }
     }
+    
     private void GetRegistrationById(string MobileNo)
     {
         try
@@ -258,6 +259,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
         {
         }
     }
+    
     protected void lnkBtnSubmit_click(object sender, EventArgs e)
     {
         try
@@ -447,6 +449,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
             ShowErrors("err", "An error occurred while processing the request.");
         }
     }
+    
     protected void chkSameAsAbove_OnCheckedChanged(object sender, EventArgs e)
     {
         try
@@ -468,6 +471,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
         }
 
     }
+    
     public class EducationDetail
     {
         public string EducationLevel { get; set; }
