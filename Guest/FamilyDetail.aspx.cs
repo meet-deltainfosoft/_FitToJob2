@@ -281,19 +281,9 @@ public partial class Guest_FamilyDetail : System.Web.UI.Page
                     dataRow["Business"] = txtBusiness.Text;
                     dataRow["Education"] = txtEducation.Text;
                     dataRow["Mobile"] = txtMobile.Text;
-                    //dataRow["DOB"] = "2024-01-01";
                     dataRow["DOB"] = Convert.ToDateTime(txtDOB.Text).ToString("dd-MMM-yyyy");
 
-                    //if (txtDOB.Text.Trim() != "")
-                    //{
-                    //    string dateString = txtDOB.Text;
-                    //    string format = "yyyy-MM-dd";
-                    //    dataRow["DOB"] = DateTime.ParseExact(dateString, format, CultureInfo.InvariantCulture);
-                    //}
-                    //else
-                    //{
-                    //    dataRow["DOB"] = "";
-                    //}
+                    
 
 
 

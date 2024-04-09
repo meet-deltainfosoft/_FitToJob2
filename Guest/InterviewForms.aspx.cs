@@ -70,7 +70,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                         txtVillageNotableRefernces.Enabled = false;
                         txtDukeReferencesMobileNo.Enabled = false;
                         txtVillageNotableReferncesMobileNo.Enabled = false;
-                       
+
                         txtPermanentState.Enabled = false;
                         txtresidentialState.Enabled = false;
 
@@ -97,7 +97,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                     gvEducationDetails.Columns[2].HeaderText = "शिक्षा पास करने का वर्ष";
                     gvEducationDetails.Columns[3].HeaderText = "प्रतिशत";
                 }
-               
+
                 gvEducationDetails.DataBind();
                 GetRegistrationById(Session["MobileNo"].ToString());
 
@@ -181,7 +181,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
             }
         }
     }
-    
+
     private void GetRegistrationById(string MobileNo)
     {
         try
@@ -202,16 +202,8 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 txtFullName.Text = dataSet.Tables[0].Rows[0]["FullName"].ToString();
                 txtDOB.Text = dataSet.Tables[0].Rows[0]["DOB"].ToString();
                 txtPF.Text = dataSet.Tables[0].Rows[0]["PFNo"].ToString();
-                txtresidentialAddress.Text = dataSet.Tables[0].Rows[0]["ResidentAddress"].ToString();
-                txtresidentialPinCode.Text = dataSet.Tables[0].Rows[0]["ResidentPinCode"].ToString();
-                txtresidentialVillage.Text = dataSet.Tables[0].Rows[0]["ResidentVillage"].ToString();
-                txtresidentialDistrict.Text = dataSet.Tables[0].Rows[0]["ResidentDistrict"].ToString();
-                txtresidentialMobileNo.Text = dataSet.Tables[0].Rows[0]["MobileNo"].ToString();
-                txtPermanentAddress.Text = dataSet.Tables[0].Rows[0]["permanentAddress"].ToString();
-                txtPermanentPinCode.Text = dataSet.Tables[0].Rows[0]["permanentPinCode"].ToString();
-                txtPermanentVillage.Text = dataSet.Tables[0].Rows[0]["permanentVillage"].ToString();
-                txtPermanentDistrict.Text = dataSet.Tables[0].Rows[0]["permanentDistrict"].ToString();
-                txtPermanentMobileNo.Text = dataSet.Tables[0].Rows[0]["MobileNo"].ToString();
+
+
                 ddlBloodGroup.SelectedValue = dataSet.Tables[0].Rows[0]["BloodGroup"].ToString();
                 rblCategory.SelectedValue = dataSet.Tables[0].Rows[0]["Category"].ToString();
                 txtAadharCard.Text = dataSet.Tables[0].Rows[0]["AadharCardNo"].ToString();
@@ -222,16 +214,30 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 txtNomineeAge.Text = dataSet.Tables[0].Rows[0]["NomineeAGE"].ToString();
                 txtRelationWithNominee.Text = dataSet.Tables[0].Rows[0]["NomineeWithRelation"].ToString();
                 rblMaritalStatus.SelectedValue = dataSet.Tables[0].Rows[0]["MaritalStatus"].ToString();
-                txtresidentialPost.Text = dataSet.Tables[0].Rows[0]["Post"].ToString();
-                txtPermanentPost.Text = dataSet.Tables[0].Rows[0]["Post"].ToString();
+
                 txtEmail.Text = dataSet.Tables[0].Rows[0]["Email"].ToString();
                 lblDigitalSignature.Text = dataSet.Tables[0].Rows[0]["DigitSignaturePath"].ToString();
                 txtDukeReferences.Text = dataSet.Tables[0].Rows[0]["DukeReferences"].ToString();
                 txtVillageNotableRefernces.Text = dataSet.Tables[0].Rows[0]["VillagePersonReferences"].ToString();
                 txtDukeReferencesMobileNo.Text = dataSet.Tables[0].Rows[0]["DukeReferencesMobileNo"].ToString();
                 txtVillageNotableReferncesMobileNo.Text = dataSet.Tables[0].Rows[0]["VillagePersonReferencesMobileNo"].ToString();
-                txtPermanentState.Text = dataSet.Tables[0].Rows[0]["permanentState"].ToString();
-                txtresidentialState.Text = dataSet.Tables[0].Rows[0]["ResidentState"].ToString();
+
+                txtPermanentAddress.Text = dataSet.Tables[0].Rows[0]["permanentAddress"].ToString();
+                txtPermanentPost.Text = dataSet.Tables[0].Rows[0]["PermanentPost"].ToString();
+                txtPermanentPinCode.Text = dataSet.Tables[0].Rows[0]["permanentPinCode"].ToString();
+                txtPermanentVillage.Text = dataSet.Tables[0].Rows[0]["permanentVillage"].ToString();
+                txtPermanentState.Text = dataSet.Tables[0].Rows[0]["PermanentState"].ToString();
+                txtPermanentDistrict.Text = dataSet.Tables[0].Rows[0]["permanentDistrict"].ToString();
+                txtPermanentMobileNo.Text = dataSet.Tables[0].Rows[0]["permanentMobileNo"].ToString();
+
+                txtresidentialAddress.Text = dataSet.Tables[0].Rows[0]["ResidentAddress"].ToString();
+                txtresidentialPost.Text = dataSet.Tables[0].Rows[0]["ResidentialPost"].ToString();
+                txtresidentialPinCode.Text = dataSet.Tables[0].Rows[0]["ResidentPinCode"].ToString();
+                txtresidentialVillage.Text = dataSet.Tables[0].Rows[0]["ResidentVillage"].ToString();
+                txtresidentialDistrict.Text = dataSet.Tables[0].Rows[0]["ResidentDistrict"].ToString();
+                txtresidentialMobileNo.Text = dataSet.Tables[0].Rows[0]["ResidentMobileNo"].ToString();
+                txtresidentialState.Text = dataSet.Tables[0].Rows[0]["ResidentialState"].ToString();
+
             }
 
             if (dataSet.Tables[1].Rows.Count > 0)
@@ -259,7 +265,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
         {
         }
     }
-    
+
     protected void lnkBtnSubmit_click(object sender, EventArgs e)
     {
         try
@@ -374,17 +380,17 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 sqlCmd.Parameters.AddWithValue("@PFNumber", txtPF.Text);
                 sqlCmd.Parameters.AddWithValue("@BloodGroup", ddlBloodGroup.SelectedValue.ToString());
 
-                sqlCmd.Parameters.AddWithValue("@ResidentialAddress", txtresidentialAddress.Text);
-                sqlCmd.Parameters.AddWithValue("@ResidentialPincode", txtresidentialPinCode.Text);
-                sqlCmd.Parameters.AddWithValue("@ResidentialVillage", txtresidentialVillage.Text);
-                sqlCmd.Parameters.AddWithValue("@ResidentialDistrict", txtresidentialDistrict.Text);
-                sqlCmd.Parameters.AddWithValue("@ResidentialMobileNumber", txtresidentialMobileNo.Text);
+                //sqlCmd.Parameters.AddWithValue("@ResidentialAddress", txtresidentialAddress.Text);
+                //sqlCmd.Parameters.AddWithValue("@ResidentialPincode", txtresidentialPinCode.Text);
+                //sqlCmd.Parameters.AddWithValue("@ResidentialVillage", txtresidentialVillage.Text);
+                //sqlCmd.Parameters.AddWithValue("@ResidentialDistrict", txtresidentialDistrict.Text);
+                //sqlCmd.Parameters.AddWithValue("@ResidentialMobileNumber", txtresidentialMobileNo.Text);
 
-                sqlCmd.Parameters.AddWithValue("@permanentAddress", txtPermanentAddress.Text);
-                sqlCmd.Parameters.AddWithValue("@permanentPinCode", txtPermanentPinCode.Text);
-                sqlCmd.Parameters.AddWithValue("@permanentVillage", txtPermanentVillage.Text);
-                sqlCmd.Parameters.AddWithValue("@permanentDistrict", txtPermanentDistrict.Text);
-                sqlCmd.Parameters.AddWithValue("@PermanentMobileNumber", txtPermanentMobileNo.Text);
+                //sqlCmd.Parameters.AddWithValue("@permanentAddress", txtPermanentAddress.Text);
+                //sqlCmd.Parameters.AddWithValue("@permanentPinCode", txtPermanentPinCode.Text);
+                //sqlCmd.Parameters.AddWithValue("@permanentVillage", txtPermanentVillage.Text);
+                //sqlCmd.Parameters.AddWithValue("@permanentDistrict", txtPermanentDistrict.Text);
+                //sqlCmd.Parameters.AddWithValue("@PermanentMobileNumber", txtPermanentMobileNo.Text);
 
 
                 sqlCmd.Parameters.AddWithValue("@PanCardNumber", txtPanCard.Text);
@@ -395,10 +401,10 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 sqlCmd.Parameters.AddWithValue("@MaritalStatus", rblMaritalStatus.SelectedValue);
                 sqlCmd.Parameters.AddWithValue("@NomineeName", txtNomineeName.Text);
 
-                sqlCmd.Parameters.AddWithValue("@Post", txtPermanentPost.Text);
+                //sqlCmd.Parameters.AddWithValue("@Post", txtPermanentPost.Text);
 
-                sqlCmd.Parameters.AddWithValue("@State", txtresidentialState.Text);
-                sqlCmd.Parameters.AddWithValue("@permanentState", txtPermanentState.Text);
+                //sqlCmd.Parameters.AddWithValue("@State", txtresidentialState.Text);
+                //sqlCmd.Parameters.AddWithValue("@permanentState", txtPermanentState.Text);
 
 
                 string nomineeDOB = txtNomineeDOB.Text.Trim();
@@ -423,6 +429,24 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
 
                 sqlCmd.Parameters.AddWithValue("@DigitSignaturePath", DigitalSignature);
                 SqlParameter tvpParam = new SqlParameter("@UT_EducationDetail", SqlDbType.Structured);
+
+                sqlCmd.Parameters.AddWithValue("@PermanentAddress", txtPermanentAddress.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentDistrict", txtPermanentDistrict.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentMobileNumber", txtPermanentMobileNo.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentPinCode", txtPermanentPinCode.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentState", txtPermanentState.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentPost", txtPermanentPost.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentVillage", txtPermanentVillage.Text.Trim());
+
+
+                sqlCmd.Parameters.AddWithValue("@ResedientalAddress", txtresidentialAddress.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@ResedientalDistrict", txtresidentialDistrict.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@ResedientalMobileNumber", txtresidentialMobileNo.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@ResedientalVillage", txtresidentialVillage.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@ResidentialState", txtresidentialState.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@ResedientalPost", txtresidentialPost.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@ResedientalPincode", txtresidentialPinCode.Text.Trim());
+
                 tvpParam.Value = educationTable;
                 tvpParam.TypeName = "dbo.UT_EducationDetail"; // Adjust the schema and type name accordingly
 
@@ -444,34 +468,32 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
             }
         }
         catch (Exception ex)
-         {
+        {
 
             ShowErrors("err", "An error occurred while processing the request.");
         }
     }
-    
+
     protected void chkSameAsAbove_OnCheckedChanged(object sender, EventArgs e)
     {
         try
         {
             if (chkSameAsAbove.Checked == true)
             {
-                txtPermanentAddress.Text = txtresidentialAddress.Text;
-                txtPermanentDistrict.Text = txtresidentialDistrict.Text;
-                txtPermanentMobileNo.Text = txtresidentialMobileNo.Text;
-                txtPermanentVillage.Text = txtresidentialVillage.Text;
-                txtPermanentPost.Text = txtresidentialPost.Text;
-                txtPermanentPinCode.Text = txtresidentialPinCode.Text;
-                txtPermanentState.Text = txtresidentialState.Text;
+                txtresidentialAddress.Text = txtPermanentAddress.Text;
+                txtresidentialDistrict.Text = txtPermanentDistrict.Text;
+                txtresidentialMobileNo.Text = txtPermanentMobileNo.Text;
+                txtresidentialPost.Text = txtPermanentPost.Text;
+                txtresidentialState.Text = txtPermanentState.Text;
+                txtresidentialPinCode.Text = txtPermanentPinCode.Text;
+                txtresidentialVillage.Text = txtPermanentVillage.Text;
             }
         }
         catch
         {
-            // throw;
         }
-
     }
-    
+
     public class EducationDetail
     {
         public string EducationLevel { get; set; }

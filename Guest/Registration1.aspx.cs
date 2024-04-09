@@ -23,8 +23,6 @@ public partial class General_Registration1 : System.Web.UI.Page
     HiddenField HDSelfIntroVideoPath = new HiddenField();
     HiddenField HDResume = new HiddenField();
 
-
-
     protected void Page_Init(object sender, EventArgs e)
     {
         try
@@ -163,6 +161,7 @@ public partial class General_Registration1 : System.Web.UI.Page
     //    return !parentPath.EndsWith("/Registration1.aspx", StringComparison.OrdinalIgnoreCase);
 
     //}
+
     protected void btnDelete_Click(object sender, EventArgs e)
     {
         try
@@ -176,6 +175,7 @@ public partial class General_Registration1 : System.Web.UI.Page
             ShowErrors("Error", ex.Message);
         }
     }
+
     protected void btnOLd_Click(object sender, EventArgs e)
     {
         try
@@ -407,38 +407,9 @@ public partial class General_Registration1 : System.Web.UI.Page
                 fuResumeUpload.SaveAs(fullPath);
             }
 
-            //if (PhotoPath == "")
-            //{
-            //    PhotoPath = lblPhotoPath.Text;
-            //}
-
-            //if (SelfIntroVideoPath == "")
-            //{
-            //    SelfIntroVideoPath = lblSelfIntroPath.Text;
-            //}
-
-            //if (Resume == "")
-            //{
-            //    Resume = lblResumePath.Text;
-            //}
-
-            //if (PhotoPath == "" || Resume == "")
-            //{
-            //    if (Session["Language"].ToString() == "Gujarati")
-            //    {
-            //        ShowErrors("err", "રિઝ્યુમ અને પાસપોર્ટ સાઇઝના ફોટા ફરજીયાત છે!!");
-            //    }
-            //    else if (Session["Language"].ToString() == "Gujarati")
-            //    {
-            //        ShowErrors("err", "बायोडाटा और पासपोर्ट साइज फोटो अनिवार्य हैं!!");
-            //    }
-            //    else
-            //    {
-            //        ShowErrors("err", "Resume and Passport Size Photos are Compulsory!!");
-            //    }
-            //}
+            
             else
-            {
+             {
 
                 SqlCommand sqlCmd = new SqlCommand();
                 GeneralDAL objDal = new GeneralDAL();
@@ -459,7 +430,15 @@ public partial class General_Registration1 : System.Web.UI.Page
                 sqlCmd.Parameters.AddWithValue("@PhotoPath", PhotoPath);
                 sqlCmd.Parameters.AddWithValue("@VideoPath", SelfIntroVideoPath);
                 sqlCmd.Parameters.AddWithValue("@ResumePath", Resume);
-                sqlCmd.Parameters.AddWithValue("@ResidentialPincode", txtResidentPinCode.Text.Trim());
+
+                sqlCmd.Parameters.AddWithValue("@PermanentAddress", txtAddress.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentDistrict", txtDistrict.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentMobileNumber", txtMobileNo.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentPinCode", txtResidentPinCode.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentState", txtState.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentPost", txtTaluka.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@PermanentVillage", txtCity.Text.Trim());
+
                 sqlCmd.Parameters.AddWithValue("@Action", "InsertRegistration");
 
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
@@ -484,6 +463,7 @@ public partial class General_Registration1 : System.Web.UI.Page
             ShowErrors("err", ex.Message.ToString());
         }
     }
+
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         try
@@ -590,6 +570,7 @@ public partial class General_Registration1 : System.Web.UI.Page
             ShowErrors("Error", ex.Message);
         }
     }
+
     private void HideErrors()
     {
         try
@@ -635,6 +616,7 @@ public partial class General_Registration1 : System.Web.UI.Page
             ShowErrors("Error", ex.Message);
         }
     }
+
     private void Reset()
     {
         try
@@ -769,17 +751,26 @@ public partial class General_Registration1 : System.Web.UI.Page
                         txtMiddlename.Text = dataSet.Tables[1].Rows[0]["MiddleName"].ToString();
                         txtLastname.Text = dataSet.Tables[1].Rows[0]["LastName"].ToString();
                         txtMobileNo.Text = dataSet.Tables[1].Rows[0]["MobileNo"].ToString();
-                        txtCity.Text = dataSet.Tables[1].Rows[0]["City"].ToString();
-                        txtTaluka.Text = dataSet.Tables[1].Rows[0]["Taluka"].ToString();
-                        txtDistrict.Text = dataSet.Tables[1].Rows[0]["District"].ToString();
-                        txtState.Text = dataSet.Tables[1].Rows[0]["State"].ToString();
-                        txtAddress.Text = dataSet.Tables[1].Rows[0]["Address"].ToString();
+                        //txtCity.Text = dataSet.Tables[1].Rows[0]["City"].ToString();
+                        //txtTaluka.Text = dataSet.Tables[1].Rows[0]["Taluka"].ToString();
+                        //txtDistrict.Text = dataSet.Tables[1].Rows[0]["District"].ToString();
+                        //txtState.Text = dataSet.Tables[1].Rows[0]["State"].ToString();
+                        //txtAddress.Text = dataSet.Tables[1].Rows[0]["Address"].ToString();
                         //_registrationBLL = new Registration1BLL(dataSet.Tables[1].Rows[0]["RegistrationId"].ToString());
                         imgPhoto.ImageUrl = dataSet.Tables[1].Rows[0]["PhotoPath"].ToString();
                         lblPhotoPath.Text = dataSet.Tables[1].Rows[0]["PhotoPath"].ToString();
                         lblSelfIntroPath.Text = dataSet.Tables[1].Rows[0]["VideoPath"].ToString();
                         lblResumePath.Text = dataSet.Tables[1].Rows[0]["ResumePath"].ToString();
-                        txtResidentPinCode.Text = dataSet.Tables[1].Rows[0]["ResidentPinCode"].ToString();
+                        //txtResidentPinCode.Text = dataSet.Tables[1].Rows[0]["ResidentPinCode"].ToString();
+
+                        txtAddress.Text = dataSet.Tables[1].Rows[0]["permanentAddress"].ToString();
+                        txtDistrict.Text = dataSet.Tables[1].Rows[0]["permanentDistrict"].ToString();
+                        txtMobileNo.Text = dataSet.Tables[1].Rows[0]["permanentMobileNo"].ToString();
+                        txtResidentPinCode.Text = dataSet.Tables[1].Rows[0]["permanentPinCode"].ToString();
+                        txtState.Text = dataSet.Tables[1].Rows[0]["PermanentState"].ToString();
+                        txtTaluka.Text = dataSet.Tables[1].Rows[0]["PermanentPost"].ToString();
+                        txtCity.Text = dataSet.Tables[1].Rows[0]["permanentVillage"].ToString();
+
                         Registration1DTO _registrationDTO = new Registration1DTO();
                         _registrationDTO.IsNew = false;
                     }
