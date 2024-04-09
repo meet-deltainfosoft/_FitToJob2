@@ -416,12 +416,18 @@
                 <div class="row" style="overflow: scroll;">
                     <asp:GridView runat="server" ID="gvEducationDetails" AutoGenerateColumns="false"
                         CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"
-                        Width="993px">
+                        OnRowDataBound="gvEducationDetails_RowDataBound" Width="993px">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:TemplateField HeaderText="Education Level">
                                 <ItemTemplate>
                                     <asp:Label runat="server" ID="lblEducationLevel" Text='<%# Eval("EducationLevel") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Qualification">
+                                <ItemTemplate>
+                                    <asp:DropDownList runat="server" ID="ddlQualification" CssClass="form-control">
+                                    </asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Board/University Name">

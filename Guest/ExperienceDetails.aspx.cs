@@ -151,7 +151,7 @@ public partial class Guest_ExperienceDetails : System.Web.UI.Page
                         }
                     }
                     objDal.CloseSQLConnection();
-                    Response.Redirect("~/Guest/ThankYouPage.aspx");
+                    Response.Redirect("~/Guest/UploadDocuments2.aspx");
 
                 }
             }

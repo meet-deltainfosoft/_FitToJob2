@@ -176,7 +176,7 @@
                 OnClick="btnAddRow_Click" ToolTip="Add New Records" />
             <div class="row" style="overflow: scroll;">
                 <asp:GridView runat="server" ID="gvFamilyDetails" AutoGenerateColumns="False" CssClass="gridview-style"
-                    CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCommand="gvFamilyDetails_RowCommand"
+                    CellPadding="4" ForeColor="#333333" GridLines="None" OnRowCommand="gvFamilyDetails_RowCommand" 
                     Width="1350px">
                     <EditRowStyle BackColor="#7C6F57" />
                     <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -196,6 +196,7 @@
                                 </asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
+                       
                         <asp:TemplateField HeaderText="Name">
                             <ItemTemplate>
                                 <asp:TextBox runat="server" ID="txtName" CssClass="form-control" Text='<%# Eval("Name") %>'></asp:TextBox>

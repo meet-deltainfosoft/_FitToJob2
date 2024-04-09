@@ -255,8 +255,6 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 new EducationDetail { EducationLevel = "Post Graduate/Degree" },
                 new EducationDetail { EducationLevel = "ITI/Others" }
             };
-
-
                 gvEducationDetails.DataSource = educationDetails;
                 gvEducationDetails.DataBind();
             }
@@ -313,6 +311,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
 
                 DataTable educationTable = new DataTable();
                 educationTable.Columns.Add("EducationLevel", typeof(string));
+                educationTable.Columns.Add("Qualification", typeof(string));
                 educationTable.Columns.Add("BoardUniversityName", typeof(string));
                 educationTable.Columns.Add("PassingYear", typeof(string));
                 educationTable.Columns.Add("Percentage", typeof(decimal));
@@ -325,6 +324,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
                 {
 
                     Label lblEducationLevel = (Label)row.FindControl("lblEducationLevel");
+                    DropDownList ddlQualification = (DropDownList)row.FindControl("ddlQualification");
                     TextBox txtBoardUniversity = (TextBox)row.FindControl("txtBoardUniversity");
                     TextBox txtPassingYear = (TextBox)row.FindControl("txtPassingYear");
                     TextBox txtPercentage = (TextBox)row.FindControl("txtPercentage");
@@ -359,6 +359,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
 
                     DataRow dataRow = educationTable.NewRow();
                     dataRow["EducationLevel"] = educationLevel;
+                    dataRow["Qualification"] = ddlQualification.SelectedItem.Text;
                     dataRow["BoardUniversityName"] = boardUniversityName;
                     dataRow["PassingYear"] = passingYear;
                     dataRow["Percentage"] = percentage;
@@ -497,6 +498,7 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
     public class EducationDetail
     {
         public string EducationLevel { get; set; }
+        public string Qualification { get; set; }
         public string BoardUniversityName { get; set; }
         public string Percentage { get; set; }
         public string PassingYear { get; set; }
@@ -548,6 +550,70 @@ public partial class Guest_InterviewForms : System.Web.UI.Page
         {
         }
 
+    }
+
+
+    protected void gvEducationDetails_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            // Find the DropDownList in the row
+            DropDownList ddlQualification = (DropDownList)e.Row.FindControl("ddlQualification");
+            Label lblEducationLevel = (Label)e.Row.FindControl("lblEducationLevel");
+            DataTable dt = new DataTable();
+            dt = GetQualifications(lblEducationLevel.Text);
+
+
+            // Bind data to DropDownList
+            ddlQualification.DataSource = dt;
+            ddlQualification.DataTextField = "Qualification";
+            ddlQualification.DataValueField = "Qualification";
+            ddlQualification.SelectedValue = GetQualifications(lblEducationLevel.Text, Session["MobileNo"].ToString());
+            ddlQualification.DataBind();
+        }
+    }
+
+    public DataTable GetQualifications(string DropDownvalue)
+    {
+
+        SqlCommand sqlCmd = new SqlCommand();
+        GeneralDAL objDal = new GeneralDAL();
+        objDal.OpenSQLConnection();
+        sqlCmd.Connection = objDal.ActiveSQLConnection();
+        sqlCmd.CommandType = CommandType.StoredProcedure;
+        sqlCmd.CommandText = "FitToJob_Master_Registration";
+        sqlCmd.Parameters.AddWithValue("@Action", "GetQualificationDropDown");
+        sqlCmd.Parameters.AddWithValue("@DropDownvalue", DropDownvalue);
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+        DataTable DataTable = new DataTable();
+        dataAdapter.Fill(DataTable);
+        return DataTable;
+    }
+
+    public string GetQualifications(string DropDownvalue,string MobileNo)
+    {
+        string selectedValue = "";
+        SqlCommand sqlCmd = new SqlCommand();
+        GeneralDAL objDal = new GeneralDAL();
+        objDal.OpenSQLConnection();
+        sqlCmd.Connection = objDal.ActiveSQLConnection();
+        sqlCmd.CommandType = CommandType.StoredProcedure;
+        sqlCmd.CommandText = "FitToJob_Master_Registration";
+        sqlCmd.Parameters.AddWithValue("@Action", "GetCandidateEmployeeDetails");
+        sqlCmd.Parameters.AddWithValue("@DropDownvalue", DropDownvalue);
+        sqlCmd.Parameters.AddWithValue("@MobileNo", MobileNo);
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
+        DataTable DataTable = new DataTable();
+        dataAdapter.Fill(DataTable);
+        if (DataTable.Rows.Count > 0) // Ensure there are rows in the DataTable
+        {
+            selectedValue = DataTable.Rows[0][0].ToString(); // Accessing the first row and first column value
+        }
+        else {
+            selectedValue = "Select Qualification";
+        }
+        return selectedValue;
     }
 
 }
