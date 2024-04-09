@@ -135,6 +135,9 @@
                 </asp:BulletedList>
             </asp:Panel>
             <div class="row">
+                <div class="col-lg-1">
+                    <asp:Label ID="Label1" runat="server" Text="Document List" Style="font-weight: bold;"></asp:Label>
+                </div>
                 <div class="col-lg-2">
                     <asp:DropDownList ID="ddlDocuments" runat="server" class="form-control">
                     </asp:DropDownList>
@@ -146,7 +149,7 @@
             <br />
             <hr />
             <div class="row mt-2">
-                <div class="col-lg-2">
+                <div class="col-lg-1">
                     <asp:Label ID="lblDropDownValue" runat="server" Text="Documents" Style="font-weight: bold;"></asp:Label>
                 </div>
                 <div class="col-lg-2">
