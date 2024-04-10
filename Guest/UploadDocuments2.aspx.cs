@@ -128,8 +128,7 @@ public partial class Guest_Default : System.Web.UI.Page
                         }
                     }
                     objDal.CloseSQLConnection();
-                    Response.Redirect("~/Guest/ThankYouPage.aspx");
-                  
+                    //Response.Redirect("~/Guest/ThankYouPage.aspx");
                     GetAllUploadedDocuments();
                 }
                 else
