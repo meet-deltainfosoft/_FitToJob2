@@ -214,16 +214,20 @@
             </div>
             <br />
             <hr />
-            <div class="row mt-2" runat="server" id="divData">
+            <div class="row mt-3" runat="server" id="divData">
                 <div class="col-lg-1">
                     <asp:Label ID="lblDropDownValue" runat="server" Text="Choose Document" Style="font-weight: bold;"></asp:Label>
                 </div>
                 <div class="col-lg-2">
                     <asp:FileUpload ID="Filupload" runat="server" />
                 </div>
-                <div class="col-lg-2">
-                    <asp:Button ID="btnSubmit" runat="Server" Text="Save & Next" class="btn btn-primary"
+                <div class="col-lg-1">
+                    <asp:Button ID="btnSubmit" runat="Server" Text="Submit" class="btn btn-primary"
                         OnClick="btnSubmit_click" />
+                </div>
+                 <div class="col-lg-2">
+                    <asp:Button ID="Button1" runat="Server" Text="Finish & Next" class="btn btn-primary"
+                        OnClick="btnNext_click" />
                 </div>
                 <%--<div class=""--%>
             </div>
@@ -235,24 +239,42 @@
             </div>
             <hr />
             <div class="row">
-                <asp:GridView runat="server" ID="gvEducationDetails" AutoGenerateColumns="false"
+              <asp:GridView runat="server" ID="gvEducationDetails" AutoGenerateColumns="False"
                     CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"
-                    Width="993px">
+                  >
+              <%--  <asp:GridView runat="server" ID="gvEducationDetails" AutoGenerateColumns="false"
+                    CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"
+                    Width="993px">--%>
+                     <EditRowStyle BackColor="#7C6F57" />
+                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
                     <AlternatingRowStyle BackColor="White" />
+                   <%-- <AlternatingRowStyle BackColor="White" />--%>
                     <Columns>
-                        <asp:TemplateField HeaderText="Education Level">
+                       <asp:TemplateField HeaderText="Education Level">
+                            <ItemTemplate>
+                                <asp:TextBox runat="server" ID="lblEducationLevel" CssClass="form-control" Text='<%# Eval("Documents") %>' ReadOnly=true></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                      <%--  <asp:TemplateField HeaderText="Education Level">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="lblEducationLevel" Text='<%# Eval("Documents") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="DocumentPath">
+                        </asp:TemplateField>--%>
+                           <asp:TemplateField HeaderText="Document Path">
                             <ItemTemplate>
-                                <asp:HyperLink runat="server" ID="lnkDocument" Text='Download Documents'
-                                    NavigateUrl='<%# Eval("DocumentPath") %>' />
+                               <%-- <asp:TextBox runat="server" ID="lnkDocument" CssClass="form-control" Text='Download Documents' NavigateUrl='<%# Eval("DocumentPath") %>'></asp:TextBox>--%>
+                               <asp:HyperLink runat="server" ID="lnkDocument" Text='Download Documents' NavigateUrl='<%# Eval("DocumentPath") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
+                       <%-- <asp:TemplateField HeaderText="DocumentPath">
+                            <ItemTemplate>
+                                <asp:HyperLink runat="server" ID="lnkDocument" Text='Download Documents' NavigateUrl='<%# Eval("DocumentPath") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>--%>
                     </Columns>
                 </asp:GridView>
+                
             </div>
         </div>
     </div>

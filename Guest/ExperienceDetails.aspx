@@ -195,7 +195,7 @@
                 <%--<div class="class-lg-3 col-sm-6">
                     <asp:Button ID="btnSubmit" runat="Server" Text="Submit" class="btn btn-primary" OnClick="lnkBtnSubmit_click" />
                 </div>--%>
-                <div class="col-lg-1 col-sm-12 mt-3">
+                <div class="col-lg-2 col-sm-12 mt-3">
                     <asp:Button ID="btnSubmit" runat="Server" Text="Save & Next" class="btn btn-primary" OnClick="lnkBtnSubmit_click" />
                 </div>
                 <div class="col-lg-1 col-sm-12 mt-3">

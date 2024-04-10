@@ -153,7 +153,7 @@
         </div>
                 </asp:LinkButton>
             </div>
-            <div class="col-lg-6 col-sm-6 text-left mt-2">
+            <div class="col-lg-6 col-sm-6 text-left mt-2" style="display: none;">
                 <asp:LinkButton ID="lnkInterviewUploadDocuments" runat="server" CssClass="btn btn-info buttton"
                     OnClick="lnkInterviewUploadDocuments_click" Style="background-color: #37C1BB;">
         <div class="d-flex justify-content-center align-items-center">

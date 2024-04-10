@@ -24,6 +24,7 @@ public partial class Guest_Default : System.Web.UI.Page
             else
             {
                 GetDocumentsDropDown();
+                GetAllUploadedDocuments();
             }
 
         }
@@ -53,6 +54,7 @@ public partial class Guest_Default : System.Web.UI.Page
 
     protected void btnSearch_click(object sender, EventArgs e)
     {
+
         if (ddlDocuments.SelectedItem.Text == "Select Documents")
         {
             lblErrorMessage.Text = "Please Choose Document For Upload";
@@ -64,11 +66,21 @@ public partial class Guest_Default : System.Web.UI.Page
         }
     }
 
-
+    protected void btnNext_click(object sender, EventArgs e)
+    {
+      //  objDal.CloseSQLConnection();
+        Response.Redirect("~/Guest/ThankYouPage.aspx");
+    }
+    
     protected void btnSubmit_click(object sender, EventArgs e)
     {
         try
         {
+            //string ddlDocuments = "";
+            //if (ddlDocuments.SelectedItem.Text == "PAN Card")
+            //{
+            //    lblErrorMessage.Text = "Please Choose Document For Upload";
+            //}
             string DocumentPath = "";
             if (ddlDocuments.SelectedItem.Text == "Select Documents")
             {
@@ -76,6 +88,8 @@ public partial class Guest_Default : System.Web.UI.Page
             }
             else
             {
+
+
                 if (Filupload.HasFile)
                 {
                     string uniqueFileName = Guid.NewGuid().ToString();
@@ -85,6 +99,11 @@ public partial class Guest_Default : System.Web.UI.Page
                     string fullPath = Path.Combine(uploadFolder, newFileName);
                     DocumentPath = newFileName;
                     Filupload.SaveAs(fullPath);
+
+                    if (CheckFileType(newFileName, ddlDocuments.SelectedItem.Text) == false) {
+                        lblErrorMessage.Text = "Please Upload Valid Format Of Document!";
+                        return;
+                    }
 
                     SqlCommand sqlCmd = new SqlCommand();
                     GeneralDAL objDal = new GeneralDAL();
@@ -109,6 +128,8 @@ public partial class Guest_Default : System.Web.UI.Page
                         }
                     }
                     objDal.CloseSQLConnection();
+                    Response.Redirect("~/Guest/ThankYouPage.aspx");
+                  
                     GetAllUploadedDocuments();
                 }
                 else
@@ -153,6 +174,87 @@ public partial class Guest_Default : System.Web.UI.Page
         }
 
     }
+
+    private bool CheckFileType(string fileName, string Document)
+    {
+        bool IsInvalid = true;
+        string ext = Path.GetExtension(fileName).ToLower();
+
+        if (Document == "PAN Card")
+        {
+            if (ext == ".gif" || ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".doc")
+            {
+                IsInvalid = true;
+            }
+            else
+            {
+                IsInvalid = false;
+            }
+        }
+
+        else if (Document == "Passport Photo")
+        {
+
+            if (ext == ".gif" || ext == ".jpg" || ext == ".jpeg" || ext == ".png")
+            {
+                IsInvalid = true;
+            }
+            else
+            {
+                IsInvalid = false;
+            }
+        }
+        else if (Document == "Resume Upload")
+        {
+
+            if (ext == ".gif" || ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".doc" || ext == ".pdf")
+            {
+                IsInvalid = true;
+            }
+            else
+            {
+                IsInvalid = false;
+            }
+        }
+        else if (Document == "Self Video")
+        {
+
+            if (ext == ".mp4" || ext == ".avi" || ext == ".mov" || ext == ".mkv" || ext == ".wmv")
+            {
+                IsInvalid = true;
+            }
+            else
+            {
+                IsInvalid = false;
+            }
+        }
+        else if (Document == "Standard 10th")
+        {
+
+            if (ext == ".gif" || ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".doc" || ext == ".pdf")
+            {
+                IsInvalid = true;
+            }
+            else
+            {
+                IsInvalid = false;
+            }
+        }
+        else if (Document == "Standard 12th")
+        {
+
+            if (ext == ".gif" || ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".doc" || ext == ".pdf")
+            {
+                IsInvalid = true;
+            }
+            else
+            {
+                IsInvalid = false;
+            }
+        }
+        return IsInvalid;
+    }
+
 
 
 
