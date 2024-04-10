@@ -113,6 +113,72 @@
         }
         /* Add more custom styles as needed */
     </style>
+    <style type="text/css">
+        .header-style
+        {
+            background-color: #3498db !important; /* Header background color */
+            color: #fff; /* Header text color */
+        }
+        
+        .gridview-style
+        {
+            margin-left: 2vh; /* Margin-left for the entire GridView */
+            margin-right: 1vh;
+        }
+    </style>
+    <style type="text/css">
+        /* Custom CSS styles for your form */
+        body
+        {
+            font-family: 'Arial' , sans-serif;
+            background-color: #37C1BB;
+        }
+        
+        .form
+        {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        
+        .formHeader
+        {
+            background-color: #37C1BB;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .form-group
+        {
+            margin-bottom: 15px;
+        }
+        
+        .custom-button
+        {
+            background-color: #37C1BB;
+            color: #ffffff; /* Text color, you can adjust it based on your preference */
+        }
+        
+        .containerBorder
+        {
+            border: 3px solid #37C1BB;
+            border-radius: 10px;
+            margin: 20px;
+            background-color: white;
+            height: auto;
+        }
+        
+        .containerBorder:hover
+        {
+            border-color: #018881;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        /* Add more custom styles as needed */
+    </style>
     <script type="text/javascript">
         function isNumber(evt) {
             evt = (evt) ? evt : window.event;
@@ -143,22 +209,50 @@
                     </asp:DropDownList>
                 </div>
                 <div class="col-lg-2">
-                    <asp:Button ID="btnSubmit" runat="Server" Text="Search" class="btn btn-primary" />
+                    <asp:Button ID="btnSearch" runat="Server" Text="Search" class="btn btn-primary" OnClick="btnSearch_click" />
                 </div>
             </div>
             <br />
             <hr />
-            <div class="row mt-2">
+            <div class="row mt-2" runat="server" id="divData">
                 <div class="col-lg-1">
-                    <asp:Label ID="lblDropDownValue" runat="server" Text="Documents" Style="font-weight: bold;"></asp:Label>
+                    <asp:Label ID="lblDropDownValue" runat="server" Text="Choose Document" Style="font-weight: bold;"></asp:Label>
                 </div>
                 <div class="col-lg-2">
                     <asp:FileUpload ID="Filupload" runat="server" />
                 </div>
                 <div class="col-lg-2">
-                    <asp:Button ID="Button1" runat="Server" Text="Save & Next" class="btn btn-primary" />
+                    <asp:Button ID="btnSubmit" runat="Server" Text="Save & Next" class="btn btn-primary"
+                        OnClick="btnSubmit_click" />
                 </div>
                 <%--<div class=""--%>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <asp:Label ID="lblErrorMessage" runat="server" Text="" Style="font-weight: bold;
+                        color: Red;"></asp:Label>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <asp:GridView runat="server" ID="gvEducationDetails" AutoGenerateColumns="false"
+                    CssClass="gridview-style" CellPadding="4" ForeColor="#333333" GridLines="None"
+                    Width="993px">
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:TemplateField HeaderText="Education Level">
+                            <ItemTemplate>
+                                <asp:Label runat="server" ID="lblEducationLevel" Text='<%# Eval("Documents") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="DocumentPath">
+                            <ItemTemplate>
+                                <asp:HyperLink runat="server" ID="lnkDocument" Text='Download Documents'
+                                    NavigateUrl='<%# Eval("DocumentPath") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
         </div>
     </div>
