@@ -147,6 +147,7 @@ public partial class Report_Exam_CRViewer : System.Web.UI.Page
         string sql4 = "";
         string sql5 = "";
         string sql6 = "";
+        string sql7 = "";
 
         string sqlWhere1 = "";
         string sqlWhere2 = "";
@@ -199,9 +200,10 @@ public partial class Report_Exam_CRViewer : System.Web.UI.Page
             sql3 = " select * from View_Candidate_Educational_Detail" + sqlWhere1;
             sql4 = " select * from View_Candidate_Personal_Detail" + sqlWhere1;
             sql5 = " select * from VwCandidateDocuments" + sqlWhere1;
-            sql6 = " select * from VwCompany";
+            sql6 = " select * from View_Candidate_Assessments_Points" + sqlWhere1;
+            sql7 = " select * from VwCompany";
             //Final Sql Query
-            sql = sql1 + sql2 + sql3 + sql4 + sql5 + sql6 + ";";
+            sql = sql1 + sql2 + sql3 + sql4 + sql5 + sql6 + sql7 + ";";
         }
         return sql;
     }
@@ -274,7 +276,8 @@ public partial class Report_Exam_CRViewer : System.Web.UI.Page
             ds.Tables[2].TableName = "View_Candidate_Educational_Detail";
             ds.Tables[3].TableName = "View_Candidate_Personal_Detail";
             ds.Tables[4].TableName = "VwCandidateDocuments";
-            ds.Tables[5].TableName = "vwCompany";
+            ds.Tables[5].TableName = "View_Candidate_Assessments_Points";
+            ds.Tables[6].TableName = "vwCompany";
         }
     }
 
