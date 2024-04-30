@@ -22,5 +22,6 @@ public class Registration1DTO
     public string PhotoPath;
     public string SelfIntroVideoPath;
     public string Resume;
+    public string permanentPinCode;
     public bool IsNew;
 }

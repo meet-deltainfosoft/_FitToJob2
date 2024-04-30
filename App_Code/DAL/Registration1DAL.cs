@@ -12,7 +12,7 @@ using System.Configuration;
 /// </summary>
 public class Registration1DAL
 {
-	private GeneralDAL _generalDAL;
+    private GeneralDAL _generalDAL;
 
     #region Constructor Destructor
     public Registration1DAL()
@@ -36,8 +36,8 @@ public class Registration1DAL
             sqlCmd.Connection = _generalDAL.ActiveSQLConnection();
             sqlCmd.CommandType = CommandType.Text;
             sqlCmd.CommandText = " INSERT INTO Registrations(RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State," +
-                                 " InsertedOn,LastUpdatedOn,Address)" +
-                                 //" InsertedByUserId,LastUpdatedByUserId,Address)" +
+                                 " InsertedOn,LastUpdatedOn,Address,permanentPinCode)" +
+                //" InsertedByUserId,LastUpdatedByUserId,Address)" +
                                  " VALUES('" + _registrationDTO.RegistrationId + "', " +
                                  ((_registrationDTO.AadharCardNo == null) ? "NULL" : "'" + _registrationDTO.AadharCardNo.Replace("'", "''") + "'") + "," +
                                  ((_registrationDTO.FirstName == null) ? "NULL" : "'" + _registrationDTO.FirstName.Replace("'", "''") + "'") + "," +
@@ -48,9 +48,11 @@ public class Registration1DAL
                                  ((_registrationDTO.Taluka == null) ? "NULL" : "'" + _registrationDTO.Taluka.Replace("'", "''") + "'") + "," +
                                  ((_registrationDTO.District == null) ? "NULL" : "'" + _registrationDTO.District.Replace("'", "''") + "'") + "," +
                                  ((_registrationDTO.State == null) ? "NULL" : "'" + _registrationDTO.State.Replace("'", "''") + "'") + "," +
+
                                  " GETDATE(),GETDATE()," +
-                                 //" '" + MySession.UserUnique + "','" + MySession.UserUnique + "'," +
+                //" '" + MySession.UserUnique + "','" + MySession.UserUnique + "'," +
                                  ((_registrationDTO.Address == null) ? "NULL" : "'" + _registrationDTO.Address + "'") +
+                                  ((_registrationDTO.permanentPinCode == null) ? "NULL" : "'" + _registrationDTO.permanentPinCode.Replace("'", "''") + "'") + "," +
                                  " );" +
                                  " Select '" + _registrationDTO.RegistrationId + "'";
 
@@ -83,12 +85,12 @@ public class Registration1DAL
                                        " SET @RegistrationVerificationId = NEWID() " +
                                        " INSERT INTO RegistrationVerifications (RegistrationVerificationId,RegistrationId,PhotoPath,SelfIntroVideoPath,UplaodResume,InsertedOn, " +
                                        " LastUpdatedOn,InsertedByUserId,LastUpdatedByUserId) " +
-                     //" VALUES (NewId(),'" + ApplicationId + "','" + _applicationDTO.FormName + "','" + _applicationDTO.BirthCirtificate + "'," + 1 + ",'" + _applicationDTO.BirthCirtificateName + "','" + _applicationDTO.FileType + "'," +
+                    //" VALUES (NewId(),'" + ApplicationId + "','" + _applicationDTO.FormName + "','" + _applicationDTO.BirthCirtificate + "'," + 1 + ",'" + _applicationDTO.BirthCirtificateName + "','" + _applicationDTO.FileType + "'," +
                                        " VALUES (NewId(),'" + RegistrationId + "','" + _registrationDTO.PhotoPath + "','" + _registrationDTO.SelfIntroVideoPath + "','" + _registrationDTO.Resume + "'," +
                                        " GETDATE(),GETDATE()," +
                                        ((MySession.UserUnique == null) ? "NULL" : "'" + MySession.UserUnique.Replace("'", "''") + "'") + "," +
                                        ((MySession.UserUnique == null) ? "NULL" : "'" + MySession.UserUnique.Replace("'", "''") + "'") + " " +
-                                       
+
                                        " )";
                 sqlCmd.ExecuteNonQuery();
             }
@@ -120,8 +122,9 @@ public class Registration1DAL
                                  " ,District=" + ((_registrationDTO.District == null) ? "NULL" : "'" + _registrationDTO.District.Replace("'", "''") + "'") +
                                  " ,State=" + ((_registrationDTO.State == null) ? "NULL" : "'" + _registrationDTO.State.Replace("'", "''") + "'") +
                                  " ,LastUpdatedOn=GETDATE()" +
-                                 //" ,LastUpdatedByUserId='" + MySession.UserUnique + "'" +
+                //" ,LastUpdatedByUserId='" + MySession.UserUnique + "'" +
                                  " ,Address =" + ((_registrationDTO.Address == null) ? "NULL" : "'" + _registrationDTO.Address.Replace("'", "''") + "'") +
+                                  " ,permanentPinCode =" + ((_registrationDTO.permanentPinCode == null) ? "NULL" : "'" + _registrationDTO.permanentPinCode.Replace("'", "''") + "'") +
                                  " WHERE RegistrationId='" + _registrationDTO.RegistrationId + "'";
 
             sqlCmd.ExecuteNonQuery();
@@ -174,8 +177,8 @@ public class Registration1DAL
             _generalDAL.OpenSQLConnection();
             sqlCmd.Connection = _generalDAL.ActiveSQLConnection();
             sqlCmd.CommandType = CommandType.Text;
-            sqlCmd.CommandText = "SELECT * FROM Registrations where RegistrationId = '"+ RegistrationId + "' " ;
-               
+            sqlCmd.CommandText = "SELECT * FROM Registrations where RegistrationId = '" + RegistrationId + "' ";
+
             sqlDr = sqlCmd.ExecuteReader();
 
             while (sqlDr.Read())
@@ -232,6 +235,12 @@ public class Registration1DAL
                     _registrationDTO.Address = sqlDr["Address"].ToString();
                 else
                     _registrationDTO.Address = null;
+
+                if (sqlDr["permanentPinCode"] != DBNull.Value)
+                    _registrationDTO.permanentPinCode = sqlDr["permanentPinCode"].ToString();
+                else
+                    _registrationDTO.permanentPinCode = null;
+
             }
 
             sqlDr.Close();
@@ -260,7 +269,7 @@ public class Registration1DAL
 
             sqlDr.Close();
 
-            
+
 
             _generalDAL.CloseSQLConnection();
             return _registrationDTO;
@@ -284,9 +293,9 @@ public class Registration1DAL
             sqlCmd.CommandType = CommandType.Text;
 
             string[] dbname = _generalDAL.ActiveSQLConnection().ConnectionString.ToString().Split(';');
-            sqlCmd.CommandText = " Insert Into " + dbname[2].Replace("Initial Catalog=", "") + "Deleted..Registrations(RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State,Address," +
+            sqlCmd.CommandText = " Insert Into " + dbname[2].Replace("Initial Catalog=", "") + "Deleted..Registrations(RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State,Address,permanentPinCode" +
                                  " OTP,OTPGeneratedOn,FCMId,LastUpdatedOn, LastUpdatedByUserId, InsertedOn, InsertedByUserId)" +
-                                 " Select RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State,Address," +
+                                 " Select RegistrationId,AadharCardNo,FirstName,MiddleName,LastName,MobileNo,City,Taluka,District,State,Address,permanentPinCode" +
                                  " OTP,OTPGeneratedOn,FCMId,InsertedOn,LastUpdatedOn, LastUpdatedByUserId" +
                                  " , getdate(),'" + MySession.UserUnique + "'" +
                                  " FROM Registrations WHERE RegistrationId='" + RegistrationId + "'";

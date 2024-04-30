@@ -377,31 +377,42 @@
                                 ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>
-                    <div class="col-lg-12 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
                         <div class="form-group">
-                            <asp:Label runat="server" ID="lblAddress" Text="Address :"></asp:Label>
+                            <asp:Label ID="lblresidentialPinCode" runat="server" Text="PinCode :"></asp:Label>
+                            <span style="color: red">*</span>
+                            <asp:TextBox ID="txtresidentialPinCode" runat="server" CssClass="form-control" onkeypress="return isNumber(event)" AutoCompleteType="Disabled"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="txtresidentialPinCode"
+                                 ValidationExpression="^\d{6}$" ErrorMessage="PIN code must be exactly 6 digits."
+                                Display="Dynamic" ForeColor="Red"></asp:RegularExpressionValidator>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-sm-12">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblAddress" Text="Full Permanent Address (Landmark):"></asp:Label>
                             <span style="color: red">*</span>
                             <asp:TextBox runat="server" ID="txtAddress" TextMode="MultiLine" TabIndex="10" CssClass="form-control"
                                 AutoCompleteType="Disabled">
                             </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="txtAddress"
+                            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="txtAddress"
                                 ErrorMessage="Address is required." Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" runat="server" visible="false">
                         <asp:Label ID="lblPhoto" runat="server" Text="Passport Photo : "></asp:Label>
                         <span style="color: red">*</span>
-                        <asp:FileUpload ID="fuPhoto" runat="server" class="form-control" onchange="return validateFile();" />
+                        <asp:FileUpload ID="fuPhoto" Enabled="false" runat="server" class="form-control"
+                            onchange="return validateFile();" />
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" runat="server" visible="false">
                         <asp:Image ID="imgPhoto" runat="server" Height="158.4px" TabIndex="11" Visible="True"
                             Width="120px" />
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" runat="server" visible="false">
                         <asp:Label ID="lblSelfintravideo" runat="server" Text="Self Intro Video :"></asp:Label>
                         <asp:FileUpload ID="fuSelfintravideo" runat="server" class="form-control" onchange="return validateVideo();" />
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" runat="server" visible="false">
                         <asp:Label ID="lblResume" runat="server" Text="Resume Upload :"></asp:Label>
                         <span style="color: red">*</span>
                         <asp:FileUpload ID="fuResumeUpload" runat="server" onchange="return validateResume();"
@@ -429,7 +440,7 @@
             <div class="formFooter">
                 <div class="row">
                     <div class="col-lg-8 m-1">
-                        <asp:Button runat="server" ID="btnOk" Text="OK" OnClick="btnOk_Click" class="btn custom-button"
+                        <asp:Button runat="server" ID="btnOk" Text="Save & Next" OnClick="btnOk_Click" class="btn custom-button"
                             Style="height: 30px; width: 200px; font-size: 15px;" CausesValidation="true" />
                         <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"
                             class="btn custom-button" Style="height: 30px; width: 80px; font-size: 15px;" />
